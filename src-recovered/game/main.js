@@ -20,10 +20,11 @@ function getElementPos(oElement) {
     let x = 0;
     let y = 0;
     if (oElement.offsetParent) {
-        do {
+        while (oElement) {
             x += oElement.offsetLeft;
-            y += oElement.offsetTop
-        } while (oElement = oElement.offsetParent)
+            y += oElement.offsetTop;
+            oElement = oElement.offsetParent;
+        }
     }
     return [x, y]
 }

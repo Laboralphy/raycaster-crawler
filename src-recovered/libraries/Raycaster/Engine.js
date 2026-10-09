@@ -227,7 +227,6 @@ export class Engine extends Transistate {
     stateLoadComplete() {
         this._callGameEvent('onLoading', 'gfx', this.oRaycaster.oImages.countLoaded(), this.oRaycaster.oImages.countLoading() + this.nShadedTileCount);
         if (this.oRaycaster.oImages.complete()) {
-            this.oRaycaster.backgroundRedim();
             this.nShadedTiles = 0;
             this.setDoomloop('stateShading')
         }

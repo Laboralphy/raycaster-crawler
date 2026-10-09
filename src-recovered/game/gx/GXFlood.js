@@ -75,6 +75,7 @@ export class GXFlood extends GXEffect {
         const w = rc.oWall.image;
         const wc = w.getContext('2d');
         wc.drawImage(w, w.width >> 1, 0, w.width >> 1, w.height, 0, 0, w.width >> 1, w.height);
+        rc.updateWallTextures();
         rc.buildGradient()
     }
 

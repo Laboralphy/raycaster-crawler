@@ -121,24 +121,59 @@ npm start          # node server.js -> http://localhost:8080/
   `const` réaffectée ; partie jouée dans le navigateur jusqu'à la mort du
   personnage, sans erreur.
 
+### 8. Rendu par raycaster-386
+- Dépendance npm `@laboralphy/raycaster386` (1.0.0, version publiée ; la
+  1.1.0 locale n'est pas publiée).
+- `libraries/Raycaster/Raycaster.js` garde son rôle et son interface pour le
+  jeu (carte `aMap`, `getMapXY*`, caméra, `oHorde`, effets GX, arme,
+  `castRay` pour la ligne de vue des monstres) mais tout le dessin passe par
+  un `Renderer` 386 : rayons, murs, sol/plafond, sprites, brouillard,
+  décalcomanies. `XMap.js` supprimé.
+- Correspondances : phys et offset des cases identiques ; le code de texture
+  (octet 0-7) devient un matériau 386 (`codes[n][0]` faces nord/sud,
+  `codes[n][1]` est/ouest, `flats.codes[n]` sol/plafond). `aMap` reste la
+  référence (le jeu l'écrit directement) : les cases modifiées sont recopiées
+  dans le Renderer avant chaque image.
+- Sprites : chaque image, les mobiles des cases vues reçoivent un sprite 386
+  (réserve réutilisée), avec l'image calculée comme avant
+  (direction 8 secteurs, `Animation`) ; échelle 0.961 / `nScale` pour garder
+  le rapport sprites/murs de l'ancien moteur ; surcouches (`oOverlay`)
+  rapprochées d'une unité. Le filtre de couleur de l'ancien moteur (sprites
+  seulement) est appliqué aux images des sprites.
+- `cloneWall` → `Renderer.paintSurface` ; dégradés plafond/sol → image de
+  fond ; `shadeProcess()` prépare le Renderer après chargement ;
+  `textureAnimation()` réenregistre les matériaux animés ; `GXFlood` appelle
+  `updateWallTextures()` après avoir modifié l'atlas des murs.
+- Corrigé au passage : `setMapXYTag` utilisait une variable inexistante.
+- Non repris : second étage (`uppermap`, aucun niveau ne l'utilise).
+- Testé dans le navigateur : intro, forêt, donjons (gris, cramoisi), mines,
+  sprites, portes, barreaux, décalcomanies, combat ; 25 i/s (plafond de la
+  boucle) contre 20-22 pour l'ancien rendu dans le même environnement.
+
 ## À faire
 
-### Étape suivante : brancher raycaster-386
-Le moteur cible (`../raycaster-386`, ESM, TypeScript compilé) est un portage
-de `o876-raycaster-engine`, plus récent que le `O876_Raycaster` du jeu. Il
-fournit le rendu et une couche de simulation (portes, acteurs, collisions,
-déclencheurs) mais pas `Engine`, les thinkers, `Horde`/`Mobile`, les effets
-`GX*`, les périphériques d'entrée ni la minicarte. Approche proposée :
-1. rapatrier dans le jeu ce que 386 ne fournit pas (boucle, thinkers,
-   mobiles, GX, entrées) ;
-2. isoler l'accès au moteur derrière une façade (le jeu utilise une
-   trentaine de membres de `oRaycaster` : `nPlaneSpacing`, `oHorde`,
-   `oEffects`, `oCamera`, `cloneWall`, `getMapXYPhysical`, `aMap`,
-   `castRay`, `textureAnimation`, `shadeProcess`…) ;
-3. remplacer le rendu derrière la façade par `Renderer` / `MapHelper` de
-   386 (conversion de la carte en `LevelMap`, sprites, `cloneWall` →
-   décalcomanies) ;
-4. éventuellement, simulation 386 pour les portes et les collisions.
+### Écarts visuels avec l'ancien moteur
+- **Champ de vision** : 386 dérive la focale de la largeur
+  (`width / 2 × 16 / 9`, soit ~59°), l'ancien moteur avait 90° (et des murs
+  étirés verticalement de 1.25). Tout paraît ~1.8× plus proche. Pour
+  retrouver l'ancienne vue, il faut une focale (ou un FOV) réglable dans
+  raycaster-386.
+- Ombrage des sprites un peu différent (l'ancien moteur calculait leur
+  distance d'ombrage avec un facteur 1.333).
+
+### raycaster386 1.0.0 : à signaler / vérifier en 1.1.0
+- Un tileset créé après le premier `render()` n'est jamais ombré (dessiné
+  vide). Contourné : tilesets créés au chargement, `compute()` explicite
+  pour les suivants.
+- Avertissement Chrome « Multiple readback operations using getImageData »
+  (lecture du canvas par le rendu des sols à chaque image).
+
+### Suite possible
+- Portes, collisions et déplacements par la couche simulation de 386
+  (`DoorPolicy`, `moveActor`) à la place de `GXDoor` / `Mobile`.
+- Rapatrier dans `game/` ce que 386 ne fournit pas (boucle `Engine`,
+  thinkers, `Horde`/`Mobile`, effets GX, entrées) : ce n'est plus une
+  bibliothèque.
 
 ### Globales restantes
 - `window.G` (instance de `Game`, lue dans 8 fichiers),

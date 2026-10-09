@@ -1,5 +1,6 @@
 {
   "name": "reikaster-crawler",
+  "version": "2.0.0",
   "private": true,
   "description": "Reikaster Underland - prototype de dungeon crawler",
   "scripts": {
@@ -13,5 +14,8 @@
     "esbuild": "0.24.2",
     "eslint-scope": "^8.2.0",
     "js-beautify": "^1.15.1"
+  },
+  "dependencies": {
+    "@laboralphy/raycaster386": "^1.0.0"
   }
 }
