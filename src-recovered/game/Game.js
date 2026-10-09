@@ -233,7 +233,7 @@ export class Game extends Engine {
         this.bMPL = this.oMPL.init();
         if (this.oSoundSystem === null) {
             this.oSoundSystem = new SoundSystem();
-            this.oSoundSystem.addChans(16)
+            this.oSoundSystem.preload(this.sys_getSoundEffectFiles())
         }
         this.oPathFinder = new Land();
         this.oPathFinder.isCellWalkable = function(x, y) {
@@ -1758,9 +1758,23 @@ export class Game extends Engine {
         }
     }
 
+    sys_getSoundPath(sFile) {
+        return 'resources/snd/' + this.sAudioType + '/' + sFile + '.' + this.sAudioType
+    }
+
+    /** Fichiers des bruitages (tout SOUNDS sauf les musiques), pour les précharger. */
+    sys_getSoundEffectFiles() {
+        const aFiles = [];
+        for (const sKey in SOUNDS) {
+            if (!sKey.startsWith('MUSIC_')) {
+                [].concat(SOUNDS[sKey]).filter((sFile) => sFile !== '').forEach((sFile) => aFiles.push(this.sys_getSoundPath(sFile)))
+            }
+        }
+        return aFiles
+    }
+
     sys_playSound(sFile, x, y) {
-        sFile = 'resources/snd/' + this.sAudioType + '/' + sFile + '.' + this.sAudioType;
-        const nChan = this.oSoundSystem.getFreeChan(sFile);
+        sFile = this.sys_getSoundPath(sFile);
         let fDist = 0;
         if (x !== undefined) {
             const oPlayer = this.getPlayer();
@@ -1780,7 +1794,7 @@ export class Game extends Engine {
             fVolume = 1
         }
         if (fVolume > 0.01) {
-            this.oSoundSystem.play(sFile, nChan, fVolume)
+            this.oSoundSystem.play(sFile, fVolume)
         }
     }
 
@@ -1791,7 +1805,7 @@ export class Game extends Engine {
         } else {
             sFile = xFile
         }
-        this.oSoundSystem.playMusic('resources/snd/' + this.sAudioType + '/' + sFile + '.' + this.sAudioType)
+        this.oSoundSystem.playMusic(this.sys_getSoundPath(sFile))
     }
 
     sys_getVersion(nFormat) {

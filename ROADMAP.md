@@ -150,6 +150,20 @@ npm start          # node server.js -> http://localhost:8080/
   sprites, portes, barreaux, décalcomanies, combat ; 25 i/s (plafond de la
   boucle) contre 20-22 pour l'ancien rendu dans le même environnement.
 
+### 9. Son : howler.js
+- `SoundSystem` (éléments `<audio>`, 16 canaux recyclés, lecture au premier
+  `load()` par `autoplay`) remplacé par une petite couche sur howler.js :
+  bruitages décodés une fois (Web Audio) et rejoués sans délai, plusieurs
+  instances d'un même son possibles ; musique lue en flux (html5) et en
+  boucle.
+- Les bruitages de `SOUNDS` (sauf `MUSIC_*`) sont préchargés au démarrage.
+- Un même morceau demandé deux fois continue au lieu de recommencer
+  (cinématique d'intro puis forêt).
+- Interface réduite à ce que le jeu utilise : `play(fichier, volume)`,
+  `playMusic`, `mute`/`unmute` (pause de la musique, comme avant),
+  `preload`, `free`. `crossFadeMusic` et la gestion des canaux, inutilisés,
+  ont disparu.
+
 ## À faire
 
 ### Écarts visuels avec l'ancien moteur
