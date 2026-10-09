@@ -1,0 +1,111 @@
+O2.createObject('O876_Raycaster.MouseDevice', class MouseDevice {
+    constructor(...aArgs) {
+        this.__construct(...aArgs);
+    }
+
+    __construct() {
+        this.aEvents = []
+    }
+
+    clearBuffer() {
+        this.aEvents = []
+    }
+
+    eventMouseUp(e) {
+        var oEvent = window.event ? window.event : e;
+        var oDev = window.__mouseDevice;
+        oDev.nButtons = oEvent.buttons;
+        if (oDev.bUseBuffer && oDev.aEvents.length < oDev.nKeyBufferSize) {
+            oDev.aEvents.push([0, oEvent.clientX, oEvent.clientY, oEvent.button])
+        }
+        return false
+    }
+
+    eventMouseDown(e) {
+        var oEvent = window.event ? window.event : e;
+        var oDev = window.__mouseDevice;
+        oDev.nButtons = oEvent.buttons;
+        if (oDev.bUseBuffer && oDev.aEvents.length < oDev.nKeyBufferSize) {
+            oDev.aEvents.push([1, oEvent.clientX, oEvent.clientY, oEvent.button])
+        }
+        if (oEvent.button === 2) {
+            if (oEvent.stopPropagation) {
+                oEvent.stopPropagation()
+            }
+            oEvent.cancelBubble = true
+        }
+        return false
+    }
+
+    eventMouseClick(e) {
+        var oEvent = window.event ? window.event : e;
+        if (oEvent.button === 2) {
+            if (oEvent.stopPropagation) {
+                oEvent.stopPropagation()
+            }
+            oEvent.cancelBubble = true
+        }
+        return false
+    }
+
+    inputMouse() {
+        if (this.nSecurityDelay > 0) {
+            --this.nSecurityDelay;
+            this.clearBuffer();
+            return null
+        } else {
+            return this.aEvents.shift()
+        }
+    }
+
+    mouseWheel(e) {
+        var oEvent = window.event ? window.event : e;
+        var oDev = window.__mouseDevice;
+        var nDelta = 0;
+        if (oEvent.wheelDelta) {
+            nDelta = oEvent.wheelDelta
+        } else {
+            nDelta = -40 * oEvent.detail
+        }
+        if (oDev.bUseBuffer && oDev.aEvents.length < oDev.nKeyBufferSize) {
+            if (e.wheelDelta) {
+                nDelta = oEvent.wheelDelta > 0 ? 3 : -3;
+                oDev.aEvents.push([nDelta, 0, 0, 3])
+            } else {
+                nDelta = oEvent.detail > 0 ? -3 : 3;
+                oDev.aEvents.push([nDelta, 0, 0, 3])
+            }
+        }
+    }
+
+    plugEvents(oElement) {
+        window.__mouseDevice = this;
+        oElement.addEventListener('mousedown', this.eventMouseDown, false);
+        oElement.addEventListener('click', this.eventMouseClick, false);
+        oElement.addEventListener('mouseup', this.eventMouseUp, false);
+        oElement.addEventListener('mousewheel', this.mouseWheel, false);
+        oElement.addEventListener('DOMMouseScroll', this.mouseWheel, false);
+        this.oElement = oElement
+    }
+
+    unplugEvents() {
+        var oElement = this.oElement;
+        oElement.removeEventListener('mousedown', this.eventMouseDown, false);
+        oElement.removeEventListener('click', this.eventMouseClick, false);
+        oElement.removeEventListener('mouseup', this.eventMouseUp, false);
+        oElement.removeEventListener('mousewheel', this.mouseWheel, false);
+        oElement.removeEventListener('DOMMouseScroll', this.mouseWheel, false)
+    }
+
+    clearEvents() {
+        this.aEvents = []
+    }
+});
+Object.assign(O876_Raycaster.MouseDevice.prototype, {
+    nButtons: 0,
+    aEvents: null,
+    nKeyBufferSize: 16,
+    bUseBuffer: true,
+    nSecurityDelay: 0,
+    oElement: null
+});

@@ -1,0 +1,17 @@
+{
+  "name": "reikaster-crawler",
+  "private": true,
+  "description": "Reikaster Underland - prototype de dungeon crawler",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node src-recovered/build.js && esbuild src-recovered/dist/crawler.js --minify --target=es2015 --outfile=crawler.js",
+    "check:laby": "node laby/tools/check.js"
+  },
+  "devDependencies": {
+    "acorn": "^8.14.0",
+    "acorn-walk": "^8.3.4",
+    "esbuild": "0.24.2",
+    "eslint-scope": "^8.2.0",
+    "js-beautify": "^1.15.1"
+  }
+}

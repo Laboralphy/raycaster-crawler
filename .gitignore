@@ -1,0 +1,23 @@
+# Dépendances
+node_modules/
+
+# Build intermédiaire (concaténation avant minification)
+src-recovered/dist/
+
+# Journaux
+*.log
+npm-debug.log*
+
+# Environnement local
+.env
+.env.*
+
+# IDE / éditeurs
+.idea/
+.vscode/
+*.swp
+*~
+
+# Systèmes
+.DS_Store
+Thumbs.db

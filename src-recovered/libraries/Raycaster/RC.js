@@ -1,0 +1,16 @@
+var RC = {
+    OBJECT_TYPE_NONE: 0,
+    OBJECT_TYPE_MOB: 1,
+    OBJECT_TYPE_PLAYER: 2,
+    OBJECT_TYPE_PLACEABLE: 3,
+    OBJECT_TYPE_MISSILE: 4,
+    OBJECT_TYPE_ITEM: 5,
+    FX_NONE: 0,
+    FX_LIGHT_ADD: 1,
+    FX_LIGHT_SOURCE: 2,
+    FX_ALPHA_75: 1 << 2,
+    FX_ALPHA_50: 2 << 2,
+    FX_ALPHA_25: 3 << 2,
+    FX_ALPHA: [1, 0.75, 0.50, 0.25, 0],
+    FX_DIM0: 0x10,
+};
