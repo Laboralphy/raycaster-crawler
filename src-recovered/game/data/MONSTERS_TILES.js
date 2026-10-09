@@ -1,4 +1,4 @@
-var MONSTERS_TILES = {
+export const MONSTERS_TILES = {
     m_myco: {
         src: 'resources/gfx/sprites/m_myco.png',
         width: 64,

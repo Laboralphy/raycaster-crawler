@@ -1,15 +1,19 @@
-O2.createObject('GXUnderwater', class GXUnderwater extends O876_Raycaster.GXEffect {
+import { CanvasFactory } from '../../libraries/O876/CanvasFactory.js';
+import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
+import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class GXUnderwater extends GXEffect {
     __construct(oRaycaster) {
         super.__construct(oRaycaster);
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
-        this.oDistCanvas = O876.CanvasFactory.getCanvas();
+        this.oDistCanvas = CanvasFactory.getCanvas();
         this.oDistCanvas.width = this.oCanvas.width;
         this.oDistCanvas.height = this.oCanvas.height;
         this.oDistContext = this.oDistCanvas.getContext('2d');
         this.oDistContext.fillStyle = 'rgb(0, 0, 0)';
         this.oDistContext.fillRect(0, 0, this.oDistCanvas.width, this.oDistCanvas.height);
-        this.oDistCanvas2 = O876.CanvasFactory.getCanvas();
+        this.oDistCanvas2 = CanvasFactory.getCanvas();
         this.oDistCanvas2.width = this.oCanvas.width;
         this.oDistCanvas2.height = this.oCanvas.height;
         this.oDistContext2 = this.oDistCanvas2.getContext('2d');
@@ -43,12 +47,12 @@ O2.createObject('GXUnderwater', class GXUnderwater extends O876_Raycaster.GXEffe
     }
 
     buildDistortion() {
-        var h = this.oCanvas.height;
-        var w = this.oCanvas.width;
-        var h2 = h >> 1;
-        var h4 = h >> 2;
-        var h16 = h >> 5;
-        var y = [h16 * Math.sin(MathTools.toRad(this.nTime * 8)) + h4 - h16 | 0, h16 * Math.sin(MathTools.toRad(this.nTime * 10)) + h2 | 0, h16 * Math.sin(MathTools.toRad(this.nTime * 6)) + h2 + h4 + h16 | 0];
+        const h = this.oCanvas.height;
+        const w = this.oCanvas.width;
+        let h2 = h >> 1;
+        let h4 = h >> 2;
+        let h16 = h >> 5;
+        let y = [h16 * Math.sin(MathTools.toRad(this.nTime * 8)) + h4 - h16 | 0, h16 * Math.sin(MathTools.toRad(this.nTime * 10)) + h2 | 0, h16 * Math.sin(MathTools.toRad(this.nTime * 6)) + h2 + h4 + h16 | 0];
         this.oDistContext.drawImage(this.oCanvas, 0, 0, w, h4, 0, 0, w, y[0]);
         this.oDistContext.drawImage(this.oCanvas, 0, h4, w, h4, 0, y[0], w, y[1] - y[0]);
         this.oDistContext.drawImage(this.oCanvas, 0, h2, w, h4, 0, y[1], w, y[2] - y[1]);
@@ -62,7 +66,7 @@ O2.createObject('GXUnderwater', class GXUnderwater extends O876_Raycaster.GXEffe
         this.oDistContext2.drawImage(this.oDistCanvas, h2, 0, h4, h, y[1], 0, y[2] - y[1], h);
         this.oDistContext2.drawImage(this.oDistCanvas, h2 + h4, 0, h4, h, y[2], 0, w - y[2], h)
     }
-});
+}
 Object.assign(GXUnderwater.prototype, {
     sClass: 'Underwater',
     oCanvas: null,

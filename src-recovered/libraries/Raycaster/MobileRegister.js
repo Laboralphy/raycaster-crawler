@@ -1,10 +1,10 @@
-O2.createObject('O876_Raycaster.MobileRegister', class MobileRegister {
+export class MobileRegister {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
 
     __construct(n) {
-        var x, y;
+        let x, y;
         this.nSize = n;
         this.aSectors = {};
         for (x = 0; x < n; x++) {
@@ -27,8 +27,8 @@ O2.createObject('O876_Raycaster.MobileRegister', class MobileRegister {
         if (oMobile.xSector < 0 || oMobile.ySector < 0 || oMobile.xSector >= this.nSize || oMobile.ySector >= this.nSize) {
             return
         }
-        var aSector = this.aSectors[oMobile.xSector][oMobile.ySector];
-        var n = oMobile.nSectorRank;
+        const aSector = this.aSectors[oMobile.xSector][oMobile.ySector];
+        const n = oMobile.nSectorRank;
         if (n == (aSector.length - 1)) {
             aSector.pop();
             oMobile.nSectorRank = -1
@@ -42,13 +42,13 @@ O2.createObject('O876_Raycaster.MobileRegister', class MobileRegister {
         if (oMobile.xSector < 0 || oMobile.ySector < 0 || oMobile.xSector >= this.nSize || oMobile.ySector >= this.nSize) {
             return
         }
-        var aSector = this.aSectors[oMobile.xSector][oMobile.ySector];
-        var n = aSector.length;
+        const aSector = this.aSectors[oMobile.xSector][oMobile.ySector];
+        const n = aSector.length;
         aSector.push(oMobile);
         oMobile.nSectorRank = n
     }
-});
-Object.assign(O876_Raycaster.MobileRegister.prototype, {
+}
+Object.assign(MobileRegister.prototype, {
     aSectors: null,
     nSize: 0
 });

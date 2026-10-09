@@ -1,15 +1,19 @@
-O2.createObject('H5UI.Text', class Text extends H5UI.WinControl {
+import { Font } from './Font.js';
+import { WinControl } from './WinControl.js';
+import { CanvasFactory } from '../O876/CanvasFactory.js';
+
+export class Text extends WinControl {
     __construct() {
         super.__construct();
-        O876.CanvasFactory.setImageSmoothing(this.getSurface(), true);
-        this.font = new H5UI.Font(this)
+        CanvasFactory.setImageSmoothing(this.getSurface(), true);
+        this.font = new Font(this)
     }
 
     setCaption(s) {
         this._set('_sCaption', s);
         if (this._bAutosize && this._bInvalid) {
             this.font.update();
-            var oMetrics = this.getSurface().measureText(this._sCaption);
+            const oMetrics = this.getSurface().measureText(this._sCaption);
             this.setSize(oMetrics.width, this.font._nFontSize + 1)
         }
     }
@@ -23,19 +27,19 @@ O2.createObject('H5UI.Text', class Text extends H5UI.WinControl {
     }
 
     renderSelf() {
-        var oSurface = this.getSurface();
-        var oMetrics;
+        const oSurface = this.getSurface();
+        let oMetrics;
         oSurface.clearRect(0, 0, this.getWidth(), this.getHeight());
         if (this._bWordWrap) {
             this.font.update();
-            var aWords;
-            var sLine = '',
+            let aWords;
+            let sLine = '',
                 sWord, x = 0,
                 y = 0;
-            var sSpace;
+            let sSpace;
             oSurface.textBaseline = 'top';
-            var aParas = this._sCaption.split('\n');
-            for (var iPara = 0; iPara < aParas.length; iPara++) {
+            const aParas = this._sCaption.split('\n');
+            for (let iPara = 0; iPara < aParas.length; iPara++) {
                 aWords = aParas[iPara].split(' ');
                 while (aWords.length) {
                     sWord = aWords.shift();
@@ -76,8 +80,8 @@ O2.createObject('H5UI.Text', class Text extends H5UI.WinControl {
             oSurface.fillText(this._sCaption, 0, this.getHeight() >> 1)
         }
     }
-});
-Object.assign(H5UI.Text.prototype, {
+}
+Object.assign(Text.prototype, {
     _sClass: 'Text',
     _sCaption: '',
     _bAutosize: true,

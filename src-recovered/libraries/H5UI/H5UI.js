@@ -1,4 +1,6 @@
-O2.createObject('H5UI', {
+import { CanvasFactory } from '../O876/CanvasFactory.js';
+
+export const H5UI = {
     data: {
         renderCount: 0,
         cdiCount: 0,
@@ -11,20 +13,20 @@ O2.createObject('H5UI', {
     handle: 0,
     root: null,
     initRoot: function() {
-        UI.root = document.getElementsByTagName('body')[0]
+        H5UI.root = document.getElementsByTagName('body')[0]
     },
     setRoot: function(oDomElement) {
         H5UI.root = oDomElement
     },
     getCanvas: function() {
-        var oCanvas = H5UI.canvasDispenser.pop();
+        const oCanvas = H5UI.canvasDispenser.pop();
         if (oCanvas) {
             return oCanvas
         } else {
-            return O876.CanvasFactory.getCanvas()
+            return CanvasFactory.getCanvas()
         }
     },
     recycleCanvas: function(oCanvas) {
         H5UI.canvasDispenser.push(oCanvas)
     }
-});
+};

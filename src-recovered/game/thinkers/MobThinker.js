@@ -1,4 +1,11 @@
-O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
+import { SOUNDS } from '../data/SOUNDS.js';
+import { ArrayTools } from '../../libraries/O876/ArrayTools.js';
+import { Marker } from '../../libraries/O876/Marker.js';
+import { RC } from '../../libraries/Raycaster/RC.js';
+import { Thinker } from '../../libraries/Raycaster/Thinker.js';
+import { MathTools, PI } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class MobThinker extends Thinker {
     __construct() {
         this.fViewAngle = PI;
         this.aAngles = [0, 0.25 * PI, 0.5 * PI, 0.75 * PI, PI, -0.75 * PI, -0.5 * PI, -0.25 * PI];
@@ -34,24 +41,24 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
         if (oTarget === null) {
             return
         }
-        var sx = oTarget.x;
-        var sy = oTarget.y;
-        var mx = this.oMobile.x;
-        var my = this.oMobile.y;
-        var fSearchAngle = Math.atan2(sy - my, sx - mx);
-        var fSA = Math.abs((fSearchAngle + PI) - (this.oMobile.fTheta + PI));
+        const sx = oTarget.x;
+        const sy = oTarget.y;
+        const mx = this.oMobile.x;
+        const my = this.oMobile.y;
+        const fSearchAngle = Math.atan2(sy - my, sx - mx);
+        const fSA = Math.abs((fSearchAngle + PI) - (this.oMobile.fTheta + PI));
         if (fSA > this.fViewAngle) {
             return false
         }
-        var dx = Math.cos(fSearchAngle);
-        var dy = Math.sin(fSearchAngle);
-        var aVisibles = this.oGame.oRaycaster.castRay(this.oDummyData, this.oMobile.x, this.oMobile.y, dx, dy);
+        const dx = Math.cos(fSearchAngle);
+        const dy = Math.sin(fSearchAngle);
+        const aVisibles = this.oGame.oRaycaster.castRay(this.oDummyData, this.oMobile.x, this.oMobile.y, dx, dy);
         return Marker.getMarkXY(aVisibles, oTarget.xSector, oTarget.ySector)
     }
 
     searchForRandomTarget() {
-        var aMobs = this.oGame.gc_selectMobilesInCircle(this.oMobile.x, this.oMobile.y, 384);
-        var nMe = aMobs.indexOf(this.oMobile);
+        const aMobs = this.oGame.gc_selectMobilesInCircle(this.oMobile.x, this.oMobile.y, 384);
+        const nMe = aMobs.indexOf(this.oMobile);
         if (nMe >= 0) {
             ArrayTools.removeItem(aMobs, nMe)
         }
@@ -66,9 +73,9 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
         if (t === null) {
             return false
         }
-        var c = t.getData('creature');
-        var bInvisible = c.getAttribute('invisible') > 0;
-        var bEsp = c.getAttribute('esp') > 0;
+        const c = t.getData('creature');
+        const bInvisible = c.getAttribute('invisible') > 0;
+        const bEsp = c.getAttribute('esp') > 0;
         if (bInvisible && (!bEsp)) {
             return false
         }
@@ -79,7 +86,7 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
     }
 
     distanceToTarget() {
-        var t = this.getTarget();
+        const t = this.getTarget();
         if (t) {
             return MathTools.distance(this.oMobile.x - t.x, this.oMobile.y - t.y)
         } else {
@@ -110,7 +117,7 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
 
     getCollisionType() {
         if (this.oMobile.oMobileCollision !== null) {
-            var oTarget = this.oMobile.oMobileCollision;
+            const oTarget = this.oMobile.oMobileCollision;
             if (oTarget.getType() == RC.OBJECT_TYPE_MISSILE) {
                 return this.COLLISION_NONE
             } else {
@@ -132,7 +139,7 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
     }
 
     escapeFrom(oMobile) {
-        var fAngle = Math.atan2(this.oMobile.y - oMobile.y, this.oMobile.x - oMobile.x);
+        const fAngle = Math.atan2(this.oMobile.y - oMobile.y, this.oMobile.x - oMobile.x);
         this.oMobile.move(fAngle, this.oMobile.fSpeed)
     }
 
@@ -143,8 +150,8 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
     }
 
     pulse() {
-        var xPulse = this.oPulse.x;
-        var yPulse = this.oPulse.y;
+        const xPulse = this.oPulse.x;
+        const yPulse = this.oPulse.y;
         if (xPulse || yPulse) {
             this.oMobile.slide(xPulse | 0, yPulse | 0);
             this.oPulse.x /= 1.33;
@@ -162,7 +169,7 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
         if (nType === undefined) {
             nType = 0
         }
-        var g = this.oGame;
+        const g = this.oGame;
         this.oMobile.fSpeed = g.TIME_FACTOR * g.oDungeon.getCreatureMoveSpeed(this.oCreature) / 1000;
         switch (nType) {
             case 0:
@@ -178,7 +185,7 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
                 this.oMobile.moveBackward();
                 break
         }
-        var nCollisionType = this.getCollisionType();
+        const nCollisionType = this.getCollisionType();
         switch (nCollisionType) {
             case this.COLLISION_TARGET:
                 this.oMobile.rollbackXY();
@@ -261,10 +268,10 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
     }
 
     setupHaze() {
-        var nHaze = 0;
-        var bHaze = false;
-        var oHazeDef;
-        for (var sHaze in this.EFFECT_HAZES) {
+        let nHaze = 0;
+        let bHaze = false;
+        let oHazeDef;
+        for (const sHaze in this.EFFECT_HAZES) {
             oHazeDef = this.EFFECT_HAZES[sHaze];
             if (this[oHazeDef.property]) {
                 nHaze = oHazeDef.haze;
@@ -295,7 +302,7 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
     _cast(nTime) {}
 
     _hitByMissile(oMissile) {
-        var oBastard = this.oLastAggressor = oMissile.oThinker.oOwner;
+        const oBastard = this.oLastAggressor = oMissile.oThinker.oOwner;
         if (this.isConfused()) {
             return
         }
@@ -338,7 +345,7 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
 
     stripEffects() {
         this.oGame.oDungeon.oEffectProcessor.dispellEffects(this.oCreature, this.oGame.oDungeon.oEffectProcessor.selectorAll);
-        for (var sHaze in this.EFFECT_HAZES) {
+        for (const sHaze in this.EFFECT_HAZES) {
             this[this.EFFECT_HAZES[sHaze].property] = false
         }
         if (this.oMobile.oSprite.oOverlay) {
@@ -358,7 +365,7 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
             this.disable()
         }
         this.aCastTimes = [];
-        for (var i = 0; i < this.oWeapon.spells.length; i++) {
+        for (let i = 0; i < this.oWeapon.spells.length; i++) {
             this.aCastTimes.push(this.oWeapon.spells[i].time)
         }
         this.TIME_REACTIVITY = 400 / this.oGame.TIME_FACTOR | 0;
@@ -408,7 +415,7 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
 
     thinkSearchConfused() {
         this.processEffects();
-        var oTarget = null;
+        let oTarget = null;
         if (!this.isConfused()) {
             this.think = this.thinkSearch;
             return
@@ -425,7 +432,7 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
 
     thinkFollow() {
         this.processEffects();
-        var nTime = this.oGame.nTime;
+        const nTime = this.oGame.nTime;
         if (this.nBoredTime > this.MAX_BORING_TIME) {
             this.setWanderMode()
         } else {
@@ -492,7 +499,7 @@ O2.createObject('MobThinker', class MobThinker extends O876_Raycaster.Thinker {
         this.oMobile.bActive = false;
         this._dead()
     }
-});
+}
 Object.assign(MobThinker.prototype, {
     oMobileSectors: null,
     oPulse: null,

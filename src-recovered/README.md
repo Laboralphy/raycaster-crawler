@@ -8,35 +8,56 @@ décompression, puis découpage en un fichier par classe ou objet.
   ne renomme rien.
 - Les commentaires sont perdus.
 - L'arborescence est reconstituée d'après les espaces de noms ;
-  `libraries/O876/o2.js` et `libraries/Raycaster/Tools/MathTools.js`
-  reprennent des chemins connus de l'ancien projet, les autres
-  emplacements sont déduits.
+  `libraries/Raycaster/Tools/MathTools.js` (et `libraries/O876/o2.js`,
+  supprimé depuis) reprennent des chemins connus de l'ancien projet, les
+  autres emplacements sont déduits.
 - Le bundle contenait deux fois `CRAFT_DATA`, `ITEMS_DATA`,
   `MONSTERS_BLUEPRINTS` et `SPELLS_DATA` (copies identiques, jamais lues
   entre les deux déclarations) : une seule est conservée.
 
 ## Construire
 
-Le code repose sur des variables globales et sur l'ordre de chargement
-(une classe doit être déclarée après celle qu'elle étend). Cet ordre est
-dans `build-order.json`.
+Les sources sont des modules ES (`import` / `export`). esbuild les
+assemble depuis le point d'entrée `game/main.js` :
 
 ```bash
 npm install        # une fois (installe esbuild)
 npm run build      # -> crawler.js à la racine, chargé par index.html
 ```
 
-`npm run build` concatène les sources dans `src-recovered/dist/crawler.js`,
-puis le minifie avec esbuild vers `crawler.js`.
+Les fichiers qu'aucun module n'importe (ex. `ReikasterMicrosyte.js`,
+`MW.LABY.js`, plusieurs thinkers et outils de `libraries/`) sont du code
+mort : ils restent dans l'arborescence mais n'entrent pas dans le bundle.
+
+## Modules ES
+
+Chaque fichier exporte sa classe ou son objet sous son nom court : l'ancien
+`O2.createObject('H5UI.Box', class Box …)` est devenu `export class Box …`,
+et `H5UI.Box` s'écrit `Box` dans les modules qui l'importent. Quand deux
+noms courts entrent en collision, l'import est renommé d'après l'ancien
+espace de noms (`import { Item as GC_Item }`).
+
+- Les objets `H5UI` et `UI` existent toujours, mais ne contiennent plus que
+  leurs propres données et fonctions (`UI.INTFMODE_*`, `H5UI.getCanvas`…),
+  pas les classes.
+- Classes cherchées par leur nom : `Game.addPlugin('Shop')` lit le registre
+  `PLUGINS` de `Game.js` ; `ThinkerManager.createThinker('Rusher')` lit le
+  registre rempli par `ThinkerManager.registerThinkers(THINKERS)` dans
+  `main()` (`game/thinkers/THINKERS.js`). Un nouveau plugin ou thinker
+  désigné par son nom doit y être ajouté.
+- `WORLD_DATA` (`game/data/WORLD_DATA.js`) regroupe `shops` et `dungeons` ;
+  `Game.newGame` le restaure en place (`Object.assign`) : ne pas le
+  réaffecter.
+- Globales restantes, posées sur `window` : `G` (l'instance de `Game`,
+  créée dans `main()`), `__keyboardDevice` et `__mouseDevice`.
+- `libraries/Raycaster/Engine.js` importe `CONFIG` depuis `game/` : le moteur
+  dépend encore de la configuration du jeu.
 
 ## Classes ES
 
-Toutes les classes `o2` (`O2.createClass` / `O2.extendClass`) ont été
-converties en classes ES (`class … extends …`, `super`). De `o2.js`, il ne
-reste que `O2.createObject`, qui enregistre classes et objets dans leurs
-espaces de noms globaux (`H5UI.Box`, `UI.Window`...).
-
-Choix de conversion, pour garder le comportement d'o2 :
+Les classes `o2` (`O2.createClass` / `O2.extendClass`) avaient d'abord été
+converties en classes ES (`class … extends …`, `super`). Choix de conversion,
+pour garder le comportement d'o2 :
 
 - `__inherited(...)` est devenu `super.<méthode>(...)` ;
 - `__construct` reste la méthode d'initialisation, appelée par le

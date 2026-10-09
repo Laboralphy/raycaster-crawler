@@ -1,4 +1,6 @@
-O2.createObject('O876_Raycaster.LinearThinker', class LinearThinker extends O876_Raycaster.Thinker {
+import { Thinker } from './Thinker.js';
+
+export class LinearThinker extends Thinker {
     __construct() {
         this.nTime = 0
     }
@@ -52,8 +54,8 @@ O2.createObject('O876_Raycaster.LinearThinker', class LinearThinker extends O876
     thinkStop() {}
 
     thinkIdle() {}
-});
-Object.assign(O876_Raycaster.LinearThinker.prototype, {
+}
+Object.assign(LinearThinker.prototype, {
     nTime: 0,
     nCurrentTime: 0,
     xStart: 0,

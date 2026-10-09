@@ -1,4 +1,4 @@
-O2.createObject('O876.Easing', class Easing {
+export class Easing {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -33,7 +33,7 @@ O2.createObject('O876.Easing', class Easing {
         if (t === undefined) {
             t = this.iTime++
         }
-        var v = this[this.sFunction](t / this.nTime);
+        const v = this[this.sFunction](t / this.nTime);
         if (this.bXCompute) {
             this.x = this.xEnd * v + (this.xStart * (1 - v))
         }
@@ -91,12 +91,12 @@ O2.createObject('O876.Easing', class Easing {
     }
 
     quinticBezier(v) {
-        var ts = v * this.nTime;
-        var tc = ts * this.nTime;
+        const ts = v * this.nTime;
+        const tc = ts * this.nTime;
         return 4 * tc - 9 * ts + 6 * v
     }
-});
-Object.assign(O876.Easing.prototype, {
+}
+Object.assign(Easing.prototype, {
     xStart: 0,
     yStart: 0,
     xEnd: 0,

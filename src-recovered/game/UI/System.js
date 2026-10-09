@@ -1,10 +1,15 @@
-O2.createObject('UI.System', class System {
+import { LoadingWindow } from './LoadingWindow.js';
+import { MainMenuWindow } from './MainMenuWindow.js';
+import { Screen } from './Screen.js';
+import { UI } from './UI.js';
+
+export class System {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
 
     __construct() {
-        this.oScreen = new UI.Screen();
+        this.oScreen = new Screen();
         this.oPlugins = UI.oPlugins
     }
 
@@ -20,12 +25,12 @@ O2.createObject('UI.System', class System {
     }
 
     cornerWidget(w, nCorner, nMargin) {
-        var xLeft = nMargin;
-        var yTop = nMargin;
-        var xCenter = (this.oScreen._nWidth - w._nWidth) >> 1;
-        var yCenter = (this.oScreen._nHeight - w._nHeight) >> 1;
-        var xRight = this.oScreen._nWidth - w._nWidth - nMargin;
-        var yBottom = this.oScreen._nHeight - w._nHeight - nMargin;
+        const xLeft = nMargin;
+        const yTop = nMargin;
+        const xCenter = (this.oScreen._nWidth - w._nWidth) >> 1;
+        const yCenter = (this.oScreen._nHeight - w._nHeight) >> 1;
+        const xRight = this.oScreen._nWidth - w._nWidth - nMargin;
+        const yBottom = this.oScreen._nHeight - w._nHeight - nMargin;
         switch (nCorner) {
             case 1:
                 w.moveTo(xLeft, yBottom);
@@ -82,57 +87,57 @@ O2.createObject('UI.System', class System {
     }
 
     eventScreenClick(e) {
-        var oThis = this.__this;
-        var x = e.offsetX || e.clientX - this.__x;
-        var y = e.offsetY || e.clientY - this.__y;
+        const oThis = this.__this;
+        let x = e.offsetX || e.clientX - this.__x;
+        let y = e.offsetY || e.clientY - this.__y;
         x = x / this.__ratio | 0;
         y = y / this.__ratio | 0;
         oThis.doMouseEvent('Click', x - oThis._x, y - oThis._y, e.which)
     }
 
     eventScreenDblClick(e) {
-        var oThis = this.__this;
-        var x = e.offsetX || e.clientX - this.__x;
-        var y = e.offsetY || e.clientY - this.__y;
+        const oThis = this.__this;
+        let x = e.offsetX || e.clientX - this.__x;
+        let y = e.offsetY || e.clientY - this.__y;
         x = x / this.__ratio | 0;
         y = y / this.__ratio | 0;
         oThis.doMouseEvent('Dblclick', x - oThis._x, y - oThis._y, e.which)
     }
 
     eventScreenMouseMove(e) {
-        var oThis = this.__this;
-        var x = e.offsetX || e.clientX - this.__x;
-        var y = e.offsetY || e.clientY - this.__y;
+        const oThis = this.__this;
+        let x = e.offsetX || e.clientX - this.__x;
+        let y = e.offsetY || e.clientY - this.__y;
         x = x / this.__ratio | 0;
         y = y / this.__ratio | 0;
         oThis.doMouseEvent('MouseMove', x - oThis._x, y - oThis._y, e.which)
     }
 
     eventScreenMouseDown(e) {
-        var oThis = this.__this;
-        var x = e.offsetX || e.clientX - this.__x;
-        var y = e.offsetY || e.clientY - this.__y;
+        const oThis = this.__this;
+        let x = e.offsetX || e.clientX - this.__x;
+        let y = e.offsetY || e.clientY - this.__y;
         x = x / this.__ratio | 0;
         y = y / this.__ratio | 0;
         oThis.doMouseEvent('MouseDown', x - oThis._x, y - oThis._y, e.which)
     }
 
     eventScreenMouseUp(e) {
-        var oThis = this.__this;
-        var x = e.offsetX || e.clientX - this.__x;
-        var y = e.offsetY || e.clientY - this.__y;
+        const oThis = this.__this;
+        let x = e.offsetX || e.clientX - this.__x;
+        let y = e.offsetY || e.clientY - this.__y;
         x = x / this.__ratio | 0;
         y = y / this.__ratio | 0;
         oThis.doMouseEvent('MouseUp', x - oThis._x, y - oThis._y, e.which)
     }
 
     eventScreenDOMMouseScroll(e) {
-        var oThis = this.__this;
-        var x = e.offsetX || e.clientX - this.__x;
-        var y = e.offsetY || e.clientY - this.__y;
+        const oThis = this.__this;
+        let x = e.offsetX || e.clientX - this.__x;
+        let y = e.offsetY || e.clientY - this.__y;
         x = x / this.__ratio | 0;
         y = y / this.__ratio | 0;
-        var nDelta = 0;
+        let nDelta = 0;
         if (e.wheelDelta) {
             nDelta = e.wheelDelta
         } else {
@@ -188,7 +193,7 @@ O2.createObject('UI.System', class System {
 
     setScreen(sScreen) {
         this.sScreen = sScreen;
-        var sCmdProc = 'cmd' + sScreen;
+        const sCmdProc = 'cmd' + sScreen;
         if (sCmdProc in this) {
             this.commandProc = this[sCmdProc]
         } else {
@@ -207,10 +212,10 @@ O2.createObject('UI.System', class System {
 
     cmdLoading(sCommand, xParams) {
         if (this.getWidget() === null) {
-            this.centerWidget(this.declareWidget(new UI.LoadingWindow()))
+            this.centerWidget(this.declareWidget(new LoadingWindow()))
         }
         this.oScreen.fAlpha = 0.2;
-        var w = this.getWidget().getProgressBar();
+        const w = this.getWidget().getProgressBar();
         switch (sCommand) {
             case 'set':
                 w.setMax(xParams.max);
@@ -221,11 +226,11 @@ O2.createObject('UI.System', class System {
     }
 
     cmdMainmenu(sCommand, xParams) {
-        var i;
+        let i;
         switch (sCommand) {
             case 'on':
                 this.clear();
-                this.cornerWidget(this.declareWidget(new UI.MainMenuWindow(xParams)), 2, 32);
+                this.cornerWidget(this.declareWidget(new MainMenuWindow(xParams)), 2, 32);
                 this.oScreen.fAlpha = 0;
                 this.oScreen.show();
                 break;
@@ -246,8 +251,8 @@ O2.createObject('UI.System', class System {
                 break
         }
     }
-});
-Object.assign(UI.System.prototype, {
+}
+Object.assign(System.prototype, {
     oScreen: null,
     oRenderContext: null,
     oRenderCanvas: null,

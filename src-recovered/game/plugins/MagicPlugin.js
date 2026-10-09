@@ -1,6 +1,19 @@
-O2.createObject('MagicPlugin', class MagicPlugin {
+import { ICONS } from '../data/ICONS.js';
+import { LABY } from '../data/LABY.js';
+import { MAGIC_DATA } from '../data/MAGIC_DATA.js';
+import { SOUNDS } from '../data/SOUNDS.js';
+import { SPELLS_DATA } from '../data/SPELLS_DATA.js';
+import { GXTimeStop } from '../gx/GXTimeStop.js';
+import { CanvasFactory } from '../../libraries/O876/CanvasFactory.js';
+import { Animation } from '../../libraries/Raycaster/Animation.js';
+import { KEYS } from '../../libraries/Raycaster/KEYS.js';
+import { RC } from '../../libraries/Raycaster/RC.js';
+import { Raycaster } from '../../libraries/Raycaster/Raycaster.js';
+import { MathTools, PI } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class MagicPlugin {
     triggerSpell(b, n) {
-        var s = b[n];
+        const s = b[n];
         if (s === undefined) {
             return
         }
@@ -12,7 +25,7 @@ O2.createObject('MagicPlugin', class MagicPlugin {
     }
 
     key(nKey) {
-        var b = this.oGame.getPlayer().getData('creature').oExtraData.magic.book;
+        const b = this.oGame.getPlayer().getData('creature').oExtraData.magic.book;
         switch (nKey) {
             case 3:
             case KEYS.ALPHANUM.V:
@@ -72,11 +85,11 @@ O2.createObject('MagicPlugin', class MagicPlugin {
         if (oAttacker === null) {
             return false
         }
-        var oAttackerCreature = oAttacker.getData('creature');
-        var nVampyre = oAttackerCreature.getAttribute('vampyre');
+        const oAttackerCreature = oAttacker.getData('creature');
+        const nVampyre = oAttackerCreature.getAttribute('vampyre');
         if (nVampyre > 0) {
-            var ep = this.oGame.oDungeon.oEffectProcessor;
-            var nHeal = Math.max(1, nAmount * ep.BUFF_FACTOR[nVampyre]) | 0;
+            const ep = this.oGame.oDungeon.oEffectProcessor;
+            const nHeal = Math.max(1, nAmount * ep.BUFF_FACTOR[nVampyre]) | 0;
             ep.healCreature(oAttackerCreature, nHeal)
         }
         return false
@@ -100,27 +113,28 @@ O2.createObject('MagicPlugin', class MagicPlugin {
     }
 
     display() {
-        var xStart = 320;
-        var wIcon = 48;
+        let iSpell;
+        const xStart = 320;
+        const wIcon = 48;
         if (this.oCanvas === null) {
             this.oCanvas = document.createElement('canvas');
             this.oCanvas.height = wIcon;
             this.oCanvas.width = 12 * this.oCanvas.height;
             this.oContext = this.oCanvas.getContext('2d')
         }
-        var oCreature = this.oGame.oDungeon.getPlayerCreature();
-        var aBook = oCreature.oExtraData.magic.book;
-        var nSpellCount = aBook.length;
-        var sSpell;
-        var nCooldown;
-        var x, y;
-        var oIcons = this.oGame.oRaycaster.oHorde.oTiles.i_icons.oImage;
+        const oCreature = this.oGame.oDungeon.getPlayerCreature();
+        const aBook = oCreature.oExtraData.magic.book;
+        const nSpellCount = aBook.length;
+        let sSpell;
+        let nCooldown;
+        let x, y;
+        const oIcons = this.oGame.oRaycaster.oHorde.oTiles.i_icons.oImage;
         if (!oIcons.complete) {
             return
         }
         this.bDisplayInvalid = false;
         this.oContext.fillStyle = 'rgba(0, 0, 0, 0.666)';
-        for (var iSpell = 0; iSpell < nSpellCount; iSpell += 1) {
+        for (iSpell = 0; iSpell < nSpellCount; iSpell += 1) {
             sSpell = aBook[iSpell];
             nCooldown = this.computeCooldown(oCreature, sSpell);
             x = iSpell * wIcon;
@@ -130,14 +144,14 @@ O2.createObject('MagicPlugin', class MagicPlugin {
                 y = wIcon - (wIcon * (MAGIC_DATA[sSpell].cooldown + nCooldown) / MAGIC_DATA[sSpell].cooldown | 0);
                 this.oContext.fillRect(x, 0, wIcon, y)
             } else if (this.sSelected === sSpell) {
-                var sGCO = this.oContext.globalCompositeOperation;
+                const sGCO = this.oContext.globalCompositeOperation;
                 this.oContext.globalCompositeOperation = 'lighter';
                 this.oContext.drawImage(oIcons, ICONS[MAGIC_DATA[sSpell].icon] * wIcon, 0, wIcon, wIcon, x, 0, wIcon, wIcon);
                 this.oContext.globalCompositeOperation = sGCO
             }
         }
-        var c = this.oGame.oHUD.oContext;
-        var ca = this.oGame.oHUD.oCanvas;
+        const c = this.oGame.oHUD.oContext;
+        const ca = this.oGame.oHUD.oCanvas;
         c.drawImage(this.oCanvas, 0, 0, this.oCanvas.width, this.oCanvas.height, 320, 0, this.oCanvas.width * 32 / 48 | 0, 32);
         c.clearRect(xStart, 32, ca.width - xStart, ca.height - 32);
         c.fillStyle = '#FFFFFF';
@@ -149,9 +163,9 @@ O2.createObject('MagicPlugin', class MagicPlugin {
     }
 
     computeCooldown(c, sSpell) {
-        var m = c.oExtraData.magic.cooldown;
-        var md = MAGIC_DATA[sSpell];
-        var nCastTime = m[sSpell] || 0;
+        const m = c.oExtraData.magic.cooldown;
+        const md = MAGIC_DATA[sSpell];
+        let nCastTime = m[sSpell] || 0;
         if (nCastTime) {
             nCastTime += md.cooldown
         }
@@ -159,9 +173,9 @@ O2.createObject('MagicPlugin', class MagicPlugin {
     }
 
     castSpell(oWho, sSpell) {
-        var c = oWho.getData('creature');
-        var m = c.oExtraData.magic.cooldown;
-        var md = MAGIC_DATA[sSpell];
+        const c = oWho.getData('creature');
+        const m = c.oExtraData.magic.cooldown;
+        const md = MAGIC_DATA[sSpell];
         if (this.computeCooldown(c, sSpell) < 0) {
             this.oGame.sys_notify('magic_cooldown');
             return
@@ -172,7 +186,7 @@ O2.createObject('MagicPlugin', class MagicPlugin {
         }
         if (this['spell' + sSpell](oWho)) {
             this.oGame.sys_playSound(SOUNDS[md.sound]);
-            for (var i = 0; i < md.visual.length; i += 3) {
+            for (let i = 0; i < md.visual.length; i += 3) {
                 this.oGame.sys_flash(md.visual[i], md.visual[i + 1], md.visual[i + 2])
             }
             m[sSpell] = this.oGame.nTimeMs;
@@ -188,11 +202,11 @@ O2.createObject('MagicPlugin', class MagicPlugin {
 
     spellTeleport(oMobile) {
         oMobile.bEthereal = true;
-        var nSize = oMobile.nSize;
+        const nSize = oMobile.nSize;
         oMobile.nSize = 0;
         oMobile.fSpeed = 16;
         this.oGame.gc_visualEffect('o_teleport', oMobile.x, oMobile.y);
-        var bCollision = false;
+        let bCollision = false;
         do {
             oMobile.moveForward();
             bCollision = oMobile.oWallCollision.x || oMobile.oWallCollision.y;
@@ -202,8 +216,8 @@ O2.createObject('MagicPlugin', class MagicPlugin {
         } while (!bCollision);
         oMobile.fTheta += PI;
         oMobile.fSpeed = 0;
-        var ps = oMobile.oRaycaster.nPlaneSpacing;
-        var ps2 = ps >> 1;
+        const ps = oMobile.oRaycaster.nPlaneSpacing;
+        const ps2 = ps >> 1;
         oMobile.x = (oMobile.x / ps | 0) * ps + ps2;
         oMobile.y = (oMobile.y / ps | 0) * ps + ps2;
         oMobile.bEthereal = false;
@@ -214,11 +228,11 @@ O2.createObject('MagicPlugin', class MagicPlugin {
     }
 
     spellForget(oMobile) {
-        var g = this.oGame;
-        var h = g.oRaycaster.oHorde;
-        var nMobs = h.getMobileCount();
-        var oMob;
-        for (var iMob = 0; iMob < nMobs; iMob += 1) {
+        const g = this.oGame;
+        const h = g.oRaycaster.oHorde;
+        const nMobs = h.getMobileCount();
+        let oMob;
+        for (let iMob = 0; iMob < nMobs; iMob += 1) {
             oMob = h.getMobile(iMob);
             if (oMob.oThinker) {
                 if (oMob.getType() == RC.OBJECT_TYPE_MOB) {
@@ -232,10 +246,10 @@ O2.createObject('MagicPlugin', class MagicPlugin {
     }
 
     spellKnock(oMobile) {
-        var oDoorCellXY = oMobile.getFrontCellXY();
+        const oDoorCellXY = oMobile.getFrontCellXY();
         if ('x' in oDoorCellXY && 'y' in oDoorCellXY) {
-            var x = oDoorCellXY.x;
-            var y = oDoorCellXY.y;
+            const x = oDoorCellXY.x;
+            const y = oDoorCellXY.y;
             switch (this.oGame.oDungeon.getAreaBlockProperty(x, y)) {
                 case LABY.BLOCK_LOCKEDDOOR_0:
                 case LABY.BLOCK_LOCKEDDOOR_1:
@@ -252,12 +266,12 @@ O2.createObject('MagicPlugin', class MagicPlugin {
     }
 
     spellDeathSpell(oMobile) {
-        var oCreature = oMobile.getData('creature');
-        var aMissiles = this.oGame.oDungeon.getWeaponMissileDefinition(SPELLS_DATA.mis_deathspell_1);
-        var nMissiles = aMissiles.length;
-        var oMissileDef, oMissile = null,
+        const oCreature = oMobile.getData('creature');
+        const aMissiles = this.oGame.oDungeon.getWeaponMissileDefinition(SPELLS_DATA.mis_deathspell_1);
+        const nMissiles = aMissiles.length;
+        let oMissileDef, oMissile = null,
             sOptions;
-        for (var iMis = 0; iMis < nMissiles; iMis++) {
+        for (let iMis = 0; iMis < nMissiles; iMis++) {
             oMissileDef = aMissiles[iMis];
             oMissile = this.oGame.spawnMobile(oMissileDef.blueprint, oMobile.x, oMobile.y, oMobile.fTheta + oMissileDef.angle);
             oMissile.fSpeed = this.oGame.TIME_FACTOR * oMissile.getData('speed') / 1000;
@@ -272,20 +286,20 @@ O2.createObject('MagicPlugin', class MagicPlugin {
             oMissile.oThinker.nLifeOut = this.oGame.nTime + oMissile.getData('range');
             oMissile.oThinker.fire(oMobile)
         }
-        var aSnd = oMissile.getData('sounds');
+        const aSnd = oMissile.getData('sounds');
         this.oGame.sys_playSound(aSnd[0], oMobile.x, oMobile.y);
         return true
     }
 
     spellMagicMapping(oMobile) {
-        var oWallCellXY = oMobile.getFrontCellXY();
+        const oWallCellXY = oMobile.getFrontCellXY();
         if ('x' in oWallCellXY && 'y' in oWallCellXY) {
-            var x = oWallCellXY.x;
-            var y = oWallCellXY.y;
+            const x = oWallCellXY.x;
+            const y = oWallCellXY.y;
             if (this.oGame.oDungeon.getAreaBlockProperty(x, y) == LABY.BLOCK_WALL) {
-                var xMob = oMobile.xSector;
-                var yMob = oMobile.ySector;
-                var nSide = -1;
+                const xMob = oMobile.xSector;
+                const yMob = oMobile.ySector;
+                let nSide = -1;
                 if (xMob === (x - 1)) {
                     nSide = 0
                 } else if (xMob === (x + 1)) {
@@ -296,25 +310,25 @@ O2.createObject('MagicPlugin', class MagicPlugin {
                     nSide = 1
                 }
                 if (nSide >= 0) {
-                    var g = this.oGame;
+                    const g = this.oGame;
                     g.oRaycaster.cloneWall(x, y, nSide, function(rc, c, xBlock, yBlock, n) {
-                        var aWallStyles = ['#552200', '#663300', '#773300'];
-                        var aVoidStyles = ['#FFFFFF', '#FFFFEE', '#FFFFDD'];
-                        var oContext = c.getContext('2d');
-                        var wMap = 44;
-                        var oMap = O876.CanvasFactory.getCanvas();
-                        var wWall = rc.xTexture;
-                        var hWall = rc.yTexture;
+                        const aWallStyles = ['#552200', '#663300', '#773300'];
+                        const aVoidStyles = ['#FFFFFF', '#FFFFEE', '#FFFFDD'];
+                        const oContext = c.getContext('2d');
+                        const wMap = 44;
+                        const oMap = CanvasFactory.getCanvas();
+                        const wWall = rc.xTexture;
+                        const hWall = rc.yTexture;
                         oMap.width = wMap;
                         oMap.height = wMap;
-                        var xMap = (wWall - wMap) >> 1;
-                        var yMap = (hWall - wMap) >> 1;
+                        const xMap = (wWall - wMap) >> 1;
+                        const yMap = (hWall - wMap) >> 1;
                         oContext.fillStyle = '#FFFFFF';
                         oContext.strokeStyle = '#000000';
                         oContext.fillRect(xMap, yMap, wMap, wMap);
                         oContext.fillStyle = '#000000';
-                        var xi, yi;
-                        var xb, yb;
+                        let xi, yi;
+                        let xb, yb;
                         for (yi = 0; yi < wMap; yi += 1) {
                             for (xi = 0; xi < wMap; xi += 1) {
                                 xb = xi + (xBlock - (wMap >> 1));
@@ -413,10 +427,11 @@ O2.createObject('MagicPlugin', class MagicPlugin {
     }
 
     spellSummonFood(oMobile) {
-        var oWallCellXY = oMobile.getFrontCellXY();
+        let ps, ps2;
+        const oWallCellXY = oMobile.getFrontCellXY();
         if ('x' in oWallCellXY && 'y' in oWallCellXY) {
-            var x = oWallCellXY.x;
-            var y = oWallCellXY.y;
+            const x = oWallCellXY.x;
+            const y = oWallCellXY.y;
             switch (this.oGame.oDungeon.getAreaBlockProperty(x, y)) {
                 case LABY.BLOCK_VOID:
                 case LABY.BLOCK_MOB_LEVEL_0:
@@ -432,8 +447,8 @@ O2.createObject('MagicPlugin', class MagicPlugin {
                 case LABY.BLOCK_MOB_LEVEL_X:
                     this.oGame.gc_dropLoot('spell_summon_food', x, y);
                     this.oGame.gc_spawnLootBag(4, x, y);
-                    var ps = this.oGame.oRaycaster.nPlaneSpacing;
-                    var ps2 = ps >> 1;
+                    ps = this.oGame.oRaycaster.nPlaneSpacing;
+                    ps2 = ps >> 1;
                     this.oGame.gc_visualEffect('o_boom', x * ps + ps2, y * ps + ps2);
                     return true
             }
@@ -448,7 +463,7 @@ O2.createObject('MagicPlugin', class MagicPlugin {
     }
 
     spellLight(oMobile) {
-        var r = this.oGame.oRaycaster;
+        const r = this.oGame.oRaycaster;
         r.oVisual.light = 200;
         r.oVisual.fogDistance = 1;
         r.buildGradient();
@@ -456,7 +471,7 @@ O2.createObject('MagicPlugin', class MagicPlugin {
     }
 
     timeStopHordeThinker() {
-        var oMobile = this.__timestopMobile;
+        const oMobile = this.__timestopMobile;
         oMobile.think();
         if (!oMobile.bActive) {
             this.unlinkMobile(oMobile);
@@ -474,14 +489,14 @@ O2.createObject('MagicPlugin', class MagicPlugin {
         if (!this.oTimeStopMobile) {
             return false
         }
-        var h = this.oGame.oRaycaster.oHorde;
+        const h = this.oGame.oRaycaster.oHorde;
         h.think = this.__timestopThink;
         h.__timestopMobile = null;
         this.__timestopThink = null;
-        O876_Raycaster.Animation.prototype.animate = O876_Raycaster.Animation.prototype.__timestopAnimate;
-        O876_Raycaster.Animation.prototype.__timestopAnimate = null;
-        O876_Raycaster.Raycaster.prototype.textureAnimation = O876_Raycaster.Raycaster.prototype.__timestopAnimate;
-        O876_Raycaster.Raycaster.prototype.__timestopAnimate = null;
+        Animation.prototype.animate = Animation.prototype.__timestopAnimate;
+        Animation.prototype.__timestopAnimate = null;
+        Raycaster.prototype.textureAnimation = Raycaster.prototype.__timestopAnimate;
+        Raycaster.prototype.__timestopAnimate = null;
         this.oGame.nTime = this.nTimeStopGameTime;
         this.oGame.nTimeMs = this.nTimeStopGameTime * this.oGame.oRaycaster.TIME_FACTOR;
         this.oTimeStopMobile.getData('creature').oExtraData.retrigger = 0;
@@ -496,14 +511,14 @@ O2.createObject('MagicPlugin', class MagicPlugin {
         if (this.oTimeStopMobile) {
             return false
         }
-        var h = this.oGame.oRaycaster.oHorde;
+        const h = this.oGame.oRaycaster.oHorde;
         h.__timestopMobile = oMobile;
         this.__timestopThink = h.think;
         h.think = this.timeStopHordeThinker;
-        O876_Raycaster.Animation.prototype.__timestopAnimate = O876_Raycaster.Animation.prototype.animate;
-        O876_Raycaster.Animation.prototype.animate = this.timeStopAnimator;
-        O876_Raycaster.Raycaster.prototype.__timestopAnimate = O876_Raycaster.Raycaster.prototype.textureAnimation;
-        O876_Raycaster.Raycaster.prototype.textureAnimation = this.timeStopTextureAnimation;
+        Animation.prototype.__timestopAnimate = Animation.prototype.animate;
+        Animation.prototype.animate = this.timeStopAnimator;
+        Raycaster.prototype.__timestopAnimate = Raycaster.prototype.textureAnimation;
+        Raycaster.prototype.textureAnimation = this.timeStopTextureAnimation;
         this.oTimeStopMobile = oMobile;
         this.nTimeStop = 9;
         this.nTimeStopGameTime = this.oGame.nTime;
@@ -518,7 +533,7 @@ O2.createObject('MagicPlugin', class MagicPlugin {
         this.oGame.registerPluginSignal('timesecond', this);
         this.oGame.registerPluginSignal('exitlevel', this)
     }
-});
+}
 Object.assign(MagicPlugin.prototype, {
     oGame: null,
     oCanvas: null,

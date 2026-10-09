@@ -1,4 +1,6 @@
-O2.createObject('O876_Raycaster.Tile', class Tile {
+import { Animation } from './Animation.js';
+
+export class Tile {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -15,16 +17,16 @@ O2.createObject('O876_Raycaster.Tile', class Tile {
                 this.bShading = false
             }
             if (oData.animations) {
-                var oAnimation, iFrame;
+                let oAnimation, iFrame;
                 this.aAnimations = [];
-                for (var iAnim = 0; iAnim < oData.animations.length; iAnim++) {
+                for (let iAnim = 0; iAnim < oData.animations.length; iAnim++) {
                     if (oData.animations[iAnim] === null) {
                         for (iFrame = 0; iFrame < 8; iFrame++) {
                             this.aAnimations.push(null)
                         }
                     } else {
                         for (iFrame = 0; iFrame < 8; iFrame++) {
-                            oAnimation = new O876_Raycaster.Animation();
+                            oAnimation = new Animation();
                             oAnimation.nStart = oData.animations[iAnim][0][iFrame];
                             oAnimation.nCount = oData.animations[iAnim][1];
                             oAnimation.nDuration = oData.animations[iAnim][2];
@@ -36,8 +38,8 @@ O2.createObject('O876_Raycaster.Tile', class Tile {
             }
         }
     }
-});
-Object.assign(O876_Raycaster.Tile.prototype, {
+}
+Object.assign(Tile.prototype, {
     oImage: null,
     nWidth: 0,
     nHeight: 0,

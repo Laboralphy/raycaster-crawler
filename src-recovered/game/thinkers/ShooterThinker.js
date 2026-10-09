@@ -1,12 +1,15 @@
-O2.createObject('ShooterThinker', class ShooterThinker extends MobThinker {
+import { MobThinker } from './MobThinker.js';
+import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class ShooterThinker extends MobThinker {
     _follow(nTime) {
-        var nCT = null;
+        let nCT = null;
         if (this.nDodging < 4) {
             nCT = this.move(this.nDodging)
         }
         if ((nTime % this.TIME_REACTIVITY) === 0) {
             this.chaseTarget(this.getTarget());
-            var d = (this.distanceToTarget() | 0) >> 7;
+            const d = (this.distanceToTarget() | 0) >> 7;
             switch (d) {
                 case 0:
                     this.nDodging = 3;
@@ -42,7 +45,7 @@ O2.createObject('ShooterThinker', class ShooterThinker extends MobThinker {
     _attack(nTime) {
         this.oGame.gc_attack(this.oMobile, 0)
     }
-});
+}
 Object.assign(ShooterThinker.prototype, {
     nDodging: 3,
     nDodgingTime: 0,

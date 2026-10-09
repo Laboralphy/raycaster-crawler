@@ -1,13 +1,18 @@
-O2.createObject('Cutscene', class Cutscene {
+import { CanvasFactory } from '../../libraries/O876/CanvasFactory.js';
+import { GXMessage } from '../../libraries/Raycaster/GXMessage.js';
+import { Raycaster } from '../../libraries/Raycaster/Raycaster.js';
+import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class Cutscene {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
 
     __construct() {
         this.aPopups = [];
-        this.oRenderCanvas = O876.CanvasFactory.getCanvas();
+        this.oRenderCanvas = CanvasFactory.getCanvas();
         this.oRenderContext = this.oRenderCanvas.getContext('2d');
-        this.oRCCanvas = O876.CanvasFactory.getCanvas();
+        this.oRCCanvas = CanvasFactory.getCanvas();
         this.oRCCanvas.width = this.RAYCASTER_WIDTH;
         this.oRCCanvas.height = this.RAYCASTER_HEIGHT;
         this.oRCContext = this.oRenderCanvas.getContext('2d');
@@ -28,7 +33,7 @@ O2.createObject('Cutscene', class Cutscene {
 
     buildRaycaster() {
         this.bRender = false;
-        this.oRaycaster = new O876_Raycaster.Raycaster();
+        this.oRaycaster = new Raycaster();
         this.oRaycaster.setConfig({
             canvas: this.oRCCanvas,
             smoothTextures: false,
@@ -39,7 +44,7 @@ O2.createObject('Cutscene', class Cutscene {
         this.oRaycaster.initialize();
         this.oRaycaster.defineWorld(this.RAYCASTER_LEVEL);
         this.oRaycaster.buildLevel();
-        var oThinker = this.oRaycaster.oThinkerManager.createThinker('O876_Raycaster.Linear');
+        const oThinker = this.oRaycaster.oThinkerManager.createThinker('O876_Raycaster.Linear');
         this.oRaycaster.oCamera.setThinker(oThinker)
     }
 
@@ -51,7 +56,7 @@ O2.createObject('Cutscene', class Cutscene {
         if (nDelay === undefined) {
             nDelay = 0
         }
-        var oGX = new O876_Raycaster.GXMessage(this.oRaycaster);
+        const oGX = new GXMessage(this.oRaycaster);
         oGX.setMessage(sMessage);
         oGX.yTo += 4;
         oGX.yPos = oGX.yTo - 16;
@@ -64,7 +69,7 @@ O2.createObject('Cutscene', class Cutscene {
     runPopups() {
         if (this.aPopups.length) {
             if (this.nTime >= this.aPopups[0][0]) {
-                var aGX = this.aPopups.shift();
+                const aGX = this.aPopups.shift();
                 this.oRaycaster.oEffects.addEffect(aGX[1])
             }
         }
@@ -72,8 +77,8 @@ O2.createObject('Cutscene', class Cutscene {
 
     defineData() {
         this.RAYCASTER_LEVEL = this.getLevelData();
-        var aLaby = this.getLabyMap();
-        var xBlock, yBlock, aRow, nBlock, nCode;
+        const aLaby = this.getLabyMap();
+        let xBlock, yBlock, aRow, nBlock, nCode;
         for (yBlock = 0; yBlock < aLaby.length; yBlock++) {
             aRow = [];
             for (xBlock = 0; xBlock < aLaby[yBlock].length; xBlock++) {
@@ -106,8 +111,8 @@ O2.createObject('Cutscene', class Cutscene {
             this.runPopups();
             this.oRaycaster.frameProcess();
             this.oRaycaster.frameRender();
-            var xRC = this.xRC;
-            var yRC = this.yRC;
+            const xRC = this.xRC;
+            const yRC = this.yRC;
             this.oRenderContext.drawImage(this.oRCCanvas, xRC, yRC);
             if (this.onRender) {
                 this.onRender()
@@ -121,7 +126,7 @@ O2.createObject('Cutscene', class Cutscene {
             }
         }
     }
-});
+}
 Object.assign(Cutscene.prototype, {
     RAYCASTER_WIDTH: 800,
     RAYCASTER_HEIGHT: 500,

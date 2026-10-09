@@ -1,4 +1,4 @@
-var KEYS = {
+export const KEYS = {
     MOUSE: {
         KEY: 0,
         X: 0,

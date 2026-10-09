@@ -1,4 +1,9 @@
-O2.createObject('UI.DescriptorWindow', class DescriptorWindow extends UI.Window {
+import { Icon } from './Icon.js';
+import { UI } from './UI.js';
+import { Window } from './Window.js';
+import { Text } from '../../libraries/H5UI/Text.js';
+
+export class DescriptorWindow extends Window {
     __construct(oParams) {
         super.__construct({
             caption: oParams.title
@@ -19,7 +24,7 @@ O2.createObject('UI.DescriptorWindow', class DescriptorWindow extends UI.Window 
 
     buildWindowContent() {
         this.setSize(this.nWidth, this.nHeight);
-        var oText = this.linkControl(new H5UI.Text());
+        const oText = this.linkControl(new Text());
         this.xIcon = this.nWidth - this.nIconSize - this.yIcon;
         oText._bWordWrap = true;
         oText._bAutosize = false;
@@ -31,7 +36,7 @@ O2.createObject('UI.DescriptorWindow', class DescriptorWindow extends UI.Window 
         oText._nLineHeight = 4;
         this.oText = oText;
         this.oText.setCaption(this.oParams.message);
-        var oBox = this.linkControl(new UI.Icon());
+        const oBox = this.linkControl(new Icon());
         oBox.setSize(this.nIconSize, this.nIconSize);
         oBox.xStart = this.oParams.icon * this.nIconSize;
         oBox.moveTo(this.xIcon, this.yIcon);
@@ -41,8 +46,8 @@ O2.createObject('UI.DescriptorWindow', class DescriptorWindow extends UI.Window 
             ['~key_gen_close', 'desc_close', 4]
         ])
     }
-});
-Object.assign(UI.DescriptorWindow.prototype, {
+}
+Object.assign(DescriptorWindow.prototype, {
     nWidth: 400,
     nHeight: 360,
     nFontSize: 14,

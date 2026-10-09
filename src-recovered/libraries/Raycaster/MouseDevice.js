@@ -1,4 +1,4 @@
-O2.createObject('O876_Raycaster.MouseDevice', class MouseDevice {
+export class MouseDevice {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -12,8 +12,8 @@ O2.createObject('O876_Raycaster.MouseDevice', class MouseDevice {
     }
 
     eventMouseUp(e) {
-        var oEvent = window.event ? window.event : e;
-        var oDev = window.__mouseDevice;
+        const oEvent = window.event ? window.event : e;
+        const oDev = window.__mouseDevice;
         oDev.nButtons = oEvent.buttons;
         if (oDev.bUseBuffer && oDev.aEvents.length < oDev.nKeyBufferSize) {
             oDev.aEvents.push([0, oEvent.clientX, oEvent.clientY, oEvent.button])
@@ -22,8 +22,8 @@ O2.createObject('O876_Raycaster.MouseDevice', class MouseDevice {
     }
 
     eventMouseDown(e) {
-        var oEvent = window.event ? window.event : e;
-        var oDev = window.__mouseDevice;
+        const oEvent = window.event ? window.event : e;
+        const oDev = window.__mouseDevice;
         oDev.nButtons = oEvent.buttons;
         if (oDev.bUseBuffer && oDev.aEvents.length < oDev.nKeyBufferSize) {
             oDev.aEvents.push([1, oEvent.clientX, oEvent.clientY, oEvent.button])
@@ -38,7 +38,7 @@ O2.createObject('O876_Raycaster.MouseDevice', class MouseDevice {
     }
 
     eventMouseClick(e) {
-        var oEvent = window.event ? window.event : e;
+        const oEvent = window.event ? window.event : e;
         if (oEvent.button === 2) {
             if (oEvent.stopPropagation) {
                 oEvent.stopPropagation()
@@ -59,9 +59,9 @@ O2.createObject('O876_Raycaster.MouseDevice', class MouseDevice {
     }
 
     mouseWheel(e) {
-        var oEvent = window.event ? window.event : e;
-        var oDev = window.__mouseDevice;
-        var nDelta = 0;
+        const oEvent = window.event ? window.event : e;
+        const oDev = window.__mouseDevice;
+        let nDelta = 0;
         if (oEvent.wheelDelta) {
             nDelta = oEvent.wheelDelta
         } else {
@@ -89,7 +89,7 @@ O2.createObject('O876_Raycaster.MouseDevice', class MouseDevice {
     }
 
     unplugEvents() {
-        var oElement = this.oElement;
+        const oElement = this.oElement;
         oElement.removeEventListener('mousedown', this.eventMouseDown, false);
         oElement.removeEventListener('click', this.eventMouseClick, false);
         oElement.removeEventListener('mouseup', this.eventMouseUp, false);
@@ -100,8 +100,8 @@ O2.createObject('O876_Raycaster.MouseDevice', class MouseDevice {
     clearEvents() {
         this.aEvents = []
     }
-});
-Object.assign(O876_Raycaster.MouseDevice.prototype, {
+}
+Object.assign(MouseDevice.prototype, {
     nButtons: 0,
     aEvents: null,
     nKeyBufferSize: 16,

@@ -1,4 +1,14 @@
-O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Transistate {
+import { CONFIG } from '../../game/config.js';
+import { Marker } from '../O876/Marker.js';
+import { FrameCounter } from './FrameCounter.js';
+import { GXDoor } from './GXDoor.js';
+import { GXSecret } from './GXSecret.js';
+import { KeyboardDevice } from './KeyboardDevice.js';
+import { MouseDevice } from './MouseDevice.js';
+import { Raycaster } from './Raycaster.js';
+import { Transistate } from './Transistate.js';
+
+export class Engine extends Transistate {
     __construct() {
         super.__construct('stateInitialize');
         this.resume()
@@ -8,7 +18,7 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
         if ('requestAnimationFrame' in window) {
             return true
         }
-        var RAF = null;
+        let RAF = null;
         if ('requestAnimationFrame' in window) {
             RAF = window.requestAnimationFrame
         } else if ('webkitRequestAnimationFrame' in window) {
@@ -35,8 +45,8 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
 
     _callGameEvent(sEvent) {
         if (sEvent in this && this[sEvent]) {
-            var pFunc = this[sEvent];
-            var aParams = Array.prototype.slice.call(arguments, 1);
+            const pFunc = this[sEvent];
+            const aParams = Array.prototype.slice.call(arguments, 1);
             return pFunc.apply(this, aParams)
         }
         return null
@@ -61,7 +71,7 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
 
     _getKeyboardDevice() {
         if (this.oKbdDevice === null) {
-            this.oKbdDevice = new O876_Raycaster.KeyboardDevice();
+            this.oKbdDevice = new KeyboardDevice();
             this.oKbdDevice.plugEvents()
         }
         return this.oKbdDevice
@@ -72,7 +82,7 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
             if (oElement === undefined) {
                 throw new Error('no target element specified for the mouse device')
             }
-            this.oMouseDevice = new O876_Raycaster.MouseDevice();
+            this.oMouseDevice = new MouseDevice();
             this.oMouseDevice.plugEvents(oElement)
         }
         return this.oMouseDevice
@@ -88,8 +98,8 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
     }
 
     openDoor(x, y, bStayOpen) {
-        var nPhys = this.oRaycaster.getMapXYPhysical(x, y);
-        var o = null;
+        const nPhys = this.oRaycaster.getMapXYPhysical(x, y);
+        let o = null;
         switch (nPhys) {
             case 2:
             case 3:
@@ -99,7 +109,7 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
             case 7:
             case 8:
                 if (!Marker.getMarkXY(this.oRaycaster.oDoors, x, y)) {
-                    o = new O876_Raycaster.GXDoor(this.oRaycaster);
+                    o = new GXDoor(this.oRaycaster);
                     o.x = x;
                     o.y = y;
                     if (bStayOpen) {
@@ -110,7 +120,7 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
                 break;
             case 9:
                 if (!Marker.getMarkXY(this.oRaycaster.oDoors, x, y)) {
-                    o = new O876_Raycaster.GXSecret(this.oRaycaster);
+                    o = new GXSecret(this.oRaycaster);
                     o.x = x;
                     o.y = y;
                     this.oRaycaster.oEffects.addEffect(o)
@@ -121,7 +131,7 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
     }
 
     closeDoor(x, y, bForce) {
-        var oDoor = Marker.getMarkXY(this.oRaycaster.oDoors, x, y);
+        const oDoor = Marker.getMarkXY(this.oRaycaster.oDoors, x, y);
         if (oDoor) {
             oDoor.setAutoClose(1);
             oDoor.close()
@@ -178,7 +188,7 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
         if (this.oRaycaster) {
             this.oRaycaster.finalize()
         } else {
-            this.oRaycaster = new O876_Raycaster.Raycaster();
+            this.oRaycaster = new Raycaster();
             this.oRaycaster.TIME_FACTOR = this.TIME_FACTOR
         }
         this.oRaycaster.setConfig(CONFIG.raycaster);
@@ -191,7 +201,7 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
     }
 
     stateBuildLevel() {
-        var oData = this._callGameEvent('onRequestLevelData');
+        const oData = this._callGameEvent('onRequestLevelData');
         if (typeof oData != 'object') {
             this._halt('no world data : without world data I can\'t build the world. (onRequestLevelData did not return object)');
             return
@@ -205,7 +215,7 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
             return
         }
         this.nShadedTileCount = 0;
-        var iStc = '';
+        let iStc = '';
         for (iStc in this.oRaycaster.oHorde.oTiles) {
             if (this.oRaycaster.oHorde.oTiles[iStc].bShading) {
                 ++this.nShadedTileCount
@@ -230,7 +240,7 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
             return
         }
         this.nLastTimeStamp = Date.now();
-        this.oFrameCounter = new O876_Raycaster.FrameCounter();
+        this.oFrameCounter = new FrameCounter();
         this.oFrameCounter.start(this.nLastTimeStamp);
         this.setDoomloop('stateRunning');
         this._callGameEvent('onLoading', 'end', 1, 1);
@@ -238,8 +248,8 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
     }
 
     stateRunningInt() {
-        var nNowTimeStamp = Date.now();
-        var nFrames = 0;
+        const nNowTimeStamp = Date.now();
+        let nFrames = 0;
         while (this.nLastTimeStamp < nNowTimeStamp) {
             this.oRaycaster.frameProcess();
             this._callGameEvent('onDoomLoop');
@@ -256,10 +266,10 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
     }
 
     stateRunningRAF(nTime) {
-        var E = window.__transistateMachine;
+        const E = window.__transistateMachine;
         requestAnimationFrame(E.stateRunning);
-        var nNowTimeStamp = Date.now();
-        var nFrames = 0;
+        const nNowTimeStamp = Date.now();
+        let nFrames = 0;
         while (E.nLastTimeStamp < nNowTimeStamp) {
             E.oRaycaster.frameProcess();
             E._callGameEvent('onDoomLoop');
@@ -278,8 +288,8 @@ O2.createObject('O876_Raycaster.Engine', class Engine extends O876_Raycaster.Tra
     stateEnd() {
         this.pause()
     }
-});
-Object.assign(O876_Raycaster.Engine.prototype, {
+}
+Object.assign(Engine.prototype, {
     TIME_FACTOR: 50,
     oRaycaster: null,
     oKbdDevice: null,

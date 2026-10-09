@@ -1,4 +1,13 @@
-O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
+import { Icon } from './Icon.js';
+import { ProgressBar } from './ProgressBar.js';
+import { UI } from './UI.js';
+import { Window } from './Window.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { Box } from '../../libraries/H5UI/Box.js';
+import { ScrollBox } from '../../libraries/H5UI/ScrollBox.js';
+import { Text } from '../../libraries/H5UI/Text.js';
+
+export class CraftWindow extends Window {
     __construct(oParams) {
         super.__construct({
             caption: STRINGS._('~win_craft')
@@ -12,7 +21,7 @@ O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
     }
 
     command(sCommand) {
-        var y;
+        let y;
         switch (sCommand) {
             case 'craft_close':
                 if (this.oPopup._bVisible) {
@@ -54,9 +63,9 @@ O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
     }
 
     select(y) {
-        var nOptionCount = this.getOptionCount();
+        const nOptionCount = this.getOptionCount();
         y = Math.max(0, Math.min(nOptionCount - 1, y));
-        var o;
+        let o;
         if (this.ySelected !== y) {
             if (this.ySelected !== null) {
                 o = this.getOption(this.ySelected);
@@ -91,8 +100,9 @@ O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
     }
 
     updateCraftableFlag(f) {
-        var o, oIcon, n = this.getOptionCount();
-        for (var i = 0; i < n; i++) {
+        let o, oIcon;
+        const n = this.getOptionCount();
+        for (let i = 0; i < n; i++) {
             o = this.getOption(i);
             o.__craftable = f(this.oParams.recipes[i][0].resref);
             o.setBorder(1, o.__craftable ? UI.clWINDOW_BORDER : this.clNOCRAFT_BORDER);
@@ -101,7 +111,7 @@ O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
             oIcon._set('_bRedCross', !o.__craftable);
             o.invalidate()
         }
-        var s = this.ySelected;
+        const s = this.ySelected;
         this.ySelected = null;
         this.select(s)
     }
@@ -137,30 +147,30 @@ O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
     }
 
     optionDblclick() {
-        var p = this.getParent().getParent().getParent();
+        const p = this.getParent().getParent().getParent();
         p.select(this.__y);
         p.command('craft_go')
     }
 
     buildWindowContent() {
         this.setSize(this.nWidth, this.nHeight);
-        var r = this.oParams.recipes;
-        var aAble = this.oParams.able;
-        this.oSelector = this.linkControl(new H5UI.ScrollBox());
+        const r = this.oParams.recipes;
+        const aAble = this.oParams.able;
+        this.oSelector = this.linkControl(new ScrollBox());
         this.oSelector.moveTo((this.nWidth - this.nOptionWidth) >> 1, this.nOptionY), this.oSelector.setSize(this.nOptionWidth, this.nOptionHeight * this.nOptionVisible);
-        var oCaption, oOption, oIcon, oItem, iComp, oComp;
-        var yIcon = (this.nOptionHeight - UI.INV_ICON_SIZE) >> 1;
-        var bCraftable;
+        let oCaption, oOption, oIcon, oItem, iComp, oComp;
+        const yIcon = (this.nOptionHeight - UI.INV_ICON_SIZE) >> 1;
+        let bCraftable;
         this.onMouseWheelUp = function() {
             this.command('craft_prev')
         };
         this.onMouseWheelDown = function() {
             this.command('craft_next')
         };
-        for (var iRec = 0; iRec < r.length; iRec++) {
+        for (let iRec = 0; iRec < r.length; iRec++) {
             oItem = r[iRec][0];
             bCraftable = aAble.indexOf(oItem.resref) >= 0;
-            oOption = this.oSelector.linkControl(new H5UI.Box());
+            oOption = this.oSelector.linkControl(new Box());
             oOption.setSize(this.nOptionWidth, this.nOptionHeight);
             oOption.moveTo(0, iRec * oOption.getHeight());
             oOption.__craftable = bCraftable;
@@ -169,7 +179,7 @@ O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
             oOption.__y = iRec;
             oOption.onClick = this.optionClick;
             oOption.onDblclick = this.optionDblclick;
-            oIcon = oOption.linkControl(new UI.Icon());
+            oIcon = oOption.linkControl(new Icon());
             oIcon.setSize(UI.INV_ICON_SIZE, UI.INV_ICON_SIZE);
             oIcon.moveTo(yIcon, yIcon);
             oIcon.setImage(this.oParams.image);
@@ -178,7 +188,7 @@ O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
                 oIcon.setStackCounter(oItem.stackcount)
             }
             oIcon._set('_bRedCross', !bCraftable);
-            oCaption = oOption.linkControl(new H5UI.Text());
+            oCaption = oOption.linkControl(new Text());
             oCaption.font.setFont('monospace');
             oCaption.font.setSize(12);
             oCaption.font.setColor(UI.clFONT);
@@ -187,7 +197,7 @@ O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
             oCaption.setCaption(oItem.name);
             for (iComp = 1; iComp < r[iRec].length; iComp++) {
                 oComp = r[iRec][iComp];
-                oIcon = oOption.linkControl(new UI.Icon());
+                oIcon = oOption.linkControl(new Icon());
                 oIcon.setSize(UI.INV_ICON_SIZE, UI.INV_ICON_SIZE);
                 oIcon.moveTo(this.nOptionWidth - 1 - (UI.INV_ICON_SIZE + 4) * iComp, yIcon);
                 oIcon.setImage(this.oParams.image);
@@ -195,13 +205,13 @@ O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
                 oIcon.setStackCounter(oComp.stackcount)
             }
         }
-        var p = this.oPopup = this.linkControl(new UI.Window({
+        const p = this.oPopup = this.linkControl(new Window({
             caption: STRINGS._('~win_craft_progress')
         }));
         p.hide();
         p.setSize(320, 160);
         p.moveTo((this.nWidth - p.getWidth()) >> 1, (this.nHeight - p.getHeight()) >> 1);
-        oCaption = p.linkControl(new H5UI.Text());
+        oCaption = p.linkControl(new Text());
         oCaption.font.setFont('monospace');
         oCaption.font.setSize(12);
         oCaption.font.setColor(UI.clFONT);
@@ -210,14 +220,14 @@ O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
         oCaption.setAutosize(false);
         oCaption.setWordWrap(true);
         this.oPopupMessage = oCaption;
-        oCaption = p.linkControl(new H5UI.Text());
+        oCaption = p.linkControl(new Text());
         oCaption.font.setFont('monospace');
         oCaption.font.setSize(12);
         oCaption.font.setColor(UI.clFONT);
         oCaption.setAutosize(true);
         oCaption.moveTo(10, 80);
         this.oProgressCaption = oCaption;
-        var pb = this.oProgressBar = p.linkControl(new UI.ProgressBar());
+        const pb = this.oProgressBar = p.linkControl(new ProgressBar());
         pb.setSize(300, 24);
         pb.moveTo(10, 100);
         pb.setMax(100);
@@ -229,8 +239,8 @@ O2.createObject('UI.CraftWindow', class CraftWindow extends UI.Window {
             this.getParent().command(s)
         }
     }
-});
-Object.assign(UI.CraftWindow.prototype, {
+}
+Object.assign(CraftWindow.prototype, {
     nWidth: 540,
     nHeight: 356,
     nOptionWidth: 512,

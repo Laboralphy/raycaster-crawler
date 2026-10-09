@@ -1,4 +1,7 @@
-O2.createObject('UI.ConsoleWindow', class ConsoleWindow extends UI.Window {
+import { Window } from './Window.js';
+import { Text } from '../../libraries/H5UI/Text.js';
+
+export class ConsoleWindow extends Window {
     __construct(oParams) {
         super.__construct({
             caption: 'Console'
@@ -12,7 +15,7 @@ O2.createObject('UI.ConsoleWindow', class ConsoleWindow extends UI.Window {
 
     buildWindowContent() {
         this.setSize(this.nWidth, this.nHeight);
-        var oText = this.linkControl(new H5UI.Text());
+        const oText = this.linkControl(new Text());
         oText._bWordWrap = true;
         oText._bAutosize = false;
         oText.moveTo(8, 24);
@@ -31,8 +34,8 @@ O2.createObject('UI.ConsoleWindow', class ConsoleWindow extends UI.Window {
                 break
         }
     }
-});
-Object.assign(UI.ConsoleWindow.prototype, {
+}
+Object.assign(ConsoleWindow.prototype, {
     nWidth: 512,
     nHeight: 256,
     oParams: null,

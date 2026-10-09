@@ -1,5 +1,7 @@
-var CRAWLERFS_URL = '../../dynamics/crawlerfs/';
-var CONFIG = {
+import { PointerLock } from '../libraries/Raycaster/PointerLock.js';
+
+export const CRAWLERFS_URL = '../../dynamics/crawlerfs/';
+export const CONFIG = {
     crawlerfs: {
         l: CRAWLERFS_URL + 'l.php',
         r: CRAWLERFS_URL + 'r.php',
@@ -10,7 +12,7 @@ var CONFIG = {
         interval: 40,
         doomloop: 'interval',
         cpumonitor: false,
-        mouse: O876_Raycaster.PointerLock.init()
+        mouse: PointerLock.init()
     },
     raycaster: {
         canvas: 'screen',

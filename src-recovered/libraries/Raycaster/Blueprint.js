@@ -1,4 +1,4 @@
-O2.createObject('O876_Raycaster.Blueprint', class Blueprint {
+export class Blueprint {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -25,8 +25,8 @@ O2.createObject('O876_Raycaster.Blueprint', class Blueprint {
             return null
         }
     }
-});
-Object.assign(O876_Raycaster.Blueprint.prototype, {
+}
+Object.assign(Blueprint.prototype, {
     sId: '',
     nType: 0,
     oTile: null,

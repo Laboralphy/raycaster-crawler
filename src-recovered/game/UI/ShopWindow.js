@@ -1,4 +1,14 @@
-O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
+import { Item } from '../Item.js';
+import { Icon } from './Icon.js';
+import { UI } from './UI.js';
+import { Window } from './Window.js';
+import { ICONS } from '../data/ICONS.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { Box } from '../../libraries/H5UI/Box.js';
+import { ScrollBox } from '../../libraries/H5UI/ScrollBox.js';
+import { Text } from '../../libraries/H5UI/Text.js';
+
+export class ShopWindow extends Window {
     __construct(oParams) {
         super.__construct({
             caption: '~win_shop'
@@ -14,14 +24,14 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
     }
 
     buildOption(oItem, nPrice, bSoldOut) {
-        var oOption = this.oSelector.linkControl(new H5UI.Box());
+        const oOption = this.oSelector.linkControl(new Box());
         oOption.__bSoldOut = bSoldOut;
         oOption.setSize(this.nOptionWidth, this.nOptionHeight);
         oOption.setColor(bSoldOut ? this.clSOLDOUT_COLOR : UI.clDARK_WINDOW);
         oOption.setBorder(1, bSoldOut ? this.clSOLDOUT_BORDER : UI.clWINDOW_BORDER);
         oOption.onClick = this.optionClick;
         oOption.onDblclick = this.optionDblclick;
-        var oIcon = oOption.linkControl(new UI.Icon());
+        let oIcon = oOption.linkControl(new Icon());
         oIcon.setSize(UI.INV_ICON_SIZE, UI.INV_ICON_SIZE);
         oIcon.moveTo(this.yIcon, this.yIcon);
         oIcon.setImage(this.oParams.image);
@@ -30,14 +40,14 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
         if (oItem.stackcount > 1) {
             oIcon.setStackCounter(oItem.stackcount)
         }
-        var oCaption = oOption.linkControl(new H5UI.Text());
+        const oCaption = oOption.linkControl(new Text());
         oCaption.font.setFont('monospace');
         oCaption.font.setSize(12);
         oCaption.font.setColor(bSoldOut ? this.clSOLDOUT_TEXTCOLOR : UI.clFONT);
         oCaption.setAutosize(true);
         oCaption.moveTo(64, 16);
         oCaption.setCaption(bSoldOut ? STRINGS._('~win_shop_soldout') : oItem.name);
-        oIcon = oOption.linkControl(new UI.Icon());
+        oIcon = oOption.linkControl(new Icon());
         oIcon.setSize(UI.INV_ICON_SIZE, UI.INV_ICON_SIZE);
         oIcon.moveTo(this.nOptionWidth - 1 - UI.INV_ICON_SIZE - this.yIcon, this.yIcon);
         oIcon.setImage(this.oParams.image);
@@ -50,7 +60,7 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
 
     buildWindowContent() {
         this.setSize(this.nWidth, this.nHeight);
-        this.oSelector = this.linkControl(new H5UI.ScrollBox());
+        this.oSelector = this.linkControl(new ScrollBox());
         this.oSelector.moveTo(this.xTab, this.yTab), this.oSelector.setSize(this.nOptionWidth, this.nOptionHeight * this.nOptionVisible);
         this.onMouseWheelUp = function() {
             this.command('shop_prev')
@@ -58,8 +68,9 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
         this.onMouseWheelDown = function() {
             this.command('shop_next')
         };
-        var oOption, oItem;
-        var nPrice, sItem, iItem, aItems = this.oParams.items;
+        let oOption, oItem;
+        let nPrice, sItem, iItem;
+        const aItems = this.oParams.items;
         this.aItems = [];
         this.aPrices = [];
         for (iItem = 0; iItem < aItems.length; iItem++) {
@@ -71,7 +82,7 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
             this.aItems.push(oItem);
             this.aPrices.push(nPrice)
         }
-        var oIcon = this.linkControl(new UI.Icon());
+        const oIcon = this.linkControl(new Icon());
         oIcon.setSize(UI.INV_ICON_SIZE, UI.INV_ICON_SIZE);
         oIcon.moveTo(this.nOptionWidth + this.xTab - UI.INV_ICON_SIZE - this.yIcon, this.nOptionHeight * this.nOptionVisible + this.yTab + this.yIcon);
         oIcon.setImage(this.oParams.image);
@@ -82,13 +93,13 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
             ['~key_gen_close', 'shop_close', 4], null, ['~key_shop_buy', 'shop_buy', 1],
             ['~key_inv_look', 'shop_look', 1]
         ]);
-        var p = this.oPopup = this.linkControl(new UI.Window({
+        const p = this.oPopup = this.linkControl(new Window({
             caption: STRINGS._('~win_shop_message')
         }));
         p.hide();
         p.setSize(320, 160);
         p.moveTo((this.nWidth - p.getWidth()) >> 1, (this.nHeight - p.getHeight()) >> 1);
-        var oCaption = p.linkControl(new H5UI.Text());
+        const oCaption = p.linkControl(new Text());
         oCaption.font.setFont('monospace');
         oCaption.font.setSize(12);
         oCaption.font.setColor(UI.clFONT);
@@ -106,22 +117,22 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
 
     displayMessage(sMessage) {
         this.oPopup.setTitleCaption(STRINGS._('~win_information'));
-        var pm = this.oPopup.getControl(1);
+        const pm = this.oPopup.getControl(1);
         pm.setCaption(sMessage);
         this.oPopup.show()
     }
 
     buySelectedItem() {
-        var oItem = this.getSelectedItem();
-        var nPrice = this.aPrices[this.ySelected];
-        var oOption = this.getSelectedOption();
+        const oItem = this.getSelectedItem();
+        const nPrice = this.aPrices[this.ySelected];
+        const oOption = this.getSelectedOption();
         if (!oOption.__bSoldOut) {
             if (this.getPlugin('Shop').buy(oItem.resref, nPrice)) {
                 this.oGold.setStackCounter(this.oParams.gold -= nPrice);
                 oOption.__bSoldOut = true;
                 this.oParams.items[this.ySelected][2] = true;
-                var oIcon = oOption.getControl(0);
-                var oText = oOption.getControl(1);
+                const oIcon = oOption.getControl(0);
+                const oText = oOption.getControl(1);
                 oIcon._set('_bRedCross', true);
                 oText.setCaption(STRINGS._('~win_shop_soldout'));
                 oText.font.setColor(this.clSOLDOUT_TEXTCOLOR);
@@ -131,6 +142,7 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
     }
 
     command(sCommand) {
+        let y;
         switch (sCommand) {
             case 'shop_close':
                 this.getPlugin('Shop').closeShop();
@@ -140,7 +152,7 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
                 this.buySelectedItem();
                 break;
             case 'shop_next':
-                var y = this.oSelector.getScrollY() + this.nOptionHeight;
+                y = this.oSelector.getScrollY() + this.nOptionHeight;
                 y = Math.min(y, (Math.max(0, this.getOptionCount() - this.nOptionVisible)) * this.nOptionHeight);
                 this.oSelector.scrollTo(0, y);
                 break;
@@ -163,7 +175,7 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
     }
 
     optionDblclick() {
-        var p = this.getParent().getParent().getParent();
+        const p = this.getParent().getParent().getParent();
         p.select(this.__y);
         p.command('shop_buy')
     }
@@ -185,9 +197,9 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
     }
 
     select(y) {
-        var nOptionCount = this.getOptionCount();
+        const nOptionCount = this.getOptionCount();
         y = Math.max(0, Math.min(nOptionCount - 1, y));
-        var o;
+        let o;
         if (this.ySelected !== y) {
             if (this.ySelected !== null) {
                 o = this.getOption(this.ySelected);
@@ -199,8 +211,8 @@ O2.createObject('UI.ShopWindow', class ShopWindow extends UI.Window {
             o.setColor(o.__bSoldOut ? this.clSOLDOUT_SELECT : UI.clSELECT_WINDOW)
         }
     }
-});
-Object.assign(UI.ShopWindow.prototype, {
+}
+Object.assign(ShopWindow.prototype, {
     _sClass: 'UI.ShopWindow',
     nWidth: 512,
     nHeight: 356,

@@ -1,4 +1,8 @@
-O2.createObject('O876_Raycaster.CameraMouseKeyboardThinker', class CameraMouseKeyboardThinker extends O876_Raycaster.MouseKeyboardThinker {
+import { KEYS } from './KEYS.js';
+import { MouseKeyboardThinker } from './MouseKeyboardThinker.js';
+import { RC } from './RC.js';
+
+export class CameraMouseKeyboardThinker extends MouseKeyboardThinker {
     __construct() {
         this.defineKeys({
             forward: KEYS.ALPHANUM.Z,
@@ -21,7 +25,7 @@ O2.createObject('O876_Raycaster.CameraMouseKeyboardThinker', class CameraMouseKe
 
     checkCollision() {
         if (this.oMobile.oMobileCollision !== null) {
-            var oTarget = this.oMobile.oMobileCollision;
+            const oTarget = this.oMobile.oMobileCollision;
             if (oTarget.oSprite.oBlueprint.nType != RC.OBJECT_TYPE_MISSILE) {
                 this.oMobile.rollbackXY()
             }
@@ -57,8 +61,8 @@ O2.createObject('O876_Raycaster.CameraMouseKeyboardThinker', class CameraMouseKe
         this.oMobile.moveBackward();
         this.checkCollision()
     }
-});
-Object.assign(O876_Raycaster.CameraMouseKeyboardThinker.prototype, {
+}
+Object.assign(CameraMouseKeyboardThinker.prototype, {
     nRotationTime: 0,
     nRotationMask: 0,
     nRotationLeftTime: 0,

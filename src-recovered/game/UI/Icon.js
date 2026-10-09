@@ -1,4 +1,8 @@
-O2.createObject('UI.Icon', class Icon extends H5UI.WinControl {
+import { UI } from './UI.js';
+import { Text } from '../../libraries/H5UI/Text.js';
+import { WinControl } from '../../libraries/H5UI/WinControl.js';
+
+export class Icon extends WinControl {
     setImage(oImage) {
         this.oImage = oImage;
         this.invalidate()
@@ -13,10 +17,10 @@ O2.createObject('UI.Icon', class Icon extends H5UI.WinControl {
     }
 
     setStackCounter(n) {
-        var bStackable = n >= 1;
-        var bHasCounter = this.getControlCount() > 0;
-        var nMask = (bStackable ? 2 : 0) | (bHasCounter ? 1 : 0);
-        var oBoxStackCounter;
+        const bStackable = n >= 1;
+        const bHasCounter = this.getControlCount() > 0;
+        const nMask = (bStackable ? 2 : 0) | (bHasCounter ? 1 : 0);
+        let oBoxStackCounter;
         switch (nMask) {
             case 0:
                 break;
@@ -24,7 +28,7 @@ O2.createObject('UI.Icon', class Icon extends H5UI.WinControl {
                 this.clear();
                 break;
             case 2:
-                oBoxStackCounter = this.linkControl(new H5UI.Text());
+                oBoxStackCounter = this.linkControl(new Text());
                 oBoxStackCounter.font.setFont('monospace');
                 oBoxStackCounter.font.setSize(16);
                 oBoxStackCounter.font.setStyle('bold');
@@ -39,14 +43,14 @@ O2.createObject('UI.Icon', class Icon extends H5UI.WinControl {
     }
 
     renderSelf() {
-        var c = this._oContext;
-        var w = this.getWidth();
-        var h = this.getHeight();
+        const c = this._oContext;
+        const w = this.getWidth();
+        const h = this.getHeight();
         c.clearRect(0, 0, this.getWidth(), this.getHeight());
         this.drawImage();
         if (this._bSelected) {
-            var sGCO = c.globalCompositeOperation;
-            var fGA = c.globalAlpha;
+            const sGCO = c.globalCompositeOperation;
+            const fGA = c.globalAlpha;
             c.globalCompositeOperation = 'lighter';
             c.globalAlpha = 0.5;
             this.drawImage();
@@ -57,10 +61,10 @@ O2.createObject('UI.Icon', class Icon extends H5UI.WinControl {
             c.strokeRect(0, 0, w, h)
         }
         if (this._bRedCross) {
-            var w4 = w >> 3;
-            var h4 = h >> 3;
-            var w3 = w - w4;
-            var h3 = h - h4;
+            const w4 = w >> 3;
+            const h4 = h >> 3;
+            const w3 = w - w4;
+            const h3 = h - h4;
             c.strokeStyle = '#FF0000', c.lineWidth = 4;
             c.beginPath();
             c.moveTo(w4, h4);
@@ -72,8 +76,8 @@ O2.createObject('UI.Icon', class Icon extends H5UI.WinControl {
             c.stroke()
         }
     }
-});
-Object.assign(UI.Icon.prototype, {
+}
+Object.assign(Icon.prototype, {
     _sClass: 'UI.Icon',
     oImage: null,
     xStart: 0,

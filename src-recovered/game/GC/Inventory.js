@@ -1,4 +1,4 @@
-O2.createObject('GC.Inventory', class Inventory {
+export class Inventory {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -9,8 +9,8 @@ O2.createObject('GC.Inventory', class Inventory {
     }
 
     getAllObjects() {
-        var oInvExport = [];
-        var i = '';
+        const oInvExport = [];
+        let i = '';
         for (i in this.oEquipSlots) {
             if (this.oEquipSlots[i]) {
                 oInvExport.push(this.oEquipSlots[i])
@@ -31,7 +31,8 @@ O2.createObject('GC.Inventory', class Inventory {
     }
 
     setSize(nSize) {
-        var i, nPrevSize = this.getSize();
+        let i;
+        const nPrevSize = this.getSize();
         if (nSize >= nPrevSize) {
             for (i = nPrevSize; i < nSize; i++) {
                 this.aBagSlots.push(null)
@@ -55,8 +56,8 @@ O2.createObject('GC.Inventory', class Inventory {
     }
 
     getFreeBagSlot() {
-        var nSize = this.getSize();
-        for (var i = 0; i < nSize; i++) {
+        const nSize = this.getSize();
+        for (let i = 0; i < nSize; i++) {
             if (this.aBagSlots[i] === null) {
                 return i
             }
@@ -71,7 +72,7 @@ O2.createObject('GC.Inventory', class Inventory {
         if (oItem.isStackable()) {
             return this.addStackableItem(oItem)
         }
-        var nSlot = this.getFreeBagSlot();
+        const nSlot = this.getFreeBagSlot();
         if (nSlot < 0) {
             return false
         }
@@ -80,9 +81,9 @@ O2.createObject('GC.Inventory', class Inventory {
     }
 
     addStackableItem(oStackableItem) {
-        var oItem;
-        var nSlot;
-        var nAdded;
+        let oItem;
+        let nSlot;
+        let nAdded;
         oItem = this.findItem(oStackableItem.resref);
         while (oItem) {
             if (!oItem.isStackFull()) {
@@ -110,10 +111,10 @@ O2.createObject('GC.Inventory', class Inventory {
     }
 
     findNextItem() {
-        var sResRef = this.sFindResRef;
-        var nSize = this.getSize();
-        var oItem = null;
-        for (var i = this.nFindIndex; i < nSize; i++) {
+        const sResRef = this.sFindResRef;
+        const nSize = this.getSize();
+        let oItem = null;
+        for (let i = this.nFindIndex; i < nSize; i++) {
             oItem = this.aBagSlots[i];
             if (oItem && oItem.resref == sResRef) {
                 this.nFindIndex = i + 1;
@@ -135,7 +136,7 @@ O2.createObject('GC.Inventory', class Inventory {
         if (oItem === null) {
             return true
         }
-        var nSlot = this.getItemBagSlot(oItem);
+        const nSlot = this.getItemBagSlot(oItem);
         if (nSlot >= 0) {
             if (oItem.isStackable()) {
                 if (nCount === undefined) {
@@ -154,8 +155,8 @@ O2.createObject('GC.Inventory', class Inventory {
     }
 
     countItemStacks(sResRef) {
-        var nSum = 0;
-        var oItem = this.findItem(sResRef);
+        let nSum = 0;
+        let oItem = this.findItem(sResRef);
         while (oItem) {
             nSum += oItem.stackcount;
             oItem = this.findNextItem()
@@ -164,8 +165,8 @@ O2.createObject('GC.Inventory', class Inventory {
     }
 
     findAllItems(sResRef) {
-        var oItem = this.findItem(sResRef);
-        var aItems = [];
+        let oItem = this.findItem(sResRef);
+        const aItems = [];
         while (oItem) {
             aItems.push(oItem);
             oItem = this.findNextItem()
@@ -177,7 +178,8 @@ O2.createObject('GC.Inventory', class Inventory {
     }
 
     removeItemStack(sResRef, nCount) {
-        var nStackCount, oItem, aItems = this.findAllItems(sResRef);
+        let nStackCount, oItem;
+        const aItems = this.findAllItems(sResRef);
         while (aItems.length > 0 && nCount > 0) {
             oItem = aItems.pop();
             nStackCount = oItem.stackcount;
@@ -195,7 +197,7 @@ O2.createObject('GC.Inventory', class Inventory {
         if (!(sSlot in this.oEquipSlots)) {
             throw new Error('inventory equipItem invalid slot: ' + sSlot)
         }
-        var oPrevItem = this.oEquipSlots[sSlot];
+        const oPrevItem = this.oEquipSlots[sSlot];
         this.oEquipSlots[sSlot] = oItem;
         if (this.removeItem(oItem)) {
             if (this.addItem(oPrevItem)) {
@@ -211,8 +213,8 @@ O2.createObject('GC.Inventory', class Inventory {
         }
         return null
     }
-});
-Object.assign(GC.Inventory.prototype, {
+}
+Object.assign(Inventory.prototype, {
     aBagSlots: null,
     oEquipSlots: null,
     nFindIndex: 0,

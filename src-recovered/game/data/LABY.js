@@ -1,4 +1,4 @@
-var LABY = {
+export const LABY = {
     BLOCK_VOID: 0,
     BLOCK_WALL: 1,
     BLOCK_DOOR: 2,

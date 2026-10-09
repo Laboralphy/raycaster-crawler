@@ -1,4 +1,6 @@
-O2.createObject('H5UI.Box', class Box extends H5UI.WinControl {
+import { WinControl } from './WinControl.js';
+
+export class Box extends WinControl {
     setColor(sNormal, sHighlight) {
         if (sHighlight === undefined) {
             sHighlight = sNormal
@@ -62,9 +64,9 @@ O2.createObject('H5UI.Box', class Box extends H5UI.WinControl {
     }
 
     getFillStyle() {
-        var s = this.getSurface();
-        var aGrad = this._sColor.split(' ');
-        var xFillStyle;
+        const s = this.getSurface();
+        const aGrad = this._sColor.split(' ');
+        let xFillStyle;
         if (aGrad.length === 1) {
             xFillStyle = this._sColor
         } else {
@@ -89,8 +91,8 @@ O2.createObject('H5UI.Box', class Box extends H5UI.WinControl {
                 aGrad.shift()
             }
             this.computeGradientOrientation();
-            var oGrad = s.createLinearGradient(this._xGradStart, this._yGradStart, this._xGradEnd, this._yGradEnd);
-            for (var iGrad = 0; iGrad < aGrad.length; iGrad++) {
+            const oGrad = s.createLinearGradient(this._xGradStart, this._yGradStart, this._xGradEnd, this._yGradEnd);
+            for (let iGrad = 0; iGrad < aGrad.length; iGrad++) {
                 oGrad.addColorStop(iGrad / (aGrad.length - 1), aGrad[iGrad])
             }
             xFillStyle = oGrad
@@ -107,8 +109,8 @@ O2.createObject('H5UI.Box', class Box extends H5UI.WinControl {
             this._oContext.strokeRect(0, 0, this.getWidth(), this.getHeight())
         }
     }
-});
-Object.assign(H5UI.Box.prototype, {
+}
+Object.assign(Box.prototype, {
     _sClass: 'Box',
     _sColor: '#FFFFFF',
     _sColorOutside: '#FF6666',

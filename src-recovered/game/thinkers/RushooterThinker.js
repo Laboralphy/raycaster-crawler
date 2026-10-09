@@ -1,4 +1,7 @@
-O2.createObject('RushooterThinker', class RushooterThinker extends MobThinker {
+import { MobThinker } from './MobThinker.js';
+import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class RushooterThinker extends MobThinker {
     _follow(nTime) {
         if ((nTime % this.TIME_REACTIVITY) === 0) {
             this.chaseTarget(this.getTarget());
@@ -6,7 +9,7 @@ O2.createObject('RushooterThinker', class RushooterThinker extends MobThinker {
                 this.setAttackMode()
             }
         }
-        var nCT = this.move();
+        const nCT = this.move();
         if (nCT == this.COLLISION_TARGET) {
             this.setAttackMode()
         }
@@ -17,4 +20,4 @@ O2.createObject('RushooterThinker', class RushooterThinker extends MobThinker {
             this.oGame.gc_attack(this.oMobile, 0)
         }
     }
-});
+}

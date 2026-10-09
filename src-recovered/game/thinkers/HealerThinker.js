@@ -1,14 +1,17 @@
-O2.createObject('HealerThinker', class HealerThinker extends MobThinker {
+import { MobThinker } from './MobThinker.js';
+import { RC } from '../../libraries/Raycaster/RC.js';
+
+export class HealerThinker extends MobThinker {
     _follow(nTime) {
         if ((nTime % this.TIME_REACTIVITY) === 0) {
-            var aMobs = this.oGame.gc_selectMobilesInCircle(this.oMobile.x, this.oMobile.y, 512);
+            const aMobs = this.oGame.gc_selectMobilesInCircle(this.oMobile.x, this.oMobile.y, 512);
             if (aMobs.length) {
-                var iMob = 0;
-                var oMob = null;
-                var oMobCreature;
-                var nMobs = aMobs.length;
-                var oMobMostWounded = null;
-                var nMobWorstWound = 0;
+                let iMob = 0;
+                let oMob = null;
+                let oMobCreature;
+                const nMobs = aMobs.length;
+                let oMobMostWounded = null;
+                let nMobWorstWound = 0;
                 for (iMob = 0; iMob < nMobs; iMob++) {
                     oMob = aMobs[iMob];
                     if (oMob.getType() == RC.OBJECT_TYPE_MOB && oMob != this.oMobile) {
@@ -41,8 +44,8 @@ O2.createObject('HealerThinker', class HealerThinker extends MobThinker {
     }
 
     _attack(nTime) {
-        var g = this.oGame;
+        const g = this.oGame;
         g.gc_attack(this.oMobile, 0);
         this.nBoredTime += g.TIME_FACTOR
     }
-});
+}

@@ -1,4 +1,4 @@
-O2.createObject('Astar.NoodList', class NoodList {
+export class NoodList {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -16,7 +16,7 @@ O2.createObject('Astar.NoodList', class NoodList {
     }
 
     count() {
-        var n = 0,
+        let n = 0,
             i = '';
         for (i in this.aList) {
             n++
@@ -49,13 +49,13 @@ O2.createObject('Astar.NoodList', class NoodList {
     }
 
     empty() {
-        var i = '';
+        let i = '';
         for (i in this.aList) {
             return false
         }
         return true
     }
-});
-Object.assign(Astar.NoodList.prototype, {
+}
+Object.assign(NoodList.prototype, {
     aList: null
 });

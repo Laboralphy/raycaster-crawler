@@ -1,9 +1,6 @@
 # Dépendances
 node_modules/
 
-# Build intermédiaire (concaténation avant minification)
-src-recovered/dist/
-
 # Journaux
 *.log
 npm-debug.log*

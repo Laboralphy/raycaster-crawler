@@ -1,10 +1,12 @@
-O2.createObject('UI.HUD', class HUD {
+import { TileGrid } from '../../libraries/H5UI/TileGrid.js';
+
+export class HUD {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
 
     __construct() {
-        this.oHUD = new H5UI.TileGrid();
+        this.oHUD = new TileGrid();
         this.oHUD.setGridSize(20, 2);
         this.printTile(this.POSITIONS.life.x + this.POSITIONS.life.pad, this.POSITIONS.life.y, this.TILE_HEART);
         this.printTile(this.POSITIONS.energy.x + this.POSITIONS.energy.pad, this.POSITIONS.energy.y, this.TILE_CRYSTAL);
@@ -28,14 +30,14 @@ O2.createObject('UI.HUD', class HUD {
     }
 
     printInt(x, y, n) {
-        var a = [];
+        const a = [];
         do {
             a.push((n % 10) + this.TILE_ZERO);
             n = n / 10 | 0
         } while (n > 0);
         a.reverse();
-        var l = a.length;
-        for (var i = 0; i < l; i++) {
+        const l = a.length;
+        for (let i = 0; i < l; i++) {
             this.printTile(x++, y, a[i])
         }
         return l
@@ -49,7 +51,7 @@ O2.createObject('UI.HUD', class HUD {
     }
 
     printBlank(x, y, n) {
-        for (var i = 0; i < n; i++) {
+        for (let i = 0; i < n; i++) {
             this.oHUD.setCell(x++, y, this.TILE_VOID)
         }
     }
@@ -96,8 +98,8 @@ O2.createObject('UI.HUD', class HUD {
             this.oContext.drawImage(this.oHUD._oCanvas, 0, 0, this.oHUD._nWidth, this.oHUD._nHeight, 0, 0, (this.oHUD._nWidth << 1), (this.oHUD._nHeight << 1))
         }
     }
-});
-Object.assign(UI.HUD.prototype, {
+}
+Object.assign(HUD.prototype, {
     oCanvas: null,
     oContext: null,
     oHUD: null,

@@ -1,9 +1,13 @@
-O2.createObject('GXIconPad', class GXIconPad extends O876_Raycaster.GXEffect {
+import { ICONS } from '../data/ICONS.js';
+import { CanvasFactory } from '../../libraries/O876/CanvasFactory.js';
+import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
+
+export class GXIconPad extends GXEffect {
     __construct(oRaycaster) {
         super.__construct(oRaycaster);
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
-        this.oRenderCanvas = O876.CanvasFactory.getCanvas();
+        this.oRenderCanvas = CanvasFactory.getCanvas();
         this.oRenderCanvas.width = this.oCanvas.width - this.PAD_X - this.PAD_X;
         this.oRenderCanvas.height = this.PAD_HEIGHT;
         this.oRenderContext = this.oRenderCanvas.getContext('2d')
@@ -15,7 +19,7 @@ O2.createObject('GXIconPad', class GXIconPad extends O876_Raycaster.GXEffect {
     }
 
     getIcon(sIcon) {
-        var sIconName = 'eff_' + sIcon;
+        const sIconName = 'eff_' + sIcon;
         if (!(sIconName in ICONS)) {
             throw new Error('unknown alteration icon: ' + sIcon)
         }
@@ -23,7 +27,7 @@ O2.createObject('GXIconPad', class GXIconPad extends O876_Raycaster.GXEffect {
             this.oIcons = {}
         }
         if (!(sIcon in this.oIcons)) {
-            var oIcon = this.oRaycaster.oHorde.oTiles.i_icons.oImage;
+            const oIcon = this.oRaycaster.oHorde.oTiles.i_icons.oImage;
             this.oIcons[sIcon] = {
                 icon: oIcon,
                 effect: null,
@@ -35,7 +39,7 @@ O2.createObject('GXIconPad', class GXIconPad extends O876_Raycaster.GXEffect {
     }
 
     setIconEffect(oEffect) {
-        var oIcon = this.getIcon(oEffect.sEffect.substr(1, 4));
+        const oIcon = this.getIcon(oEffect.sEffect.substr(1, 4));
         if (oIcon.effect === null) {
             oIcon.effect = oEffect;
             return oIcon
@@ -55,10 +59,10 @@ O2.createObject('GXIconPad', class GXIconPad extends O876_Raycaster.GXEffect {
     }
 
     processIcons() {
-        var nEffCount = this.oEffects.length;
-        var sSnapShot = '';
-        var oEffect;
-        var iEff;
+        const nEffCount = this.oEffects.length;
+        let sSnapShot = '';
+        let oEffect;
+        let iEff;
         for (iEff = 0; iEff < nEffCount; iEff++) {
             oEffect = this.oEffects[iEff];
             sSnapShot += oEffect.sEffect
@@ -80,9 +84,9 @@ O2.createObject('GXIconPad', class GXIconPad extends O876_Raycaster.GXEffect {
     }
 
     orderIcons() {
-        var aDisplayIcons = [];
-        var oIcon;
-        for (var iIc in this.oIcons) {
+        const aDisplayIcons = [];
+        let oIcon;
+        for (const iIc in this.oIcons) {
             oIcon = this.oIcons[iIc];
             if (oIcon.effect) {
                 if (oIcon.effect.hasExpired()) {
@@ -103,12 +107,12 @@ O2.createObject('GXIconPad', class GXIconPad extends O876_Raycaster.GXEffect {
     }
 
     process() {
-        var x = 0;
-        var oIcon;
-        var a = this.processIcons();
+        let x = 0;
+        let oIcon;
+        const a = this.processIcons();
         if (a) {
             this.oRenderContext.clearRect(0, 0, this.oRenderCanvas.width, this.oRenderCanvas.height);
-            for (var i in a) {
+            for (const i in a) {
                 oIcon = a[i];
                 if (oIcon.visible) {
                     this.oRenderContext.drawImage(oIcon.icon, oIcon.offset, 0, this.PAD_ICON_SIZE, this.PAD_ICON_SIZE, x, 0, this.PAD_ICON_SIZE, this.PAD_ICON_SIZE);
@@ -125,7 +129,7 @@ O2.createObject('GXIconPad', class GXIconPad extends O876_Raycaster.GXEffect {
     done() {}
 
     terminate() {}
-});
+}
 Object.assign(GXIconPad.prototype, {
     sClass: 'IconPad',
     oCanvas: null,

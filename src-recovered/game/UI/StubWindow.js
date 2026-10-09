@@ -1,4 +1,6 @@
-O2.createObject('UI.StubWindow', class StubWindow extends UI.Window {
+import { Window } from './Window.js';
+
+export class StubWindow extends Window {
     __construct(oParams) {
         super.__construct({
             caption: 'STUB Window'
@@ -25,8 +27,8 @@ O2.createObject('UI.StubWindow', class StubWindow extends UI.Window {
                 break
         }
     }
-});
-Object.assign(UI.StubWindow.prototype, {
+}
+Object.assign(StubWindow.prototype, {
     nWidth: 540,
     nHeight: 356,
     oParams: null

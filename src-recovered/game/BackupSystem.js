@@ -1,4 +1,7 @@
-O2.createObject('BackupSystem', class BackupSystem {
+import { ArrayTools } from '../libraries/O876/ArrayTools.js';
+import { LZW } from '../libraries/O876/LZW.js';
+
+export class BackupSystem {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -22,7 +25,7 @@ O2.createObject('BackupSystem', class BackupSystem {
         if (sKey == this.DATA_KEY) {
             return
         }
-        var f = this.loadData(this.DATA_KEY);
+        const f = this.loadData(this.DATA_KEY);
         if (f === null) {
             this.storeData(this.DATA_KEY, [sKey])
         } else if (f.indexOf(sKey) < 0) {
@@ -35,7 +38,7 @@ O2.createObject('BackupSystem', class BackupSystem {
         if (sKey == this.DATA_KEY) {
             return
         }
-        var f = this.loadData(this.DATA_KEY);
+        const f = this.loadData(this.DATA_KEY);
         if (f === null) {
             return
         } else if (f.indexOf(sKey) >= 0) {
@@ -45,45 +48,46 @@ O2.createObject('BackupSystem', class BackupSystem {
     }
 
     isStoredData(sKey) {
-        var sNSKey = this.sNameSpace + sKey;
+        const sNSKey = this.sNameSpace + sKey;
         return sNSKey in localStorage
     }
 
     storeData(sKey, xData) {
-        var sNSKey = this.sNameSpace + sKey;
+        const sNSKey = this.sNameSpace + sKey;
         if (xData === null) {
             this.unregisterData(sKey);
             localStorage.removeItem(sNSKey)
         } else {
             this.registerData(sKey);
-            localStorage[sNSKey] = O876.LZW.encode(JSON.stringify(xData));
-            this.aRatio[sKey] = O876.LZW.nLastRatio
+            localStorage[sNSKey] = LZW.encode(JSON.stringify(xData));
+            this.aRatio[sKey] = LZW.nLastRatio
         }
     }
 
     loadData(sKey) {
-        var sNSKey = this.sNameSpace + sKey;
+        const sNSKey = this.sNameSpace + sKey;
         if (sNSKey in localStorage) {
-            return JSON.parse(O876.LZW.decode(localStorage[sNSKey]))
+            return JSON.parse(LZW.decode(localStorage[sNSKey]))
         } else {
             return null
         }
     }
 
     clear() {
-        var f;
+        let i;
+        let f;
         try {
             f = this.loadData(this.DATA_KEY);
             if (f === null) {
                 return
             }
-            for (var i = 0; i < f.length; i++) {
+            for (i = 0; i < f.length; i++) {
                 localStorage.removeItem(this.sNameSpace + f[i])
             }
             localStorage.removeItem(this.sNameSpace + this.DATA_KEY)
         } catch (e) {
-            var aToBeRemoved = [];
-            for (var i in localStorage) {
+            const aToBeRemoved = [];
+            for (i in localStorage) {
                 if (i.substr(0, this.sNameSpace.length) == this.sNameSpace) {
                     aToBeRemoved.push(i)
                 }
@@ -95,17 +99,17 @@ O2.createObject('BackupSystem', class BackupSystem {
     }
 
     exportData() {
-        var oExport = {};
-        var f = this.loadData(this.DATA_KEY);
+        const oExport = {};
+        const f = this.loadData(this.DATA_KEY);
         if (f === null) {
             return null
         }
-        for (var i = 0; i < f.length; i++) {
+        for (let i = 0; i < f.length; i++) {
             oExport[f[i]] = this.loadData(f[i])
         }
         return oExport
     }
-});
+}
 Object.assign(BackupSystem.prototype, {
     nBackupFormat: 1,
     sNameSpace: '',

@@ -1,4 +1,6 @@
-O2.createObject('EventLog', class EventLog {
+import { WORLD_DATA } from './data/WORLD_DATA.js';
+
+export class EventLog {
     getItemRef(oInv, sSlot) {
         if (sSlot in oInv.oEquipSlots && oInv.oEquipSlots[sSlot]) {
             return oInv.oEquipSlots[sSlot].resref
@@ -29,13 +31,13 @@ O2.createObject('EventLog', class EventLog {
                 cr: null
             }
         }
-        var oPlayer = oGame.getPlayer();
-        var oDungeon = oGame.oDungeon;
-        var oCreature = oDungeon.getPlayerCreature();
-        var oInventory = oDungeon.getCreatureInventory(oCreature);
-        var dd = oDungeon.getPlayerLocationArea();
-        var df = oDungeon.getPlayerLocationFloor();
-        var oCandidate = {
+        const oPlayer = oGame.getPlayer();
+        const oDungeon = oGame.oDungeon;
+        const oCreature = oDungeon.getPlayerCreature();
+        const oInventory = oDungeon.getCreatureInventory(oCreature);
+        const dd = oDungeon.getPlayerLocationArea();
+        const df = oDungeon.getPlayerLocationFloor();
+        const oCandidate = {
             d: dd,
             f: df,
             r: WORLD_DATA.dungeons[dd][df].seed,
@@ -54,9 +56,9 @@ O2.createObject('EventLog', class EventLog {
             ie: this.getItemRef(oInventory, 'ears'),
             cr: oCreature.oExtraData.craft.length
         };
-        var oDigest = {};
-        var bEmpty = true;
-        for (var sKey in oCandidate) {
+        const oDigest = {};
+        let bEmpty = true;
+        for (const sKey in oCandidate) {
             if (this.oProgressDigest[sKey] != oCandidate[sKey]) {
                 oDigest[sKey] = oCandidate[sKey];
                 this.oProgressDigest[sKey] = oCandidate[sKey];
@@ -64,13 +66,13 @@ O2.createObject('EventLog', class EventLog {
             }
         }
         if (!bEmpty) {
-            var oPostData = {
+            const oPostData = {
                 f: 'ru_log_*remote_addr',
                 d: oDigest
             }
         }
     }
-});
+}
 Object.assign(EventLog.prototype, {
     oProgressDigest: null
 });

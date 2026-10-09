@@ -1,14 +1,20 @@
-O2.createObject('InventoryPlugin', class InventoryPlugin {
+import { InventoryWindow } from '../UI/InventoryWindow.js';
+import { UI } from '../UI/UI.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { KEYS } from '../../libraries/Raycaster/KEYS.js';
+
+export class InventoryPlugin {
     uiController(sCommand, xParams) {
-        var w;
+        let n;
+        let w;
         switch (sCommand) {
             case 'on':
                 this.clear();
-                this.centerWidget(this.declareWidget(new UI.InventoryWindow(xParams)));
+                this.centerWidget(this.declareWidget(new InventoryWindow(xParams)));
                 break;
             case 'get':
                 w = this.getWidget();
-                var n = w.getBagIndex();
+                n = w.getBagIndex();
                 if (n < 0) {
                     n -= w.getEquipIndex()
                 }
@@ -20,9 +26,9 @@ O2.createObject('InventoryPlugin', class InventoryPlugin {
     }
 
     useItem() {
-        var nIndex, oItem, oInv;
-        var oPlayer = this.oGame.getPlayer();
-        var oPlayerCreature = this.oGame.oDungeon.getPlayerCreature();
+        let nIndex, oItem, oInv;
+        const oPlayer = this.oGame.getPlayer();
+        const oPlayerCreature = this.oGame.oDungeon.getPlayerCreature();
         nIndex = this.oGame.ui_command('get');
         if (nIndex >= 0) {
             oInv = this.oGame.oDungeon.getCreatureInventory(oPlayerCreature);
@@ -50,9 +56,9 @@ O2.createObject('InventoryPlugin', class InventoryPlugin {
     }
 
     dropItem() {
-        var nIndex, oItem, oInv;
-        var oPlayer = this.oGame.getPlayer();
-        var oPlayerCreature = this.oGame.oDungeon.getPlayerCreature();
+        let nIndex, oItem, oInv;
+        const oPlayer = this.oGame.getPlayer();
+        const oPlayerCreature = this.oGame.oDungeon.getPlayerCreature();
         nIndex = this.oGame.ui_command('get');
         if (nIndex >= 0) {
             oInv = this.oGame.oDungeon.getCreatureInventory(oPlayerCreature);
@@ -73,7 +79,7 @@ O2.createObject('InventoryPlugin', class InventoryPlugin {
         if (this.oGame.nIntfMode != UI.INTFMODE_INVENTORY && nKey != KEYS._INT_INVENTORY) {
             return false
         }
-        var oPlayerCreature = this.oGame.oDungeon.getPlayerCreature();
+        const oPlayerCreature = this.oGame.oDungeon.getPlayerCreature();
         switch (nKey) {
             case KEYS._INT_INVENTORY:
                 if (this.oGame.nIntfMode == UI.INTFMODE_NONE) {
@@ -94,7 +100,7 @@ O2.createObject('InventoryPlugin', class InventoryPlugin {
         this.oGame = g;
         this.oGame.registerPluginSignal('key', this)
     }
-});
+}
 Object.assign(InventoryPlugin.prototype, {
     oGame: null
 });

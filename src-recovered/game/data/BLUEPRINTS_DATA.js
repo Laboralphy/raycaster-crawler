@@ -1,4 +1,6 @@
-var BLUEPRINTS_DATA = {
+import { RC } from '../../libraries/Raycaster/RC.js';
+
+export const BLUEPRINTS_DATA = {
     o_lootbag: {
         type: RC.OBJECT_TYPE_PLACEABLE,
         tile: 'o_lootbag',

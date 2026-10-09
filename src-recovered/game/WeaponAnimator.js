@@ -1,15 +1,19 @@
-O2.createObject('WeaponAnimator', class WeaponAnimator {
+import { WEAPON_MODELS_DATA } from './data/WEAPON_MODELS_DATA.js';
+import { Animation } from '../libraries/Raycaster/Animation.js';
+import { MathTools } from '../libraries/Raycaster/Tools/MathTools.js';
+
+export class WeaponAnimator {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
 
     __construct() {
-        this.oAnimation = new O876_Raycaster.Animation()
+        this.oAnimation = new Animation()
     }
 
     selectWeapon(wd) {
         this.sAnim = '';
-        var wm = WEAPON_MODELS_DATA[wd.model];
+        const wm = WEAPON_MODELS_DATA[wd.model];
         this.sTile = wm.tile;
         this.oAnimationLibrary = {
             ready: {
@@ -64,7 +68,7 @@ O2.createObject('WeaponAnimator', class WeaponAnimator {
         }
         this.yShift = this.nDraw;
         if (bMoving) {
-            var fTime = MathTools.toRad(nTime * this.fOscilloSpeed);
+            const fTime = MathTools.toRad(nTime * this.fOscilloSpeed);
             this.xShift = 32 * Math.sin(fTime);
             this.yShift += Math.abs(32 * Math.cos(fTime))
         } else {
@@ -73,7 +77,7 @@ O2.createObject('WeaponAnimator', class WeaponAnimator {
         this.xWeapon = this.xCalibration + this.xShift | 0;
         this.yWeapon = this.yCalibration + this.yShift | 0
     }
-});
+}
 Object.assign(WeaponAnimator.prototype, {
     oWeaponLayer: null,
     oRaycaster: null,

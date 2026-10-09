@@ -1,4 +1,4 @@
-O2.createObject('O876_Raycaster.GXEffect', class GXEffect {
+export class GXEffect {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -18,8 +18,8 @@ O2.createObject('O876_Raycaster.GXEffect', class GXEffect {
     done() {}
 
     terminate() {}
-});
-Object.assign(O876_Raycaster.GXEffect.prototype, {
+}
+Object.assign(GXEffect.prototype, {
     sClass: 'Effect',
     oRaycaster: null
 });

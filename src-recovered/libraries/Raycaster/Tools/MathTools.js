@@ -1,5 +1,5 @@
-var PI = 3.14159;
-var MathTools = {
+export const PI = 3.14159;
+export const MathTools = {
     aQuadrans: [-PI / 2, -PI / 4, 0, PI / 4, PI / 2],
     fToDeg: 180 / PI,
     fToRad: PI / 180,
@@ -18,18 +18,18 @@ var MathTools = {
         return Math.sqrt((dx * dx) + (dy * dy))
     },
     isPointInsideAngle: function(xCenter, yCenter, fBissect, fAperture, xTarget, yTarget) {
-        var xPoint = xTarget - xCenter;
-        var yPoint = yTarget - yCenter;
-        var dPoint = MathTools.distance(xPoint, yPoint);
+        let xPoint = xTarget - xCenter;
+        let yPoint = yTarget - yCenter;
+        const dPoint = MathTools.distance(xPoint, yPoint);
         xPoint /= dPoint;
         yPoint /= dPoint;
-        var xBissect = Math.cos(fBissect);
-        var yBissect = Math.sin(fBissect);
-        var fDot = xPoint * xBissect + yPoint * yBissect;
+        const xBissect = Math.cos(fBissect);
+        const yBissect = Math.sin(fBissect);
+        const fDot = xPoint * xBissect + yPoint * yBissect;
         return Math.acos(fDot) < (fAperture / 2)
     },
     quadran: function(a) {
-        var i = 0;
+        let i = 0;
         while (i < (MathTools.aQuadrans.length - 1)) {
             if (a >= MathTools.aQuadrans[i] && a < MathTools.aQuadrans[i + 1]) {
                 break
@@ -48,20 +48,20 @@ var MathTools = {
         MathTools.iRndIndex = n % MathTools.aRndTable.length
     },
     rnd8: function(nMin, nMax) {
-        var r = MathTools.aRndTable[MathTools.iRndIndex];
+        const r = MathTools.aRndTable[MathTools.iRndIndex];
         MathTools.iRndIndex = (MathTools.iRndIndex + 1) & 0xFF;
-        var d = nMax - nMin + 1;
+        const d = nMax - nMin + 1;
         return (r * d / 256 | 0) + nMin
     },
     rndSeed31: function(n) {
-        var v = n % 2147483647;
+        let v = n % 2147483647;
         if (v == 0) {
             v = 1
         }
         return this.nRndSeed = v
     },
     rnd31: function(nMin, nMax) {
-        var nRnd = this.rndSeed31(16807 * this.nRndSeed);
+        const nRnd = this.rndSeed31(16807 * this.nRndSeed);
         if (nMin === undefined) {
             return nRnd
         } else {
@@ -69,7 +69,7 @@ var MathTools = {
         }
     },
     rndJS: function(nMin, nMax) {
-        var fRnd = Math.random();
+        const fRnd = Math.random();
         if (nMin === undefined) {
             return fRnd
         } else {
@@ -78,7 +78,7 @@ var MathTools = {
     },
     rnd: null,
     benchmarkRnd: function() {
-        var x, i, a = [];
+        let x, i, a = [];
         console.time('rnd js');
         for (i = 0; i < 1000000; ++i) {
             x = MathTools.rnd(0, 10);
@@ -107,8 +107,8 @@ var MathTools = {
         if (nCount > 3) {
             return (nCount - 3) * ((1 + nFaces) / 2) + MathTools.rollDice(nFaces, 3) | 0
         }
-        var n = 0;
-        for (var i = 0; i < nCount; i++) {
+        let n = 0;
+        for (let i = 0; i < nCount; i++) {
             n += MathTools.rnd(1, nFaces)
         }
         return n
@@ -121,7 +121,7 @@ var MathTools = {
         }
     },
     base64Encode: function(n, l) {
-        var s = '';
+        let s = '';
         if (l === undefined) {
             l = 0
         }
@@ -137,9 +137,9 @@ var MathTools = {
         return s
     },
     base64Decode: function(s64) {
-        var n = 0,
-            nLen = s64.length;
-        for (var i = 0; i < nLen; i++) {
+        let n = 0;
+        const nLen = s64.length;
+        for (let i = 0; i < nLen; i++) {
             n = (n << 6) | MathTools.sBASE64.indexOf(s64.charAt(i))
         }
         return n

@@ -1,11 +1,15 @@
-O2.createObject('UI.ProgressBar', class ProgressBar extends H5UI.Box {
+import { UI } from './UI.js';
+import { Box } from '../../libraries/H5UI/Box.js';
+import { Text } from '../../libraries/H5UI/Text.js';
+
+export class ProgressBar extends Box {
     __construct(oParams) {
         super.__construct();
         this.setColor(UI.clDARK_WINDOW, UI.clDARK_WINDOW);
         this.setBorder(1, UI.clWINDOW_BORDER, UI.clWINDOW_BORDER);
-        this.oBar = this.linkControl(new H5UI.Box());
+        this.oBar = this.linkControl(new Box());
         this.setBarColor(UI.clBAR);
-        this.oCaption = this.linkControl(new H5UI.Text());
+        this.oCaption = this.linkControl(new Text());
         this.oCaption.font.setFont('monospace');
         this.oCaption.font.setSize(12);
         this.oCaption.font.setColor(UI.clFONT);
@@ -30,8 +34,8 @@ O2.createObject('UI.ProgressBar', class ProgressBar extends H5UI.Box {
     setCaption(sCaption) {
         this.oCaption.setCaption(sCaption)
     }
-});
-Object.assign(UI.ProgressBar.prototype, {
+}
+Object.assign(ProgressBar.prototype, {
     _sClass: 'UI.ProgressBar',
     nMax: 100,
     nProgress: 0,

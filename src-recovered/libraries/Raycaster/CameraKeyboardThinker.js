@@ -1,4 +1,8 @@
-O2.createObject('O876_Raycaster.CameraKeyboardThinker', class CameraKeyboardThinker extends O876_Raycaster.KeyboardThinker {
+import { KEYS } from './KEYS.js';
+import { KeyboardThinker } from './KeyboardThinker.js';
+import { RC } from './RC.js';
+
+export class CameraKeyboardThinker extends KeyboardThinker {
     __construct() {
         this.defineKeys({
             forward: KEYS.UP,
@@ -11,8 +15,8 @@ O2.createObject('O876_Raycaster.CameraKeyboardThinker', class CameraKeyboardThin
     }
 
     setRotationMask(nBit, bValue) {
-        var nMask = 1 << nBit;
-        var nNotMask = 255 ^ nMask;
+        const nMask = 1 << nBit;
+        const nNotMask = 255 ^ nMask;
         if (bValue) {
             this.nRotationMask |= nMask
         } else {
@@ -29,7 +33,7 @@ O2.createObject('O876_Raycaster.CameraKeyboardThinker', class CameraKeyboardThin
 
     checkCollision() {
         if (this.oMobile.oMobileCollision !== null) {
-            var oTarget = this.oMobile.oMobileCollision;
+            const oTarget = this.oMobile.oMobileCollision;
             if (oTarget.oSprite.oBlueprint.nType != RC.OBJECT_TYPE_MISSILE) {
                 this.oMobile.rollbackXY()
             }
@@ -127,8 +131,8 @@ O2.createObject('O876_Raycaster.CameraKeyboardThinker', class CameraKeyboardThin
             }
         }
     }
-});
-Object.assign(O876_Raycaster.CameraKeyboardThinker.prototype, {
+}
+Object.assign(CameraKeyboardThinker.prototype, {
     nRotationTime: 0,
     nRotationMask: 0,
     nRotationLeftTime: 0,

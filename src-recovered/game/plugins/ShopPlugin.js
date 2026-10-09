@@ -1,9 +1,18 @@
-O2.createObject('ShopPlugin', class ShopPlugin {
+import { Item } from '../Item.js';
+import { ShopWindow } from '../UI/ShopWindow.js';
+import { UI } from '../UI/UI.js';
+import { LABY } from '../data/LABY.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { WORLD_DATA } from '../data/WORLD_DATA.js';
+import { Marker } from '../../libraries/O876/Marker.js';
+import { KEYS } from '../../libraries/Raycaster/KEYS.js';
+
+export class ShopPlugin {
     uiController(sCommand, xParams) {
         switch (sCommand) {
             case 'on':
                 this.clear();
-                this.centerWidget(this.declareWidget(new UI.ShopWindow(xParams)));
+                this.centerWidget(this.declareWidget(new ShopWindow(xParams)));
                 break;
             case 'get':
                 return this.getWidget().getSelectedOption();
@@ -22,7 +31,8 @@ O2.createObject('ShopPlugin', class ShopPlugin {
     }
 
     generateShop(aShop) {
-        var i, aItem, nShopItemCount = aShop.length;
+        let i, aItem;
+        const nShopItemCount = aShop.length;
         for (i = 0; i < nShopItemCount; i++) {
             aItem = aShop[i];
             this.checkShopItem(aItem);
@@ -34,8 +44,9 @@ O2.createObject('ShopPlugin', class ShopPlugin {
     }
 
     closeShop() {
-        var aShop = this.aShop;
-        var i, aItem, nShopItemCount = aShop.length;
+        const aShop = this.aShop;
+        let i, aItem;
+        const nShopItemCount = aShop.length;
         for (i = 0; i < nShopItemCount; i++) {
             aItem = aShop[i];
             this.checkShopItem(aItem);
@@ -55,16 +66,16 @@ O2.createObject('ShopPlugin', class ShopPlugin {
     }
 
     getShop(xBlock, yBlock) {
-        var sArea = this.oGame.oDungeon.getPlayerLocationArea();
-        var nFloor = this.oGame.oDungeon.getPlayerLocationFloor();
+        const sArea = this.oGame.oDungeon.getPlayerLocationArea();
+        const nFloor = this.oGame.oDungeon.getPlayerLocationFloor();
         if (nFloor != this.nCurrentFloor || sArea != this.sCurrentArea) {
             this.oShopRegistry = null
         }
         if (!this.oShopRegistry) {
             this.oShopRegistry = Marker.create();
-            var d = this.oGame.oDungeon;
-            var w = d.getArea().length;
-            var x, y, iShop = 0;
+            const d = this.oGame.oDungeon;
+            const w = d.getArea().length;
+            let x, y, iShop = 0;
             for (y = 0; y < w; y++) {
                 for (x = 0; x < w; x++) {
                     if (d.getAreaBlockProperty(x, y) === LABY.BLOCK_SHOP) {
@@ -73,7 +84,7 @@ O2.createObject('ShopPlugin', class ShopPlugin {
                 }
             }
         }
-        var aShops = WORLD_DATA.dungeons[sArea][nFloor].shops;
+        const aShops = WORLD_DATA.dungeons[sArea][nFloor].shops;
         if (aShops.length) {
             return aShops[Marker.getMarkXY(this.oShopRegistry, xBlock, yBlock) % aShops.length]
         } else {
@@ -112,7 +123,7 @@ O2.createObject('ShopPlugin', class ShopPlugin {
     }
 
     buy(sItem, nPrice) {
-        var oInv = this.oGame.oDungeon.getCreatureInventory(this.oGame.oDungeon.getPlayerCreature());
+        const oInv = this.oGame.oDungeon.getCreatureInventory(this.oGame.oDungeon.getPlayerCreature());
         if (!oInv.isFull()) {
             if (oInv.countItemStacks('gold') >= nPrice) {
                 oInv.removeItemStack('gold', nPrice);
@@ -126,7 +137,7 @@ O2.createObject('ShopPlugin', class ShopPlugin {
         }
         return false
     }
-});
+}
 Object.assign(ShopPlugin.prototype, {
     oGame: null,
     oEffectProcessor: null,

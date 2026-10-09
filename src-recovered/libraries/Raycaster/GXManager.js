@@ -1,4 +1,6 @@
-O2.createObject('O876_Raycaster.GXManager', class GXManager {
+import { ArrayTools } from '../O876/ArrayTools.js';
+
+export class GXManager {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -17,7 +19,7 @@ O2.createObject('O876_Raycaster.GXManager', class GXManager {
     }
 
     clear() {
-        for (var i = 0; i < this.aEffects.length; ++i) {
+        for (let i = 0; i < this.aEffects.length; ++i) {
             this.aEffects[i].terminate();
             this.aEffects[i].done()
         }
@@ -25,7 +27,7 @@ O2.createObject('O876_Raycaster.GXManager', class GXManager {
     }
 
     process() {
-        var i = this.aEffects.length - 1;
+        let i = this.aEffects.length - 1;
         while (i >= 0) {
             this.aEffects[i].process();
             if (this.aEffects[i].isOver()) {
@@ -37,12 +39,12 @@ O2.createObject('O876_Raycaster.GXManager', class GXManager {
     }
 
     render() {
-        var nLen = this.aEffects.length;
-        for (var i = nLen - 1; i >= 0; i--) {
+        const nLen = this.aEffects.length;
+        for (let i = nLen - 1; i >= 0; i--) {
             this.aEffects[i].render()
         }
     }
-});
-Object.assign(O876_Raycaster.GXManager.prototype, {
+}
+Object.assign(GXManager.prototype, {
     aEffects: null
 });

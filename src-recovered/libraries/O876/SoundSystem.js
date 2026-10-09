@@ -1,4 +1,4 @@
-O2.createObject('SoundSystem', class SoundSystem {
+export class SoundSystem {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -42,7 +42,7 @@ O2.createObject('SoundSystem', class SoundSystem {
     }
 
     free() {
-        for (var i = 0; i < this.aChans.length; i++) {
+        for (let i = 0; i < this.aChans.length; i++) {
             this.destroyItem(this.aChans[i])
         }
         this.destroyItem(this.oMusicChan);
@@ -50,13 +50,13 @@ O2.createObject('SoundSystem', class SoundSystem {
     }
 
     createChan() {
-        var oChan = document.createElement('audio');
+        const oChan = document.createElement('audio');
         this.oBase.appendChild(oChan);
         return oChan
     }
 
     addChan() {
-        var oChan = this.createChan();
+        const oChan = this.createChan();
         oChan.setAttribute('preload', 'auto');
         oChan.setAttribute('autoplay', 'autoplay');
         oChan.__file = '';
@@ -66,7 +66,7 @@ O2.createObject('SoundSystem', class SoundSystem {
     }
 
     addChans(n) {
-        for (var i = 0; i < n; i++) {
+        for (let i = 0; i < n; i++) {
             this.addChan()
         }
     }
@@ -81,7 +81,7 @@ O2.createObject('SoundSystem', class SoundSystem {
         if (nChan >= this.aChans.length) {
             nChan = this.aChans.length - 1
         }
-        var oChan = this.aChans[nChan];
+        const oChan = this.aChans[nChan];
         if (sFile === undefined) {
             return !oChan.ended
         } else {
@@ -99,13 +99,13 @@ O2.createObject('SoundSystem', class SoundSystem {
         if (nChan >= this.aChans.length) {
             nChan = this.aChans.length - 1
         }
-        var oChan = this.aChans[nChan];
+        const oChan = this.aChans[nChan];
         if (sFile === undefined) {
             return oChan.ended
         } else {
-            var bEmpty = oChan.__file === '';
-            var bNotPlaying = oChan.ended;
-            var bAlreadyLoaded = sFile == oChan.__file;
+            const bEmpty = oChan.__file === '';
+            const bNotPlaying = oChan.ended;
+            const bAlreadyLoaded = sFile == oChan.__file;
             return bEmpty || (bNotPlaying && bAlreadyLoaded)
         }
     }
@@ -114,7 +114,7 @@ O2.createObject('SoundSystem', class SoundSystem {
         if (!this.hasChan()) {
             return -1
         }
-        var iChan;
+        let iChan;
         for (iChan = 0; iChan < this.aChans.length; iChan++) {
             if (this.isChanFree(iChan, sFile)) {
                 return iChan
@@ -137,7 +137,7 @@ O2.createObject('SoundSystem', class SoundSystem {
         if (this.bMute) {
             return -1
         }
-        var oChan = null;
+        let oChan = null;
         if (sFile === undefined) {
             return -1
         }
@@ -169,7 +169,7 @@ O2.createObject('SoundSystem', class SoundSystem {
     }
 
     playMusic(sFile) {
-        var oChan = this.oMusicChan;
+        const oChan = this.oMusicChan;
         oChan.src = sFile;
         oChan.load();
         oChan.play()
@@ -180,10 +180,10 @@ O2.createObject('SoundSystem', class SoundSystem {
             this.sCrossFadeTo = sFile;
             return
         }
-        var iVolume = 100;
-        var nVolumeDelta = -10;
+        let iVolume = 100;
+        const nVolumeDelta = -10;
         this.bCrossFading = true;
-        var oInterval = null;
+        let oInterval = null;
         oInterval = setInterval((function() {
             iVolume += nVolumeDelta;
             this.oMusicChan.volume = iVolume / 100;
@@ -199,7 +199,7 @@ O2.createObject('SoundSystem', class SoundSystem {
             }
         }).bind(this), 100)
     }
-});
+}
 Object.assign(SoundSystem.prototype, {
     CHAN_MUSIC: 99,
     HAVE_NOTHING: 0,

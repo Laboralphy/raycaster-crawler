@@ -1,9 +1,13 @@
-O2.createObject('GXConfused', class GXConfused extends O876_Raycaster.GXEffect {
+import { CanvasFactory } from '../../libraries/O876/CanvasFactory.js';
+import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
+import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class GXConfused extends GXEffect {
     __construct(oRaycaster) {
         super.__construct(oRaycaster);
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
-        this.oConfCanvas = O876.CanvasFactory.getCanvas();
+        this.oConfCanvas = CanvasFactory.getCanvas();
         this.oConfCanvas.width = this.oCanvas.width;
         this.oConfCanvas.height = this.oCanvas.height;
         this.oConfContext = this.oConfCanvas.getContext('2d');
@@ -35,13 +39,13 @@ O2.createObject('GXConfused', class GXConfused extends O876_Raycaster.GXEffect {
     }
 
     buildConfusion() {
-        var fx = Math.sin(MathTools.toRad(this.nTime << 3)) + 1;
-        var fy = 2 - fx;
-        var nx = fx * 32 | 0;
-        var ny = fy * 32 | 0;
+        const fx = Math.sin(MathTools.toRad(this.nTime << 3)) + 1;
+        const fy = 2 - fx;
+        const nx = fx * 32 | 0;
+        const ny = fy * 32 | 0;
         this.oConfContext.drawImage(this.oCanvas, nx, ny, this.oCanvas.width - nx - nx, this.oCanvas.height - ny - ny, 0, 0, this.oConfCanvas.width, this.oConfCanvas.height)
     }
-});
+}
 Object.assign(GXConfused.prototype, {
     sClass: 'Confused',
     oCanvas: null,

@@ -1,4 +1,4 @@
-O2.createObject('O876_Raycaster.FrameCounter', class FrameCounter {
+export class FrameCounter {
     start(nTimeStamp) {
         this.nTimeStart = nTimeStamp;
         this.bCheck = true;
@@ -25,8 +25,8 @@ O2.createObject('O876_Raycaster.FrameCounter', class FrameCounter {
         }
         return false
     }
-});
-Object.assign(O876_Raycaster.FrameCounter.prototype, {
+}
+Object.assign(FrameCounter.prototype, {
     bCheck: false,
     bLoop: true,
     nFPS: 0,

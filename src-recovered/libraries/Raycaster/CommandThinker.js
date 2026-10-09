@@ -1,11 +1,13 @@
-O2.createObject('O876_Raycaster.CommandThinker', class CommandThinker extends O876_Raycaster.Thinker {
+import { Thinker } from './Thinker.js';
+
+export class CommandThinker extends Thinker {
     setMovement(a, s) {
         if (this.fma != a || this.fms != s) {
             this.fma = a;
             this.fms = s;
-            var oSprite = this.oMobile.oSprite;
-            var nAnim = oSprite.nAnimationType;
-            var bStopped = s === 0;
+            const oSprite = this.oMobile.oSprite;
+            const nAnim = oSprite.nAnimationType;
+            const bStopped = s === 0;
             switch (nAnim) {
                 case this.ANIMATION_ACTION:
                 case this.ANIMATION_STAND:
@@ -44,7 +46,7 @@ O2.createObject('O876_Raycaster.CommandThinker', class CommandThinker extends O8
     }
 
     thinkAlive() {
-        var m = this.oMobile;
+        const m = this.oMobile;
         m.move(this.fma, this.fms);
         if (this.oGame.oRaycaster.clip(m.x, m.y, 1)) {
             m.rollbackXY()
@@ -68,8 +70,8 @@ O2.createObject('O876_Raycaster.CommandThinker', class CommandThinker extends O8
     thinkDead() {
         this.oMobile.bActive = false
     }
-});
-Object.assign(O876_Raycaster.CommandThinker.prototype, {
+}
+Object.assign(CommandThinker.prototype, {
     fma: 0,
     fms: 0,
     nDeadTime: 0,

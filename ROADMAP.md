@@ -20,11 +20,10 @@ npm start          # node server.js -> http://localhost:8080/
 | Chemin | Rôle |
 |---|---|
 | `index.html`, `styles.css`, `resources/` | page du jeu et ressources (images, sons, docs) |
-| `crawler.js` | **généré** par `npm run build` ; suivi par git pour que le jeu tourne sans build |
+| `crawler.js` | **généré** par `npm run build` (bundle esbuild depuis `src-recovered/game/main.js`) ; suivi par git pour que le jeu tourne sans build |
 | `src-recovered/` | sources du jeu reconstituées (voir son `README.md`) |
 | `src-recovered/libraries/` | bibliothèques : `O876/` (outils, A*, o2), `Raycaster/` (moteur), `H5UI/` (UI canvas) |
 | `src-recovered/game/` | le jeu : `Game.js`, `Dungeon.js`, `UI/`, `GC/`, `plugins/`, `thinkers/`, `gx/`, `data/` |
-| `src-recovered/build-order.json` | ordre de chargement des fichiers (concaténation) |
 | `laby/` | générateur de niveaux (JavaScript, sans dépendance), porté depuis l'ancien PHP |
 | `server.js` | serveur HTTP statique ; répond aussi à `/dynamics/laby/laby.php` (URL historique appelée par le jeu) en générant le niveau avec `laby/` |
 
@@ -53,8 +52,8 @@ npm start          # node server.js -> http://localhost:8080/
   `mspage_button_close` dans `STRINGS` (gardé `'Close'`).
 
 ### 3. Build avec esbuild
-- `src-recovered/build.js` concatène les fichiers selon `build-order.json`,
-  puis esbuild minifie vers `crawler.js` (cible es2015).
+- D'abord concaténation des fichiers (`build-order.json`) puis minification ;
+  remplacé à l'étape 6 par un vrai bundle de modules ES.
 
 ### 4. Classes `o2` → classes ES
 - Les 128 classes (`O2.createClass` / `O2.extendClass` / `__inherited`) sont
@@ -81,38 +80,73 @@ npm start          # node server.js -> http://localhost:8080/
   rejouait d'un coup tout le temps passé en pause (250 itérations pour 10 s).
   Renommée `initDoomloop`, l'horloge est remise à zéro avant l'appel au parent.
 
+### 6. Modules ES (`import` / `export`)
+- Les 167 fichiers sont des modules ES ; `npm run build` lance esbuild en
+  bundle depuis `game/main.js` (`--bundle --format=iife`, cible es2015).
+  `build-order.json`, `build.js` et `o2.js` sont supprimés.
+- Conversion automatique (acorn + eslint-scope) : chaque
+  `O2.createObject('NS.X', …)` devient `export class X` / `export const X`,
+  chaque `NS.X` est remplacé par un import (renommé `NS_X` en cas de
+  collision, ex. `GC_Item`, `O876_Horde`). Aucune référence à un espace de
+  noms n'est restée non résolue.
+- Registres explicites à la place des recherches par nom sur `window` :
+  `PLUGINS` dans `Game.js`, `THINKERS` (`game/thinkers/THINKERS.js`)
+  enregistré dans `ThinkerManager` par `main()`. `O876.ClassLoader`
+  supprimé.
+- `WORLD_DATA` : module qui regroupe `shops` et `dungeons` ; `newGame` le
+  restaure en place (`Object.assign`) au lieu de le réaffecter.
+- `ICONS` déclaré (`export const`) ; `H5UI.initRoot` écrivait `UI.root` au
+  lieu de `H5UI.root` (jamais appelée, corrigée).
+- Bug introduit par l'étape 4, corrigé : dans `class Image` (H5UI),
+  `new Image()` construisait un contrôle H5UI au lieu d'un `<img>`
+  (`new window.Image()`).
+- Ordre d'évaluation vérifié statiquement : aucun module n'utilise au
+  chargement (`extends`, valeurs calculées) un import pas encore évalué.
+- Testé dans un navigateur piloté (Electron), comparé à la version
+  précédente : menu, cinématique d'intro, niveau généré, déplacements,
+  inventaire, fiche de personnage, livre de sorts, sorts, monstres qui
+  attaquent ; mêmes messages de console dans les deux versions.
+
+### 7. `var` → `const` / `let`
+- Plus aucun `var` dans `src-recovered/` : 1 188 `const`, 739 `let`.
+- Conversion automatique (eslint-scope), conservatrice : `const` seulement
+  si la variable est initialisée et jamais réaffectée ; conversion sur place
+  seulement si la portée de bloc ne change rien (toutes les utilisations
+  dans le bloc, après la déclaration ; pas de variable de boucle capturée
+  par une closure ; pas de variable non initialisée dans une boucle, qui
+  garderait sa valeur d'un tour à l'autre avec `var`). Les 22 autres
+  (variables déclarées dans un `case`, ou utilisées hors de leur bloc) sont
+  déclarées par un `let` en tête de fonction, comme le faisait `var`.
+- Vérifié : aucun `let`/`const` utilisé avant sa déclaration, aucune
+  `const` réaffectée ; partie jouée dans le navigateur jusqu'à la mort du
+  personnage, sans erreur.
+
 ## À faire
 
-### Étape suivante : modules ES (`import` / `export`)
-Objectif : supprimer `build-order.json` et les globales, esbuild bundle
-depuis `game/main.js` (`--bundle --format=iife`).
+### Étape suivante : brancher raycaster-386
+Le moteur cible (`../raycaster-386`, ESM, TypeScript compilé) est un portage
+de `o876-raycaster-engine`, plus récent que le `O876_Raycaster` du jeu. Il
+fournit le rendu et une couche de simulation (portes, acteurs, collisions,
+déclencheurs) mais pas `Engine`, les thinkers, `Horde`/`Mobile`, les effets
+`GX*`, les périphériques d'entrée ni la minicarte. Approche proposée :
+1. rapatrier dans le jeu ce que 386 ne fournit pas (boucle, thinkers,
+   mobiles, GX, entrées) ;
+2. isoler l'accès au moteur derrière une façade (le jeu utilise une
+   trentaine de membres de `oRaycaster` : `nPlaneSpacing`, `oHorde`,
+   `oEffects`, `oCamera`, `cloneWall`, `getMapXYPhysical`, `aMap`,
+   `castRay`, `textureAnimation`, `shadeProcess`…) ;
+3. remplacer le rendu derrière la façade par `Renderer` / `MapHelper` de
+   386 (conversion de la carte en `LevelMap`, sprites, `cloneWall` →
+   décalcomanies) ;
+4. éventuellement, simulation 386 pour les portes et les collisions.
 
-Points durs repérés :
-- **Classes cherchées par leur nom** : `Game.addPlugin` fait
-  `window[sPlugin + 'Plugin']` ; `ThinkerManager.createThinker` charge
-  `sThinker + 'Thinker'` via `O876.ClassLoader` (noms venant des données,
-  ex. `thinker: 'Timed'` dans `BLUEPRINTS_DATA`). Il faudra des registres
-  explicites (nom → classe).
-- **Données globales réaffectées** : `Game.newGame` fait
-  `WORLD_DATA = JSON.parse(this.sWorldBackup)` ; un `import` ne peut pas être
-  réaffecté depuis un autre module → objet d'état partagé, ou mutation en
-  place.
-- **Globale implicite au premier niveau** : `game/data/ICONS.js` commence par
-  `ICONS = {` sans `var` (interdit dans un module).
-- **Espaces de noms fusionnés** : `O2.createObject` fusionne dans un objet
-  existant (ex. `H5UI` créé implicitement par `H5UI.Font` puis complété par
-  l'objet `H5UI`, `WORLD_DATA.shops` / `WORLD_DATA.dungeons`, `UI`).
-- **Globales posées sur `window`** : `window.__mouseDevice` (gestionnaires
-  d'événements de la souris), `ReikasterMicrosyte` appelé depuis des
-  `onclick` HTML ; `main()` est lancée
-  par `window.addEventListener('load', main)` dans `game/main.js`.
-- Ordre d'évaluation : certaines valeurs sont calculées au chargement
-  (ex. `CONFIG.game.mouse: O876_Raycaster.PointerLock.init()`).
-
-Approche suggérée : procéder par couches, des feuilles (`libraries/O876`) vers
-`game/`, en gardant temporairement un module « pont » qui réexpose les
-symboles sur `window` tant que tout n'est pas converti ; vérifier à chaque
-étape par build + test dans le navigateur.
+### Globales restantes
+- `window.G` (instance de `Game`, lue dans 8 fichiers),
+  `window.__keyboardDevice`, `window.__mouseDevice`.
+- `libraries/Raycaster/Engine.js` importe `CONFIG` depuis `game/`.
+- Fichiers non importés (code mort, hors bundle) : `ReikasterMicrosyte`,
+  `MW.LABY`, thinkers `Camera*`, `Kbd*`, `Command`, `Keyboard`, `Wander`,
+  `O876` `Horde` / `Legion` / `Mediator` / `Microsyte`…
 
 ### Plus tard
 - Remplacer `__construct` par de vrais `constructor` (attention : `this`

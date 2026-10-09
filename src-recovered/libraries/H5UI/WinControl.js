@@ -1,4 +1,6 @@
-O2.createObject('H5UI.WinControl', class WinControl {
+import { H5UI } from './H5UI.js';
+
+export class WinControl {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -16,10 +18,11 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     __destruct() {
+        let i;
         H5UI.recycleCanvas(this._oCanvas);
         this.clear();
-        var aProps = [];
-        for (var i in this) {
+        let aProps = [];
+        for (i in this) {
             this[i] = null;
             aProps.push(i)
         }
@@ -50,8 +53,8 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     realignControls() {
-        var n, a, sDokoMethod;
-        for (var sDoko in this._aAlignedControls) {
+        let n, a, sDokoMethod;
+        for (const sDoko in this._aAlignedControls) {
             sDokoMethod = 'moveTo' + sDoko.substr(0, 1).toUpperCase() + sDoko.substr(1).toLowerCase();
             a = this._aAlignedControls[sDoko];
             for (n = 0; n < a.length; n++) {
@@ -68,13 +71,13 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     unregisterAlignedControl(oControl) {
-        for (var sDoko in this._aAlignedControls) {
+        for (const sDoko in this._aAlignedControls) {
             this.removeArrayItem(this._aAlignedControls[sDoko], oControl)
         }
     }
 
     removeArrayItem(oArray, xItem, sIndex) {
-        var nItem;
+        let nItem;
         if (typeof xItem == 'object') {
             nItem = oArray.indexOf(xItem);
             if (nItem < 0) {
@@ -94,7 +97,8 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     pushArrayItem(oArray, oItem, sIndex) {
-        var nLen, nItem = oArray.indexOf(oItem);
+        let nLen;
+        const nItem = oArray.indexOf(oItem);
         if (nItem < 0) {
             nLen = oArray.length;
             if (sIndex !== undefined) {
@@ -130,8 +134,8 @@ O2.createObject('H5UI.WinControl', class WinControl {
             this._oPointedControl = oClicked;
             this.doMouseEvent('MouseIn', x, y, nButton, oClicked)
         }
-        var sMouseEventMethod = 'on' + sEvent;
-        var pMouseEventMethod;
+        const sMouseEventMethod = 'on' + sEvent;
+        let pMouseEventMethod;
         if (oClicked !== null) {
             if (sMouseEventMethod in oClicked) {
                 pMouseEventMethod = oClicked[sMouseEventMethod];
@@ -142,7 +146,7 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     getControlRelativePosition(oControl) {
-        var oPos = {
+        const oPos = {
             x: 0,
             y: 0
         };
@@ -155,7 +159,7 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     doDragDropEvent(sEvent, x, y, nButton) {
-        var oPos = this.getControlRelativePosition(this._oDraggedControl);
+        const oPos = this.getControlRelativePosition(this._oDraggedControl);
         switch (sEvent) {
             case 'MouseMove':
                 this._oDraggedControl.callEvent('onDragging', x - oPos.x, y - oPos.y, nButton);
@@ -177,8 +181,8 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     argObjectToArray(a) {
-        var i = '';
-        var aArgs = [];
+        let i = '';
+        const aArgs = [];
         if ('length' in a) {
             for (i = 0; i < a.length; i++) {
                 aArgs.push(a[i])
@@ -195,16 +199,16 @@ O2.createObject('H5UI.WinControl', class WinControl {
         if (this._oParent === null) {
             return null
         }
-        var aArgs = this.argObjectToArray(arguments);
-        var sMethod = aArgs.shift();
+        const aArgs = this.argObjectToArray(arguments);
+        const sMethod = aArgs.shift();
         if (sMethod in this._oParent) {
             return this._oParent[sMethod].apply(this._oParent, aArgs)
         }
     }
 
     callEvent() {
-        var aArgs = this.argObjectToArray(arguments);
-        var sMethod = aArgs.shift();
+        const aArgs = this.argObjectToArray(arguments);
+        const sMethod = aArgs.shift();
         if (sMethod in this) {
             return this[sMethod].apply(this, aArgs)
         }
@@ -217,7 +221,7 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     renderControls() {
-        var o;
+        let o;
         while (this._aInvalidControls.length) {
             o = this._aInvalidControls.shift();
             if (o._nHandle) {
@@ -227,7 +231,7 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     hideControls() {
-        var o;
+        let o;
         while (this._aHideControls.length) {
             o = this._aHideControls.shift();
             this._oContext.clearRect(o._x, o._y, o.getWidth(), o.getHeight())
@@ -241,12 +245,12 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     render() {
-        var o;
+        let o;
         if (this._bInvalid) {
             this.hideControls();
             this.renderSelf();
             this.renderControls();
-            for (var i = 0; i < this._aControls.length; i++) {
+            for (let i = 0; i < this._aControls.length; i++) {
                 o = this._aControls[i];
                 if (o.needRender()) {
                     this._oContext.drawImage(o._oCanvas, o._x, o._y)
@@ -281,10 +285,11 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     setTopControl(o) {
-        var nIndex = this._aControls.indexOf(o);
-        var nCount = this.getControlCount();
+        let i;
+        const nIndex = this._aControls.indexOf(o);
+        const nCount = this.getControlCount();
         if (nIndex >= 0) {
-            for (var i = nIndex; i < (nCount - 1); i++) {
+            for (i = nIndex; i < (nCount - 1); i++) {
                 this._aControls[i] = this._aControls[i + 1];
                 this._aControls[i]._set('_nIndex', i)
             }
@@ -298,14 +303,14 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     unlinkControl(n) {
-        var oControl;
+        let oControl;
         if (n >= this._aControls.length) {
             throw new Error('out of bounds: ' + n.toString() + ' - range is 0 to ' + this._aControls.length)
         }
         oControl = this._aControls[n];
         this.removeArrayItem(this._aControls, n, '_nIndex');
         this.removeArrayItem(this._aInvalidControls, oControl);
-        for (var sAlign in this._aAlignedControls) {
+        for (const sAlign in this._aAlignedControls) {
             this.removeArrayItem(this._aAlignedControls[sAlign], oControl)
         }
         this.removeArrayItem(this._aHideControls, oControl);
@@ -359,7 +364,7 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     moveToCenter() {
-        var p = this.getParent();
+        const p = this.getParent();
         if (p) {
             this.moveTo(((p.getWidth() - this.getWidth()) >> 1), ((p.getHeight() - this.getHeight()) >> 1))
         }
@@ -392,9 +397,9 @@ O2.createObject('H5UI.WinControl', class WinControl {
     }
 
     getControlAt(x, y) {
-        var o, ox, oy, w, h;
+        let o, ox, oy, w, h;
         if (this._aControls) {
-            for (var i = this._aControls.length - 1; i >= 0; i--) {
+            for (let i = this._aControls.length - 1; i >= 0; i--) {
                 o = this._aControls[i];
                 ox = o._x;
                 oy = o._y;
@@ -421,8 +426,8 @@ O2.createObject('H5UI.WinControl', class WinControl {
     hasControls() {
         return this._aControls !== null && this._aControls.length > 0
     }
-});
-Object.assign(H5UI.WinControl.prototype, {
+}
+Object.assign(WinControl.prototype, {
     _sClass: 'WinControl',
     _sName: '',
     _nHandle: 0,

@@ -1,4 +1,12 @@
-O2.createObject('UI.InventoryWindow', class InventoryWindow extends UI.Window {
+import { Icon } from './Icon.js';
+import { UI } from './UI.js';
+import { Window } from './Window.js';
+import { ICONS } from '../data/ICONS.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { Box } from '../../libraries/H5UI/Box.js';
+import { Text } from '../../libraries/H5UI/Text.js';
+
+export class InventoryWindow extends Window {
     __construct(oParams) {
         super.__construct({
             caption: STRINGS._('~win_inventory')
@@ -25,7 +33,7 @@ O2.createObject('UI.InventoryWindow', class InventoryWindow extends UI.Window {
     }
 
     refreshContent() {
-        var oBox, xBox, yBox, nBox = 0,
+        let oBox, xBox, yBox, nBox = 0,
             oItem;
         for (yBox = 0; yBox < this.yBoxSize; yBox++) {
             for (xBox = 0; xBox < this.xBoxSize; xBox++) {
@@ -40,10 +48,10 @@ O2.createObject('UI.InventoryWindow', class InventoryWindow extends UI.Window {
                 nBox++
             }
         }
-        var aISlots = this.oEquipSlotData;
-        var nISlotCount = aISlots.length;
+        const aISlots = this.oEquipSlotData;
+        const nISlotCount = aISlots.length;
         nBox = 0;
-        for (var iSlot = 0; iSlot < nISlotCount; iSlot++) {
+        for (let iSlot = 0; iSlot < nISlotCount; iSlot++) {
             oBox = this.aBoxesEqu.aBoxes[nBox];
             if (this.oInventory.oEquipSlots[aISlots[iSlot].slot]) {
                 oBox._set('xStart', this.oInventory.oEquipSlots[aISlots[iSlot].slot].icon * oBox.getWidth())
@@ -57,9 +65,9 @@ O2.createObject('UI.InventoryWindow', class InventoryWindow extends UI.Window {
 
     sortItems(a, b) {
         if (a && b) {
-            var io = UI.InventoryWindow.prototype.aItemOrder;
-            var sa = io.indexOf(a.type);
-            var sb = io.indexOf(b.type);
+            const io = InventoryWindow.prototype.aItemOrder;
+            const sa = io.indexOf(a.type);
+            const sb = io.indexOf(b.type);
             if (sa == sb) {
                 return a.resref > b.resref
             } else {
@@ -100,13 +108,13 @@ O2.createObject('UI.InventoryWindow', class InventoryWindow extends UI.Window {
     }
 
     dblclickIcon() {
-        var p = this.getParent();
+        const p = this.getParent();
         p.selectXY(this.__xSlot, this.__ySlot);
         p.command('inv_use')
     }
 
     buildWindowContent() {
-        var oItem, oBox, xBox, yBox, nBox = 0;
+        let oItem, oBox, xBox, yBox, nBox = 0;
         this.setSize(this.nWidth, this.nHeight);
         this.aBoxesBag = this.buildBoxes();
         this.aBoxesBag.xSize = this.xBoxSize;
@@ -116,7 +124,7 @@ O2.createObject('UI.InventoryWindow', class InventoryWindow extends UI.Window {
         this.aBoxesEqu.ySize = 4;
         for (yBox = 0; yBox < this.yBoxSize; yBox++) {
             for (xBox = 0; xBox < this.xBoxSize; xBox++) {
-                oBox = this.linkControl(new UI.Icon());
+                oBox = this.linkControl(new Icon());
                 oBox.setSize(this.nIconSize, this.nIconSize);
                 oItem = this.oInventory.aBagSlots[nBox];
                 if (oItem) {
@@ -136,10 +144,10 @@ O2.createObject('UI.InventoryWindow', class InventoryWindow extends UI.Window {
                 oBox.onDblclick = this.dblclickIcon
             }
         }
-        var aISlots = this.oEquipSlotData;
-        var nISlotCount = aISlots.length;
-        for (var iSlot = 0; iSlot < nISlotCount; iSlot++) {
-            oBox = this.linkControl(new UI.Icon());
+        const aISlots = this.oEquipSlotData;
+        const nISlotCount = aISlots.length;
+        for (let iSlot = 0; iSlot < nISlotCount; iSlot++) {
+            oBox = this.linkControl(new Icon());
             oBox.setSize(this.nIconSize, this.nIconSize);
             if (this.oInventory.oEquipSlots[aISlots[iSlot].slot]) {
                 oBox.xStart = this.oInventory.oEquipSlots[aISlots[iSlot].slot].icon * oBox.getWidth()
@@ -155,12 +163,12 @@ O2.createObject('UI.InventoryWindow', class InventoryWindow extends UI.Window {
             this.aBoxesEqu.aBoxes.push(oBox)
         }
         this.aBoxes = this.aBoxesBag;
-        var oTextBox = this.linkControl(new H5UI.Box());
+        const oTextBox = this.linkControl(new Box());
         oTextBox.setSize(this.nIconSize * this.xBoxSize, 24);
         oTextBox.setColor(UI.clDARK_WINDOW, UI.clDARK_WINDOW);
         oTextBox.setBorder(1, UI.clWINDOW_BORDER, UI.clWINDOW_BORDER);
         oTextBox.moveTo(this.xText, this.yText);
-        var oText = oTextBox.linkControl(new H5UI.Text());
+        const oText = oTextBox.linkControl(new Text());
         oText.setCaption('');
         oText.font.setColor(UI.clFONT);
         oText.font.setFont('monospace');
@@ -211,7 +219,7 @@ O2.createObject('UI.InventoryWindow', class InventoryWindow extends UI.Window {
         this.xSelect = x;
         this.ySelect = y;
         this.nSelect = this.ySelect * this.aBoxes.xSize + this.xSelect;
-        var oItem = this.getSelectedItem();
+        const oItem = this.getSelectedItem();
         if (oItem) {
             this.oTextBox.setBorder(4, UI.clSELECT_BORDER, UI.clSELECT_BORDER);
             this.oTextItem.setCaption(oItem.name)
@@ -223,16 +231,16 @@ O2.createObject('UI.InventoryWindow', class InventoryWindow extends UI.Window {
     }
 
     getSelectedItem() {
-        var nIndex = this.getBagIndex();
+        let nIndex = this.getBagIndex();
         if (nIndex < 0) {
             nIndex -= this.getEquipIndex()
         }
-        var oInv = this.oInventory;
-        var oItem = null;
+        const oInv = this.oInventory;
+        let oItem = null;
         if (nIndex >= 0) {
             oItem = oInv.aBagSlots[nIndex]
         } else {
-            for (var iSlot in oInv.oEquipSlots) {
+            for (const iSlot in oInv.oEquipSlots) {
                 nIndex++;
                 if (nIndex === 0) {
                     oItem = oInv.oEquipSlots[iSlot]
@@ -241,8 +249,8 @@ O2.createObject('UI.InventoryWindow', class InventoryWindow extends UI.Window {
         }
         return oItem
     }
-});
-Object.assign(UI.InventoryWindow.prototype, {
+}
+Object.assign(InventoryWindow.prototype, {
     _sClass: 'UI.InventoryWindow',
     nWidth: 540,
     nHeight: 320,

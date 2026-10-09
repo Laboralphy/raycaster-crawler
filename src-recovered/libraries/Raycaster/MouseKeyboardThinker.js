@@ -1,8 +1,10 @@
-O2.createObject('O876_Raycaster.MouseKeyboardThinker', class MouseKeyboardThinker extends O876_Raycaster.Thinker {
+import { Thinker } from './Thinker.js';
+
+export class MouseKeyboardThinker extends Thinker {
     defineKeys(a) {
         this.aKeys = {};
         this.aCommands = {};
-        for (var k in a) {
+        for (const k in a) {
             this.aKeys[k] = [a[k], 0];
             this.aCommands[a[k]] = false
         }
@@ -13,7 +15,7 @@ O2.createObject('O876_Raycaster.MouseKeyboardThinker', class MouseKeyboardThinke
     }
 
     updateKeys() {
-        var sKey = '',
+        let sKey = '',
             nKey, sProc, pProc, aButton;
         for (sKey in this.aKeys) {
             nKey = this.aKeys[sKey][0];
@@ -79,8 +81,8 @@ O2.createObject('O876_Raycaster.MouseKeyboardThinker', class MouseKeyboardThinke
             }
         }
     }
-});
-Object.assign(O876_Raycaster.MouseKeyboardThinker.prototype, {
+}
+Object.assign(MouseKeyboardThinker.prototype, {
     oKeyboard: null,
     oMouse: null,
     aKeys: null,

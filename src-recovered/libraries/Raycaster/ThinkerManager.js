@@ -1,27 +1,31 @@
-O2.createObject('O876_Raycaster.ThinkerManager', class ThinkerManager {
+// classes de thinkers par nom (ex. 'Rusher', 'O876_Raycaster.Linear'),
+// remplies par ThinkerManager.registerThinkers
+const THINKERS = {};
+
+export class ThinkerManager {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
 
-    __construct() {
-        this.oLoader = new O876.ClassLoader()
+    __construct() {}
+
+    static registerThinkers(oThinkers) {
+        Object.assign(THINKERS, oThinkers)
     }
 
     createThinker(sThinker) {
         if (sThinker === undefined || sThinker === null) {
             return null
         }
-        var pThinker = this.oLoader.loadClass(sThinker + 'Thinker');
-        if (pThinker !== null) {
-            var oThinker = new pThinker();
+        if (sThinker in THINKERS) {
+            const oThinker = new THINKERS[sThinker]();
             oThinker.oGame = this.oGameInstance;
             return oThinker
         } else {
-            throw new Error('ThinkerManager : ' + sThinker + ' class not found.')
+            throw new Error('ThinkerManager : ' + sThinker + 'Thinker class not found.')
         }
     }
-});
-Object.assign(O876_Raycaster.ThinkerManager.prototype, {
-    oGameInstance: null,
-    oLoader: null
+}
+Object.assign(ThinkerManager.prototype, {
+    oGameInstance: null
 });

@@ -1,6 +1,8 @@
-O2.createObject('H5UI.Image', class Image extends H5UI.WinControl {
+import { WinControl } from './WinControl.js';
+
+export class Image extends WinControl {
     _loadEvent(oEvent) {
-        var i = oEvent.target.__image;
+        const i = oEvent.target.__image;
         oEvent.target.__image = null;
         if (i.onLoad) {
             i.onLoad()
@@ -11,7 +13,7 @@ O2.createObject('H5UI.Image', class Image extends H5UI.WinControl {
 
     setSource(sSrc) {
         if (!this._oTexture) {
-            this._oTexture = new Image()
+            this._oTexture = new window.Image()
         }
         this._oTexture.src = sSrc;
         this._oTexture.__image = this;
@@ -29,7 +31,7 @@ O2.createObject('H5UI.Image', class Image extends H5UI.WinControl {
     }
 
     renderSelf() {
-        var s = this.getSurface();
+        const s = this.getSurface();
         if (this._oTexture && this._oTexture.complete) {
             if (this._bAutosize) {
                 this.setSize(this._oTexture.width, this._oTexture.height);
@@ -40,8 +42,8 @@ O2.createObject('H5UI.Image', class Image extends H5UI.WinControl {
             }
         }
     }
-});
-Object.assign(H5UI.Image.prototype, {
+}
+Object.assign(Image.prototype, {
     _oTexture: null,
     _bAutosize: true,
     onLoad: null

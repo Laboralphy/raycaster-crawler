@@ -1,4 +1,8 @@
-O2.createObject('O876_Raycaster.KbdArrowThinker', class KbdArrowThinker extends O876_Raycaster.KeyboardThinker {
+import { KEYS } from './KEYS.js';
+import { KeyboardThinker } from './KeyboardThinker.js';
+import { RC } from './RC.js';
+
+export class KbdArrowThinker extends KeyboardThinker {
     __construct() {
         this.defineKeys({
             forward: KEYS.UP,
@@ -16,7 +20,7 @@ O2.createObject('O876_Raycaster.KbdArrowThinker', class KbdArrowThinker extends 
 
     checkCollision() {
         if (this.oMobile.oMobileCollision !== null) {
-            var oTarget = this.oMobile.oMobileCollision;
+            const oTarget = this.oMobile.oMobileCollision;
             if (oTarget.oSprite.oBlueprint.nType != RC.OBJECT_TYPE_MISSILE) {
                 this.oMobile.rollbackXY()
             }
@@ -48,4 +52,4 @@ O2.createObject('O876_Raycaster.KbdArrowThinker', class KbdArrowThinker extends 
         this.oMobile.moveBackward();
         this.checkCollision()
     }
-});
+}

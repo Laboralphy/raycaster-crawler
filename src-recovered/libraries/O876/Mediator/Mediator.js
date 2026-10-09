@@ -1,4 +1,6 @@
-O2.createObject('O876.Mediator.Mediator', class Mediator {
+import { ArrayTools } from '../ArrayTools.js';
+
+export class Mediator {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -20,7 +22,7 @@ O2.createObject('O876.Mediator.Mediator', class Mediator {
         if (!('getName' in oPlugin)) {
             throw new Error('O876.Mediator : anonymous plugin')
         }
-        var sName = oPlugin.getName();
+        const sName = oPlugin.getName();
         if (sName === '') {
             throw new Error('O876.Mediator : undefined plugin name')
         }
@@ -72,19 +74,19 @@ O2.createObject('O876.Mediator.Mediator', class Mediator {
         if (!(sSignal in this._oRegister)) {
             return
         }
-        var n = this._oRegister[sSignal].indexOf(oPlugin);
+        const n = this._oRegister[sSignal].indexOf(oPlugin);
         if (n >= 0) {
             ArrayTools.removeItem(this._oRegister[sSignal], n)
         }
     }
 
     sendPluginSignal(s) {
-        var i, p, pi, n;
+        let i, p, pi, n;
         if (this._oRegister && (s in this._oRegister)) {
             p = this._oRegister[s];
             n = p.length;
             if (n) {
-                var aArgs;
+                let aArgs;
                 if (arguments.length > 1) {
                     aArgs = Array.prototype.slice.call(arguments, 1)
                 } else {
@@ -97,8 +99,8 @@ O2.createObject('O876.Mediator.Mediator', class Mediator {
             }
         }
     }
-});
-Object.assign(O876.Mediator.Mediator.prototype, {
+}
+Object.assign(Mediator.prototype, {
     _oPlugins: null,
     _oRegister: null,
     _oApplication: null

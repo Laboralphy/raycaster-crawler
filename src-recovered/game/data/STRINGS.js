@@ -1,4 +1,6 @@
-var STRINGS = {
+import { ArrayTools } from '../../libraries/O876/ArrayTools.js';
+
+export const STRINGS = {
     l: 'en',
     _parameterSubstitution: function(sDispMsg, aParams) {
         if (aParams !== undefined) {
@@ -31,7 +33,7 @@ var STRINGS = {
         if (xKey === null) {
             return ''
         }
-        var i = '',
+        let i = '',
             sKey, sDispMsg;
         if (typeof xKey === 'string') {
             sKey = xKey.substr(1);
@@ -46,13 +48,13 @@ var STRINGS = {
                 return STRINGS._parameterSubstitution(xKey, aParams)
             }
         } else if (ArrayTools.isArray(xKey)) {
-            var aArray = [];
-            for (var iArray = 0; iArray < xKey.length; iArray++) {
+            const aArray = [];
+            for (let iArray = 0; iArray < xKey.length; iArray++) {
                 aArray.push(STRINGS._(xKey[iArray], aParams))
             }
             return aArray
         } else if (typeof xKey === 'object') {
-            var oResult = {};
+            const oResult = {};
             for (i in xKey) {
                 oResult[i] = STRINGS._(xKey[i], aParams)
             }

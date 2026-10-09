@@ -1,4 +1,4 @@
-ICONS = {
+export const ICONS = {
     eff_abld: 0,
     eff_acnf: 1,
     eff_adhp: 2,

@@ -1,4 +1,9 @@
-O2.createObject('PlayerKeyboardThinker', class PlayerKeyboardThinker extends O876_Raycaster.MouseKeyboardThinker {
+import { GXFade } from '../../libraries/Raycaster/GXFade.js';
+import { KEYS } from '../../libraries/Raycaster/KEYS.js';
+import { MouseKeyboardThinker } from '../../libraries/Raycaster/MouseKeyboardThinker.js';
+import { RC } from '../../libraries/Raycaster/RC.js';
+
+export class PlayerKeyboardThinker extends MouseKeyboardThinker {
     __construct() {
         this.oPulse = {
             x: 0,
@@ -17,8 +22,8 @@ O2.createObject('PlayerKeyboardThinker', class PlayerKeyboardThinker extends O87
     }
 
     pulse() {
-        var xPulse = this.oPulse.x;
-        var yPulse = this.oPulse.y;
+        const xPulse = this.oPulse.x;
+        const yPulse = this.oPulse.y;
         if (xPulse || yPulse) {
             this.oMobile.slide(xPulse | 0, yPulse | 0);
             this.oPulse.x /= 1.33;
@@ -40,7 +45,7 @@ O2.createObject('PlayerKeyboardThinker', class PlayerKeyboardThinker extends O87
         if (nType === undefined) {
             nType = 0
         }
-        var g = this.oGame;
+        const g = this.oGame;
         this.oMobile.fSpeed = g.TIME_FACTOR * g.oDungeon.getCreatureMoveSpeed(this.oCreature) / 1000;
         switch (nType) {
             case 0:
@@ -60,7 +65,7 @@ O2.createObject('PlayerKeyboardThinker', class PlayerKeyboardThinker extends O87
 
     checkCollision() {
         if (this.oMobile.oMobileCollision !== null) {
-            var oTarget = this.oMobile.oMobileCollision;
+            const oTarget = this.oMobile.oMobileCollision;
             if (oTarget.getType() != RC.OBJECT_TYPE_MISSILE) {
                 this.oMobile.rollbackXY()
             }
@@ -142,8 +147,8 @@ O2.createObject('PlayerKeyboardThinker', class PlayerKeyboardThinker extends O87
     }
 
     setRotationMask(nBit, bValue) {
-        var nMask = 1 << nBit;
-        var nNotMask = 255 ^ nMask;
+        const nMask = 1 << nBit;
+        const nNotMask = 255 ^ nMask;
         if (bValue) {
             this.nRotationMask |= nMask
         } else {
@@ -276,7 +281,7 @@ O2.createObject('PlayerKeyboardThinker', class PlayerKeyboardThinker extends O87
         this.oMobile.bEthereal = true;
         this.think = this.thinkDying;
         this.nDeadTime = 18;
-        var oFadeOut = new O876_Raycaster.GXFade(this.oGame.oRaycaster);
+        const oFadeOut = new GXFade(this.oGame.oRaycaster);
         oFadeOut.oColor = {
             r: 128,
             g: 0,
@@ -292,7 +297,7 @@ O2.createObject('PlayerKeyboardThinker', class PlayerKeyboardThinker extends O87
         if (this.nDeadTime <= 0) {
             this.think = this.thinkDead;
             this.nDeadTime = 40;
-            var oFadeOut = new O876_Raycaster.GXFade(this.oGame.oRaycaster);
+            const oFadeOut = new GXFade(this.oGame.oRaycaster);
             oFadeOut.oColor = {
                 r: 128,
                 g: 0,
@@ -316,7 +321,7 @@ O2.createObject('PlayerKeyboardThinker', class PlayerKeyboardThinker extends O87
     thinkWaitForRespawn() {}
 
     _hitByMissile(oMissile) {}
-});
+}
 Object.assign(PlayerKeyboardThinker.prototype, {
     nDeadTime: 0,
     nRotationTime: 0,

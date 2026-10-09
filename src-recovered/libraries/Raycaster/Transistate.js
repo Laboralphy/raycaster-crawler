@@ -1,4 +1,4 @@
-O2.createObject('O876_Raycaster.Transistate', class Transistate {
+export class Transistate {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -39,8 +39,8 @@ O2.createObject('O876_Raycaster.Transistate', class Transistate {
         this.bPause = false;
         this.initDoomloop()
     }
-});
-Object.assign(O876_Raycaster.Transistate.prototype, {
+}
+Object.assign(Transistate.prototype, {
     nInterval: 160,
     oInterval: null,
     pDoomloop: null,

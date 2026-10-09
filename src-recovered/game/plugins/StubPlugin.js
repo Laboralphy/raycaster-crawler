@@ -1,15 +1,17 @@
-O2.createObject('StubPlugin', class StubPlugin {
+import { StubWindow } from '../UI/StubWindow.js';
+
+export class StubPlugin {
     setGame(g) {
         this.oGame = g;
         this.oGame.registerPluginSignal('block', this)
     }
 
     uiController(sCommand, xParams) {
-        var w;
+        let w;
         switch (sCommand) {
             case 'on':
                 this.clear();
-                this.centerWidget(this.declareWidget(new UI.StubWindow(xParams)));
+                this.centerWidget(this.declareWidget(new StubWindow(xParams)));
                 break;
             case 'off':
                 w = this.getWidget();
@@ -22,7 +24,7 @@ O2.createObject('StubPlugin', class StubPlugin {
                 return true
         }
     }
-});
+}
 Object.assign(StubPlugin.prototype, {
     oGame: null
 });

@@ -1,10 +1,14 @@
-O2.createObject('UI.LoadingWindow', class LoadingWindow extends UI.Window {
+import { ProgressBar } from './ProgressBar.js';
+import { Window } from './Window.js';
+import { STRINGS } from '../data/STRINGS.js';
+
+export class LoadingWindow extends Window {
     __construct(oParams) {
         super.__construct({
             caption: STRINGS._('~win_loading')
         });
         this.setSize(320, 160);
-        var pb = this.linkControl(new UI.ProgressBar({}));
+        const pb = this.linkControl(new ProgressBar({}));
         pb.setSize(260, 32);
         pb.moveTo(32, 100);
         pb.setMax(100);
@@ -15,8 +19,8 @@ O2.createObject('UI.LoadingWindow', class LoadingWindow extends UI.Window {
     getProgressBar() {
         return this.oPB
     }
-});
-Object.assign(UI.LoadingWindow.prototype, {
+}
+Object.assign(LoadingWindow.prototype, {
     _sClass: 'UI.LoadingWindow',
     oPB: null
 });

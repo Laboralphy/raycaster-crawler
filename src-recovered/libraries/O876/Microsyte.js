@@ -1,4 +1,6 @@
-O2.createObject('O876.Microsyte', class Microsyte {
+import { XHR } from './XHR.js';
+
+export class Microsyte {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -25,7 +27,7 @@ O2.createObject('O876.Microsyte', class Microsyte {
     }
 
     setSize(w, h) {
-        var oHome = this.getHome();
+        const oHome = this.getHome();
         this._nWidth = w;
         this._nHeight = h;
         oHome.style.width = w.toString() + 'px';
@@ -33,7 +35,7 @@ O2.createObject('O876.Microsyte', class Microsyte {
     }
 
     getPxValue(s) {
-        var r = s.match(/^([0-9]+)px$/i);
+        const r = s.match(/^([0-9]+)px$/i);
         if (r) {
             return r[1] | 0
         } else {
@@ -42,10 +44,10 @@ O2.createObject('O876.Microsyte', class Microsyte {
     }
 
     center() {
-        var oHome = this.getHome();
-        var p = this.getPxValue(window.getComputedStyle(oHome).padding);
-        var w = -((this._nWidth + p) >> 1);
-        var h = -((this._nHeight + p) >> 1);
+        const oHome = this.getHome();
+        const p = this.getPxValue(window.getComputedStyle(oHome).padding);
+        const w = -((this._nWidth + p) >> 1);
+        const h = -((this._nHeight + p) >> 1);
         oHome.style.left = '50%';
         oHome.style.top = '50%';
         oHome.style.marginTop = h.toString() + 'px';
@@ -53,7 +55,7 @@ O2.createObject('O876.Microsyte', class Microsyte {
     }
 
     getSubItem(sSubItem) {
-        var oTarget = this.getHome();
+        let oTarget = this.getHome();
         if (sSubItem !== undefined && sSubItem !== null && sSubItem !== '') {
             oTarget = document.getElementById(sSubItem)
         }
@@ -95,7 +97,7 @@ O2.createObject('O876.Microsyte', class Microsyte {
     }
 
     linkDiv(sHtml, x, y, w, h, sSubItem) {
-        var oDiv = this.getSubItem(sSubItem).appendChild(document.createElement('div'));
+        const oDiv = this.getSubItem(sSubItem).appendChild(document.createElement('div'));
         oDiv.style.position = 'absolute';
         oDiv.style[this._xOrientation] = x.toString() + 'px';
         oDiv.style[this._yOrientation] = y.toString() + 'px';
@@ -108,8 +110,8 @@ O2.createObject('O876.Microsyte', class Microsyte {
         oDiv.innerHTML = sHtml;
         return oDiv
     }
-});
-Object.assign(O876.Microsyte.prototype, {
+}
+Object.assign(Microsyte.prototype, {
     _sBlockId: '',
     _oHome: null,
     _oXHR: null,

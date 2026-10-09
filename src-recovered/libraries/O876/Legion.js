@@ -1,4 +1,4 @@
-O2.createObject('O876.Legion', class Legion {
+export class Legion {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -9,7 +9,7 @@ O2.createObject('O876.Legion', class Legion {
     }
 
     link(oItem) {
-        var nKey;
+        let nKey;
         if (this.aRecycler.length) {
             nKey = this.aRecycler.shift();
             this.aItems[nKey] = oItem
@@ -33,7 +33,7 @@ O2.createObject('O876.Legion', class Legion {
     }
 
     unlink(xKey) {
-        var nKey;
+        let nKey;
         if (typeof xKey == 'object') {
             nKey = this.indexOf(xKey)
         } else {
@@ -42,8 +42,8 @@ O2.createObject('O876.Legion', class Legion {
         this.aItems[nKey] = null;
         this.aRecycler.push(nKey)
     }
-});
-Object.assign(O876.Legion.prototype, {
+}
+Object.assign(Legion.prototype, {
     aItems: null,
     aRecycler: null
 });

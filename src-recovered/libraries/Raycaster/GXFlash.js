@@ -1,4 +1,7 @@
-O2.createObject('O876_Raycaster.GXFlash', class GXFlash extends O876_Raycaster.GXEffect {
+import { GfxTools } from '../O876/GfxTools.js';
+import { GXEffect } from './GXEffect.js';
+
+export class GXFlash extends GXEffect {
     __construct(oRaycaster) {
         super.__construct(oRaycaster);
         this.oCanvas = this.oRaycaster.oCanvas;
@@ -28,8 +31,8 @@ O2.createObject('O876_Raycaster.GXFlash', class GXFlash extends O876_Raycaster.G
     terminate() {
         this.fAlpha = 0
     }
-});
-Object.assign(O876_Raycaster.GXFlash.prototype, {
+}
+Object.assign(GXFlash.prototype, {
     sClass: 'Flash',
     oCanvas: null,
     oContext: null,

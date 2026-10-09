@@ -1,4 +1,7 @@
-O2.createObject('GXColorVeil', class GXColorVeil extends O876_Raycaster.GXEffect {
+import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
+import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class GXColorVeil extends GXEffect {
     __construct(oRaycaster) {
         super.__construct(oRaycaster);
         this.oCanvas = this.oRaycaster.oCanvas;
@@ -69,7 +72,7 @@ O2.createObject('GXColorVeil', class GXColorVeil extends O876_Raycaster.GXEffect
 
     render() {
         if (this.nEffectMask) {
-            var f = this.oContext.globalAlpha;
+            const f = this.oContext.globalAlpha;
             this.oContext.globalAlpha = Math.sin(MathTools.toRad(this.nTime << 3)) / 5 + 0.444;
             this.oContext.fillStyle = this.xStyle;
             this.oContext.fillRect(0, this.yFrom, this.oCanvas.width, this.yTo);
@@ -82,7 +85,7 @@ O2.createObject('GXColorVeil', class GXColorVeil extends O876_Raycaster.GXEffect
     terminate() {
         this.bOver = true
     }
-});
+}
 Object.assign(GXColorVeil.prototype, {
     sClass: 'ColorVeil',
     oCanvas: null,

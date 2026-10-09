@@ -1,4 +1,11 @@
-O2.createObject('Dungeon', class Dungeon {
+import { EffectProcessor } from './EffectProcessor.js';
+import { Creature } from './GC/Creature.js';
+import { Inventory } from './GC/Inventory.js';
+import { Item } from './Item.js';
+import { SPELLS_DATA } from './data/SPELLS_DATA.js';
+import { Marker } from '../libraries/O876/Marker.js';
+
+export class Dungeon {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -38,14 +45,14 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     newCreature(nLevel) {
-        var oCreature = new GC.Creature();
+        const oCreature = new Creature();
         oCreature.setEffectProcessor(this.oEffectProcessor);
         if (nLevel === undefined) {
             nLevel = 1
         }
         oCreature.oExtraData = {
             retrigger: 0,
-            inventory: new GC.Inventory(),
+            inventory: new Inventory(),
             level: nLevel,
             magic: {
                 cooldown: {},
@@ -56,8 +63,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     setupPlayerCreature(oCreature) {
-        var c = oCreature;
-        var i = c.oExtraData.inventory;
+        const c = oCreature;
+        const i = c.oExtraData.inventory;
         c.setBaseAttribute('vitality', 100);
         c.setBaseAttribute('energy', 100);
         c.setBaseAttribute('speed', 160);
@@ -70,8 +77,8 @@ O2.createObject('Dungeon', class Dungeon {
         i.defineEquipSlot('finger');
         i.defineEquipSlot('ears');
         this.aStartingStuff = ['wand_yce_1', 'dag_steel', 'pot_heal_3', 'pot_heal_3', 'pot_heal_3', 'pot_ether_3', 'pot_ether_3', 'pot_ether_3', 'ccc_herb0', 'ccc_herb1', 'ccc_h2o', 'ccc_vegs', 'ccc_meat'];
-        var oItem = null;
-        for (var iStuff = 0; iStuff < this.aStartingStuff.length; iStuff++) {
+        let oItem = null;
+        for (let iStuff = 0; iStuff < this.aStartingStuff.length; iStuff++) {
             oItem = new Item(this.aStartingStuff[iStuff]);
             this.pickupItem(c, oItem);
             if (oItem.slot && i.oEquipSlots[oItem.slot] === null) {
@@ -89,32 +96,32 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     getItemLevel(oItem) {
-        var aProperties = oItem.getProperties();
+        const aProperties = oItem.getProperties();
         return this.oEffectProcessor.getLevelFromEffects(aProperties)
     }
 
     setupMobCreature(oCreature, oMobile) {
-        var sWeapon = oMobile.getData('weapon');
-        var oWeapon = new Item(sWeapon);
-        var oInv = oCreature.oExtraData.inventory;
+        const sWeapon = oMobile.getData('weapon');
+        const oWeapon = new Item(sWeapon);
+        const oInv = oCreature.oExtraData.inventory;
         oInv.setSize(this.INVENTORY_SIZE_CREATURE);
         oInv.defineEquipSlot('hand');
         oInv.addItem(oWeapon);
         oInv.equipItem(oWeapon, 'hand');
-        var nLevel = oCreature.oExtraData.level;
-        var aProp = oMobile.getData('properties');
+        const nLevel = oCreature.oExtraData.level;
+        const aProp = oMobile.getData('properties');
         if (aProp) {
-            var nPropCount = aProp.length;
-            var sProp;
-            var ep = this.oEffectProcessor;
-            for (var iProp = 0; iProp < nPropCount; iProp++) {
+            const nPropCount = aProp.length;
+            let sProp;
+            const ep = this.oEffectProcessor;
+            for (let iProp = 0; iProp < nPropCount; iProp++) {
                 sProp = aProp[iProp];
                 sProp = ep.setEffectLevel(sProp, ep.getEffectLevel(sProp) + nLevel);
                 this.oEffectProcessor.applyEffect(oCreature, sProp, null)
             }
         }
-        var iFlag;
-        var sFlags = oMobile.getData('flags');
+        let iFlag;
+        const sFlags = oMobile.getData('flags');
         for (iFlag = 0; iFlag < sFlags.length; iFlag++) {
             switch (sFlags[iFlag]) {
                 case 'B':
@@ -130,8 +137,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     defineArea(aMap) {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         this.oArea = this.oData.world[sArea][nFloor] = aMap
     }
 
@@ -148,8 +155,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     getHorde() {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (!(sArea in this.oData.hordes)) {
             return null
         }
@@ -160,8 +167,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     setHorde(h) {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (!(sArea in this.oData.hordes)) {
             this.oData.hordes[sArea] = []
         }
@@ -169,8 +176,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     getObjects() {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (!(sArea in this.oData.objects)) {
             this.oData.objects[sArea] = []
         }
@@ -178,8 +185,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     setObjects(o) {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (!(sArea in this.oData.objects)) {
             this.oData.objects[sArea] = []
         }
@@ -187,8 +194,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     getOpenDoors() {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (!(sArea in this.oData.opendoors)) {
             this.oData.opendoors[sArea] = []
         }
@@ -199,8 +206,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     setOpenDoors(oRegister) {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (!(sArea in this.oData.opendoors)) {
             this.oData.opendoors[sArea] = []
         }
@@ -208,8 +215,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     getDropStack(x, y) {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (!(sArea in this.oData.drops)) {
             this.oData.drops[sArea] = []
         }
@@ -220,8 +227,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     getDropStacks() {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (!(sArea in this.oData.drops)) {
             this.oData.drops[sArea] = []
         }
@@ -232,8 +239,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     setDropStacks(oData) {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (!(sArea in this.oData.drops)) {
             this.oData.drops[sArea] = []
         }
@@ -241,8 +248,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     isDropStack(x, y) {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (!(sArea in this.oData.drops)) {
             return false
         }
@@ -256,9 +263,9 @@ O2.createObject('Dungeon', class Dungeon {
         if (typeof oItem == 'string') {
             oItem = new Item(oItem)
         }
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
-        var oDrops = this.getDropStack(x, y);
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
+        let oDrops = this.getDropStack(x, y);
         if (!oDrops) {
             oDrops = [];
             Marker.markXY(this.oData.drops[sArea][nFloor], x, y, oDrops)
@@ -267,7 +274,7 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     peekDrop(x, y) {
-        var aDrops = this.getDropStack(x, y);
+        const aDrops = this.getDropStack(x, y);
         if (!aDrops) {
             return null
         }
@@ -278,12 +285,12 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     pickupDrop(oCreature, x, y) {
-        var aDrops = this.getDropStack(x, y);
+        const aDrops = this.getDropStack(x, y);
         if (!aDrops) {
             return null
         }
         if (aDrops.length) {
-            var oItem = aDrops[0];
+            const oItem = aDrops[0];
             if (this.pickupItem(oCreature, oItem)) {
                 aDrops.shift();
                 return oItem
@@ -333,8 +340,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     equipItem(oCreature, oItem) {
-        var iEff, nEffCount, oEffect;
-        var oRemovedItem = this.getCreatureInventory(oCreature).equipItem(oItem, oItem.slot);
+        let iEff, nEffCount, oEffect;
+        const oRemovedItem = this.getCreatureInventory(oCreature).equipItem(oItem, oItem.slot);
         if (oRemovedItem) {
             nEffCount = oRemovedItem.effects.length;
             for (iEff = 0; iEff < nEffCount; iEff++) {
@@ -361,18 +368,18 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     pickupAreaKey(nKey) {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (!(sArea in this.oData.player.keys.special)) {
             this.oData.player.keys.special[sArea] = []
         }
-        var nKeyMask = 1 << nKey;
+        const nKeyMask = 1 << nKey;
         this.oData.player.keys.special[sArea][nFloor] |= nKeyMask
     }
 
     getPossessedKeys() {
-        var sArea = this.getPlayerLocationArea();
-        var nFloor = this.getPlayerLocationFloor();
+        const sArea = this.getPlayerLocationArea();
+        const nFloor = this.getPlayerLocationFloor();
         if (sArea in this.oData.player.keys.special && nFloor < this.oData.player.keys.special[sArea].length) {
             return this.oData.player.keys.special[sArea][nFloor]
         } else {
@@ -381,8 +388,8 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     hasKey(nKey) {
-        var nPossessedKeys = this.getPossessedKeys();
-        var nKeyMask = 1 << nKey;
+        const nPossessedKeys = this.getPossessedKeys();
+        const nKeyMask = 1 << nKey;
         return (nPossessedKeys & nKeyMask) !== 0
     }
 
@@ -419,8 +426,9 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     getInventoryDigest(oInv) {
-        var oItem, aDigest = [oInv.oEquipSlots.hand];
-        for (var iSlot = 0; iSlot < oInv.getSize(); iSlot++) {
+        let oItem;
+        const aDigest = [oInv.oEquipSlots.hand];
+        for (let iSlot = 0; iSlot < oInv.getSize(); iSlot++) {
             oItem = oInv.aBagSlots[iSlot];
             if (oItem) {
                 aDigest.push(oItem)
@@ -430,7 +438,7 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     getCreatureEquippedWeapon(oCreature) {
-        var aWeapons = this.getCreatureInventory(oCreature).oEquipSlots.hand;
+        const aWeapons = this.getCreatureInventory(oCreature).oEquipSlots.hand;
         return aWeapons
     }
 
@@ -438,10 +446,10 @@ O2.createObject('Dungeon', class Dungeon {
         if ('missiles' in oDef) {
             return oDef.missiles
         }
-        var m = [];
-        var sBP = oDef.blueprint;
-        var s2 = oDef.options.substr(0, 2);
-        var sOptions = oDef.options.substr(2);
+        const m = [];
+        const sBP = oDef.blueprint;
+        const s2 = oDef.options.substr(0, 2);
+        const sOptions = oDef.options.substr(2);
         switch (s2) {
             case 'l5':
                 m.push({
@@ -536,7 +544,7 @@ O2.createObject('Dungeon', class Dungeon {
     }
 
     getCreatureMoveSpeed(oCreature) {
-        var fSpeed = oCreature.getAttribute('speed');
+        let fSpeed = oCreature.getAttribute('speed');
         if (oCreature.getAttribute('rooted') > 0) {
             fSpeed = 0
         } else {
@@ -570,11 +578,11 @@ O2.createObject('Dungeon', class Dungeon {
         if (nChargeTime === 0 && oCreature.oExtraData.retrigger >= nTime) {
             return null
         }
-        var oWeapon = this.getCreatureEquippedWeapon(oCreature);
+        const oWeapon = this.getCreatureEquippedWeapon(oCreature);
         if (oWeapon === null) {
             return 'no_weapon'
         }
-        var iSpell = 0;
+        let iSpell = 0;
         if (nChargeTime > 0) {
             iSpell = oWeapon.spells.length - 1;
             while (iSpell > 0) {
@@ -588,7 +596,7 @@ O2.createObject('Dungeon', class Dungeon {
             }
         }
         oCreature.oExtraData.retrigger = nTime + oWeapon.speed;
-        var oSpell = SPELLS_DATA[oWeapon.spells[iSpell].ref];
+        const oSpell = SPELLS_DATA[oWeapon.spells[iSpell].ref];
         if (oSpell.cost <= (oCreature.getAttribute('energy') - oCreature.getAttribute('mp'))) {
             oCreature.modifyAttribute('mp', oSpell.cost)
         } else {
@@ -597,7 +605,7 @@ O2.createObject('Dungeon', class Dungeon {
         }
         return this.getWeaponMissileDefinition(oSpell)
     }
-});
+}
 Object.assign(Dungeon.prototype, {
     INVENTORY_SIZE_PLAYER: 32,
     INVENTORY_SIZE_CREATURE: 4,

@@ -1,4 +1,9 @@
-O2.createObject('Astar.Land', class Land {
+import { Nood } from './Nood.js';
+import { NoodList } from './NoodList.js';
+import { Point } from './Point.js';
+import { MathTools } from '../../Raycaster/Tools/MathTools.js';
+
+export class Land {
     init(a) {
         this.aTab = a;
         this.nHeight = a.length;
@@ -6,8 +11,8 @@ O2.createObject('Astar.Land', class Land {
     }
 
     reset() {
-        this.oOpList = new Astar.NoodList();
-        this.oClList = new Astar.NoodList();
+        this.oOpList = new NoodList();
+        this.oClList = new NoodList();
         this.aPath = [];
         this.aMoves = [];
         this.nIterations = 0
@@ -43,7 +48,7 @@ O2.createObject('Astar.Land', class Land {
     }
 
     closeNood(x, y) {
-        var n = this.oOpList.get(x, y);
+        const n = this.oOpList.get(x, y);
         if (n) {
             this.oClList.set(x, y, n);
             this.oOpList.del(x, y)
@@ -51,9 +56,9 @@ O2.createObject('Astar.Land', class Land {
     }
 
     addAdjacent(x, y, xArrivee, yArrivee) {
-        var i, j;
-        var i0, j0;
-        var oTmp;
+        let i, j;
+        let i0, j0;
+        let oTmp;
         for (i0 = -1; i0 <= 1; i0++) {
             i = x + i0;
             if ((i < 0) || (i >= this.nWidth)) {
@@ -74,12 +79,12 @@ O2.createObject('Astar.Land', class Land {
                     continue
                 }
                 if (!this.oClList.exists(i, j)) {
-                    oTmp = new Astar.Nood();
+                    oTmp = new Nood();
                     oTmp.fGCost = this.oClList.get(x, y).fGCost + this.distance(i, j, x, y);
                     oTmp.fHCost = this.distance(i, j, xArrivee, yArrivee);
                     oTmp.fFCost = oTmp.fGCost + oTmp.fHCost;
-                    oTmp.oPos = new Astar.Point(i, j);
-                    oTmp.oParent = new Astar.Point(x, y);
+                    oTmp.oPos = new Point(i, j);
+                    oTmp.oParent = new Point(x, y);
                     if (this.oOpList.exists(i, j)) {
                         if (oTmp.fFCost < this.oOpList.get(i, j).fFCost) {
                             this.oOpList.set(i, j, oTmp)
@@ -93,9 +98,9 @@ O2.createObject('Astar.Land', class Land {
     }
 
     bestNood(oList) {
-        var oBest = null;
-        var oNood;
-        var iNood = '';
+        let oBest = null;
+        let oNood;
+        let iNood = '';
         for (iNood in oList.aList) {
             oNood = oList.aList[iNood];
             if (oBest === null) {
@@ -109,16 +114,16 @@ O2.createObject('Astar.Land', class Land {
 
     findPath(xFrom, yFrom, xTo, yTo) {
         this.reset();
-        var oBest;
-        var oDepart = new Astar.Nood();
-        oDepart.oPos = new Astar.Point(xFrom, yFrom);
-        oDepart.oParent = new Astar.Point(xFrom, yFrom);
-        var xCurrent = xFrom;
-        var yCurrent = yFrom;
+        let oBest;
+        const oDepart = new Nood();
+        oDepart.oPos = new Point(xFrom, yFrom);
+        oDepart.oParent = new Point(xFrom, yFrom);
+        let xCurrent = xFrom;
+        let yCurrent = yFrom;
         this.oOpList.add(oDepart);
         this.closeNood(xCurrent, yCurrent);
         this.addAdjacent(xCurrent, yCurrent, xTo, yTo);
-        var iIter = 0;
+        let iIter = 0;
         while (!((xCurrent == xTo) && (yCurrent == yTo)) && (!this.oOpList.empty())) {
             oBest = this.bestNood(this.oOpList);
             xCurrent = oBest.oPos.x;
@@ -138,10 +143,10 @@ O2.createObject('Astar.Land', class Land {
     }
 
     buildPath(xTo, yTo) {
-        var oCursor = this.oClList.get(xTo, yTo);
+        let oCursor = this.oClList.get(xTo, yTo);
         if (oCursor !== null) {
             while (!oCursor.isRoot()) {
-                this.aPath.unshift(new Astar.Point(oCursor.oPos.x, oCursor.oPos.y));
+                this.aPath.unshift(new Point(oCursor.oPos.x, oCursor.oPos.y));
                 oCursor = this.oClList.get(oCursor.oParent.x, oCursor.oParent.y)
             }
         }
@@ -167,16 +172,16 @@ O2.createObject('Astar.Land', class Land {
     }
 
     transformPath(xFrom, yFrom) {
-        var i;
+        let i;
         if (this.aPath.length === 0) {
             return
         }
         this.xLast = this.aPath[0].x;
         this.yLast = this.aPath[0].y;
         this.nLastDir = this.getDirFromXY(xFrom, yFrom, this.xLast, this.yLast);
-        var d;
-        var n = 1;
-        var nLen = this.aPath.length;
+        let d;
+        let n = 1;
+        const nLen = this.aPath.length;
         for (i = 1; i < nLen; i++) {
             d = this.getDirFromXY(this.xLast, this.yLast, this.aPath[i].x, this.aPath[i].y);
             this.xLast = this.aPath[i].x;
@@ -193,8 +198,8 @@ O2.createObject('Astar.Land', class Land {
         this.aMoves.push(this.nLastDir);
         this.aMoves.push(n)
     }
-});
-Object.assign(Astar.Land.prototype, {
+}
+Object.assign(Land.prototype, {
     bUseDiagonals: false,
     MAX_ITERATIONS: 2048,
     nIterations: 0,

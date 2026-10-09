@@ -1,4 +1,4 @@
-O2.createObject('O876.CPUMonitor', class CPUMonitor {
+export class CPUMonitor {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -10,7 +10,7 @@ O2.createObject('O876.CPUMonitor', class CPUMonitor {
     }
 
     start() {
-        var d = Date.now();
+        const d = Date.now();
         if (this.nTimes > 0) {
             this.nIdleTime = d - this.aTimes[this.nTimes - 1];
             this.nTimes = 0
@@ -27,8 +27,9 @@ O2.createObject('O876.CPUMonitor', class CPUMonitor {
     }
 
     render(oContext, x, y) {
-        var n;
-        for (var i = 0; i < (this.nTimes - 1); i++) {
+        let i;
+        let n;
+        for (i = 0; i < (this.nTimes - 1); i++) {
             n = this.aTimes[i + 1] - this.aTimes[i];
             oContext.fillStyle = this.aColors[i % 7];
             oContext.fillRect(x, y, n, 8);
@@ -37,8 +38,8 @@ O2.createObject('O876.CPUMonitor', class CPUMonitor {
         oContext.fillStyle = this.aColors[i % 7];
         oContext.fillRect(x, y, this.nIdleTime, 8)
     }
-});
-Object.assign(O876.CPUMonitor.prototype, {
+}
+Object.assign(CPUMonitor.prototype, {
     aTimes: null,
     sTimes: null,
     nTimes: 0,

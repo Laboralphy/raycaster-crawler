@@ -1,4 +1,4 @@
-O2.createObject('O876_Raycaster.Scheduler', class Scheduler {
+export class Scheduler {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -9,8 +9,8 @@ O2.createObject('O876_Raycaster.Scheduler', class Scheduler {
     }
 
     delayCommand(oInstance, pCommand, nDelay) {
-        var aParams = Array.prototype.slice.call(arguments, 3);
-        var n = nDelay + this.nTime;
+        const aParams = Array.prototype.slice.call(arguments, 3);
+        const n = nDelay + this.nTime;
         if (!(n in this.oCommands)) {
             this.oCommands[n] = []
         }
@@ -27,7 +27,7 @@ O2.createObject('O876_Raycaster.Scheduler', class Scheduler {
             });
             this.bInvalid = false
         }
-        var n, i, o;
+        let n, i, o;
         while (this.aIndex.length && this.aIndex[0] < nTime) {
             n = this.aIndex.shift();
             o = this.oCommands[n];
@@ -37,8 +37,8 @@ O2.createObject('O876_Raycaster.Scheduler', class Scheduler {
             delete this.oCommands[n]
         }
     }
-});
-Object.assign(O876_Raycaster.Scheduler.prototype, {
+}
+Object.assign(Scheduler.prototype, {
     oCommands: null,
     aIndex: null,
     bInvalid: true,

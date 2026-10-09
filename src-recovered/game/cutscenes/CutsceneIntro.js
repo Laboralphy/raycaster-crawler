@@ -1,4 +1,11 @@
-O2.createObject('CutsceneIntro', class CutsceneIntro extends Cutscene {
+import { Cutscene } from './Cutscene.js';
+import { GFX_DATA } from '../data/GFX_DATA.js';
+import { MONSTERS_TILES } from '../data/MONSTERS_TILES.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { RC } from '../../libraries/Raycaster/RC.js';
+import { PI } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class CutsceneIntro extends Cutscene {
     __construct() {
         super.__construct();
         this.nLabySize = this.oRaycaster.nMapSize;
@@ -196,8 +203,8 @@ O2.createObject('CutsceneIntro', class CutsceneIntro extends Cutscene {
     }
 
     setActorMove(iActor, x, y, a, dx, dy, t, nAnim, pOnStop) {
-        var oActor = this.oRaycaster.oHorde.getMobile(iActor);
-        var oThinker = oActor.oThinker;
+        const oActor = this.oRaycaster.oHorde.getMobile(iActor);
+        const oThinker = oActor.oThinker;
         if (x !== null && x !== undefined) {
             x = this.oRaycaster.nPlaneSpacing * x + (this.oRaycaster.nPlaneSpacing >> 1) | 0
         }
@@ -218,8 +225,8 @@ O2.createObject('CutsceneIntro', class CutsceneIntro extends Cutscene {
     }
 
     setActorNonLinearMove(iActor, x, y, a, dx, dy, t, nAnim, pOnStop) {
-        var oActor = this.oRaycaster.oHorde.getMobile(iActor);
-        var oThinker = oActor.oThinker;
+        const oActor = this.oRaycaster.oHorde.getMobile(iActor);
+        const oThinker = oActor.oThinker;
         x = this.oRaycaster.nPlaneSpacing * x + (this.oRaycaster.nPlaneSpacing >> 1) | 0;
         y = this.oRaycaster.nPlaneSpacing * y + (this.oRaycaster.nPlaneSpacing >> 1) | 0;
         dx = this.oRaycaster.nPlaneSpacing * dx + (this.oRaycaster.nPlaneSpacing >> 1) | 0;
@@ -313,7 +320,7 @@ O2.createObject('CutsceneIntro', class CutsceneIntro extends Cutscene {
     }
 
     eventWarlockSpeaks() {
-        var nTime = this.oCutscene.popup(STRINGS._('~cs0_ambush0'));
+        const nTime = this.oCutscene.popup(STRINGS._('~cs0_ambush0'));
         this.oCutscene.setActorMove(2, null, null, null, null, null, 10, 1, this.oCutscene.doStandAnimation);
         this.oCutscene.setCameraMove(null, null, null, 0, 0, nTime + 10, this.oCutscene.eventAdvZoom)
     }
@@ -323,7 +330,7 @@ O2.createObject('CutsceneIntro', class CutsceneIntro extends Cutscene {
     }
 
     eventAdvSpeaks() {
-        var nTime = this.oCutscene.popup(STRINGS._('~cs0_ambush1'));
+        const nTime = this.oCutscene.popup(STRINGS._('~cs0_ambush1'));
         this.oCutscene.setCameraMove(null, null, null, 0, 0, nTime + 10, this.oCutscene.eventWarlockZoom2)
     }
 
@@ -332,7 +339,7 @@ O2.createObject('CutsceneIntro', class CutsceneIntro extends Cutscene {
     }
 
     eventWarlockSpeaks2() {
-        var nTime = this.oCutscene.popup(STRINGS._('~cs0_ambush2'));
+        const nTime = this.oCutscene.popup(STRINGS._('~cs0_ambush2'));
         this.oCutscene.setActorMove(2, null, null, null, null, null, 10, 1, this.oCutscene.doStandAnimation);
         this.oCutscene.setCameraMove(null, null, null, 0, 0, nTime + 10, this.oCutscene.eventUnzoom)
     }
@@ -357,7 +364,7 @@ O2.createObject('CutsceneIntro', class CutsceneIntro extends Cutscene {
     }
 
     eventWarlockLaughter() {
-        var nTime = this.oCutscene.popup(STRINGS._('~cs0_ambush3'));
+        const nTime = this.oCutscene.popup(STRINGS._('~cs0_ambush3'));
         this.oCutscene.setActorMove(2, null, null, null, null, null, 10, 1, this.oCutscene.doStandAnimation);
         this.oCutscene.setCameraMove(null, null, null, 0, 0, nTime + 10, this.oCutscene.eventWarlockLeaves)
     }
@@ -410,7 +417,7 @@ O2.createObject('CutsceneIntro', class CutsceneIntro extends Cutscene {
     }
 
     eventAngryAdvSpeaks() {
-        var nTime = 0;
+        let nTime = 0;
         nTime += this.oCutscene.popup(STRINGS._('~cs0_advangry1'), nTime) + 10;
         nTime += this.oCutscene.popup(STRINGS._('~cs0_advangry2'), nTime) + 10;
         this.oCutscene.setCameraMove(null, null, null, 0, -0.25, nTime, this.oCutscene.eventAdvFaceCamera)
@@ -423,7 +430,7 @@ O2.createObject('CutsceneIntro', class CutsceneIntro extends Cutscene {
 
     eventItsWar() {
         this.oCutscene.setActorMove(1, null, null, 0.5 * PI, 0, 0, 10, 0, this.oCutscene.doStandAnimation);
-        var nTime = this.oCutscene.popup(STRINGS._('~cs0_advangry3'), 10);
+        const nTime = this.oCutscene.popup(STRINGS._('~cs0_advangry3'), 10);
         this.oCutscene.setCameraMove(null, null, null, 0, 0, nTime * 2, this.oCutscene.eventEnd)
     }
 
@@ -442,12 +449,12 @@ O2.createObject('CutsceneIntro', class CutsceneIntro extends Cutscene {
     phaseInit() {
         this.fFade = -0.05;
         this.fAlpha = 1;
-        var t = this.oCameraThinker;
+        const t = this.oCameraThinker;
         t.oRaycaster = this.oRaycaster;
         this.setActorMove(0, 2, 10.5, 3 * PI / 2, 2, 0, 96, null, this.eventGoingWrongWay);
         this.setActorMove(1, 2, 8, 0, 2, 0, 500, 1);
         this.setActorMove(2, 10, 8, PI * (0.9), 0, 0, 500, 0);
-        var nTime = 0;
+        let nTime = 0;
         nTime += this.popup(STRINGS._('~cs0_advwalking0'), nTime) + 10;
         nTime += this.popup(STRINGS._('~cs0_advwalking1'), nTime) + 10;
         nTime += this.popup(STRINGS._('~cs0_advwalking2'), nTime) + 40;
@@ -466,7 +473,7 @@ O2.createObject('CutsceneIntro', class CutsceneIntro extends Cutscene {
             G._callGameEvent('onLoading', 'shd', ++this.nShadedTileCount, this.oRaycaster.oHorde.nTileCount)
         }
     }
-});
+}
 Object.assign(CutsceneIntro.prototype, {
     fFade: -0.05,
     fAlpha: 1,

@@ -1,10 +1,12 @@
-O2.createObject('GXTimeStop', class GXTimeStop extends O876_Raycaster.GXEffect {
+import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
+
+export class GXTimeStop extends GXEffect {
     __construct(oRaycaster) {
         super.__construct(oRaycaster);
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
         this.bOver = false;
-        var oData = this.oContext.getImageData(0, 0, this.wBuff = this.oCanvas.width, this.hBuff = this.oCanvas.height);
+        const oData = this.oContext.getImageData(0, 0, this.wBuff = this.oCanvas.width, this.hBuff = this.oCanvas.height);
         this.nPixelCount = this.hBuff * this.wBuff;
         this.oPixBuff = new ArrayBuffer(oData.data.length);
         this.oPixBuff8 = new Uint8ClampedArray(this.oPixBuff);
@@ -30,12 +32,12 @@ O2.createObject('GXTimeStop', class GXTimeStop extends O876_Raycaster.GXEffect {
     }
 
     buildTimeStop() {
-        var oImageData = this.oContext.getImageData(0, 0, this.wBuff, this.hBuff);
-        var pc = this.nPixelCount;
+        const oImageData = this.oContext.getImageData(0, 0, this.wBuff, this.hBuff);
+        const pc = this.nPixelCount;
         this.oPixBuff8.set(oImageData.data);
-        var p32 = this.oPixBuff32;
-        var p, r, g, b, v;
-        for (var i = 0; i < pc; i += 1) {
+        const p32 = this.oPixBuff32;
+        let p, r, g, b, v;
+        for (let i = 0; i < pc; i += 1) {
             p = p32[i];
             b = (p >> 16) & 0xFF;
             g = (p >> 8) & 0xFF;
@@ -46,7 +48,7 @@ O2.createObject('GXTimeStop', class GXTimeStop extends O876_Raycaster.GXEffect {
         oImageData.data.set(this.oPixBuff8);
         this.oContext.putImageData(oImageData, 0, 0)
     }
-});
+}
 Object.assign(GXTimeStop.prototype, {
     sClass: 'TimeStop',
     oCanvas: null,

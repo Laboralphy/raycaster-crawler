@@ -1,4 +1,8 @@
-O2.createObject('O876_Raycaster.Minimap', class Minimap {
+import { CanvasFactory } from '../O876/CanvasFactory.js';
+import { Marker } from '../O876/Marker.js';
+import { RC } from './RC.js';
+
+export class Minimap {
     reset(oRaycaster) {
         this.aColors = ['#000000', '#FF8888', '#00FF00', '#00FFFF', '#5588AA', '#FF00FF', '#FFFF00', '#555555', '#777777'];
         this.oRaycaster = oRaycaster;
@@ -21,8 +25,8 @@ O2.createObject('O876_Raycaster.Minimap', class Minimap {
             [],
             []
         ];
-        var aSqrRaw;
-        var x, y;
+        let aSqrRaw;
+        let x, y;
         for (y = 0; y < this.oRaycaster.nMapSize; y++) {
             aSqrRaw = [];
             for (x = 0; x < this.oRaycaster.nMapSize; x++) {
@@ -31,14 +35,14 @@ O2.createObject('O876_Raycaster.Minimap', class Minimap {
             this.aSquares.push(aSqrRaw)
         }
         if (this.oCanvas === null) {
-            this.oCanvas = O876.CanvasFactory.getCanvas()
+            this.oCanvas = CanvasFactory.getCanvas()
         }
         this.oCanvas.width = this.oCanvas.height = this.oRaycaster.nMapSize << 2;
-        var ctx = this.oCanvas.getContext('2d');
-        var pix = [];
+        const ctx = this.oCanvas.getContext('2d');
+        const pix = [];
         this.aColors.forEach(function(sItem, i, a) {
-            var oID = ctx.createImageData(1, 1);
-            var d = oID.data;
+            const oID = ctx.createImageData(1, 1);
+            const d = oID.data;
             d[0] = 100;
             d[1] = 200;
             d[2] = 50;
@@ -50,7 +54,7 @@ O2.createObject('O876_Raycaster.Minimap', class Minimap {
     }
 
     setSquare(x, y, n) {
-        var q = this.aSquares[y][x];
+        const q = this.aSquares[y][x];
         if (q[0] != n) {
             q[0] = n;
             if (!q[1]) {
@@ -61,9 +65,9 @@ O2.createObject('O876_Raycaster.Minimap', class Minimap {
     }
 
     getMobileColor(aMobiles) {
-        var l = aMobiles.length;
-        var m, nType, bPlaceable = false;
-        for (var i = 0; i < l; ++i) {
+        const l = aMobiles.length;
+        let m, nType, bPlaceable = false;
+        for (let i = 0; i < l; ++i) {
             m = aMobiles[i];
             nType = m.getType();
             if (nType == RC.OBJECT_TYPE_PLAYER || nType == RC.OBJECT_TYPE_MOB) {
@@ -80,9 +84,9 @@ O2.createObject('O876_Raycaster.Minimap', class Minimap {
     }
 
     render() {
-        var rc = this.oRaycaster;
-        var nMapSize = rc.nMapSize;
-        var x, y, nColor;
+        const rc = this.oRaycaster;
+        const nMapSize = rc.nMapSize;
+        let x, y, nColor;
         for (y = 0; y < nMapSize; y++) {
             for (x = 0; x < nMapSize; x++) {
                 if (this.bRestricted && rc.oCamera.xSector === x && rc.oCamera.ySector === y) {
@@ -99,7 +103,8 @@ O2.createObject('O876_Raycaster.Minimap', class Minimap {
                 this.setSquare(x, y, nColor)
             }
         }
-        var q, mc, m = this.aModified;
+        let q, mc;
+        const m = this.aModified;
         for (nColor = 0; nColor < m.length; nColor++) {
             if (this.aColors[nColor]) {
                 mc = m[nColor];
@@ -113,8 +118,8 @@ O2.createObject('O876_Raycaster.Minimap', class Minimap {
         }
         rc.oRenderContext.drawImage(this.oCanvas, 2, 2)
     }
-});
-Object.assign(O876_Raycaster.Minimap.prototype, {
+}
+Object.assign(Minimap.prototype, {
     oRaycaster: null,
     aSquares: null,
     aModified: null,

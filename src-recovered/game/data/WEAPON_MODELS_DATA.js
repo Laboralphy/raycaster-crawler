@@ -1,4 +1,4 @@
-var WEAPON_MODELS_DATA = {
+export const WEAPON_MODELS_DATA = {
     sylver: {
         tile: 'w_daggers',
         startframe: 0

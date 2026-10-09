@@ -1,10 +1,13 @@
-O2.createObject('H5UI.Button', class Button extends H5UI.Box {
+import { Box } from './Box.js';
+import { Text } from './Text.js';
+
+export class Button extends Box {
     __construct() {
         super.__construct();
         this.setSize(64, 24);
         this.setColor(this._sColorNormal, this._sColorOver);
         this.setBorder(1, this._sColorBorder);
-        this.oText = this.linkControl(new H5UI.Text());
+        this.oText = this.linkControl(new Text());
         this.oText.font.setFont('Arial');
         this.oText.font.setSize(12);
         this.oText.font.setColor('#000');
@@ -29,8 +32,8 @@ O2.createObject('H5UI.Button', class Button extends H5UI.Box {
             this.setColor(this._sColorNormal, this._sColorOver)
         }
     }
-});
-Object.assign(H5UI.Button.prototype, {
+}
+Object.assign(Button.prototype, {
     oText: null,
     _sColorNormal: '#999',
     _sColorOver: '#BBB',

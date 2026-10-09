@@ -1,4 +1,6 @@
-var ITEMS_DATA = {
+import { ICONS } from './ICONS.js';
+
+export const ITEMS_DATA = {
     "pot_heal_1": {
         "name": "~item_pot_heal_1",
         "type": "potion",

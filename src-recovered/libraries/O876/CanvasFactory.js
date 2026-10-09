@@ -1,8 +1,8 @@
-O2.createObject('O876.CanvasFactory', {
+export const CanvasFactory = {
     getCanvas: function() {
-        var oCanvas = document.createElement('canvas');
-        var oContext = oCanvas.getContext('2d');
-        O876.CanvasFactory.setImageSmoothing(oContext, false);
+        const oCanvas = document.createElement('canvas');
+        const oContext = oCanvas.getContext('2d');
+        CanvasFactory.setImageSmoothing(oContext, false);
         return oCanvas
     },
     setImageSmoothing: function(oContext, b) {
@@ -10,4 +10,4 @@ O2.createObject('O876.CanvasFactory', {
         oContext.mozImageSmoothingEnabled = b;
         oContext.imageSmoothingEnabled = b
     }
-});
+};

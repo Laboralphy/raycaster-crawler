@@ -1,10 +1,18 @@
-O2.createObject('CraftPlugin', class CraftPlugin {
+import { Item } from '../Item.js';
+import { CraftWindow } from '../UI/CraftWindow.js';
+import { UI } from '../UI/UI.js';
+import { CRAFT_DATA } from '../data/CRAFT_DATA.js';
+import { LABY } from '../data/LABY.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class CraftPlugin {
     uiController(sCommand, xParams) {
-        var w;
+        let w;
         switch (sCommand) {
             case 'on':
                 this.clear();
-                this.centerWidget(this.declareWidget(new UI.CraftWindow(xParams)));
+                this.centerWidget(this.declareWidget(new CraftWindow(xParams)));
                 break;
             case 'up':
                 w = this.getWidget();
@@ -61,7 +69,7 @@ O2.createObject('CraftPlugin', class CraftPlugin {
     time() {
         if (this.oGame.nIntfMode == UI.INTFMODE_CRAFT && this.bCrafting) {
             if (this.oGame.ui_command('progress')) {
-                var oCraftedItem = this.oGame.ui_command('reclaim');
+                const oCraftedItem = this.oGame.ui_command('reclaim');
                 this.oGame.oDungeon.pickupItem(this.oGame.oDungeon.getPlayerCreature(), oCraftedItem);
                 this.bCrafting = false;
                 this.updateCraftWindow(this.oGame.oDungeon.getPlayerCreature());
@@ -98,9 +106,9 @@ O2.createObject('CraftPlugin', class CraftPlugin {
     }
 
     readRandomRecipe(sType, nLevel, oCreature) {
-        var aList = this.getCraftRecipeList(sType, nLevel, oCreature);
+        const aList = this.getCraftRecipeList(sType, nLevel, oCreature);
         if (aList.length) {
-            var sRec = MathTools.rndChoose(aList);
+            const sRec = MathTools.rndChoose(aList);
             this.oGame.oBookSystem.read('~craft_' + sType + '_recipe', ['~item_' + sRec]);
             this.oGame.oDungeon.learnCraft(oCreature, sRec)
         }
@@ -112,14 +120,14 @@ O2.createObject('CraftPlugin', class CraftPlugin {
     }
 
     getCraftRecipeList(sType, nLevel, oLearningCreature) {
-        var aList = [];
-        var aKnown;
+        const aList = [];
+        let aKnown;
         if (oLearningCreature) {
             aKnown = oLearningCreature.oExtraData.craft
         } else {
             aKnown = []
         }
-        var sRec = '',
+        let sRec = '',
             oRec;
         for (sRec in CRAFT_DATA) {
             oRec = CRAFT_DATA[sRec];
@@ -131,17 +139,17 @@ O2.createObject('CraftPlugin', class CraftPlugin {
     }
 
     getCraftRecipe(sRecipe) {
-        var r, q, oItem;
+        let r, q, oItem;
         if (this.oCraftRecipes === null) {
             this.oCraftRecipes = {
                 brew: {},
                 cook: {}
             }
         }
-        var sType = CRAFT_DATA[sRecipe].type;
+        const sType = CRAFT_DATA[sRecipe].type;
         if (!(sRecipe in this.oCraftRecipes[sType])) {
-            var aRec = [new Item(sRecipe, 1)];
-            for (var i = 0; i < CRAFT_DATA[sRecipe].reagents.length; i++) {
+            const aRec = [new Item(sRecipe, 1)];
+            for (let i = 0; i < CRAFT_DATA[sRecipe].reagents.length; i++) {
                 r = CRAFT_DATA[sRecipe].reagents[i][0];
                 q = CRAFT_DATA[sRecipe].reagents[i][1];
                 oItem = new Item(r, q);
@@ -153,12 +161,12 @@ O2.createObject('CraftPlugin', class CraftPlugin {
     }
 
     openCraft(oCreature, sType) {
-        var aCraft = oCreature.oExtraData.craft;
-        var aCD = [];
-        var aRec;
-        var sRec;
-        var aAble = [];
-        for (var iCraft = 0; iCraft < aCraft.length; iCraft++) {
+        const aCraft = oCreature.oExtraData.craft;
+        const aCD = [];
+        let aRec;
+        let sRec;
+        const aAble = [];
+        for (let iCraft = 0; iCraft < aCraft.length; iCraft++) {
             sRec = aCraft[iCraft];
             aRec = this.getCraftRecipe(sRec);
             if (CRAFT_DATA[sRec].type == sType) {
@@ -178,7 +186,7 @@ O2.createObject('CraftPlugin', class CraftPlugin {
     }
 
     updateCraftWindow(oCreature) {
-        var oCS = this;
+        const oCS = this;
         this.oGame.oUI.command('Craft', 'update', function(sRec) {
             return oCS.craftItem(oCreature, sRec, true)
         })
@@ -188,10 +196,10 @@ O2.createObject('CraftPlugin', class CraftPlugin {
         if (bTest === undefined) {
             bTest = false
         }
-        var oComp, iComp, nNeed, nItemGot, bFailed = false;
-        var aRec = this.getCraftRecipe(sRecipeId);
-        var oInv = this.oGame.oDungeon.getCreatureInventory(oCreature);
-        var aMissingComps = [];
+        let oComp, iComp, nNeed, nItemGot, bFailed = false;
+        const aRec = this.getCraftRecipe(sRecipeId);
+        const oInv = this.oGame.oDungeon.getCreatureInventory(oCreature);
+        const aMissingComps = [];
         for (iComp = 1; iComp < aRec.length; iComp++) {
             oComp = aRec[iComp];
             nNeed = oComp.stackcount;
@@ -223,7 +231,7 @@ O2.createObject('CraftPlugin', class CraftPlugin {
     }
 
     craftSelectedItem() {
-        var sRecipeId = this.oGame.oUI.command('Craft', 'get');
+        const sRecipeId = this.oGame.oUI.command('Craft', 'get');
         if (sRecipeId !== null) {
             this.craftItem(this.oGame.oDungeon.getPlayerCreature(), sRecipeId)
         }
@@ -245,7 +253,7 @@ O2.createObject('CraftPlugin', class CraftPlugin {
         }
         return false
     }
-});
+}
 Object.assign(CraftPlugin.prototype, {
     oGame: null,
     bCrafting: false,

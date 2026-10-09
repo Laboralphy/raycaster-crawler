@@ -1,6 +1,8 @@
-O2.createObject('DasherThinker', class DasherThinker extends MobThinker {
+import { MobThinker } from './MobThinker.js';
+
+export class DasherThinker extends MobThinker {
     _follow(nTime) {
-        for (var i = 0; i < 3; ++i) {
+        for (let i = 0; i < 3; ++i) {
             switch (this.move()) {
                 case this.COLLISION_TARGET:
                     if (this.getTarget() == this.oMobile.oMobileCollision) {
@@ -22,4 +24,4 @@ O2.createObject('DasherThinker', class DasherThinker extends MobThinker {
         this.chaseTarget(this.getTarget());
         this.oGame.gc_attack(this.oMobile, 0)
     }
-});
+}

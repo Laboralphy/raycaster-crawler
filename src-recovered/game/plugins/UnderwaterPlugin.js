@@ -1,15 +1,20 @@
-O2.createObject('UnderwaterPlugin', class UnderwaterPlugin {
+import { StubWindow } from '../UI/StubWindow.js';
+import { SOUNDS } from '../data/SOUNDS.js';
+import { GXFlood } from '../gx/GXFlood.js';
+import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class UnderwaterPlugin {
     setGame(g) {
         this.oGame = g;
         this.oGame.registerPluginSignal('gamerestart', this)
     }
 
     uiController(sCommand, xParams) {
-        var w;
+        let w;
         switch (sCommand) {
             case 'on':
                 this.clear();
-                this.centerWidget(this.declareWidget(new UI.StubWindow(xParams)));
+                this.centerWidget(this.declareWidget(new StubWindow(xParams)));
                 break;
             case 'off':
                 w = this.getWidget();
@@ -30,7 +35,7 @@ O2.createObject('UnderwaterPlugin', class UnderwaterPlugin {
         this.bInWater = true;
         this.oGame.registerPluginSignal('timesecond', this);
         this.oGame.registerPluginSignal('exitlevel', this);
-        var p = this.oGame.oDungeon.getPlayerCreature();
+        const p = this.oGame.oDungeon.getPlayerCreature();
         p.setBaseAttribute('maxapnea', this.MAX_APNEA);
         p.modifyAttribute('apnea', -p.getAttribute('apnea'));
         this.displayBubbles(0, this.MAX_APNEA)
@@ -43,27 +48,27 @@ O2.createObject('UnderwaterPlugin', class UnderwaterPlugin {
         this.bInWater = false;
         this.oGame.unregisterPluginSignal('timesecond', this);
         this.oGame.unregisterPluginSignal('exitlevel', this);
-        for (var x = 0; x < this.MAX_BUBBLES; ++x) {
+        for (let x = 0; x < this.MAX_BUBBLES; ++x) {
             this.oGame.oHUD.printTile(11 + x, 0, 0)
         }
     }
 
     breathe() {
-        var p = this.oGame.oDungeon.getPlayerCreature();
+        const p = this.oGame.oDungeon.getPlayerCreature();
         p.modifyAttribute('apnea', -p.getAttribute('apnea'));
         this.displayBubbles(0, this.MAX_APNEA);
         this.oGame.sys_flash(0x0044FF, 50, 10);
-        var nBubbles = MathTools.rnd(0, 5);
+        const nBubbles = MathTools.rnd(0, 5);
         if (nBubbles < SOUNDS.AMB_BUBBLES.length) {
             this.oGame.sys_playSound(SOUNDS.AMB_BUBBLES[nBubbles])
         }
     }
 
     dive() {
-        var g = this.oGame;
-        var p = g.oDungeon.getPlayerCreature();
-        var nApnea = p.getAttribute('apnea');
-        var nMaxApnea = p.getAttribute('maxapnea');
+        const g = this.oGame;
+        const p = g.oDungeon.getPlayerCreature();
+        let nApnea = p.getAttribute('apnea');
+        const nMaxApnea = p.getAttribute('maxapnea');
         if (nApnea < nMaxApnea) {
             ++nApnea;
             p.modifyAttribute('apnea', 1)
@@ -74,12 +79,12 @@ O2.createObject('UnderwaterPlugin', class UnderwaterPlugin {
     }
 
     checkAir() {
-        var g = this.oGame;
-        var p = g.getPlayer();
-        var aSector = g.oRaycaster.oMobileSectors.get(p.xSector, p.ySector);
-        var l = aSector.length;
-        var o;
-        for (var i = 0; i < l; ++i) {
+        const g = this.oGame;
+        const p = g.getPlayer();
+        const aSector = g.oRaycaster.oMobileSectors.get(p.xSector, p.ySector);
+        const l = aSector.length;
+        let o;
+        for (let i = 0; i < l; ++i) {
             o = aSector[i];
             if (o.getData('bubbles')) {
                 return true
@@ -89,11 +94,12 @@ O2.createObject('UnderwaterPlugin', class UnderwaterPlugin {
     }
 
     displayBubbles(nApnea, nMaxApnea) {
-        var nMaxBubbles = this.MAX_BUBBLES;
-        var nBubbles = (nMaxBubbles << 1) * (nMaxApnea - nApnea) / nMaxApnea | 0;
-        var bPop = (nBubbles & 1) !== 0;
+        let x;
+        const nMaxBubbles = this.MAX_BUBBLES;
+        let nBubbles = (nMaxBubbles << 1) * (nMaxApnea - nApnea) / nMaxApnea | 0;
+        const bPop = (nBubbles & 1) !== 0;
         nBubbles >>= 1;
-        for (var x = 0; x < nBubbles; ++x) {
+        for (x = 0; x < nBubbles; ++x) {
             this.oGame.oHUD.printTile(11 + x, 0, this.HUD_BUBBLE)
         }
         if (bPop) {
@@ -131,7 +137,7 @@ O2.createObject('UnderwaterPlugin', class UnderwaterPlugin {
     gamerestart() {
         this.waterOut()
     }
-});
+}
 Object.assign(UnderwaterPlugin.prototype, {
     oGame: null,
     MAX_APNEA: 20,

@@ -1,4 +1,7 @@
-O2.createObject('O876_Raycaster.GXSecret', class GXSecret extends O876_Raycaster.GXEffect {
+import { Marker } from '../O876/Marker.js';
+import { GXEffect } from './GXEffect.js';
+
+export class GXSecret extends GXEffect {
     __construct(r) {
         super.__construct(r);
         this.nLimit = r.nPlaneSpacing
@@ -78,8 +81,8 @@ O2.createObject('O876_Raycaster.GXSecret', class GXSecret extends O876_Raycaster
                 break
         }
     }
-});
-Object.assign(O876_Raycaster.GXSecret.prototype, {
+}
+Object.assign(GXSecret.prototype, {
     sClass: 'Secret',
     nPhase: 0,
     oRaycaster: null,

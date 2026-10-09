@@ -1,4 +1,4 @@
-O2.createObject('O876_Raycaster.KeyboardDevice', class KeyboardDevice {
+export class KeyboardDevice {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -6,7 +6,7 @@ O2.createObject('O876_Raycaster.KeyboardDevice', class KeyboardDevice {
     __construct() {
         this.aKeys = [];
         this.aAliases = {};
-        for (var i = 0; i < 256; i++) {
+        for (let i = 0; i < 256; i++) {
             this.aKeys.push(0)
         }
         this.aKeyBuffer = []
@@ -27,9 +27,9 @@ O2.createObject('O876_Raycaster.KeyboardDevice', class KeyboardDevice {
     }
 
     eventKeyUp(e) {
-        var oEvent = window.event ? window.event : e;
-        var nCode = oEvent.charCode ? oEvent.charCode : oEvent.keyCode;
-        var oDev = window.__keyboardDevice;
+        const oEvent = window.event ? window.event : e;
+        let nCode = oEvent.charCode ? oEvent.charCode : oEvent.keyCode;
+        const oDev = window.__keyboardDevice;
         if (nCode in oDev.aAliases) {
             nCode = oDev.aAliases[nCode]
         }
@@ -39,9 +39,9 @@ O2.createObject('O876_Raycaster.KeyboardDevice', class KeyboardDevice {
     }
 
     eventKeyDown(e) {
-        var oEvent = window.event ? window.event : e;
-        var nCode = oEvent.charCode ? oEvent.charCode : oEvent.keyCode;
-        var oDev = window.__keyboardDevice;
+        const oEvent = window.event ? window.event : e;
+        let nCode = oEvent.charCode ? oEvent.charCode : oEvent.keyCode;
+        const oDev = window.__keyboardDevice;
         if (nCode in oDev.aAliases) {
             nCode = oDev.aAliases[nCode]
         }
@@ -69,8 +69,8 @@ O2.createObject('O876_Raycaster.KeyboardDevice', class KeyboardDevice {
         document.onkeyup = undefined;
         document.onkeydown = undefined
     }
-});
-Object.assign(O876_Raycaster.KeyboardDevice.prototype, {
+}
+Object.assign(KeyboardDevice.prototype, {
     aKeys: null,
     aKeyBuffer: null,
     nKeyBufferSize: 16,

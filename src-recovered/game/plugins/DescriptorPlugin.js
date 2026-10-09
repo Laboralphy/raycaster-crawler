@@ -1,9 +1,15 @@
-O2.createObject('DescriptorPlugin', class DescriptorPlugin {
+import { DescriptorWindow } from '../UI/DescriptorWindow.js';
+import { UI } from '../UI/UI.js';
+import { SPELLS_DATA } from '../data/SPELLS_DATA.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { KEYS } from '../../libraries/Raycaster/KEYS.js';
+
+export class DescriptorPlugin {
     uiController(sCommand, xParams) {
-        var w;
+        let w;
         switch (sCommand) {
             case 'on':
-                w = this.oScreen.linkControl(new UI.DescriptorWindow(xParams));
+                w = this.oScreen.linkControl(new DescriptorWindow(xParams));
                 this.centerWidget(w);
                 break
         }
@@ -19,7 +25,7 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
     }
 
     getSelectedItem() {
-        var nIndex, oInv, oItem = null;
+        let nIndex, oInv, oItem = null;
         switch (this.oGame.nIntfMode) {
             case UI.INTFMODE_INVENTORY:
                 nIndex = this.oGame.oUI.command('Inventory', 'get');
@@ -28,7 +34,7 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
                 if (nIndex >= 0) {
                     oItem = oInv.aBagSlots[nIndex]
                 } else {
-                    for (var iSlot in oInv.oEquipSlots) {
+                    for (const iSlot in oInv.oEquipSlots) {
                         nIndex++;
                         if (nIndex === 0) {
                             oItem = oInv.oEquipSlots[iSlot]
@@ -61,7 +67,7 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
     }
 
     getDurationDescription(nDur) {
-        var sDur;
+        let sDur;
         switch (nDur) {
             case 62:
                 sDur = STRINGS._('~med_overtime') + '180 ' + STRINGS._('~med_second');
@@ -85,11 +91,11 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
     }
 
     getEffectDescription(sEffect) {
-        var ep = this.oGame.oDungeon.oEffectProcessor;
-        var sSubType = ep.getEffectSubType(sEffect);
-        var nLevel = ep.getEffectLevel(sEffect);
-        var nDur = ep.getEffectDuration(sEffect);
-        var sDur = this.getDurationDescription(nDur);
+        const ep = this.oGame.oDungeon.oEffectProcessor;
+        const sSubType = ep.getEffectSubType(sEffect);
+        const nLevel = ep.getEffectLevel(sEffect);
+        const nDur = ep.getEffectDuration(sEffect);
+        let sDur = this.getDurationDescription(nDur);
         sDur = sDur ? ' ' + sDur : '';
         switch (sSubType) {
             case 'ahld':
@@ -188,11 +194,11 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
     }
 
     getSpellProjectionDescription(s) {
-        var sMain = s.substr(0, 2);
-        var aDesc = [STRINGS._('~desc_spell_project_' + sMain)];
-        var aOptions = s.substr(2);
-        var sKey;
-        for (var i = 0; i < aOptions.length; i++) {
+        const sMain = s.substr(0, 2);
+        const aDesc = [STRINGS._('~desc_spell_project_' + sMain)];
+        const aOptions = s.substr(2);
+        let sKey;
+        for (let i = 0; i < aOptions.length; i++) {
             sKey = '~desc_spell_project_' + aOptions[i];
             aDesc.push(STRINGS._(sKey))
         }
@@ -200,9 +206,9 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
     }
 
     getSpellDescription(oSpell) {
-        var i;
-        var aSpellDesc = [];
-        var sDesc, sChance;
+        let i;
+        const aSpellDesc = [];
+        let sDesc, sChance;
         for (i = 0; i < oSpell.effects.length; i++) {
             sDesc = this.getEffectDescription(oSpell.effects[i]);
             sChance = '';
@@ -220,9 +226,10 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
     }
 
     getMultipleSpellDescription(aSpells) {
-        var oSpell, aDesc = [],
-            oSpellData, aSpellDesc, sLine, aLine;
-        for (var i = 0; i < aSpells.length; i++) {
+        let oSpell;
+        const aDesc = [];
+        let oSpellData, aSpellDesc, sLine, aLine;
+        for (let i = 0; i < aSpells.length; i++) {
             oSpell = aSpells[i];
             oSpellData = SPELLS_DATA[oSpell.ref];
             aLine = [STRINGS._('~desc_spell_num') + (i + 1).toString()];
@@ -242,7 +249,7 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
     }
 
     getDaggerSpellDescription(aSpells) {
-        var oSpell, aDesc, oSpellData, aSpellDesc;
+        let oSpell, aDesc, oSpellData, aSpellDesc;
         oSpell = aSpells[0];
         oSpellData = SPELLS_DATA[oSpell.ref];
         aSpellDesc = this.getSpellDescription(oSpellData);
@@ -251,8 +258,8 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
     }
 
     getWornPropertiesDescription(aEffects) {
-        var a = [];
-        for (var i = 0; i < aEffects.length; i++) {
+        const a = [];
+        for (let i = 0; i < aEffects.length; i++) {
             a.push(this.getEffectDescription(aEffects[i]))
         }
         return a
@@ -263,7 +270,7 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
     }
 
     describe(oItem) {
-        var sProperties;
+        let sProperties;
         switch (oItem.type) {
             case 'potion':
             case 'ccc':
@@ -282,9 +289,9 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
                 sProperties = '';
                 break
         }
-        var sMessage = '';
-        var sDIType = 'desc_item_' + oItem.type;
-        var sDIItem = 'desc_item_' + oItem.resref;
+        let sMessage = '';
+        const sDIType = 'desc_item_' + oItem.type;
+        const sDIItem = 'desc_item_' + oItem.resref;
         if (sDIItem in STRINGS.l) {
             sMessage += STRINGS._('~' + sDIItem) + '\n'
         }
@@ -301,7 +308,7 @@ O2.createObject('DescriptorPlugin', class DescriptorPlugin {
         });
         this.oGame.nIntfMode = UI.INTFMODE_DESCRIPTOR
     }
-});
+}
 Object.assign(DescriptorPlugin.prototype, {
     oGame: null,
     oEffectProcessor: null,

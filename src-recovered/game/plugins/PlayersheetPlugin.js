@@ -1,9 +1,13 @@
-O2.createObject('PlayersheetPlugin', class PlayersheetPlugin {
+import { PlayersheetWindow } from '../UI/PlayersheetWindow.js';
+import { UI } from '../UI/UI.js';
+import { KEYS } from '../../libraries/Raycaster/KEYS.js';
+
+export class PlayersheetPlugin {
     uiController(sCommand, xParams) {
         switch (sCommand) {
             case 'on':
                 this.clear();
-                this.centerWidget(this.declareWidget(new UI.PlayersheetWindow(xParams)));
+                this.centerWidget(this.declareWidget(new PlayersheetWindow(xParams)));
                 break
         }
     }
@@ -26,7 +30,7 @@ O2.createObject('PlayersheetPlugin', class PlayersheetPlugin {
         this.oGame = g;
         this.oGame.registerPluginSignal('key', this)
     }
-});
+}
 Object.assign(PlayersheetPlugin.prototype, {
     oGame: null,
     oEffectProcessor: null,

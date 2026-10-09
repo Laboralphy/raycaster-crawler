@@ -1,4 +1,6 @@
-O2.createObject('O876_Raycaster.NonLinearThinker', class NonLinearThinker extends O876_Raycaster.Thinker {
+import { Thinker } from './Thinker.js';
+
+export class NonLinearThinker extends Thinker {
     __construct() {
         this.nTime = 0
     }
@@ -49,8 +51,8 @@ O2.createObject('O876_Raycaster.NonLinearThinker', class NonLinearThinker extend
     }
 
     thinkMove() {
-        var x, y;
-        var v = this[this.sFunction](this.nCurrentTime / this.nTime);
+        let x, y;
+        const v = this[this.sFunction](this.nCurrentTime / this.nTime);
         x = this.xEnd * v + (this.xStart * (1 - v));
         y = this.yEnd * v + (this.yStart * (1 - v));
         this.oMobile.setXY(x, y);
@@ -107,8 +109,8 @@ O2.createObject('O876_Raycaster.NonLinearThinker', class NonLinearThinker extend
     thinkStop() {}
 
     thinkIdle() {}
-});
-Object.assign(O876_Raycaster.NonLinearThinker.prototype, {
+}
+Object.assign(NonLinearThinker.prototype, {
     nTime: 0,
     nCurrentTime: 0,
     xStart: 0,

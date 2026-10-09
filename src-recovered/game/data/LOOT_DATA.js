@@ -1,4 +1,4 @@
-O2.createObject('LOOT_DATA', {
+export const LOOT_DATA = {
     m_bigface: {
         chances: {
             0: 1,
@@ -378,4 +378,4 @@ O2.createObject('LOOT_DATA', {
             pot_dispell: 1
         }
     }
-});
+};

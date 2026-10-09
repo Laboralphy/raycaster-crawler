@@ -1,4 +1,11 @@
-O2.createObject('O876_Raycaster.Horde', class Horde {
+import { ArrayTools } from '../O876/ArrayTools.js';
+import { Blueprint } from './Blueprint.js';
+import { Mobile } from './Mobile.js';
+import { MobileDispenser } from './MobileDispenser.js';
+import { Sprite } from './Sprite.js';
+import { Tile } from './Tile.js';
+
+export class Horde {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -6,7 +13,7 @@ O2.createObject('O876_Raycaster.Horde', class Horde {
     __construct(r) {
         this.oRaycaster = r;
         this.oImageLoader = this.oRaycaster.oImages;
-        this.oMobileDispenser = new O876_Raycaster.MobileDispenser();
+        this.oMobileDispenser = new MobileDispenser();
         this.aMobiles = [];
         this.aStatics = [];
         this.aSprites = [];
@@ -15,8 +22,8 @@ O2.createObject('O876_Raycaster.Horde', class Horde {
     }
 
     think() {
-        var oMobile;
-        var i = 0;
+        let oMobile;
+        let i = 0;
         while (i < this.aMobiles.length) {
             oMobile = this.aMobiles[i];
             oMobile.think();
@@ -31,14 +38,14 @@ O2.createObject('O876_Raycaster.Horde', class Horde {
 
     defineTile(sId, aData) {
         this.nTileCount++;
-        var oTile = new O876_Raycaster.Tile(aData);
+        const oTile = new Tile(aData);
         oTile.oImage = this.oImageLoader.load(oTile.sSource);
         this.oTiles[sId] = oTile;
         return oTile
     }
 
     defineBlueprint(sId, aData) {
-        var oBP = new O876_Raycaster.Blueprint(aData);
+        const oBP = new Blueprint(aData);
         oBP.oTile = this.oTiles[aData.tile];
         oBP.sId = sId;
         this.oBlueprints[sId] = oBP;
@@ -46,7 +53,7 @@ O2.createObject('O876_Raycaster.Horde', class Horde {
     }
 
     defineSprite(aData) {
-        var oSprite = new O876_Raycaster.Sprite();
+        const oSprite = new Sprite();
         oSprite.oBlueprint = this.oBlueprints[aData.blueprint];
         this.aSprites.push(oSprite);
         return oSprite
@@ -59,7 +66,7 @@ O2.createObject('O876_Raycaster.Horde', class Horde {
     }
 
     unlinkMobile(oMobile) {
-        var nHordeRank = this.aMobiles.indexOf(oMobile);
+        const nHordeRank = this.aMobiles.indexOf(oMobile);
         if (nHordeRank < 0) {
             this.unlinkStatic(oMobile);
             return
@@ -68,7 +75,7 @@ O2.createObject('O876_Raycaster.Horde', class Horde {
     }
 
     unlinkStatic(oMobile) {
-        var nHordeRank = this.aStatics.indexOf(oMobile);
+        const nHordeRank = this.aStatics.indexOf(oMobile);
         if (nHordeRank < 0) {
             return
         }
@@ -79,10 +86,10 @@ O2.createObject('O876_Raycaster.Horde', class Horde {
     }
 
     defineMobile(aData) {
-        var oMobile = new O876_Raycaster.Mobile();
+        const oMobile = new Mobile();
         oMobile.oRaycaster = this.oRaycaster;
         oMobile.oSprite = this.defineSprite(aData);
-        var oThinker = null;
+        let oThinker = null;
         if (oMobile.oSprite.oBlueprint.sThinker !== null) {
             oThinker = this.oThinkerManager.createThinker(oMobile.oSprite.oBlueprint.sThinker)
         }
@@ -102,9 +109,9 @@ O2.createObject('O876_Raycaster.Horde', class Horde {
     }
 
     spawnMobile(sBlueprint, x, y, fTheta) {
-        var oMobile = this.oMobileDispenser.popMobile(sBlueprint);
+        const oMobile = this.oMobileDispenser.popMobile(sBlueprint);
         if (oMobile === null) {
-            var aData = {
+            const aData = {
                 blueprint: sBlueprint,
                 x: x,
                 y: y,
@@ -128,12 +135,12 @@ O2.createObject('O876_Raycaster.Horde', class Horde {
     }
 
     computeCollision(oMobile) {
-        var xTonari = this.xTonari;
-        var yTonari = this.yTonari;
-        var oRegister = this.oRaycaster.oMobileSectors;
-        var oSector;
-        var i;
-        var oOther, iOther, nSectorLength;
+        const xTonari = this.xTonari;
+        const yTonari = this.yTonari;
+        const oRegister = this.oRaycaster.oMobileSectors;
+        let oSector;
+        let i;
+        let oOther, iOther, nSectorLength;
         for (i = 0; i < 9; i++) {
             oSector = oRegister.get(oMobile.xSector + xTonari[i], oMobile.ySector + yTonari[i]);
             if (oSector !== null) {
@@ -153,16 +160,16 @@ O2.createObject('O876_Raycaster.Horde', class Horde {
     }
 
     getAllocatedMemory() {
-        var nRes = 0,
+        let nRes = 0,
             oTile;
-        for (var s in this.oTiles) {
+        for (const s in this.oTiles) {
             oTile = this.oTiles[s];
             nRes += oTile.oImage.width * oTile.oImage.height * 4
         }
         return nRes
     }
-});
-Object.assign(O876_Raycaster.Horde.prototype, {
+}
+Object.assign(Horde.prototype, {
     oRaycaster: null,
     oThinkerManager: null,
     aMobiles: null,

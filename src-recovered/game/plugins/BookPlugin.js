@@ -1,9 +1,15 @@
-O2.createObject('BookPlugin', class BookPlugin {
+import { BookWindow } from '../UI/BookWindow.js';
+import { UI } from '../UI/UI.js';
+import { LABY } from '../data/LABY.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class BookPlugin {
     uiController(sCommand, xParams) {
         switch (sCommand) {
             case 'on':
                 this.clear();
-                this.centerWidget(this.declareWidget(new UI.BookWindow(xParams)));
+                this.centerWidget(this.declareWidget(new BookWindow(xParams)));
                 break;
             case 'next':
                 return this.getWidget().nextPage();
@@ -30,9 +36,9 @@ O2.createObject('BookPlugin', class BookPlugin {
     }
 
     read(sBook, aParams) {
-        var oBook = STRINGS._(sBook, aParams);
+        const oBook = STRINGS._(sBook, aParams);
         if (('images' in oBook) && oBook.images !== null) {
-            for (var iBook = 0; iBook < oBook.images.length; iBook++) {
+            for (let iBook = 0; iBook < oBook.images.length; iBook++) {
                 if (typeof oBook.images[iBook] === 'string') {
                     oBook.images[iBook] = this.oGame.oRaycaster.oImages.load(oBook.images[iBook])
                 }
@@ -46,7 +52,7 @@ O2.createObject('BookPlugin', class BookPlugin {
     readRandom() {
         if (this.aBookList === null) {
             this.aBookList = [];
-            for (var s in STRINGS.l) {
+            for (const s in STRINGS.l) {
                 if (s.substr(0, 5) === 'book_') {
                     this.aBookList.push('~' + s)
                 }
@@ -54,7 +60,7 @@ O2.createObject('BookPlugin', class BookPlugin {
         }
         this.read(MathTools.rndChoose(this.aBookList))
     }
-});
+}
 Object.assign(BookPlugin.prototype, {
     oGame: null,
     aBookList: null

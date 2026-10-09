@@ -1,4 +1,8 @@
-O2.createObject('ConsolePlugin', class ConsolePlugin {
+import { ConsoleWindow } from '../UI/ConsoleWindow.js';
+import { UI } from '../UI/UI.js';
+import { KEYS } from '../../libraries/Raycaster/KEYS.js';
+
+export class ConsolePlugin {
     setGame(g) {
         this.oGame = g;
         this.oGame.registerPluginSignal('key', this);
@@ -6,11 +10,11 @@ O2.createObject('ConsolePlugin', class ConsolePlugin {
     }
 
     uiController(sCommand, xParams) {
-        var w;
+        let w;
         switch (sCommand) {
             case 'on':
                 this.clear();
-                this.centerWidget(this.declareWidget(new UI.ConsoleWindow(xParams)));
+                this.centerWidget(this.declareWidget(new ConsoleWindow(xParams)));
                 break;
             case 'off':
                 w = this.getWidget();
@@ -53,7 +57,7 @@ O2.createObject('ConsolePlugin', class ConsolePlugin {
             this.aLines.shift()
         }
     }
-});
+}
 Object.assign(ConsolePlugin.prototype, {
     oGame: null,
     aLines: null

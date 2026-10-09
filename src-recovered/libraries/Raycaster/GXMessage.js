@@ -1,7 +1,10 @@
-O2.createObject('O876_Raycaster.GXMessage', class GXMessage extends O876_Raycaster.GXEffect {
+import { CanvasFactory } from '../O876/CanvasFactory.js';
+import { GXEffect } from './GXEffect.js';
+
+export class GXMessage extends GXEffect {
     __construct(oRaycaster) {
         super.__construct(oRaycaster);
-        var s = this.oStyle;
+        const s = this.oStyle;
         this.wSize = s.width;
         this.hSize = s.height;
         this.fTimePerChar = s.speed;
@@ -15,7 +18,7 @@ O2.createObject('O876_Raycaster.GXMessage', class GXMessage extends O876_Raycast
         }).bind(this));
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
-        this.oMessageCanvas = O876.CanvasFactory.getCanvas();
+        this.oMessageCanvas = CanvasFactory.getCanvas();
         this.oMessageCanvas.width = this.wSize;
         this.oMessageCanvas.height = this.hSize;
         this.xPos = this.xTo = (this.oCanvas.width - this.oMessageCanvas.width) >> 1;
@@ -33,7 +36,7 @@ O2.createObject('O876_Raycaster.GXMessage', class GXMessage extends O876_Raycast
     }
 
     drawIcon(oSource, x, y, w, h) {
-        var nOffset = (this.oMessageCanvas.height - 32) >> 1;
+        const nOffset = (this.oMessageCanvas.height - 32) >> 1;
         this.oMessageCanvas.getContext('2d').drawImage(oSource, x, y, w, h, nOffset, nOffset, 32, 32);
         this.xTextPos += 32;
         this.oIcon = null
@@ -64,12 +67,12 @@ O2.createObject('O876_Raycaster.GXMessage', class GXMessage extends O876_Raycast
 
     buildPath() {
         this.aPath = [];
-        var nWeightPos = 1;
-        var nWeightTo = 1;
-        var nSum = nWeightPos + nWeightTo;
-        var bMove;
-        var xPos = this.xPos;
-        var yPos = this.yPos;
+        const nWeightPos = 1;
+        const nWeightTo = 1;
+        const nSum = nWeightPos + nWeightTo;
+        let bMove;
+        let xPos = this.xPos;
+        let yPos = this.yPos;
         do {
             bMove = false;
             if (xPos != this.xTo) {
@@ -92,14 +95,14 @@ O2.createObject('O876_Raycaster.GXMessage', class GXMessage extends O876_Raycast
                 this.aPath.push([xPos | 0, yPos + this.yOfs | 0, 1])
             }
         } while (bMove && this.aPath.length < 20);
-        for (var i = this.aPath.length - 2; i >= 0; i--) {
+        for (let i = this.aPath.length - 2; i >= 0; i--) {
             this.aPath[i][2] = Math.max(0, this.aPath[i + 1][2] - 0.2)
         }
     }
 
     movePopup() {
         if (this.iPath < this.aPath.length) {
-            var aPos = this.aPath[this.iPath];
+            const aPos = this.aPath[this.iPath];
             this.xPos = aPos[0];
             this.yPos = aPos[1];
             this.fAlpha = aPos[2];
@@ -109,7 +112,7 @@ O2.createObject('O876_Raycaster.GXMessage', class GXMessage extends O876_Raycast
 
     reverseMovePopup() {
         if (this.aPath.length) {
-            var aPos = this.aPath.pop();
+            const aPos = this.aPath.pop();
             this.xPos = aPos[0];
             this.yPos = aPos[1];
             this.fAlpha = aPos[2]
@@ -117,10 +120,11 @@ O2.createObject('O876_Raycaster.GXMessage', class GXMessage extends O876_Raycast
     }
 
     process() {
+        let sMessage, oCtx, nTextWidth;
         switch (this.nState) {
             case 0:
-                var sMessage = this.sMessage;
-                var oCtx = this.oMessageCanvas.getContext('2d');
+                sMessage = this.sMessage;
+                oCtx = this.oMessageCanvas.getContext('2d');
                 oCtx.font = this.nTextHeight.toString() + 'px ' + this.sFontFamily;
                 oCtx.textAlign = this.sTextAlign;
                 oCtx.fillStyle = this.oStyle.background;
@@ -130,22 +134,22 @@ O2.createObject('O876_Raycaster.GXMessage', class GXMessage extends O876_Raycast
                 if (this.oIcon) {
                     this.drawIcon(this.oIcon.src, this.oIcon.x, this.oIcon.y, this.oIcon.w, this.oIcon.h)
                 }
-                var nTextWidth = oCtx.measureText(sMessage).width;
+                nTextWidth = oCtx.measureText(sMessage).width;
                 if ((nTextWidth + this.xTextPos + 2) < this.wSize) {
                     oCtx.fillStyle = this.oStyle.shadow;
                     oCtx.fillText(sMessage, this.xTextPos + 2, this.yTextPos + 2);
                     oCtx.fillStyle = this.oStyle.text;
                     oCtx.fillText(sMessage, this.xTextPos, this.yTextPos)
                 } else {
-                    var sMessage2 = '';
-                    var aWords = sMessage.split(' ');
+                    let sMessage2 = '';
+                    const aWords = sMessage.split(' ');
                     while (aWords.length > 0 && (oCtx.measureText(sMessage2 + aWords[0]).width + this.xTextPos + 8) < this.wSize) {
                         sMessage2 += aWords.shift();
                         sMessage2 += ' '
                     }
                     sMessage = aWords.join(' ');
                     oCtx.fillStyle = this.oStyle.text;
-                    var yLine = (this.nTextHeight >> 1) + 2;
+                    const yLine = (this.nTextHeight >> 1) + 2;
                     oCtx.fillText(sMessage2, this.xTextPos + 2, this.yTextPos + 2 - yLine);
                     oCtx.fillText(sMessage, this.xTextPos + 2, this.yTextPos + 2 + yLine);
                     oCtx.fillStyle = this.oStyle.shadow;
@@ -178,7 +182,7 @@ O2.createObject('O876_Raycaster.GXMessage', class GXMessage extends O876_Raycast
 
     render() {
         if (this.fAlpha > 0) {
-            var a = this.oContext.globalAlpha;
+            const a = this.oContext.globalAlpha;
             this.oContext.globalAlpha = this.fAlpha;
             this.oContext.drawImage(this.oMessageCanvas, this.xPos | 0, this.yPos | 0);
             this.oContext.globalAlpha = a
@@ -188,8 +192,8 @@ O2.createObject('O876_Raycaster.GXMessage', class GXMessage extends O876_Raycast
     terminate() {
         this.nState = 4
     }
-});
-Object.assign(O876_Raycaster.GXMessage.prototype, {
+}
+Object.assign(GXMessage.prototype, {
     sClass: 'Message',
     oCanvas: null,
     oContext: null,

@@ -4,7 +4,7 @@
   "description": "Reikaster Underland - prototype de dungeon crawler",
   "scripts": {
     "start": "node server.js",
-    "build": "node src-recovered/build.js && esbuild src-recovered/dist/crawler.js --minify --target=es2015 --outfile=crawler.js",
+    "build": "esbuild src-recovered/game/main.js --bundle --format=iife --minify --target=es2015 --outfile=crawler.js",
     "check:laby": "node laby/tools/check.js"
   },
   "devDependencies": {

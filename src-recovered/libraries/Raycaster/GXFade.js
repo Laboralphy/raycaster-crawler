@@ -1,4 +1,7 @@
-O2.createObject('O876_Raycaster.GXFade', class GXFade extends O876_Raycaster.GXEffect {
+import { GfxTools } from '../O876/GfxTools.js';
+import { GXEffect } from './GXEffect.js';
+
+export class GXFade extends GXEffect {
     __construct(oRaycaster) {
         super.__construct(oRaycaster);
         this.oCanvas = this.oRaycaster.oCanvas;
@@ -28,8 +31,8 @@ O2.createObject('O876_Raycaster.GXFade', class GXFade extends O876_Raycaster.GXE
     terminate() {
         this.fAlpha = this.fAlphaFade > 0 ? 1 : 0
     }
-});
-Object.assign(O876_Raycaster.GXFade.prototype, {
+}
+Object.assign(GXFade.prototype, {
     sClass: 'FadeOut',
     oCanvas: null,
     oContext: null,

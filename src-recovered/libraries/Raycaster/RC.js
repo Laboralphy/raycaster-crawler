@@ -1,4 +1,4 @@
-var RC = {
+export const RC = {
     OBJECT_TYPE_NONE: 0,
     OBJECT_TYPE_MOB: 1,
     OBJECT_TYPE_PLAYER: 2,

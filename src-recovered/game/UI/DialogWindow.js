@@ -1,4 +1,8 @@
-O2.createObject('UI.DialogWindow', class DialogWindow extends UI.Window {
+import { Window } from './Window.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { Text } from '../../libraries/H5UI/Text.js';
+
+export class DialogWindow extends Window {
     __construct(oParams) {
         super.__construct({
             caption: STRINGS._('~win_dialog')
@@ -9,7 +13,7 @@ O2.createObject('UI.DialogWindow', class DialogWindow extends UI.Window {
 
     buildWindowContent() {
         this.setSize(this.nWidth, this.nHeight);
-        var oText = this.linkControl(new H5UI.Text());
+        const oText = this.linkControl(new Text());
         oText._bWordWrap = true;
         oText._bAutosize = false;
         oText.moveTo(this.nPadding, this.yText);
@@ -24,21 +28,22 @@ O2.createObject('UI.DialogWindow', class DialogWindow extends UI.Window {
     }
 
     command(sCommand) {
+        let p, e;
         switch (sCommand) {
             case 'dlg_close':
                 this.close();
                 break;
             default:
-                var p = this.getPlugin('Dialog');
-                var e = p.oEvents;
+                p = this.getPlugin('Dialog');
+                e = p.oEvents;
                 if (sCommand in e) {
                     e[sCommand].apply(p.oGame, [])
                 }
                 break
         }
     }
-});
-Object.assign(UI.DialogWindow.prototype, {
+}
+Object.assign(DialogWindow.prototype, {
     nWidth: 512,
     nHeight: 192,
     nFontSize: 16,

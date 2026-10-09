@@ -1,4 +1,6 @@
-O2.createObject('GC.EffectProcessor', class EffectProcessor {
+import { Effect } from './Effect.js';
+
+export class EffectProcessor {
     constructor(...aArgs) {
         if ('__construct' in this) {
             this.__construct(...aArgs);
@@ -38,10 +40,10 @@ O2.createObject('GC.EffectProcessor', class EffectProcessor {
     }
 
     processEffects(oCreature) {
-        var oEffect;
-        var sMeth;
-        var sSubType;
-        var i = oCreature.oEffects.length - 1;
+        let oEffect;
+        let sMeth;
+        let sSubType;
+        let i = oCreature.oEffects.length - 1;
         while (i >= 0) {
             oEffect = oCreature.oEffects[i];
             sSubType = this.getEffectSubType(oEffect.sEffect);
@@ -61,8 +63,8 @@ O2.createObject('GC.EffectProcessor', class EffectProcessor {
     }
 
     removeExpiredEffects(oCreature) {
-        var oEffect;
-        var i = oCreature.oEffects.length - 1;
+        let oEffect;
+        let i = oCreature.oEffects.length - 1;
         while (i >= 0) {
             oEffect = oCreature.oEffects[i--];
             if (oEffect.hasExpired()) {
@@ -72,8 +74,8 @@ O2.createObject('GC.EffectProcessor', class EffectProcessor {
     }
 
     killEffect(oCreature, oEffect) {
-        var sMeth;
-        var sSubType = this.getEffectSubType(oEffect.sEffect);
+        let sMeth;
+        const sSubType = this.getEffectSubType(oEffect.sEffect);
         sMeth = 'expireEffect_' + sSubType;
         if (sMeth in this) {
             this[sMeth](oCreature, oEffect.sEffect)
@@ -82,7 +84,7 @@ O2.createObject('GC.EffectProcessor', class EffectProcessor {
     }
 
     applyEffect(oCreature, sEffect) {
-        var sEff2, sAttr, sMeth;
+        let sEff2, sAttr, sMeth;
         sAttr = this.getEffectType(sEffect);
         sMeth = 'filterEffect_' + sAttr;
         if (sMeth in this) {
@@ -99,7 +101,7 @@ O2.createObject('GC.EffectProcessor', class EffectProcessor {
                 sEffect = sEff2
             }
         }
-        var nDur = this.getEffectDuration(sEffect);
+        const nDur = this.getEffectDuration(sEffect);
         if (nDur) {
             return this.bestowEffect(oCreature, sEffect, nDur)
         }
@@ -107,7 +109,7 @@ O2.createObject('GC.EffectProcessor', class EffectProcessor {
     }
 
     bestowEffect(oCreature, sEffect, nDuration) {
-        var oEffect = new GC.Effect();
+        const oEffect = new Effect();
         switch (nDuration) {
             case 63:
                 oEffect.bExpirable = false;
@@ -132,8 +134,8 @@ O2.createObject('GC.EffectProcessor', class EffectProcessor {
     }
 
     selectEffects(oCreature, f) {
-        var aEffects = [];
-        for (var i = 0; i < oCreature.oEffects.length; i++) {
+        const aEffects = [];
+        for (let i = 0; i < oCreature.oEffects.length; i++) {
             if (f.apply(this, [oCreature.oEffects[i]])) {
                 aEffects.push(oCreature.oEffects[i])
             }
@@ -142,7 +144,7 @@ O2.createObject('GC.EffectProcessor', class EffectProcessor {
     }
 
     dispellEffects(oCreature, f) {
-        for (var i = 0; i < oCreature.oEffects.length; i++) {
+        for (let i = 0; i < oCreature.oEffects.length; i++) {
             if (f.apply(this, [oCreature.oEffects[i]])) {
                 oCreature.oEffects[i].expire()
             }
@@ -156,8 +158,8 @@ O2.createObject('GC.EffectProcessor', class EffectProcessor {
     selectorExpired(oEffect) {
         return oEffect.isExpired(this.nTime)
     }
-});
-Object.assign(GC.EffectProcessor.prototype, {
+}
+Object.assign(EffectProcessor.prototype, {
     nTime: 0,
     BASE64: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 });

@@ -1,4 +1,7 @@
-O2.createObject('O876_Raycaster.WanderThinker', class WanderThinker extends O876_Raycaster.Thinker {
+import { Thinker } from './Thinker.js';
+import { MathTools, PI } from './Tools/MathTools.js';
+
+export class WanderThinker extends Thinker {
     __construct() {
         this.aAngles = [0, 0.25 * PI, 0.5 * PI, 0.75 * PI, PI, -0.75 * PI, -0.5 * PI, -0.25 * PI];
         this.nTime = 0;
@@ -25,8 +28,8 @@ O2.createObject('O876_Raycaster.WanderThinker', class WanderThinker extends O876
             }
         }
     }
-});
-Object.assign(O876_Raycaster.WanderThinker.prototype, {
+}
+Object.assign(WanderThinker.prototype, {
     nTime: 0,
     aAngles: null,
     nAngle: 0

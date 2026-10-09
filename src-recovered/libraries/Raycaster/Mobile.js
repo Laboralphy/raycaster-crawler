@@ -1,4 +1,7 @@
-O2.createObject('O876_Raycaster.Mobile', class Mobile {
+import { RC } from './RC.js';
+import { PI } from './Tools/MathTools.js';
+
+export class Mobile {
     getBlueprint(sXData) {
         if (this.oSprite) {
             if (sXData === undefined) {
@@ -78,7 +81,7 @@ O2.createObject('O876_Raycaster.Mobile', class Mobile {
 
     setAngle(f) {
         this.fTheta = f;
-        var f2Pi = 2 * PI;
+        const f2Pi = 2 * PI;
         if (f > 0) {
             while (this.fTheta >= PI) {
                 this.fTheta -= f2Pi
@@ -98,8 +101,8 @@ O2.createObject('O876_Raycaster.Mobile', class Mobile {
         if (this.oFrontCell === null) {
             this.oFrontCell = {}
         }
-        var rc = this.oRaycaster;
-        var nActionRadius = rc.nPlaneSpacing * 0.75;
+        const rc = this.oRaycaster;
+        const nActionRadius = rc.nPlaneSpacing * 0.75;
         this.oFrontCell.x = (this.x + Math.cos(this.fTheta) * nActionRadius) / rc.nPlaneSpacing | 0;
         this.oFrontCell.y = (this.y + Math.sin(this.fTheta) * nActionRadius) / rc.nPlaneSpacing | 0;
         return this.oFrontCell
@@ -112,12 +115,12 @@ O2.createObject('O876_Raycaster.Mobile', class Mobile {
     }
 
     setXY(x, y) {
-        var rc = this.oRaycaster;
-        var ps = rc.nPlaneSpacing;
+        const rc = this.oRaycaster;
+        const ps = rc.nPlaneSpacing;
         this.x = x;
         this.y = y;
-        var xs = x / ps | 0;
-        var ys = y / ps | 0;
+        const xs = x / ps | 0;
+        const ys = y / ps | 0;
         if (xs != this.xSector || ys != this.ySector) {
             rc.oMobileSectors.unregister(this);
             this.xSector = xs;
@@ -128,13 +131,13 @@ O2.createObject('O876_Raycaster.Mobile', class Mobile {
     }
 
     rollbackXY() {
-        var ps = this.oRaycaster.nPlaneSpacing;
+        const ps = this.oRaycaster.nPlaneSpacing;
         this.x = this.xSave;
         this.y = this.ySave;
         this.xSpeed = 0;
         this.ySpeed = 0;
-        var xs = this.x / ps | 0;
-        var ys = this.y / ps | 0;
+        const xs = this.x / ps | 0;
+        const ys = this.y / ps | 0;
         if (xs != this.xSector || ys != this.ySector) {
             this.oRaycaster.oMobileSectors.unregister(this);
             this.xSector = xs;
@@ -144,22 +147,22 @@ O2.createObject('O876_Raycaster.Mobile', class Mobile {
     }
 
     slide(dx, dy) {
-        var xc = this.xCollisions;
-        var yc = this.yCollisions;
-        var x = this.x;
-        var y = this.y;
-        var ix, iy;
-        var ps = this.oRaycaster.nPlaneSpacing;
-        var nSize = this.nSize;
-        var wc = this.oWallCollision;
+        const xc = this.xCollisions;
+        const yc = this.yCollisions;
+        let x = this.x;
+        let y = this.y;
+        let ix, iy;
+        const ps = this.oRaycaster.nPlaneSpacing;
+        const nSize = this.nSize;
+        const wc = this.oWallCollision;
         wc.x = 0;
         wc.y = 0;
-        var nXYFormula = (Math.abs(dx) > Math.abs(dy) ? 1 : 0) | ((dx > dy) || (dx == dy && dx < 0) ? 2 : 0);
-        var bCorrection = false;
-        var xClip, yClip;
-        var bCrashWall = !this.bSlideWall;
+        const nXYFormula = (Math.abs(dx) > Math.abs(dy) ? 1 : 0) | ((dx > dy) || (dx == dy && dx < 0) ? 2 : 0);
+        let bCorrection = false;
+        let xClip, yClip;
+        const bCrashWall = !this.bSlideWall;
         this.bWallCollision = false;
-        for (var i = 0; i < 4; ++i) {
+        for (let i = 0; i < 4; ++i) {
             if (nXYFormula == i) {
                 continue
             }
@@ -217,10 +220,10 @@ O2.createObject('O876_Raycaster.Mobile', class Mobile {
         if (this.bEthereal || oMobile.bEthereal) {
             return false
         }
-        var dx = oMobile.x - this.x;
-        var dy = oMobile.y - this.y;
-        var d2 = dx * dx + dy * dy;
-        var dMin = this.nSize + oMobile.nSize;
+        const dx = oMobile.x - this.x;
+        const dy = oMobile.y - this.y;
+        const d2 = dx * dx + dy * dy;
+        let dMin = this.nSize + oMobile.nSize;
         dMin *= dMin;
         return d2 < dMin
     }
@@ -248,8 +251,8 @@ O2.createObject('O876_Raycaster.Mobile', class Mobile {
     strafeRight() {
         this.move(this.fTheta + PI / 2, this.fSpeed)
     }
-});
-Object.assign(O876_Raycaster.Mobile.prototype, {
+}
+Object.assign(Mobile.prototype, {
     oRaycaster: null,
     x: 0,
     y: 0,

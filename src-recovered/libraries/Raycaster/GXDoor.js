@@ -1,4 +1,7 @@
-O2.createObject('O876_Raycaster.GXDoor', class GXDoor extends O876_Raycaster.GXEffect {
+import { Marker } from '../O876/Marker.js';
+import { GXEffect } from './GXEffect.js';
+
+export class GXDoor extends GXEffect {
     __construct(r) {
         super.__construct(r);
         this.setAutoClose(true)
@@ -9,7 +12,7 @@ O2.createObject('O876_Raycaster.GXDoor', class GXDoor extends O876_Raycaster.GXE
     }
 
     process() {
-        var r = this.oRaycaster;
+        const r = this.oRaycaster;
         switch (this.nPhase) {
             case 0:
                 Marker.markXY(r.oDoors, this.x, this.y, this);
@@ -82,8 +85,8 @@ O2.createObject('O876_Raycaster.GXDoor', class GXDoor extends O876_Raycaster.GXE
         this.oRaycaster.setMapXYOffset(this.x, this.y, 0);
         this.oRaycaster.setMapXYPhysical(this.x, this.y, this.nCode)
     }
-});
-Object.assign(O876_Raycaster.GXDoor.prototype, {
+}
+Object.assign(GXDoor.prototype, {
     sClass: 'Door',
     nPhase: 0,
     oRaycaster: null,

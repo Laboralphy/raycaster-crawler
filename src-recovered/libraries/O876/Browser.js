@@ -1,14 +1,14 @@
-O2.createObject('O876.Browser', class Browser {
+export class Browser {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
 
     __construct() {
-        var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-        var isFirefox = typeof InstallTrigger !== 'undefined';
-        var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-        var isChrome = !!window.chrome && !isOpera;
-        var isIE = false || !!document.documentMode
+        const isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+        const isFirefox = typeof InstallTrigger !== 'undefined';
+        const isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+        const isChrome = !!window.chrome && !isOpera;
+        const isIE = false || !!document.documentMode
     }
 
     isOpera() {
@@ -30,4 +30,4 @@ O2.createObject('O876.Browser', class Browser {
     isIE() {
         return false || !!document.documentMode
     }
-});
+}

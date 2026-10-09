@@ -1,13 +1,86 @@
-O2.createObject('Game', class Game extends O876_Raycaster.Engine {
+import { Adventure } from './Adventure.js';
+import { BackupSystem } from './BackupSystem.js';
+import { DataSerializer } from './DataSerializer.js';
+import { Dungeon } from './Dungeon.js';
+import { EventLog } from './EventLog.js';
+import { Item } from './Item.js';
+import { LootSystem } from './LootSystem.js';
+import { MenuSystem } from './MenuSystem.js';
+import { HUD } from './UI/HUD.js';
+import { System } from './UI/System.js';
+import { UI } from './UI/UI.js';
+import { WeaponAnimator } from './WeaponAnimator.js';
+import { CONFIG } from './config.js';
+import { CutsceneEnd } from './cutscenes/CutsceneEnd.js';
+import { CutsceneIntro } from './cutscenes/CutsceneIntro.js';
+import { BLUEPRINTS_DATA } from './data/BLUEPRINTS_DATA.js';
+import { GFX_DATA } from './data/GFX_DATA.js';
+import { ICONS } from './data/ICONS.js';
+import { LABY } from './data/LABY.js';
+import { MONSTERS_BLUEPRINTS } from './data/MONSTERS_BLUEPRINTS.js';
+import { MONSTERS_TILES } from './data/MONSTERS_TILES.js';
+import { SOUNDS } from './data/SOUNDS.js';
+import { SPELLS_DATA } from './data/SPELLS_DATA.js';
+import { STRINGS } from './data/STRINGS.js';
+import { VERSION_DATA } from './data/VERSION_DATA.js';
+import { WORLD_DATA } from './data/WORLD_DATA.js';
+import { GXBlind } from './gx/GXBlind.js';
+import { GXColorVeil } from './gx/GXColorVeil.js';
+import { GXConfused } from './gx/GXConfused.js';
+import { GXIconPad } from './gx/GXIconPad.js';
+import { ArrayTools } from '../libraries/O876/ArrayTools.js';
+import { Land } from '../libraries/O876/Astar/Land.js';
+import { LZW } from '../libraries/O876/LZW.js';
+import { Marker } from '../libraries/O876/Marker.js';
+import { SoundSystem } from '../libraries/O876/SoundSystem.js';
+import { XHR } from '../libraries/O876/XHR.js';
+import { Engine } from '../libraries/Raycaster/Engine.js';
+import { GXFlash } from '../libraries/Raycaster/GXFlash.js';
+import { GXMessage } from '../libraries/Raycaster/GXMessage.js';
+import { KEYS } from '../libraries/Raycaster/KEYS.js';
+import { PointerLock } from '../libraries/Raycaster/PointerLock.js';
+import { RC } from '../libraries/Raycaster/RC.js';
+import { MathTools, PI } from '../libraries/Raycaster/Tools/MathTools.js';
+import { BookPlugin } from './plugins/BookPlugin.js';
+import { ConsolePlugin } from './plugins/ConsolePlugin.js';
+import { CraftPlugin } from './plugins/CraftPlugin.js';
+import { DescriptorPlugin } from './plugins/DescriptorPlugin.js';
+import { DialogPlugin } from './plugins/DialogPlugin.js';
+import { InventoryPlugin } from './plugins/InventoryPlugin.js';
+import { MagicPlugin } from './plugins/MagicPlugin.js';
+import { PlayersheetPlugin } from './plugins/PlayersheetPlugin.js';
+import { ScorePlugin } from './plugins/ScorePlugin.js';
+import { ShopPlugin } from './plugins/ShopPlugin.js';
+import { StubPlugin } from './plugins/StubPlugin.js';
+import { UnderwaterPlugin } from './plugins/UnderwaterPlugin.js';
+
+// plugins disponibles pour Game.addPlugin, par nom
+const PLUGINS = {
+    Book: BookPlugin,
+    Console: ConsolePlugin,
+    Craft: CraftPlugin,
+    Descriptor: DescriptorPlugin,
+    Dialog: DialogPlugin,
+    Inventory: InventoryPlugin,
+    Magic: MagicPlugin,
+    Playersheet: PlayersheetPlugin,
+    Score: ScorePlugin,
+    Shop: ShopPlugin,
+    Stub: StubPlugin,
+    Underwater: UnderwaterPlugin
+};
+
+export class Game extends Engine {
     addPlugin(sPlugin) {
         if (this.aPlugins === null) {
             this.aPlugins = []
         }
-        var p, oPlugin, sClass = sPlugin + 'Plugin';
-        if (!(sClass in window)) {
+        let p, oPlugin;
+        const sClass = sPlugin + 'Plugin';
+        if (!(sPlugin in PLUGINS)) {
             throw new Error('Game.addPlugin: plugin ' + sClass + ' not found')
         }
-        p = window[sPlugin + 'Plugin'];
+        p = PLUGINS[sPlugin];
         oPlugin = new p();
         if (!('setGame' in oPlugin)) {
             throw new Error('Game.addPlugin: plugin ' + sClass + ' has no method "setGame"')
@@ -41,19 +114,19 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         if (!(s in this.oPluginSignalRegister)) {
             return
         }
-        var n = this.oPluginSignalRegister[s].indexOf(o);
+        const n = this.oPluginSignalRegister[s].indexOf(o);
         if (n >= 0) {
             ArrayTools.removeItem(this.oPluginSignalRegister[s], n)
         }
     }
 
     sendPluginSignal(s) {
-        var i, p, pi, n;
+        let i, p, pi, n;
         if (this.oPluginSignalRegister && (s in this.oPluginSignalRegister)) {
             p = this.oPluginSignalRegister[s];
             n = p.length;
             if (n) {
-                var aArgs;
+                let aArgs;
                 if (arguments.length > 1) {
                     aArgs = Array.prototype.slice.call(arguments, 1)
                 } else {
@@ -79,7 +152,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         this.oDungeon = new Dungeon();
         this.oSerializer = new DataSerializer();
         this.oLootSystem = new LootSystem();
-        WORLD_DATA = JSON.parse(this.sWorldBackup);
+        Object.assign(WORLD_DATA, JSON.parse(this.sWorldBackup));
         this.oAdventure = new Adventure()
     }
 
@@ -156,13 +229,13 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         this.oControls.ALIASES[KEYS._CNTFPS_A_FORWARD] = KEYS._CNTFPS_Q_FORWARD;
         this.oControls.ALIASES[KEYS._CNTFPS_A_LEFT] = KEYS._CNTFPS_Q_LEFT;
         this._getMouseDevice(this.oCanvas);
-        this.oMPL = O876_Raycaster.PointerLock;
+        this.oMPL = PointerLock;
         this.bMPL = this.oMPL.init();
         if (this.oSoundSystem === null) {
             this.oSoundSystem = new SoundSystem();
             this.oSoundSystem.addChans(16)
         }
-        this.oPathFinder = new Astar.Land();
+        this.oPathFinder = new Land();
         this.oPathFinder.isCellWalkable = function(x, y) {
             try {
                 return (this.getCell(x, y) & 0xFF00) === 0
@@ -203,7 +276,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
                 options: STRINGS._(['~mmenu_newgame', '~mmenu_htp', '~mmenu_credits'])
             })
         }
-        var nMenuAction = this.menuInputProcess();
+        const nMenuAction = this.menuInputProcess();
         this.ui_render();
         switch (nMenuAction) {
             case 1:
@@ -240,17 +313,17 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     onEnterLevel() {
-        var pNoFlash = this.sys_flash;
+        const pNoFlash = this.sys_flash;
         this.sys_flash = function() {};
         this.oUI.oScreen.hide();
         this.oUI.clear();
         UI.oIconsItems = this.oRaycaster.oHorde.oTiles.i_icons.oImage;
         this.oHUD.setTiles(this.oRaycaster.oHorde.oTiles.i_digits.oImage);
         this.oLootBags = Marker.create();
-        var x, y;
-        var df = function(rc, c, xBlock, yBlock, n) {
-            var p = rc.oHorde.oTiles.d_pictures;
-            var xPic = ((xBlock + yBlock + n) % p.nFrames) * p.nWidth;
+        let x, y;
+        const df = function(rc, c, xBlock, yBlock, n) {
+            const p = rc.oHorde.oTiles.d_pictures;
+            const xPic = ((xBlock + yBlock + n) % p.nFrames) * p.nWidth;
             c.getContext('2d').drawImage(p.oImage, xPic, 0, p.nWidth, p.nHeight, 16, 28, p.nWidth, p.nHeight)
         };
         for (y = 0; y < this.oRaycaster.aMap.length; y++) {
@@ -273,7 +346,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         }
         this.oPathFinder.init(this.oRaycaster.aMap);
         this.oMPL.setHook(null);
-        var oPlayerThinker = this.oThinkerManager.createThinker('PlayerKeyboard');
+        const oPlayerThinker = this.oThinkerManager.createThinker('PlayerKeyboard');
         oPlayerThinker.oKeyboard = this._getKeyboardDevice();
         oPlayerThinker.oMouse = this._getMouseDevice();
         oPlayerThinker.oMouse.clearEvents();
@@ -287,13 +360,13 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         this.oRaycaster.oCamera.nBlueprintType = RC.OBJECT_TYPE_PLAYER;
         this.oRaycaster.oCamera.setThinker(oPlayerThinker);
         this.oRaycaster.oCamera.slide(0, 0);
-        var oPC = this.oDungeon.getPlayerCreature();
+        const oPC = this.oDungeon.getPlayerCreature();
         this.oRaycaster.oCamera.setData('creature', oPC);
         oPC.setOnAttributeChanged(this.playerAttributeChanged.bind(this));
         this.oWeaponInUse = this.oDungeon.getCreatureEquippedWeapon(oPC);
-        var nLevel = 1,
-            iMob, oCreature, oMobile, oCreatures = this.oDungeon.getHorde();
-        var nMobCount = this.oRaycaster.oHorde.getMobileCount();
+        const nLevel = 1;
+        let iMob, oCreature, oMobile, oCreatures = this.oDungeon.getHorde();
+        const nMobCount = this.oRaycaster.oHorde.getMobileCount();
         if (oCreatures === null) {
             oCreatures = {};
             for (iMob = 1; iMob < nMobCount; iMob++) {
@@ -307,11 +380,11 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
             oMobile.setData('creature', oCreature);
             oCreature.setOnAttributeChanged(oMobile.oThinker.creatureAttributeChanged.bind(oMobile.oThinker))
         }
-        var aDoors = this.oDungeon.getOpenDoors();
-        var nDoorCount = aDoors.length;
-        var oDoor, oDoorGX;
-        var nSecurityTimeOut;
-        for (var iDoor = 0; iDoor < nDoorCount; iDoor++) {
+        const aDoors = this.oDungeon.getOpenDoors();
+        const nDoorCount = aDoors.length;
+        let oDoor, oDoorGX;
+        let nSecurityTimeOut;
+        for (let iDoor = 0; iDoor < nDoorCount; iDoor++) {
             oDoor = aDoors[iDoor];
             oDoorGX = this.openDoor(oDoor.x, oDoor.y);
             nSecurityTimeOut = 256;
@@ -320,18 +393,18 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
                 nSecurityTimeOut--
             }
         }
-        var nStaticCount = this.oRaycaster.oHorde.aStatics.length;
-        var oStatic;
-        for (var iStatic = 0; iStatic < nStaticCount; iStatic++) {
+        const nStaticCount = this.oRaycaster.oHorde.aStatics.length;
+        let oStatic;
+        for (let iStatic = 0; iStatic < nStaticCount; iStatic++) {
             oStatic = this.oRaycaster.oHorde.aStatics[iStatic];
             if (oStatic.getData('lootbag')) {
                 Marker.markXY(this.oLootBags, oStatic.xSector, oStatic.ySector, oStatic)
             }
         }
-        var oGXIconPad = new GXIconPad(this.oRaycaster);
+        const oGXIconPad = new GXIconPad(this.oRaycaster);
         oGXIconPad.setCreature(oPC);
         this.oRaycaster.oEffects.addEffect(oGXIconPad);
-        var w = this.oWeaponInUse;
+        const w = this.oWeaponInUse;
         if (w) {
             this.wd_selectWeapon(null);
             this.wd_selectWeapon(w)
@@ -351,14 +424,14 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         if (this.oRaycaster === null) {
             return
         }
-        var sArea = this.oDungeon.getPlayerLocationArea();
-        var nFloor = this.oDungeon.getPlayerLocationFloor();
-        var aObjects = [];
-        var nMobCount = this.oRaycaster.oHorde.getMobileCount();
-        var oMob, iMob;
-        var oObjectData;
-        var oCreatures = {},
-            oCreature = null;
+        const sArea = this.oDungeon.getPlayerLocationArea();
+        const nFloor = this.oDungeon.getPlayerLocationFloor();
+        const aObjects = [];
+        let nMobCount = this.oRaycaster.oHorde.getMobileCount();
+        let oMob, iMob;
+        let oObjectData;
+        const oCreatures = {};
+        let oCreature = null;
         for (iMob = 1; iMob < nMobCount; iMob++) {
             oMob = this.oRaycaster.oHorde.getMobile(iMob);
             oCreature = oMob.getData('creature');
@@ -433,7 +506,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         this.oContext.fillStyle = 'rgb(255, 255, 255)';
         this.oContext.font = 'bold 32px monospace';
         this.oContext.textAlign = 'center';
-        var sPauseText = STRINGS._('~m_pause');
+        const sPauseText = STRINGS._('~m_pause');
         this.oContext.fillText(sPauseText, this.oCanvas.width >> 1, this.oCanvas.height >> 1);
         this.oContext.strokeText(sPauseText, this.oCanvas.width >> 1, this.oCanvas.height >> 1);
         this.setDoomloop('statePauseLoop')
@@ -482,7 +555,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     clock() {
         this.nTime++;
         this.nTimeMs += this.TIME_FACTOR;
-        var s = this.nTimeMs / 1000 | 0;
+        const s = this.nTimeMs / 1000 | 0;
         this.bNewSecond = false;
         if (s != this.nSecond) {
             this.bNewSecond = true;
@@ -539,8 +612,8 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     pausedKeyboardProcess() {
-        var k = this._getKeyboardDevice();
-        var nKey, sCmd, aCmd;
+        const k = this._getKeyboardDevice();
+        let nKey, sCmd, aCmd;
         while ((nKey = k.inputKey()) !== 0) {
             switch (nKey) {
                 case KEYS._INT_PAUSE:
@@ -584,8 +657,8 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     cutsceneKeyboardProcess() {
-        var k = this._getKeyboardDevice();
-        var nKey;
+        const k = this._getKeyboardDevice();
+        let nKey;
         while ((nKey = k.inputKey()) !== 0) {
             switch (nKey) {
                 case KEYS.ESCAPE:
@@ -596,8 +669,8 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gameKeyboardProcess() {
-        var k = this._getKeyboardDevice();
-        var nKey;
+        const k = this._getKeyboardDevice();
+        let nKey;
         while ((nKey = k.inputKey()) !== 0) {
             this.sendPluginSignal('key', nKey);
             if (this.nIntfMode == UI.INTFMODE_NONE) {
@@ -648,15 +721,15 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         if (oWeapon == this.oWeaponInUse) {
             return
         }
-        var rc = this.oRaycaster;
-        var wl = rc.oWeaponLayer;
+        const rc = this.oRaycaster;
+        const wl = rc.oWeaponLayer;
         if (oWeapon === null) {
             wl.visible = false
         } else {
             this.oWeaponAnimator.selectWeapon(oWeapon);
             this.oWeaponAnimator.nDrawSpeed = this.TIME_FACTOR;
             this.oWeaponAnimator.fOscilloSpeed = this.TIME_FACTOR * 0.32;
-            var t = rc.oHorde.oTiles[this.oWeaponAnimator.sTile];
+            const t = rc.oHorde.oTiles[this.oWeaponAnimator.sTile];
             wl.width = t.nWidth;
             wl.height = t.nHeight;
             wl.canvas = t.oImage;
@@ -670,12 +743,12 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     wd_render() {
-        var rc = this.oRaycaster;
-        var wl = rc.oWeaponLayer;
+        const rc = this.oRaycaster;
+        const wl = rc.oWeaponLayer;
         if (wl.visible) {
-            var c = rc.oCamera;
-            var bKbdFiring = c.oThinker.getCommandStatus('fire') || c.oThinker.getCommandStatus('button0');
-            var sAnim = 'ready';
+            const c = rc.oCamera;
+            const bKbdFiring = c.oThinker.getCommandStatus('fire') || c.oThinker.getCommandStatus('button0');
+            let sAnim = 'ready';
             if (bKbdFiring) {
                 switch (this.oWeaponInUse.type) {
                     case 'dagger':
@@ -698,11 +771,11 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     ui_init() {
-        this.oUI = new UI.System();
+        this.oUI = new System();
         this.oUI.setRenderCanvas(this.oCanvas);
-        this.oHUD = new UI.HUD();
-        var oHUDCanvas = document.getElementById('hud');
-        var oHUDContext = oHUDCanvas.getContext('2d');
+        this.oHUD = new HUD();
+        const oHUDCanvas = document.getElementById('hud');
+        const oHUDContext = oHUDCanvas.getContext('2d');
         oHUDContext.mozImageSmoothingEnabled = false;
         oHUDContext.webkitImageSmoothingEnabled = false;
         this.oHUD.setRenderCanvas(oHUDCanvas)
@@ -738,11 +811,11 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
             this[sRoster] = []
         }
         if (this[sRoster][nLevel] === undefined) {
-            var h = oData[sData];
-            var a = [];
-            var l;
-            var i;
-            for (var sObj in h) {
+            const h = oData[sData];
+            const a = [];
+            let l;
+            let i;
+            for (const sObj in h) {
                 l = h[sObj].levels;
                 for (i = 0; i < l.length; i++) {
                     if (l[i] == nLevel) {
@@ -768,19 +841,19 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     rld_loadLevel() {
-        var y64, x64, xBlock, yBlock, nBlock, aRow, nCode, i;
-        var oStartPoint = {
+        let y64, x64, xBlock, yBlock, nBlock, aRow, nCode, i;
+        let oStartPoint = {
             x: 0,
             y: 0,
             angle: 0
         };
-        var xStartPoint = this.oDungeon.getPlayerLocationStartPoint();
-        var d = this.getWorldData();
+        const xStartPoint = this.oDungeon.getPlayerLocationStartPoint();
+        const d = this.getWorldData();
         this.oLootData = d.loot;
-        var t = GFX_DATA.textures[d.textures];
-        var aMetacodes = t.metacodes;
-        var aCodes = t.codes;
-        var aLaby = this.oDungeon.getArea();
+        const t = GFX_DATA.textures[d.textures];
+        const aMetacodes = t.metacodes;
+        const aCodes = t.codes;
+        let aLaby = this.oDungeon.getArea();
         if (!aLaby) {
             if ('map' in d) {
                 aLaby = d.map
@@ -789,7 +862,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
             }
             this.oDungeon.defineArea(aLaby)
         }
-        var oData = {
+        const oData = {
             map: [],
             walls: {
                 src: t.src,
@@ -806,20 +879,20 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
             objects: this.oDungeon.getObjects()
         };
         this.sAmbience = d.music;
-        var s = '';
+        let s = '';
         for (s in GFX_DATA.tiles) {
             oData.tiles[s] = GFX_DATA.tiles[s]
         }
         for (s in BLUEPRINTS_DATA) {
             oData.blueprints[s] = BLUEPRINTS_DATA[s]
         }
-        var bCreateObjects = oData.objects === undefined;
+        const bCreateObjects = oData.objects === undefined;
         if (bCreateObjects) {
             oData.objects = []
         }
         this.aMobRoster = null;
         this.aSobRoster = null;
-        var sChosenBP = null;
+        let sChosenBP = null;
         MathTools.rndSeed8();
         for (yBlock = 0; yBlock < aLaby.length; yBlock++) {
             y64 = yBlock * this.oRaycaster.nPlaneSpacing + (this.oRaycaster.nPlaneSpacing >> 1);
@@ -935,7 +1008,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
                 }
             }
         }
-        var sBP, sTile;
+        let sBP, sTile;
         for (i = 0; i < oData.objects.length; i++) {
             sBP = oData.objects[i].blueprint;
             if (!(sBP in oData.blueprints)) {
@@ -968,10 +1041,10 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gc_dropLoot(sType, x, y) {
-        var aLoot;
+        let aLoot;
         aLoot = this.oLootSystem.getLoot(sType);
-        var oItem, sLoot, aSplit, nCount;
-        for (var i = 0; i < aLoot.length; i++) {
+        let oItem, sLoot, aSplit, nCount;
+        for (let i = 0; i < aLoot.length; i++) {
             sLoot = aLoot[i];
             aSplit = sLoot.split('*');
             if (aSplit.length > 1) {
@@ -1012,15 +1085,16 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gc_activateWall(oMobile) {
-        var rc = this.oRaycaster;
-        var c = this.oDungeon;
-        var xy = oMobile.getFrontCellXY();
-        var x = xy.x;
-        var y = xy.y;
-        var nBlockCode = c.getAreaBlockProperty(x, y);
-        var nSound = 0;
-        var xBlock = x * this.oRaycaster.nPlaneSpacing + (this.oRaycaster.nPlaneSpacing >> 1);
-        var yBlock = y * this.oRaycaster.nPlaneSpacing + (this.oRaycaster.nPlaneSpacing >> 1);
+        let oGX, oGame, nKeyCode, sKeyLetter;
+        const rc = this.oRaycaster;
+        const c = this.oDungeon;
+        const xy = oMobile.getFrontCellXY();
+        const x = xy.x;
+        const y = xy.y;
+        const nBlockCode = c.getAreaBlockProperty(x, y);
+        let nSound = 0;
+        const xBlock = x * this.oRaycaster.nPlaneSpacing + (this.oRaycaster.nPlaneSpacing >> 1);
+        const yBlock = y * this.oRaycaster.nPlaneSpacing + (this.oRaycaster.nPlaneSpacing >> 1);
         this.sendPluginSignal('block', nBlockCode, oMobile, x, y);
         switch (nBlockCode) {
             case LABY.BLOCK_ELEVATOR_DOOR_NEXT_SEALED:
@@ -1048,8 +1122,8 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
             case LABY.BLOCK_ELEVATOR_DOOR_PREV:
             case LABY.BLOCK_ELEVATOR_DOOR_NEXT_UNSEALED:
             case LABY.BLOCK_JAIL_DOOR:
-                var oGX = this.openDoor(x, y, false);
-                var oGame = this;
+                oGX = this.openDoor(x, y, false);
+                oGame = this;
                 this.sys_playSound(SOUNDS.DOOR_OPEN[nSound], xBlock, yBlock);
                 if (oGX && SOUNDS.DOOR_CLOSE[nSound] && oGX.sClass === 'Door') {
                     oGX.done = function() {
@@ -1088,8 +1162,8 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
             case LABY.BLOCK_KEY_3:
                 rc.setMapXY(x, y, rc.aWorld.walls.metacodes[LABY.BLOCK_EMPTY_KEY]);
                 c.pickupAreaKey(nBlockCode - LABY.BLOCK_KEY_0);
-                var nKeyCode = nBlockCode - LABY.BLOCK_KEY_0;
-                var sKeyLetter = ('brgy').charAt(nKeyCode);
+                nKeyCode = nBlockCode - LABY.BLOCK_KEY_0;
+                sKeyLetter = ('brgy').charAt(nKeyCode);
                 this.sys_notify('key' + nKeyCode.toString() + '_acquired', [x, y], ICONS['itm_' + sKeyLetter + 'key']);
                 c.setAreaBlockProperty(x, y, LABY.BLOCK_EMPTY_KEY);
                 this.sys_playSound(SOUNDS.BLOCK_GETKEY, xBlock, yBlock);
@@ -1179,16 +1253,16 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gc_moveToSector(x, y) {
-        var ps = this.oRaycaster.nPlaneSpacing;
-        var ps2 = ps >> 1;
+        const ps = this.oRaycaster.nPlaneSpacing;
+        const ps2 = ps >> 1;
         this.getPlayer().setXY(x * ps + ps2, y * ps + ps2)
     }
 
     gc_activateTransit(sExit) {
-        var ldt = this.rld_getLevelData().transit;
+        const ldt = this.rld_getLevelData().transit;
         this.oAdventure.notify(this, sExit + 'Switch');
         if (sExit in ldt) {
-            var t = ldt[sExit];
+            const t = ldt[sExit];
             if (t === false) {
                 return true
             } else if (typeof t == 'string') {
@@ -1202,7 +1276,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gc_equipItem(oMobile, oItem) {
-        var oCreature = oMobile.getData('creature');
+        const oCreature = oMobile.getData('creature');
         this.oDungeon.equipItem(oCreature, oItem);
         if (oMobile == this.getPlayer() && oItem.slot == 'hand') {
             this.wd_selectWeapon(oItem)
@@ -1210,15 +1284,15 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gc_equipWeapon(oMobile, bNext) {
-        var oCreature = oMobile.getData('creature');
-        var oInventory = this.oDungeon.getCreatureInventory(oCreature);
+        const oCreature = oMobile.getData('creature');
+        const oInventory = this.oDungeon.getCreatureInventory(oCreature);
         if (!('__iMouseWheelSelect' in oInventory)) {
             oInventory.__iMouseWheelSelect = 0
         }
-        var nInvSize = oInventory.getSize();
-        var nNext = bNext ? 1 : nInvSize - 1;
-        var nCheck = nInvSize + 1;
-        var oItem;
+        const nInvSize = oInventory.getSize();
+        const nNext = bNext ? 1 : nInvSize - 1;
+        let nCheck = nInvSize + 1;
+        let oItem;
         do {
             oInventory.__iMouseWheelSelect = (oInventory.__iMouseWheelSelect + nNext) % nInvSize;
             oItem = oInventory.aBagSlots[oInventory.__iMouseWheelSelect];
@@ -1232,9 +1306,9 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
 
     gc_useItem(oMobile, oItem) {
         if ('properties' in oItem) {
-            var aProperties = oItem.properties;
-            var nPropCount = aProperties.length;
-            for (var iProp = 0; iProp < nPropCount; iProp++) {
+            const aProperties = oItem.properties;
+            const nPropCount = aProperties.length;
+            for (let iProp = 0; iProp < nPropCount; iProp++) {
                 this.gc_affect(oMobile, aProperties[iProp], 1, 0)
             }
         }
@@ -1242,14 +1316,14 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gc_pickup(oMobile) {
-        var x = oMobile.xSector;
-        var y = oMobile.ySector;
-        var oCreature = oMobile.getData('creature');
-        var oInv = this.oDungeon.getCreatureInventory(oCreature);
-        var oItem = null,
+        let x = oMobile.xSector;
+        let y = oMobile.ySector;
+        const oCreature = oMobile.getData('creature');
+        const oInv = this.oDungeon.getCreatureInventory(oCreature);
+        let oItem = null,
             oDropStack;
-        var rc = this.oRaycaster;
-        for (var i = 0; i < 2; i++) {
+        const rc = this.oRaycaster;
+        for (let i = 0; i < 2; i++) {
             oItem = this.oDungeon.peekDrop(x, y);
             if (oItem) {
                 this.sys_notify('item_pickup', [oItem.getName()], oItem.icon)
@@ -1259,7 +1333,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
             oItem = this.oDungeon.pickupDrop(oCreature, x, y);
             oDropStack = this.oDungeon.getDropStack(x, y);
             if (oDropStack && oDropStack.length === 0) {
-                var oMobDS = Marker.getMarkXY(this.oLootBags, x, y);
+                const oMobDS = Marker.getMarkXY(this.oLootBags, x, y);
                 if (oMobDS) {
                     rc.oHorde.unlinkStatic(oMobDS)
                 }
@@ -1275,9 +1349,9 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gc_dropItem(oMobile, oItem) {
-        var oCreature = oMobile.getData('creature');
-        var xCell = oMobile.xSector;
-        var yCell = oMobile.ySector;
+        const oCreature = oMobile.getData('creature');
+        const xCell = oMobile.xSector;
+        const yCell = oMobile.ySector;
         this.gc_spawnLootBag(0, xCell, yCell);
         this.oDungeon.dropItem(oCreature, oItem);
         this.oDungeon.addDrop(oMobile.xSector, oMobile.ySector, oItem);
@@ -1287,9 +1361,9 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gc_spawnLootBag(nType, xCell, yCell) {
-        var xDrop = xCell * this.oRaycaster.nPlaneSpacing + (this.oRaycaster.nPlaneSpacing >> 1);
-        var yDrop = yCell * this.oRaycaster.nPlaneSpacing + (this.oRaycaster.nPlaneSpacing >> 1);
-        var oLootBag = Marker.getMarkXY(this.oLootBags, xCell, yCell);
+        const xDrop = xCell * this.oRaycaster.nPlaneSpacing + (this.oRaycaster.nPlaneSpacing >> 1);
+        const yDrop = yCell * this.oRaycaster.nPlaneSpacing + (this.oRaycaster.nPlaneSpacing >> 1);
+        let oLootBag = Marker.getMarkXY(this.oLootBags, xCell, yCell);
         if (!oLootBag) {
             oLootBag = this.spawnMobile('o_lootbag', xDrop, yDrop, 0);
             oLootBag.oSprite.playAnimationType(nType);
@@ -1301,9 +1375,9 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gc_consumeItem(oMobile, oItem, nCount) {
-        var oCreature = oMobile.getData('creature');
+        const oCreature = oMobile.getData('creature');
         if (oItem.isStackable()) {
-            var nDropped = oItem.stackDec(nCount);
+            const nDropped = oItem.stackDec(nCount);
             if (oItem.isStackEmpty()) {
                 this.oDungeon.dropItem(oCreature, oItem)
             }
@@ -1315,23 +1389,23 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gc_consumeAnyItem(oMobile, sRefRef, nCount) {
-        var oCreature = oMobile.getData('creature');
+        const oCreature = oMobile.getData('creature');
         return this.oDungeon.getCreatureInventory(oCreature).removeItemStack(sResRef, nCount)
     }
 
     gc_attack(oMobile, nChargeTime) {
-        var oCreature = oMobile.getData('creature');
-        var aMissiles = this.oDungeon.actionAttack(oCreature, nChargeTime, this.nTimeMs);
+        const oCreature = oMobile.getData('creature');
+        let aMissiles = this.oDungeon.actionAttack(oCreature, nChargeTime, this.nTimeMs);
         if (typeof aMissiles === 'string') {
             this.sys_notify(aMissiles);
             aMissiles = this.oDungeon.getWeaponMissileDefinition(SPELLS_DATA.slash_wand)
         } else if (aMissiles === null) {
             return
         }
-        var nMissiles = aMissiles.length;
-        var oMissileDef, oMissile = null,
+        const nMissiles = aMissiles.length;
+        let oMissileDef, oMissile = null,
             sOptions;
-        for (var iMis = 0; iMis < nMissiles; iMis++) {
+        for (let iMis = 0; iMis < nMissiles; iMis++) {
             oMissileDef = aMissiles[iMis];
             oMissile = this.spawnMobile(oMissileDef.blueprint, oMobile.x, oMobile.y, oMobile.fTheta + oMissileDef.angle);
             oMissile.fSpeed = this.TIME_FACTOR * oMissile.getData('speed') / 1000;
@@ -1346,24 +1420,24 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
             oMissile.oThinker.nLifeOut = this.nTime + oMissile.getData('range');
             oMissile.oThinker.fire(oMobile)
         }
-        var aSnd = oMissile.getData('sounds');
+        const aSnd = oMissile.getData('sounds');
         this.sys_playSound(aSnd[0], oMobile.x, oMobile.y)
     }
 
     gc_affect(oMobile, oEffects, oChances, nPower) {
-        var ep = this.oDungeon.oEffectProcessor;
+        const ep = this.oDungeon.oEffectProcessor;
         if (typeof oEffects == 'object') {
-            var nEffCount = oEffects.length;
-            for (var iEff = 0; iEff < nEffCount; iEff++) {
+            const nEffCount = oEffects.length;
+            for (let iEff = 0; iEff < nEffCount; iEff++) {
                 this.gc_affect(oMobile, oEffects[iEff], oChances[iEff], nPower)
             }
         } else {
-            var oCreature = oMobile.getData('creature');
+            const oCreature = oMobile.getData('creature');
             if (Math.random() <= this.oDungeon.oEffectProcessor.getLuckBalance(oChances, oCreature.getAttribute('jinx'), oCreature.getAttribute('luck'))) {
                 if (nPower === undefined) {
                     nPower = 0
                 }
-                var nLevel = ep.getEffectLevel(oEffects) + nPower;
+                let nLevel = ep.getEffectLevel(oEffects) + nPower;
                 if (nLevel < 0) {
                     nLevel = 0
                 }
@@ -1379,8 +1453,8 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         if (aResult === undefined || aResult === null) {
             aResult = []
         }
-        var aSector, nSectorLen, iMob, oMob, nObjectType;
-        var rc = this.oRaycaster;
+        let aSector, nSectorLen, iMob, oMob, nObjectType;
+        const rc = this.oRaycaster;
         aSector = rc.oMobileSectors.get(x, y);
         if (aSector === null) {
             return aResult
@@ -1400,11 +1474,11 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         if (aResult === undefined || aResult === null) {
             aResult = []
         }
-        var aMobs = this.gc_selectMobilesInZone(x - nRadius, y - nRadius, x + nRadius, y + nRadius);
-        var nMobs = aMobs.length;
-        var nRadius2 = nRadius * nRadius;
-        var oMob;
-        for (var iMob = 0; iMob < nMobs; iMob++) {
+        const aMobs = this.gc_selectMobilesInZone(x - nRadius, y - nRadius, x + nRadius, y + nRadius);
+        const nMobs = aMobs.length;
+        const nRadius2 = nRadius * nRadius;
+        let oMob;
+        for (let iMob = 0; iMob < nMobs; iMob++) {
             oMob = aMobs[iMob];
             if (((oMob.x - x) * (oMob.x - x) + (oMob.y - y) * (oMob.y - y)) <= nRadius2) {
                 aResult.push(oMob)
@@ -1417,9 +1491,9 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         if (aResult === undefined || aResult === null) {
             aResult = []
         }
-        var x, y, nCellSize = this.oRaycaster.nPlaneSpacing,
-            nLabySize = this.oRaycaster.nMapSize;
-        var xt = Math.min(nLabySize, Math.max(0, Math.min(x1, x2) / nCellSize | 0)),
+        let x, y;
+        const nCellSize = this.oRaycaster.nPlaneSpacing, nLabySize = this.oRaycaster.nMapSize;
+        const xt = Math.min(nLabySize, Math.max(0, Math.min(x1, x2) / nCellSize | 0)),
             xb = Math.min(nLabySize, Math.max(0, Math.max(x1, x2) / nCellSize | 0)),
             yt = Math.min(nLabySize, Math.max(0, Math.min(y1, y2) / nCellSize | 0)),
             yb = Math.min(nLabySize, Math.max(0, Math.max(y1, y2) / nCellSize | 0));
@@ -1432,15 +1506,15 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     gc_visualEffect(sBlueprint, x, y) {
-        var oMob = this.spawnMobile(sBlueprint, x, y, 0);
+        const oMob = this.spawnMobile(sBlueprint, x, y, 0);
         oMob.oSprite.playAnimationType(0, true);
-        var oThinker = oMob.oThinker;
+        const oThinker = oMob.oThinker;
         oThinker.start(oMob.oSprite.oAnimation.nDuration * oMob.oSprite.oAnimation.nCount);
         oMob.bEthereal = true
     }
 
     playerAttributeChanged(oCreature, sAttribute, nNewValue, nPreviousValue) {
-        var nWarning;
+        let nWarning;
         this.sendPluginSignal('attr_' + sAttribute, this.getPlayer(), nNewValue, nPreviousValue);
         if (oCreature == this.oDungeon.getPlayerCreature()) {
             switch (sAttribute) {
@@ -1526,16 +1600,16 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     sys_endGame() {
-        var oSave = this.sys_save();
+        const oSave = this.sys_save();
         this.pause();
-        var sName = prompt(STRINGS._('~m_whatisyourname'));
-        var nNow = Date.now();
-        var oFields = {
+        const sName = prompt(STRINGS._('~m_whatisyourname'));
+        const nNow = Date.now();
+        const oFields = {
             c: oSave.p.c,
             d: nNow,
             s: this.oDungeon.getScore(this.oDungeon.getPlayerCreature())
         };
-        this.sys_storeData('ru_hof_rei_' + sName + '_' + nNow.toString(16), O876.LZW.encode(JSON.stringify(oFields)), true);
+        this.sys_storeData('ru_hof_rei_' + sName + '_' + nNow.toString(16), LZW.encode(JSON.stringify(oFields)), true);
         this.resume();
         this.sys_cutscene('end', 'stateMenuLoop')
     }
@@ -1545,7 +1619,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
             bRemote = false
         }
         if (bRemote) {
-            var oPostData = {
+            const oPostData = {
                 f: sKey,
                 d: xData
             }
@@ -1564,17 +1638,17 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     sys_save() {
-        var oPlayer = this.oDungeon.getPlayerCreature();
+        const oPlayer = this.oDungeon.getPlayerCreature();
         if (oPlayer.getAttribute('dead')) {
             return null
         }
-        var sArea = this.oDungeon.getPlayerLocationArea();
-        var nFloor = this.oDungeon.getPlayerLocationFloor();
+        const sArea = this.oDungeon.getPlayerLocationArea();
+        const nFloor = this.oDungeon.getPlayerLocationFloor();
         if (sArea === '') {
             return null
         }
         this.pause();
-        var oData = this.oSerializer.save(this);
+        const oData = this.oSerializer.save(this);
         this.sys_storeData(this.sSaveFile + '-' + sArea + '-' + nFloor.toString(), oData.w);
         this.sys_storeData(this.sSaveFile, oData.p);
         this.resume();
@@ -1582,13 +1656,13 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     sys_saveLevel() {
-        var sArea = this.oDungeon.getPlayerLocationArea();
-        var nFloor = this.oDungeon.getPlayerLocationFloor();
+        const sArea = this.oDungeon.getPlayerLocationArea();
+        const nFloor = this.oDungeon.getPlayerLocationFloor();
         if (sArea === '') {
             return
         }
         this.pause();
-        var oData = this.oSerializer.save(this);
+        const oData = this.oSerializer.save(this);
         this.sys_storeData(this.sSaveFile + '-' + sArea + '-' + nFloor.toString(), oData.w);
         this.resume()
     }
@@ -1598,10 +1672,10 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     sys_restore() {
-        var oData = {};
+        const oData = {};
         oData.p = this.sys_loadData(this.sSaveFile);
-        var sArea = oData.p.l.a;
-        var nFloor = oData.p.l.f;
+        const sArea = oData.p.l.a;
+        const nFloor = oData.p.l.f;
         oData.w = this.sys_loadData(this.sSaveFile + '-' + sArea + '-' + nFloor.toString());
         this.oDungeon.setPlayerSpawnPoint(oData.p.p.x, oData.p.p.y, oData.p.p.angle);
         this.pause();
@@ -1611,8 +1685,8 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     sys_restoreLevel(sArea, nFloor) {
-        var oData;
-        var d = this.sys_loadData(this.sSaveFile + '-' + sArea + '-' + nFloor.toString());
+        let oData;
+        const d = this.sys_loadData(this.sSaveFile + '-' + sArea + '-' + nFloor.toString());
         if (d) {
             oData = {
                 w: d
@@ -1631,8 +1705,8 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     sys_notify(sMessage, aParams, nIcon) {
-        var sKeyMsg = '~notify_' + sMessage;
-        var sDispMsg = STRINGS._(sKeyMsg, aParams);
+        const sKeyMsg = '~notify_' + sMessage;
+        const sDispMsg = STRINGS._(sKeyMsg, aParams);
         this.sys_popup(sDispMsg, nIcon)
     }
 
@@ -1651,10 +1725,10 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     sys_flash(nColor, nPower, nSpeed) {
-        var oGXFlash = new O876_Raycaster.GXFlash(this.oRaycaster);
-        var r = (nColor & 0xFF0000) >> 16;
-        var g = (nColor & 0xFF00) >> 8;
-        var b = nColor & 0xFF;
+        const oGXFlash = new GXFlash(this.oRaycaster);
+        const r = (nColor & 0xFF0000) >> 16;
+        const g = (nColor & 0xFF00) >> 8;
+        const b = nColor & 0xFF;
         oGXFlash.fAlpha = nPower / 100;
         oGXFlash.fAlphaFade = this.TIME_FACTOR * nSpeed / 5000;
         oGXFlash.oColor = {
@@ -1670,7 +1744,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         if (this.aPopupMessages.length && (this.aPopupMessages[this.aPopupMessages.length - 1].sMessage == sMessage) && !this.aPopupMessages[this.aPopupMessages.length - 1].isOver()) {
             return
         }
-        var oGX = new O876_Raycaster.GXMessage(this.oRaycaster);
+        const oGX = new GXMessage(this.oRaycaster);
         this.aPopupMessages.push(oGX);
         this.sendPluginSignal('notify', sMessage);
         oGX.setMessage(sMessage);
@@ -1679,22 +1753,22 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
         oGX.yPos = oGX.yTo - 16;
         oGX.buildPath();
         if (nIcon !== undefined) {
-            var oIcons = this.oRaycaster.oHorde.oTiles.i_icons;
+            const oIcons = this.oRaycaster.oHorde.oTiles.i_icons;
             oGX.setIcon(oIcons.oImage, nIcon * 48, 0, 48, 48)
         }
     }
 
     sys_playSound(sFile, x, y) {
         sFile = 'resources/snd/' + this.sAudioType + '/' + sFile + '.' + this.sAudioType;
-        var nChan = this.oSoundSystem.getFreeChan(sFile);
-        var fDist = 0;
+        const nChan = this.oSoundSystem.getFreeChan(sFile);
+        let fDist = 0;
         if (x !== undefined) {
-            var oPlayer = this.getPlayer();
+            const oPlayer = this.getPlayer();
             fDist = MathTools.distance(oPlayer.x - x, oPlayer.y - y)
         }
-        var fVolume = 1;
-        var nMinDist = 64;
-        var nMaxDist = 512;
+        let fVolume = 1;
+        const nMinDist = 64;
+        const nMaxDist = 512;
         if (fDist > nMaxDist) {
             fVolume = 0
         } else if (fDist <= nMinDist) {
@@ -1711,7 +1785,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     sys_playMusic(xFile) {
-        var sFile;
+        let sFile;
         if (typeof xFile === 'object') {
             sFile = xFile[Math.random() * xFile.length | 0]
         } else {
@@ -1742,7 +1816,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     sys_cutscene(s, sState) {
-        var oGame = this;
+        const oGame = this;
         this.oUI.clear();
         switch (s) {
             case 'intro':
@@ -1767,7 +1841,7 @@ O2.createObject('Game', class Game extends O876_Raycaster.Engine {
     }
 
     sys_sendScore() {}
-});
+}
 Object.assign(Game.prototype, {
     sGeneratorUrl: '../../dynamics/laby/laby.php',
     nTime: 0,

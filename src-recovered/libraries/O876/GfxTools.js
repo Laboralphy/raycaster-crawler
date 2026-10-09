@@ -1,8 +1,11 @@
-O2.createObject('GfxTools', {
+import { CanvasFactory } from './CanvasFactory.js';
+
+export const GfxTools = {
     buildRGBA: function(xData) {
         return GfxTools.buildRGBAFromStructure(GfxTools.buildStructure(xData))
     },
     buildStructure: function(xData) {
+        let rx;
         if (typeof xData === "object") {
             return xData
         } else if (typeof xData === "number") {
@@ -26,7 +29,7 @@ O2.createObject('GfxTools', {
                         throw new Error('invalid color structure')
                     }
                 default:
-                    var rx = xData.match(/^rgb\( *([0-9]{1,3}) *, *([0-9]{1,3}) *, *([0-9]{1,3}) *\)$/);
+                    rx = xData.match(/^rgb\( *([0-9]{1,3}) *, *([0-9]{1,3}) *, *([0-9]{1,3}) *\)$/);
                     if (rx) {
                         return {
                             r: rx[1] | 0,
@@ -40,9 +43,9 @@ O2.createObject('GfxTools', {
         }
     },
     buildStructureFromInt: function(n) {
-        var r = (n >> 16) & 0xFF;
-        var g = (n >> 8) & 0xFF;
-        var b = n & 0xFF;
+        const r = (n >> 16) & 0xFF;
+        const g = (n >> 8) & 0xFF;
+        const b = n & 0xFF;
         return {
             r: r,
             g: g,
@@ -50,9 +53,9 @@ O2.createObject('GfxTools', {
         }
     },
     buildStructureFromString3: function(s) {
-        var r = parseInt('0x' + s[0] + s[0]);
-        var g = parseInt('0x' + s[1] + s[1]);
-        var b = parseInt('0x' + s[2] + s[2]);
+        const r = parseInt('0x' + s[0] + s[0]);
+        const g = parseInt('0x' + s[1] + s[1]);
+        const b = parseInt('0x' + s[2] + s[2]);
         return {
             r: r,
             g: g,
@@ -60,9 +63,9 @@ O2.createObject('GfxTools', {
         }
     },
     buildStructureFromString6: function(s) {
-        var r = parseInt('0x' + s[0] + s[1]);
-        var g = parseInt('0x' + s[2] + s[3]);
-        var b = parseInt('0x' + s[4] + s[5]);
+        const r = parseInt('0x' + s[0] + s[1]);
+        const g = parseInt('0x' + s[2] + s[3]);
+        const b = parseInt('0x' + s[4] + s[5]);
         return {
             r: r,
             g: g,
@@ -70,8 +73,8 @@ O2.createObject('GfxTools', {
         }
     },
     buildRGBAFromStructure: function(oData) {
-        var s1 = 'rgb';
-        var s2 = oData.r.toString() + ', ' + oData.g.toString() + ', ' + oData.b.toString();
+        let s1 = 'rgb';
+        let s2 = oData.r.toString() + ', ' + oData.g.toString() + ', ' + oData.b.toString();
         if ('a' in oData) {
             s1 += 'a';
             s2 += ', ' + oData.a.toString()
@@ -79,29 +82,29 @@ O2.createObject('GfxTools', {
         return s1 + '(' + s2 + ')'
     },
     buildString3FromStructure: function(oData) {
-        var sr = ((oData.r >> 4) & 0xF).toString(16);
-        var sg = ((oData.g >> 4) & 0xF).toString(16);
-        var sb = ((oData.b >> 4) & 0xF).toString(16);
+        const sr = ((oData.r >> 4) & 0xF).toString(16);
+        const sg = ((oData.g >> 4) & 0xF).toString(16);
+        const sb = ((oData.b >> 4) & 0xF).toString(16);
         return sr + sg + sb
     },
     drawCircularHaze: function(oCanvas, sOptions) {
         sOptions = sOptions || '';
-        var aOptions = sOptions.split(' ');
-        var w = oCanvas.width;
-        var h = oCanvas.height;
-        var wg = Math.max(w, h);
-        var c3 = O876.CanvasFactory.getCanvas();
+        const aOptions = sOptions.split(' ');
+        const w = oCanvas.width;
+        const h = oCanvas.height;
+        const wg = Math.max(w, h);
+        const c3 = CanvasFactory.getCanvas();
         c3.width = c3.height = wg;
-        var ctx3 = c3.getContext('2d');
-        var oRadial = ctx3.createRadialGradient(wg >> 1, wg >> 1, wg >> 2, wg >> 1, wg >> 1, wg >> 1);
+        const ctx3 = c3.getContext('2d');
+        const oRadial = ctx3.createRadialGradient(wg >> 1, wg >> 1, wg >> 2, wg >> 1, wg >> 1, wg >> 1);
         oRadial.addColorStop(0, 'rgba(0, 0, 0, 0)');
         oRadial.addColorStop(1, 'rgba(0, 0, 0, 1)');
         ctx3.fillStyle = oRadial;
         ctx3.fillRect(0, 0, wg, wg);
-        var c2 = O876.CanvasFactory.getCanvas();
+        const c2 = CanvasFactory.getCanvas();
         c2.width = w;
         c2.height = h;
-        var ctx2 = c2.getContext('2d');
+        const ctx2 = c2.getContext('2d');
         ctx2.fillStyle = 'rgb(0, 0, 0)';
         ctx2.drawImage(oCanvas, 0, 0);
         if (aOptions.indexOf('top') >= 0) {
@@ -117,8 +120,8 @@ O2.createObject('GfxTools', {
         } else {
             ctx2.drawImage(c3, 0, 0, wg, wg, 0, 0, w, h)
         }
-        var oContext = oCanvas.getContext('2d');
-        var gco = oContext.globalCompositeOperation;
+        const oContext = oCanvas.getContext('2d');
+        const gco = oContext.globalCompositeOperation;
         oContext.globalCompositeOperation = 'lighter';
         oContext.drawImage(c2, 0, 0);
         if (aOptions.indexOf('strong') >= 0) {
@@ -126,4 +129,4 @@ O2.createObject('GfxTools', {
         }
         oContext.globalCompositeOperation = gco
     }
-});
+};

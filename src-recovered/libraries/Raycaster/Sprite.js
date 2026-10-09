@@ -1,13 +1,15 @@
-O2.createObject('O876_Raycaster.Sprite', class Sprite {
+import { Animation } from './Animation.js';
+
+export class Sprite {
     playAnimation(n) {
         if (n == this.nAnimation) {
             return
         }
-        var aBTA = this.oBlueprint.oTile.aAnimations;
+        const aBTA = this.oBlueprint.oTile.aAnimations;
         this.nAnimation = n;
         if (n < aBTA.length) {
             if (this.oAnimation === null) {
-                this.oAnimation = new O876_Raycaster.Animation()
+                this.oAnimation = new Animation()
             }
             if (aBTA[n]) {
                 this.oAnimation.assign(aBTA[n]);
@@ -31,7 +33,7 @@ O2.createObject('O876_Raycaster.Sprite', class Sprite {
 
     setDirection(n) {
         this.nAngle8 = n;
-        var nIndex = 0;
+        let nIndex = 0;
         if (this.oAnimation !== null) {
             nIndex = this.oAnimation.nIndex
         }
@@ -44,8 +46,8 @@ O2.createObject('O876_Raycaster.Sprite', class Sprite {
             this.nFrame = this.oAnimation.animate(nInc)
         }
     }
-});
-Object.assign(O876_Raycaster.Sprite.prototype, {
+}
+Object.assign(Sprite.prototype, {
     oBlueprint: null,
     oAnimation: null,
     nAnimation: -1,

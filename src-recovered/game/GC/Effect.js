@@ -1,4 +1,4 @@
-O2.createObject('GC.Effect', class Effect {
+export class Effect {
     expire() {
         this.bExpirable = true;
         this.bExpired = true;
@@ -16,8 +16,8 @@ O2.createObject('GC.Effect', class Effect {
     hasExpired() {
         return this.bExpired
     }
-});
-Object.assign(GC.Effect.prototype, {
+}
+Object.assign(Effect.prototype, {
     sEffect: '',
     nTimeOut: 0,
     bExpirable: true,

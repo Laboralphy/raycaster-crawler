@@ -1,15 +1,20 @@
-O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProcessor {
+import { EffectProcessor as GC_EffectProcessor } from './GC/EffectProcessor.js';
+import { ArrayTools } from '../libraries/O876/ArrayTools.js';
+import { MathTools } from '../libraries/Raycaster/Tools/MathTools.js';
+
+export class EffectProcessor extends GC_EffectProcessor {
     __construct() {
         this.buildTables()
     }
 
     buildTables() {
-        var f1, f2, fLog10 = Math.log(10);
+        let f1, f2;
+        const fLog10 = Math.log(10);
         this.BUFF_FACTOR = [];
         this.VULNER_FACTOR = [];
         this.RESIST_FACTOR = [];
         this.DEBUFF_FACTOR = [];
-        for (var i = 0; i <= this.MAX_LEVEL; i++) {
+        for (let i = 0; i <= this.MAX_LEVEL; i++) {
             f1 = i * 0.1 + 1;
             f2 = 1 - (Math.log(i + 1) / (2 * fLog10));
             this.BUFF_FACTOR.push(f1);
@@ -20,9 +25,9 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
     }
 
     getLevelFromEffects(aEffects) {
-        var n = aEffects.length;
-        var nLevel = 0;
-        for (var i = 0; i < n; i++) {
+        const n = aEffects.length;
+        let nLevel = 0;
+        for (let i = 0; i < n; i++) {
             nLevel = Math.max(nLevel, this.getEffectLevel(aEffects[i]))
         }
         return nLevel
@@ -39,8 +44,8 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
     }
 
     getResistProcessedValue(oCreature, nAmount, sResAttr, sVulAttr) {
-        var fResist = 1;
-        var nAttr = oCreature.getAttribute(sResAttr) - oCreature.getAttribute(sVulAttr);
+        let fResist = 1;
+        const nAttr = oCreature.getAttribute(sResAttr) - oCreature.getAttribute(sVulAttr);
         if (nAttr >= 0) {
             fResist = this.RESIST_FACTOR[Math.min(this.MAX_LEVEL, nAttr)]
         } else {
@@ -53,8 +58,8 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
     }
 
     getBuffProcessedValue(oCreature, nAmount, sBuffAttr, sDebuffAttr) {
-        var fBuff = 1;
-        var nAttr = oCreature.getAttribute(sBuffAttr);
+        let fBuff = 1;
+        let nAttr = oCreature.getAttribute(sBuffAttr);
         if (sDebuffAttr !== undefined) {
             nAttr -= oCreature.getAttribute(sDebuffAttr)
         }
@@ -92,7 +97,7 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
 
     starveCreature(oCreature, nAmount) {
         nAmount = Math.max(0, nAmount);
-        var nFoodPoints = oCreature.getAttribute('foodp');
+        const nFoodPoints = oCreature.getAttribute('foodp');
         if (nFoodPoints < nAmount) {
             nAmount = nFoodPoints
         }
@@ -105,7 +110,7 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
 
     restoreCreatureEnergy(oCreature, nAmount) {
         oCreature.modifyAttribute('mp', -this.getResistProcessedValue(oCreature, Math.max(0, nAmount), 'disease', 'pharma'));
-        var nMP = oCreature.getAttribute('mp');
+        const nMP = oCreature.getAttribute('mp');
         if (nMP < 0) {
             oCreature.modifyAttribute('mp', -nMP)
         }
@@ -118,12 +123,12 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
     }
 
     bestowEffect(oCreature, sEffect, nDuration) {
-        var sType = this.getEffectType(sEffect);
+        const sType = this.getEffectType(sEffect);
         if (this.EFFECT_NON_STACKABLE.indexOf(sType) >= 0) {
-            var oEffects = oCreature.oEffects;
-            var nEffCount = oEffects.length;
-            var oEffect;
-            for (var iEff = 0; iEff < nEffCount; iEff += 1) {
+            const oEffects = oCreature.oEffects;
+            const nEffCount = oEffects.length;
+            let oEffect;
+            for (let iEff = 0; iEff < nEffCount; iEff += 1) {
                 oEffect = oEffects[iEff];
                 if (oEffect.sEffect == sEffect) {
                     this.killEffect(oCreature, oEffect);
@@ -215,38 +220,38 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
     }
 
     applyEffect_xphy(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
-        var nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_PHYSICAL, nLevel);
+        const nLevel = this.getEffectLevel(sEffect);
+        const nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_PHYSICAL, nLevel);
         this.damageCreature(oCreature, nAmount, 'drphysical')
     }
 
     applyEffect_xmag(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
-        var nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_MAGICAL, nLevel);
+        const nLevel = this.getEffectLevel(sEffect);
+        const nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_MAGICAL, nLevel);
         this.damageCreature(oCreature, nAmount, 'drmagical')
     }
 
     applyEffect_xcld(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
-        var nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_COLD, nLevel);
+        const nLevel = this.getEffectLevel(sEffect);
+        const nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_COLD, nLevel);
         this.damageCreature(oCreature, nAmount, 'drcold')
     }
 
     applyEffect_xfir(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
-        var nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_FIRE, nLevel);
+        const nLevel = this.getEffectLevel(sEffect);
+        const nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_FIRE, nLevel);
         this.damageCreature(oCreature, nAmount, 'drfire')
     }
 
     applyEffect_xele(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
-        var nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_ELECTRICITY, nLevel);
+        const nLevel = this.getEffectLevel(sEffect);
+        const nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_ELECTRICITY, nLevel);
         this.damageCreature(oCreature, nAmount, 'drelectricity')
     }
 
     applyEffect_xtox(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
-        var nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_TOXIC, nLevel);
+        const nLevel = this.getEffectLevel(sEffect);
+        const nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_TOXIC, nLevel);
         this.damageCreature(oCreature, nAmount, 'drtoxic')
     }
 
@@ -257,44 +262,44 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
     }
 
     applyEffect_xene(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
-        var nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_MAGICAL, nLevel);
+        const nLevel = this.getEffectLevel(sEffect);
+        const nAmount = MathTools.rollDice(this.DAMAGE_FACTOR_MAGICAL, nLevel);
         this.depleteCreatureEnergy(oCreature, nAmount)
     }
 
     applyEffect_xfdp(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
-        var nAmount = this.FOOD_FACTOR * nLevel;
+        const nLevel = this.getEffectLevel(sEffect);
+        const nAmount = this.FOOD_FACTOR * nLevel;
         this.starveCreature(oCreature, nAmount)
     }
 
     applyEffect_vfir(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drfire', -nLevel)
     }
 
     applyEffect_vcld(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drcold', -nLevel)
     }
 
     applyEffect_vele(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drelectricity', -nLevel)
     }
 
     applyEffect_vtox(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drtoxic', -nLevel)
     }
 
     applyEffect_vphy(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drphysical', -nLevel)
     }
 
     applyEffect_vmag(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drmagical', -nLevel)
     }
 
@@ -302,7 +307,7 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
         if (oCreature.getAttribute('freedom') > 0) {
             return
         }
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('snared', nLevel)
     }
 
@@ -310,7 +315,7 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
         if (oCreature.getAttribute('freedom') > 0) {
             return
         }
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('rooted', nLevel)
     }
 
@@ -318,7 +323,7 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
         if (oCreature.getAttribute('health') > 0) {
             return
         }
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('vulnerable', nLevel)
     }
 
@@ -326,7 +331,7 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
         if (oCreature.getAttribute('health') > 0) {
             return
         }
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('power', -nLevel)
     }
 
@@ -334,7 +339,7 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
         if (oCreature.getAttribute('health') > 0) {
             return
         }
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('disease', nLevel)
     }
 
@@ -342,7 +347,7 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
         if (oCreature.getAttribute('clearmind') > 0) {
             return
         }
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('confused', nLevel)
     }
 
@@ -350,7 +355,7 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
         if (oCreature.getAttribute('clearmind') > 0) {
             return
         }
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('blind', nLevel)
     }
 
@@ -358,7 +363,7 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
         if (oCreature.getAttribute('freedom') > 0) {
             return
         }
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('held', nLevel)
     }
 
@@ -366,13 +371,13 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
         if (oCreature.getAttribute('invulnerable') > 0) {
             return
         }
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('vitality', 0 - (nLevel * this.VITALITY_FACTOR));
         this.checkCreatureAlive(oCreature)
     }
 
     applyEffect_ajnx(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('luck', -nLevel)
     }
 
@@ -385,43 +390,43 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
     }
 
     applyEffect_rphy(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drphysical', nLevel)
     }
 
     applyEffect_rmag(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drmagical', nLevel)
     }
 
     applyEffect_rfir(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drfire', nLevel)
     }
 
     applyEffect_rcld(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drcold', nLevel)
     }
 
     applyEffect_rele(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drelectricity', nLevel)
     }
 
     applyEffect_rtox(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drtoxic', nLevel)
     }
 
     applyEffect_rdth(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drdeath', nLevel)
     }
 
     applyEffect_rhea(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
-        var nAmount = this.HEAL_FACTOR * nLevel;
+        const nLevel = this.getEffectLevel(sEffect);
+        const nAmount = this.HEAL_FACTOR * nLevel;
         this.healCreature(oCreature, nAmount)
     }
 
@@ -454,76 +459,76 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
     }
 
     applyEffect_rene(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
-        var nAmount = this.ENERGY_FACTOR * nLevel;
+        const nLevel = this.getEffectLevel(sEffect);
+        const nAmount = this.ENERGY_FACTOR * nLevel;
         this.restoreCreatureEnergy(oCreature, nAmount)
     }
 
     applyEffect_rfdp(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
-        var nAmount = this.FOOD_FACTOR * nLevel;
+        const nLevel = this.getEffectLevel(sEffect);
+        const nAmount = this.FOOD_FACTOR * nLevel;
         this.feedCreature(oCreature, nAmount)
     }
 
     applyEffect_bpha(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('pharma', nLevel)
     }
 
     applyEffect_bhst(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('hasted', nLevel)
     }
 
     applyEffect_binv(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('invulnerable', nLevel)
     }
 
     applyEffect_bpow(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('power', nLevel)
     }
 
     applyEffect_bclk(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('invisible', nLevel)
     }
 
     applyEffect_besp(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('esp', nLevel)
     }
 
     applyEffect_bxhp(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('vitality', nLevel * this.VITALITY_FACTOR)
     }
 
     applyEffect_blck(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('luck', nLevel)
     }
 
     applyEffect_bxmp(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('energy', nLevel * this.ENERGY_FACTOR)
     }
 
     applyEffect_bsfc(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('foodc', -nLevel)
     }
 
     applyEffect_bref(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('reflect', nLevel)
     }
 
     applyEffect_disp(oCreature, sEffect) {
-        var aEffects = this.selectEffects(oCreature, this.selectEffects_expirable);
-        var nLevel = this.getEffectLevel(sEffect);
-        var iEffect, oEffToDisp;
+        const aEffects = this.selectEffects(oCreature, this.selectEffects_expirable);
+        let nLevel = this.getEffectLevel(sEffect);
+        let iEffect, oEffToDisp;
         while (nLevel > 0 && aEffects.length > 0) {
             iEffect = MathTools.rnd(0, aEffects.length - 1);
             oEffToDisp = aEffects[iEffect];
@@ -534,7 +539,7 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
     }
 
     applyEffect_sdrn(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('vampyre', nLevel)
     }
 
@@ -583,168 +588,168 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
     }
 
     expireEffect_asnr(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('snared', -nLevel)
     }
 
     expireEffect_aroo(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('rooted', -nLevel)
     }
 
     expireEffect_avul(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('vulnerable', -nLevel)
     }
 
     expireEffect_aill(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('disease', -nLevel)
     }
 
     expireEffect_acnf(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('confused', -nLevel)
     }
 
     expireEffect_abld(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('blind', -nLevel)
     }
 
     expireEffect_ahld(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('held', -nLevel)
     }
 
     expireEffect_awea(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('power', nLevel)
     }
 
     expireEffect_adhp(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('vitality', nLevel)
     }
 
     expireEffect_admp(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('energy', nLevel)
     }
 
     expireEffect_ahun(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('foodc', -nLevel)
     }
 
     expireEffect_rphy(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drphysical', -nLevel)
     }
 
     expireEffect_rmag(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drmagical', -nLevel)
     }
 
     expireEffect_rfir(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drfire', -nLevel)
     }
 
     expireEffect_rcld(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drcold', -nLevel)
     }
 
     expireEffect_rele(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drelectricity', -nLevel)
     }
 
     expireEffect_rtox(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drtoxic', -nLevel)
     }
 
     exprireEffect_rdth(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drdeath', -nLevel)
     }
 
     expireEffect_bpha(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('pharma', -nLevel)
     }
 
     expireEffect_bhst(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('hasted', -nLevel)
     }
 
     expireEffect_binv(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('invulnerable', -nLevel)
     }
 
     expireEffect_bpow(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('power', -nLevel)
     }
 
     expireEffect_bclk(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('invisible', -nLevel)
     }
 
     expireEffect_besp(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('esp', -nLevel)
     }
 
     expireEffect_bxhp(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('vitality', 0 - (nLevel * this.VITALITY_FACTOR));
         this.checkCreatureAlive(oCreature)
     }
 
     expireEffect_blck(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('luck', -nLevel)
     }
 
     expireEffect_bxmp(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('energy', 0 - (nLevel * this.ENERGY_FACTOR))
     }
 
     expireEffect_bsfc(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('foodc', nLevel)
     }
 
     expireEffect_bref(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('reflect', -nLevel)
     }
 
     expireEffect_rant(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('antidote', -nLevel)
     }
 
     exprireEffect_rbod(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('health', -nLevel)
     }
 
     exprireEffect_rmin(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('clearmind', -nLevel)
     }
 
     exprireEffect_rmov(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('freedom', -nLevel)
     }
 
@@ -753,40 +758,40 @@ O2.createObject('EffectProcessor', class EffectProcessor extends GC.EffectProces
     }
 
     expireEffect_vfir(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drfire', nLevel)
     }
 
     expireEffect_vcld(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drcold', nLevel)
     }
 
     expireEffect_vele(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drelectricity', nLevel)
     }
 
     expireEffect_vtox(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drtoxic', nLevel)
     }
 
     expireEffect_vphy(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drphysical', nLevel)
     }
 
     expireEffect_vmag(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drmagical', nLevel)
     }
 
     expireEffect_sdrn(oCreature, sEffect) {
-        var nLevel = this.getEffectLevel(sEffect);
+        const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('vampyre', -nLevel)
     }
-});
+}
 Object.assign(EffectProcessor.prototype, {
     DAMAGE_FACTOR_PHYSICAL: 6,
     DAMAGE_FACTOR_MAGICAL: 6,

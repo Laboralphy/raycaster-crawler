@@ -1,4 +1,6 @@
-O2.createObject('MAGIC_DATA', {
+import { MAGIC_DATA_PARAMS } from './MAGIC_DATA_PARAMS.js';
+
+export const MAGIC_DATA = {
     DrainLife: {
         cooldown: MAGIC_DATA_PARAMS.COOLDOWN.MEDIUM,
         mp: 10,
@@ -71,4 +73,4 @@ O2.createObject('MAGIC_DATA', {
         icon: 'spl_stf',
         target: false
     },
-});
+};

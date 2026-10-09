@@ -1,4 +1,6 @@
-O2.createObject('H5UI.ScrollBox', class ScrollBox extends H5UI.WinControl {
+import { WinControl } from './WinControl.js';
+
+export class ScrollBox extends WinControl {
     linkControl(o, bParent) {
         if (bParent === undefined) {
             bParent = false
@@ -13,7 +15,7 @@ O2.createObject('H5UI.ScrollBox', class ScrollBox extends H5UI.WinControl {
 
     getContainer() {
         if (this._oContainer === null) {
-            this._oContainer = this.linkControl(new H5UI.WinControl(), true);
+            this._oContainer = this.linkControl(new WinControl(), true);
             this._oContainer._sClass = 'ScrollBoxContainer'
         }
         return this._oContainer
@@ -37,19 +39,19 @@ O2.createObject('H5UI.ScrollBox', class ScrollBox extends H5UI.WinControl {
     }
 
     renderSelf() {
-        var w = 0,
+        let w = 0,
             h = 0,
             o;
-        var c = this.getContainer();
-        for (var i = 0; i < c._aControls.length; i++) {
+        const c = this.getContainer();
+        for (let i = 0; i < c._aControls.length; i++) {
             o = c.getControl(i);
             w = Math.max(w, o._x + o.getWidth());
             h = Math.max(h, o._y + o.getHeight())
         }
         c.setSize(w, h)
     }
-});
-Object.assign(H5UI.ScrollBox.prototype, {
+}
+Object.assign(ScrollBox.prototype, {
     _sClass: 'ScrollBox',
     _oContainer: null,
     _xScroll: 0,

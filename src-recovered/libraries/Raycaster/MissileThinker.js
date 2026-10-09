@@ -1,14 +1,17 @@
-O2.createObject('O876_Raycaster.MissileThinker', class MissileThinker extends O876_Raycaster.Thinker {
+import { RC } from './RC.js';
+import { Thinker } from './Thinker.js';
+
+export class MissileThinker extends Thinker {
     __construct() {
         this.think = this.thinkIdle
     }
 
     isCollisioned() {
-        var bWallCollision = this.oMobile.bWallCollision;
-        var bMobileCollision = this.oMobile.oMobileCollision !== null;
-        var nTargetType = bMobileCollision ? this.oMobile.oMobileCollision.getType() : 0;
-        var bOwnerCollision = this.oMobile.oMobileCollision == this.oOwner;
-        var bSolidCollision = bMobileCollision && nTargetType != RC.OBJECT_TYPE_MISSILE && nTargetType != RC.OBJECT_TYPE_ITEM;
+        const bWallCollision = this.oMobile.bWallCollision;
+        const bMobileCollision = this.oMobile.oMobileCollision !== null;
+        const nTargetType = bMobileCollision ? this.oMobile.oMobileCollision.getType() : 0;
+        const bOwnerCollision = this.oMobile.oMobileCollision == this.oOwner;
+        const bSolidCollision = bMobileCollision && nTargetType != RC.OBJECT_TYPE_MISSILE && nTargetType != RC.OBJECT_TYPE_ITEM;
         if (bWallCollision) {
             this.oMobile.oMobileCollision = null;
             return true
@@ -62,7 +65,7 @@ O2.createObject('O876_Raycaster.MissileThinker', class MissileThinker extends O8
             this.extinct();
             return
         }
-        for (var i = 0; i < this.nStepSpeed; i++) {
+        for (let i = 0; i < this.nStepSpeed; i++) {
             this.advance();
             if (this.isCollisioned()) {
                 this.explode();
@@ -82,8 +85,8 @@ O2.createObject('O876_Raycaster.MissileThinker', class MissileThinker extends O8
     thinkIdle() {
         this.oMobile.bActive = false
     }
-});
-Object.assign(O876_Raycaster.MissileThinker.prototype, {
+}
+Object.assign(MissileThinker.prototype, {
     oOwner: null,
     nExplosionTime: 0,
     nExplosionMaxTime: 4,

@@ -1,10 +1,15 @@
-O2.createObject('Item', class Item extends GC.Item {
+import { Item as GC_Item } from './GC/Item.js';
+import { ITEMS_DATA } from './data/ITEMS_DATA.js';
+import { SPELLS_DATA } from './data/SPELLS_DATA.js';
+import { STRINGS } from './data/STRINGS.js';
+
+export class Item extends GC_Item {
     __construct(sResRef, nStack) {
         super.__construct(sResRef);
         if (!(sResRef in ITEMS_DATA)) {
             throw new Error('item blueprint not found: ' + sResRef)
         }
-        var oRef = ITEMS_DATA[sResRef];
+        const oRef = ITEMS_DATA[sResRef];
         this.name = STRINGS._(oRef.name);
         this.type = oRef.type;
         this.icon = oRef.icon;
@@ -39,8 +44,8 @@ O2.createObject('Item', class Item extends GC.Item {
     }
 
     getSpellProperties() {
-        var aProperties = [];
-        var i, n, oSpell;
+        let aProperties = [];
+        let i, n, oSpell;
         if (this.spells) {
             n = this.spells.length;
             for (i = 0; i < n; i++) {
@@ -52,7 +57,7 @@ O2.createObject('Item', class Item extends GC.Item {
     }
 
     getProperties() {
-        var aProperties = this.getSpellProperties();
+        const aProperties = this.getSpellProperties();
         return aProperties.concat(this.properties)
     }
 
@@ -80,7 +85,7 @@ O2.createObject('Item', class Item extends GC.Item {
     isEquippable() {
         return this.slot !== ''
     }
-});
+}
 Object.assign(Item.prototype, {
     name: '',
     uname: '',

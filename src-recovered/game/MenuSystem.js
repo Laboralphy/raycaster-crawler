@@ -1,10 +1,14 @@
-O2.createObject('MenuSystem', class MenuSystem extends Cutscene {
+import { Cutscene } from './cutscenes/Cutscene.js';
+import { GFX_DATA } from './data/GFX_DATA.js';
+import { PI } from '../libraries/Raycaster/Tools/MathTools.js';
+
+export class MenuSystem extends Cutscene {
     __construct() {
         super.__construct();
         this.bWallPainted = false;
-        var nLabySize = this.oRaycaster.nMapSize;
-        var nLabyWidth = nLabySize * this.oRaycaster.nPlaneSpacing;
-        var t = this.oRaycaster.oCamera.oThinker;
+        const nLabySize = this.oRaycaster.nMapSize;
+        const nLabyWidth = nLabySize * this.oRaycaster.nPlaneSpacing;
+        const t = this.oRaycaster.oCamera.oThinker;
         this.oCameraThinker = t;
         t.xStart = 320;
         t.yStart = 416;
@@ -14,11 +18,11 @@ O2.createObject('MenuSystem', class MenuSystem extends Cutscene {
         t.oRaycaster = this.oRaycaster;
         t.thinkStop = function() {
             this.nState = (this.nState + 1) & 3;
-            var x0 = 320;
-            var y0 = 416;
-            var nSpeed = 2;
-            var xMax = this.oRaycaster.nPlaneSpacing * this.oRaycaster.nMapSize - x0;
-            var yMax = this.oRaycaster.nPlaneSpacing * this.oRaycaster.nMapSize - y0;
+            const x0 = 320;
+            const y0 = 416;
+            const nSpeed = 2;
+            const xMax = this.oRaycaster.nPlaneSpacing * this.oRaycaster.nMapSize - x0;
+            const yMax = this.oRaycaster.nPlaneSpacing * this.oRaycaster.nMapSize - y0;
             switch (this.nState) {
                 case 0:
                     this.xStart = x0;
@@ -145,13 +149,13 @@ O2.createObject('MenuSystem', class MenuSystem extends Cutscene {
             this.paintPicturesOnWall();
             this.bWallPainted = true
         }
-        var xRC = this.xRC;
-        var yRC = this.yRC;
-        var fAlpha = 0;
-        var nDelayAlpha = 64;
-        var c = this.oCameraThinker;
-        var nCurrentTime = c.nCurrentTime;
-        var nTime = c.nTime - nCurrentTime;
+        const xRC = this.xRC;
+        const yRC = this.yRC;
+        let fAlpha = 0;
+        const nDelayAlpha = 64;
+        const c = this.oCameraThinker;
+        const nCurrentTime = c.nCurrentTime;
+        const nTime = c.nTime - nCurrentTime;
         if (nTime < nDelayAlpha) {
             fAlpha = (nDelayAlpha - nTime) / nDelayAlpha
         } else if ((c.nTime - nTime) < nDelayAlpha) {
@@ -161,15 +165,15 @@ O2.createObject('MenuSystem', class MenuSystem extends Cutscene {
             this.oRenderContext.fillStyle = 'rgba(0, 0, 0, ' + fAlpha + ')';
             this.oRenderContext.fillRect(xRC, yRC, this.oRCCanvas.width, this.oRCCanvas.height)
         }
-        var oImage = this.oRaycaster.oHorde.oTiles.d_title.oImage;
+        const oImage = this.oRaycaster.oHorde.oTiles.d_title.oImage;
         this.oRenderContext.drawImage(oImage, (this.oRenderCanvas.width - oImage.width) >> 1, 32)
     }
 
     paintPicturesOnWall() {
-        var x, y;
-        var df = function(rc, c, xBlock, yBlock, n) {
-            var p = rc.oHorde.oTiles.d_pictures;
-            var xPic = ((xBlock + yBlock + n) % p.nFrames) * p.nWidth;
+        let x, y;
+        const df = function(rc, c, xBlock, yBlock, n) {
+            const p = rc.oHorde.oTiles.d_pictures;
+            const xPic = ((xBlock + yBlock + n) % p.nFrames) * p.nWidth;
             c.getContext('2d').drawImage(p.oImage, xPic, 0, p.nWidth, p.nHeight, 16, 28, p.nWidth, p.nHeight)
         };
         for (y = 0; y < this.oRaycaster.aMap.length; y++) {
@@ -191,7 +195,7 @@ O2.createObject('MenuSystem', class MenuSystem extends Cutscene {
             }
         }
     }
-});
+}
 Object.assign(MenuSystem.prototype, {
     RAYCASTER_WIDTH: 400,
     RAYCASTER_HEIGHT: 250,

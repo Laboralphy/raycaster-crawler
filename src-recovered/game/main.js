@@ -1,19 +1,24 @@
+import { Game } from './Game.js';
+import { PointerLock } from '../libraries/Raycaster/PointerLock.js';
+import { ThinkerManager } from '../libraries/Raycaster/ThinkerManager.js';
+import { THINKERS } from './thinkers/THINKERS.js';
+
 function benchmark(o, f, iMax) {
-    var d1 = Date.now();
-    for (var i = 0; i < iMax; i++) {
+    const d1 = Date.now();
+    for (let i = 0; i < iMax; i++) {
         f.apply(o, [])
     }
     return Date.now() - d1
 }
 
 function displayVersion(sVersion) {
-    var oVer = document.getElementById('ver');
+    const oVer = document.getElementById('ver');
     oVer.innerHTML = sVersion
 }
 
 function getElementPos(oElement) {
-    var x = 0;
-    var y = 0;
+    let x = 0;
+    let y = 0;
     if (oElement.offsetParent) {
         do {
             x += oElement.offsetLeft;
@@ -24,22 +29,23 @@ function getElementPos(oElement) {
 }
 
 function windowResizeEvent(oEvent) {
-    var oCanvas = document.getElementById('screen');
+    const oCanvas = document.getElementById('screen');
     if (oCanvas) {
-        var xy = getElementPos(oCanvas);
+        const xy = getElementPos(oCanvas);
         oCanvas.__x = xy[0];
         oCanvas.__y = xy[1]
     }
 }
 
 function resizeScreen(x, y) {
-    var oCanvas = document.getElementById('screen');
+    const oCanvas = document.getElementById('screen');
     oCanvas.style.width = x.toString() + 'px';
     oCanvas.style.height = y.toString() + 'px';
     oCanvas.__ratio = x / 800
 }
 
 function main() {
+    ThinkerManager.registerThinkers(THINKERS);
     window.G = new Game();
     window.addEventListener('blur', function(oEvent) {
         G.blur()
@@ -48,9 +54,9 @@ function main() {
         G.focus()
     }, false);
     window.addEventListener('resize', windowResizeEvent, false);
-    var oCanvas = document.getElementById('screen');
+    const oCanvas = document.getElementById('screen');
     oCanvas.addEventListener('mousedown', function(oEvent) {
-        if (!O876_Raycaster.PointerLock.locked()) {
+        if (!PointerLock.locked()) {
             G.enterPointerLockedMode()
         }
     });

@@ -1,4 +1,4 @@
-O2.createObject('GC.Creature', class Creature {
+export class Creature {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -23,7 +23,7 @@ O2.createObject('GC.Creature', class Creature {
     }
 
     getAttribute(sAttribute) {
-        var nBonus;
+        let nBonus;
         if (sAttribute in this.oAttributes) {
             nBonus = this.oAttributes[sAttribute]
         } else {
@@ -37,8 +37,8 @@ O2.createObject('GC.Creature', class Creature {
     }
 
     getAttributes() {
-        var sAttr = '',
-            oResult = {};
+        let sAttr = '';
+        const oResult = {};
         for (sAttr in this.oBaseAttributes) {
             oResult[sAttr] = [0, 0]
         }
@@ -67,8 +67,8 @@ O2.createObject('GC.Creature', class Creature {
     }
 
     setBaseAttribute(sAttribute, nValue) {
-        var nPreviousValue = 0;
-        var bAttrPresent = sAttribute in this.oBaseAttributes;
+        let nPreviousValue = 0;
+        const bAttrPresent = sAttribute in this.oBaseAttributes;
         if (bAttrPresent) {
             nPreviousValue = this.oBaseAttributes[sAttribute]
         }
@@ -83,8 +83,8 @@ O2.createObject('GC.Creature', class Creature {
     }
 
     modifyAttribute(sAttribute, nValue) {
-        var nNewValue = 0;
-        var nPreviousValue = 0;
+        let nNewValue = 0;
+        let nPreviousValue = 0;
         if (nValue === 0) {
             return
         }
@@ -104,8 +104,8 @@ O2.createObject('GC.Creature', class Creature {
 
     setOnAttributeChanged(oFunc) {
         this.onAttributeChanged = oFunc;
-        var sAttr = '',
-            oAttr = {};
+        let sAttr = '';
+        const oAttr = {};
         for (sAttr in this.oBaseAttributes) {
             oAttr[sAttr] = true
         }
@@ -122,8 +122,8 @@ O2.createObject('GC.Creature', class Creature {
             this.onAttributeChanged(this, sAttribute, nNewValue, nPreviousValue)
         }
     }
-});
-Object.assign(GC.Creature.prototype, {
+}
+Object.assign(Creature.prototype, {
     oBaseAttributes: null,
     oAttributes: null,
     oEffects: null,

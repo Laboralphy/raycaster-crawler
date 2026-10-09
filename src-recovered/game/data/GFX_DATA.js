@@ -1,4 +1,6 @@
-var GFX_DATA = {
+import { LABY } from './LABY.js';
+
+export const GFX_DATA = {
     tiles: {
         o_lootbag: {
             src: 'resources/gfx/sprites/o_lootbags.png',

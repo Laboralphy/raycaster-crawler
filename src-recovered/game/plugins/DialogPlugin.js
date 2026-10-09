@@ -1,9 +1,12 @@
-O2.createObject('DialogPlugin', class DialogPlugin {
+import { DialogWindow } from '../UI/DialogWindow.js';
+import { UI } from '../UI/UI.js';
+
+export class DialogPlugin {
     uiController(sCommand, xParams) {
         switch (sCommand) {
             case 'on':
                 this.clear();
-                this.centerWidget(this.declareWidget(new UI.DialogWindow(xParams)));
+                this.centerWidget(this.declareWidget(new DialogWindow(xParams)));
                 break
         }
     }
@@ -13,9 +16,9 @@ O2.createObject('DialogPlugin', class DialogPlugin {
     }
 
     display(sMessage, oCmds) {
-        var aButtons = [];
-        var oKeyEvents = {};
-        for (var i in oCmds) {
+        const aButtons = [];
+        const oKeyEvents = {};
+        for (const i in oCmds) {
             aButtons.push([oCmds[i][0], i, oCmds[i][1]]);
             oKeyEvents[i] = oCmds[i][2]
         }
@@ -28,7 +31,7 @@ O2.createObject('DialogPlugin', class DialogPlugin {
         });
         this.oEvents = oKeyEvents
     }
-});
+}
 Object.assign(DialogPlugin.prototype, {
     oGame: null,
     sMe: 'dialog',

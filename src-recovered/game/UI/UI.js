@@ -1,4 +1,6 @@
-O2.createObject('UI', {
+import { System } from './System.js';
+
+export const UI = {
     clWINDOW: '#999',
     clWINDOW_BORDER: '#000',
     clDARK_WINDOW: '#666',
@@ -14,7 +16,7 @@ O2.createObject('UI', {
     oPlugins: {},
     addUIPlugin: function(sController, oPlugin) {
         UI['INTFMODE_' + sController.toUpperCase()] = ++UI.INTFMODE_LAST;
-        UI.System.prototype['cmd' + sController] = oPlugin.uiController;
+        System.prototype['cmd' + sController] = oPlugin.uiController;
         UI.oPlugins[sController] = oPlugin
     }
-});
+};

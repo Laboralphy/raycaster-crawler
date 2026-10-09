@@ -1,11 +1,19 @@
-O2.createObject('CutsceneEnd', class CutsceneEnd extends Cutscene {
+import { Cutscene } from './Cutscene.js';
+import { GFX_DATA } from '../data/GFX_DATA.js';
+import { MONSTERS_TILES } from '../data/MONSTERS_TILES.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { Text } from '../../libraries/H5UI/Text.js';
+import { RC } from '../../libraries/Raycaster/RC.js';
+import { PI } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class CutsceneEnd extends Cutscene {
     __construct() {
         super.__construct();
         this.nLabySize = this.oRaycaster.nMapSize;
         this.oCameraThinker = this.oRaycaster.oCamera.oThinker;
         this.oCameraThinker.oCutscene = this;
         this.yPrompter = this.oRaycaster.oRenderCanvas.height;
-        var p = new H5UI.Text();
+        const p = new Text();
         p.setSize(400, 2048);
         p.setWordWrap(true);
         p.setAutosize(false);
@@ -15,7 +23,7 @@ O2.createObject('CutsceneEnd', class CutsceneEnd extends Cutscene {
         p.font.setColor('#FFFFFF');
         p.setCaption(STRINGS._('~cs1_credits'));
         p._nLineHeight = 16;
-        var s = p.getSurface();
+        const s = p.getSurface();
         s.shadowColor = 'black';
         s.shadowOffsetX = 1;
         s.shadowOffsetY = 1;
@@ -67,8 +75,8 @@ O2.createObject('CutsceneEnd', class CutsceneEnd extends Cutscene {
     }
 
     setActorMove(iActor, x, y, a, dx, dy, t, nAnim, pOnStop) {
-        var oActor = this.oRaycaster.oHorde.getMobile(iActor);
-        var oThinker = oActor.oThinker;
+        const oActor = this.oRaycaster.oHorde.getMobile(iActor);
+        const oThinker = oActor.oThinker;
         if (x !== null && x !== undefined) {
             x = this.oRaycaster.nPlaneSpacing * x + (this.oRaycaster.nPlaneSpacing >> 1) | 0
         }
@@ -173,7 +181,7 @@ O2.createObject('CutsceneEnd', class CutsceneEnd extends Cutscene {
     phaseInit() {
         this.fFade = -0.025;
         this.fAlpha = 1;
-        var t = this.oCameraThinker;
+        const t = this.oCameraThinker;
         t.oRaycaster = this.oRaycaster;
         this.setCameraMove(4, 3, 3 * PI / 2, 2, 0, 448, this.eventGoldenFadeOut);
         this.setActorMove(1, 3, 1, -0.8, 2, 0, 500, 1);
@@ -190,7 +198,7 @@ O2.createObject('CutsceneEnd', class CutsceneEnd extends Cutscene {
             G._callGameEvent('onLoading', 'shd', ++this.nShadedTileCount, this.oRaycaster.oHorde.nTileCount)
         }
     }
-});
+}
 Object.assign(CutsceneEnd.prototype, {
     fFade: -0.05,
     fAlpha: 1,

@@ -1,4 +1,4 @@
-O2.createObject('O876_Raycaster.Animation', class Animation {
+export class Animation {
     assign(a) {
         if (a) {
             this.nStart = a.nStart;
@@ -55,8 +55,8 @@ O2.createObject('O876_Raycaster.Animation', class Animation {
         this.nTime = 0;
         this.nDirLoop = 1
     }
-});
-Object.assign(O876_Raycaster.Animation.prototype, {
+}
+Object.assign(Animation.prototype, {
     nStart: 0,
     nIndex: 0,
     nCount: 0,

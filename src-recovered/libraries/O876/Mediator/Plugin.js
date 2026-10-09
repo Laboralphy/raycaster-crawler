@@ -1,4 +1,4 @@
-O2.createObject('O876.Mediator.Plugin', class Plugin {
+export class Plugin {
     getName() {
         return ''
     }
@@ -18,7 +18,7 @@ O2.createObject('O876.Mediator.Plugin', class Plugin {
     getPlugin(s) {
         return this._oMediator.getPlugin(s)
     }
-});
-Object.assign(O876.Mediator.Plugin.prototype, {
+}
+Object.assign(Plugin.prototype, {
     _oMediator: null
 });

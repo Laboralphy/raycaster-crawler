@@ -1,4 +1,6 @@
-O2.createObject('WavedasherThinker', class WavedasherThinker extends DasherThinker {
+import { DasherThinker } from './DasherThinker.js';
+
+export class WavedasherThinker extends DasherThinker {
     _follow(nTime) {
         if ((nTime % this.TIME_REACTIVITY) === 0) {
             this.chaseTarget(this.getTarget());
@@ -6,4 +8,4 @@ O2.createObject('WavedasherThinker', class WavedasherThinker extends DasherThink
         }
         super._follow()
     }
-});
+}

@@ -1,4 +1,4 @@
-O2.createObject('XHR', {
+export const XHR = {
     oInstance: null,
     aQueue: [],
     bAjaxing: false,
@@ -14,7 +14,7 @@ O2.createObject('XHR', {
         return XHR.oInstance
     },
     dataReceived: function(oEvent) {
-        var xhr = oEvent.target;
+        const xhr = oEvent.target;
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
                 switch (typeof XHR.oCurrentTarget) {
@@ -40,11 +40,11 @@ O2.createObject('XHR', {
             return
         }
         if (XHR.aQueue.length) {
-            var a = XHR.aQueue.shift();
+            const a = XHR.aQueue.shift();
             XHR.bAjaxing = true;
             XHR.sCurrentURL = a.url;
             XHR.oCurrentTarget = a.target;
-            var xhr = XHR.getInstance();
+            const xhr = XHR.getInstance();
             xhr.open('GET', XHR.sCurrentURL, true);
             xhr.onreadystatechange = XHR.dataReceived;
             xhr.send(null)
@@ -61,7 +61,7 @@ O2.createObject('XHR', {
         if (typeof sString === 'object') {
             sString = JSON.stringify(sString)
         }
-        var xhr = XHR.getInstance();
+        const xhr = XHR.getInstance();
         if (xhr) {
             xhr.open('POST', sUrl, true);
             xhr.send(sString)
@@ -77,7 +77,7 @@ O2.createObject('XHR', {
     },
     getSync: function(sURL) {
         console.warn('Synchronous Ajax Query (url : ' + sURL + ') ! It is known that querying synchronously is bad for health and makes animals suffer.');
-        var xhr = XHR.getInstance();
+        const xhr = XHR.getInstance();
         xhr.open('GET', sURL, false);
         xhr.send(null);
         if (xhr.status == 200) {
@@ -86,4 +86,4 @@ O2.createObject('XHR', {
             throw new Error('XHR failed to load: ' + sURL + ' (' + xhr.status.toString() + ')')
         }
     }
-});
+};

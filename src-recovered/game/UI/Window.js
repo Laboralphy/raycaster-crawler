@@ -1,9 +1,15 @@
-O2.createObject('UI.Window', class Window extends H5UI.Box {
+import { UI } from './UI.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { Box } from '../../libraries/H5UI/Box.js';
+import { Button } from '../../libraries/H5UI/Button.js';
+import { Text } from '../../libraries/H5UI/Text.js';
+
+export class Window extends Box {
     __construct(oParams) {
         super.__construct();
         this.setColor(UI.clWINDOW, UI.clWINDOW);
         this.setBorder(4, UI.clWINDOW_BORDER, UI.clWINDOW_BORDER);
-        var oCaption = this.linkControl(new H5UI.Text());
+        const oCaption = this.linkControl(new Text());
         oCaption.font.setFont('monospace');
         oCaption.font.setSize(12);
         oCaption.font.setColor(UI.clFONT);
@@ -27,7 +33,7 @@ O2.createObject('UI.Window', class Window extends H5UI.Box {
 
     setStatusCaption(s) {
         if (this._oStatusBar === null) {
-            var oMsg = this.linkControl(new H5UI.Text());
+            const oMsg = this.linkControl(new Text());
             oMsg._bWordWrap = false;
             oMsg._bAutosize = true;
             oMsg.font.setSize(this._nStatusBarHeight * 0.75 | 0);
@@ -46,7 +52,7 @@ O2.createObject('UI.Window', class Window extends H5UI.Box {
     }
 
     setCommands(a) {
-        var aColors = [
+        const aColors = [
             [UI.clWINDOW, '#BBBBBB'],
             ['#6666DD', '#BBBBFF'],
             ['#44DD44', '#BBFFBB'],
@@ -55,13 +61,13 @@ O2.createObject('UI.Window', class Window extends H5UI.Box {
             ['#DD44DD', '#FFBBFF'],
             ['#DDDD44', '#FFFFBB']
         ];
-        var b, aColor, x = 0;
-        for (var i = 0; i < a.length; i++) {
+        let b, aColor, x = 0;
+        for (let i = 0; i < a.length; i++) {
             if (a[i] === null) {
                 x += 16;
                 continue
             }
-            b = this.linkControl(new H5UI.Button());
+            b = this.linkControl(new Button());
             b.setCaption(STRINGS._(a[i][0]));
             b.setSize(this._nButtonWidth, this._nStatusBarHeight);
             b.moveTo(x + this._nButtonPadding, this.getHeight() - this._nStatusBarHeight - this._nButtonPadding);
@@ -84,8 +90,8 @@ O2.createObject('UI.Window', class Window extends H5UI.Box {
             this._oStatusBar.moveTo(8, this.getHeight() - this._nStatusBarHeight)
         }
     }
-});
-Object.assign(UI.Window.prototype, {
+}
+Object.assign(Window.prototype, {
     _sClass: 'UI.Window',
     _oStatusBar: null,
     _oCaptionBar: null,

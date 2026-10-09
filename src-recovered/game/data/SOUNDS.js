@@ -1,4 +1,4 @@
-O2.createObject('SOUNDS', {
+export const SOUNDS = {
     DOOR_OPEN: ['a_drawstrt', 'a_drawchain', 'a_pushston'],
     DOOR_CLOSE: ['a_doorstop', '', ''],
     DOOR_LOCKED: 'a_locked',
@@ -30,4 +30,4 @@ O2.createObject('SOUNDS', {
     SPELL_0: 'hit_spell0',
     SPELL_1: 'amb_gloom',
     FX_TELEPORT: 'fx_teleport'
-});
+};

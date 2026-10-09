@@ -1,4 +1,7 @@
-O2.createObject('MagicMissileThinker', class MagicMissileThinker extends O876_Raycaster.MissileThinker {
+import { MissileThinker } from '../../libraries/Raycaster/MissileThinker.js';
+import { PI } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class MagicMissileThinker extends MissileThinker {
     setOptions(sOptions) {
         this.fSineInc = this.oGame.TIME_FACTOR / 320;
         this.bRandom = false;
@@ -8,8 +11,8 @@ O2.createObject('MagicMissileThinker', class MagicMissileThinker extends O876_Ra
         this.bHeavy = false;
         this.bAoE = false;
         this.nAoE = 0;
-        var nOptLen = sOptions.length;
-        for (var iOpt = 0; iOpt < nOptLen; iOpt++) {
+        const nOptLen = sOptions.length;
+        for (let iOpt = 0; iOpt < nOptLen; iOpt++) {
             switch (sOptions.charAt(iOpt)) {
                 case 'h':
                     this.bHeavy = true;
@@ -54,8 +57,8 @@ O2.createObject('MagicMissileThinker', class MagicMissileThinker extends O876_Ra
     }
 
     bump() {
-        var dx = this.oMobile.xSpeed;
-        var dy = this.oMobile.ySpeed;
+        let dx = this.oMobile.xSpeed;
+        let dy = this.oMobile.ySpeed;
         if (this.oMobile.oWallCollision.x) {
             dx = -dx
         }
@@ -67,23 +70,23 @@ O2.createObject('MagicMissileThinker', class MagicMissileThinker extends O876_Ra
     }
 
     isCollisioned() {
-        var b = super.isCollisioned();
-        var oMC = this.oMobile.oMobileCollision;
+        let b = super.isCollisioned();
+        const oMC = this.oMobile.oMobileCollision;
         if (b) {
             if (this.bBump && oMC === null) {
                 this.bump();
                 b = false
             }
             if (oMC) {
-                var oMCC = oMC.getData('creature');
-                var nReflect = oMCC.getAttribute('reflect');
+                const oMCC = oMC.getData('creature');
+                const nReflect = oMCC.getAttribute('reflect');
                 if (nReflect > 0) {
                     this.oMobile.rollbackXY();
                     this.oMobile.rotate(PI);
                     this.oGame.gc_affect(oMC, this.aEffects, this.aChances, this.nPower - nReflect);
                     return false
                 }
-                var oMCT = oMC.oThinker;
+                const oMCT = oMC.oThinker;
                 oMCT._hitByMissile(this.oMobile);
                 if (this.bHeavy) {
                     oMCT.oPulse.x += 10 * Math.cos(this.oMobile.fTheta);
@@ -109,13 +112,12 @@ O2.createObject('MagicMissileThinker', class MagicMissileThinker extends O876_Ra
     }
 
     boom() {
-        var xBoom = this.oMobile.x,
-            yBoom = this.oMobile.y,
-            fBoomAngle;
-        var xVic, yVic;
-        var aVictims = this.oGame.gc_selectMobilesInCircle(xBoom, yBoom, this.nAoE);
-        var nBodyCount = aVictims.length;
-        var i, oVictim;
+        const xBoom = this.oMobile.x, yBoom = this.oMobile.y;
+        let fBoomAngle;
+        let xVic, yVic;
+        const aVictims = this.oGame.gc_selectMobilesInCircle(xBoom, yBoom, this.nAoE);
+        const nBodyCount = aVictims.length;
+        let i, oVictim;
         for (i = 0; i < nBodyCount; i++) {
             oVictim = aVictims[i];
             if (this.bHeavy) {
@@ -131,7 +133,7 @@ O2.createObject('MagicMissileThinker', class MagicMissileThinker extends O876_Ra
 
     advance() {
         super.advance();
-        var f;
+        let f;
         if (this.bRandom) {
             this.nRndTime = (this.nRndTime + 1) & 3;
             if (this.nRndTime === 0) {
@@ -152,10 +154,10 @@ O2.createObject('MagicMissileThinker', class MagicMissileThinker extends O876_Ra
     }
 
     explode() {
-        var oMobile = this.oMobile.oMobileCollision;
+        const oMobile = this.oMobile.oMobileCollision;
         if (oMobile) {
-            var oCreature = oMobile.getData('creature');
-            var nReflect = oCreature.getAttribute('reflect');
+            const oCreature = oMobile.getData('creature');
+            const nReflect = oCreature.getAttribute('reflect');
             if (nReflect > 0) {
                 this.oMobile.rollbackXY();
                 this.oMobile.rotate(PI);
@@ -166,7 +168,7 @@ O2.createObject('MagicMissileThinker', class MagicMissileThinker extends O876_Ra
     }
 
     _hitByMissile(oMissile) {}
-});
+}
 Object.assign(MagicMissileThinker.prototype, {
     nRndTime: 0,
     fSineTime: 0,

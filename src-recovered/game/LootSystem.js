@@ -1,4 +1,8 @@
-O2.createObject('LootSystem', class LootSystem {
+import { LOOT_DATA } from './data/LOOT_DATA.js';
+import { ArrayTools } from '../libraries/O876/ArrayTools.js';
+import { MathTools } from '../libraries/Raycaster/Tools/MathTools.js';
+
+export class LootSystem {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -8,7 +12,7 @@ O2.createObject('LootSystem', class LootSystem {
     }
 
     getLoot(sType) {
-        var aLoot = [];
+        const aLoot = [];
         if (!(sType in this._oTable)) {
             if (sType in LOOT_DATA) {
                 this._oTable[sType] = {
@@ -19,8 +23,8 @@ O2.createObject('LootSystem', class LootSystem {
                 return aLoot
             }
         }
-        var oData = this._oTable[sType];
-        var nItemCount = MathTools.rndChoose(oData.chances);
+        const oData = this._oTable[sType];
+        let nItemCount = MathTools.rndChoose(oData.chances);
         while (nItemCount > 0) {
             aLoot.push(MathTools.rndChoose(oData.items));
             nItemCount--
@@ -29,9 +33,10 @@ O2.createObject('LootSystem', class LootSystem {
     }
 
     generateDistribution(oData) {
-        var x, a = [];
-        var t = oData;
-        for (var i in t) {
+        let x;
+        const a = [];
+        const t = oData;
+        for (const i in t) {
             for (x = 0; x < t[i]; x++) {
                 a.push(i)
             }
@@ -43,9 +48,9 @@ O2.createObject('LootSystem', class LootSystem {
         if (n === undefined) {
             n = 100
         }
-        var oItems = {};
-        var aLoot, iLoot;
-        for (var i = 0; i < n; i++) {
+        const oItems = {};
+        let aLoot, iLoot;
+        for (let i = 0; i < n; i++) {
             aLoot = this.getLoot(sType);
             for (iLoot = 0; iLoot < aLoot.length; iLoot++) {
                 if (!(aLoot[iLoot] in oItems)) {
@@ -58,22 +63,22 @@ O2.createObject('LootSystem', class LootSystem {
     }
 
     runTests(sType) {
-        var oItems = {};
-        var sItem = '',
+        const oItems = {};
+        let sItem = '',
             o;
         for (sItem in LOOT_DATA[sType].items) {
             oItems[sItem] = []
         }
-        for (var iTest = 0; iTest < 10000; iTest++) {
+        for (let iTest = 0; iTest < 10000; iTest++) {
             o = this.test(sType);
             for (sItem in o) {
                 oItems[sItem].push(o[sItem])
             }
         }
-        var oResult = {};
-        var avg = function(aTab) {
-            var n = 0;
-            for (var i = 0; i < aTab.length; i++) {
+        const oResult = {};
+        const avg = function(aTab) {
+            let n = 0;
+            for (let i = 0; i < aTab.length; i++) {
                 n += aTab[i]
             }
             return n / aTab.length
@@ -81,7 +86,7 @@ O2.createObject('LootSystem', class LootSystem {
         for (sItem in oItems) {
             oResult[sItem] = avg(oItems[sItem])
         }
-        var aResult = [];
+        const aResult = [];
         for (sItem in oResult) {
             aResult.push([sItem, oResult[sItem]])
         }
@@ -92,10 +97,9 @@ O2.createObject('LootSystem', class LootSystem {
     }
 
     runDungeonTest(oTypes) {
-        var oItems = {},
-            sItem = '',
-            o;
-        for (var sType in oTypes) {
+        const oItems = {};
+        let sItem = '', o;
+        for (const sType in oTypes) {
             o = this.test(sType, oTypes[sType]);
             for (sItem in o) {
                 if (!(sItem in oItems)) {
@@ -107,7 +111,7 @@ O2.createObject('LootSystem', class LootSystem {
         }
         return oItems
     }
-});
+}
 Object.assign(LootSystem.prototype, {
     _oTable: null
 });

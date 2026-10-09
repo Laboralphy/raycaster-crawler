@@ -1,4 +1,7 @@
-O2.createObject('ScorePlugin', class ScorePlugin {
+import { CRAFT_DATA } from '../data/CRAFT_DATA.js';
+import { LABY } from '../data/LABY.js';
+
+export class ScorePlugin {
     setGame(g) {
         this.oGame = g;
         this.oMonsters = {};
@@ -8,7 +11,7 @@ O2.createObject('ScorePlugin', class ScorePlugin {
     }
 
     getMonsterValue(oMonster) {
-        var sMonsterId = oMonster.getBlueprint().sId;
+        const sMonsterId = oMonster.getBlueprint().sId;
         if (sMonsterId in this.oMonsters) {
             return this.oMonsters[sMonsterId]
         }
@@ -16,19 +19,19 @@ O2.createObject('ScorePlugin', class ScorePlugin {
     }
 
     givePoints(oMob, nAmount) {
-        var oCreature = oMob.getData('creature');
+        const oCreature = oMob.getData('creature');
         oCreature.modifyAttribute('score', nAmount)
     }
 
     getInventoryValue(oWho) {
-        var d = this.oGame.oDungeon;
-        var oCreature = oWho.getData('creature');
-        var oInv = d.getCreatureInventory(oCreature);
-        var aItems = oInv.getAllObjects();
-        var nItemCount = aItems.length;
-        var oItem, nItemValue;
-        var nScore = 0;
-        for (var iItem = 0; iItem < nItemCount; iItem++) {
+        const d = this.oGame.oDungeon;
+        const oCreature = oWho.getData('creature');
+        const oInv = d.getCreatureInventory(oCreature);
+        const aItems = oInv.getAllObjects();
+        const nItemCount = aItems.length;
+        let oItem, nItemValue;
+        let nScore = 0;
+        for (let iItem = 0; iItem < nItemCount; iItem++) {
             oItem = aItems[iItem];
             if (oItem.resref === 'gold') {
                 nItemValue = oItem.stackcount
@@ -43,7 +46,7 @@ O2.createObject('ScorePlugin', class ScorePlugin {
     }
 
     getScore(oWho) {
-        var oCreature = oWho.getData('creature');
+        const oCreature = oWho.getData('creature');
         return this.getInventoryValue(oWho) * this.POINTS_INVENTORY + oCreature.getAttribute('score')
     }
 
@@ -68,7 +71,7 @@ O2.createObject('ScorePlugin', class ScorePlugin {
     craft(oCrafter, oItem) {
         this.givePoints(oCrafter, CRAFT_DATA[oItem.resref].level * this.POINTS_CRAFT_PER_LEVEL)
     }
-});
+}
 Object.assign(ScorePlugin.prototype, {
     oGame: null,
     oMonsters: null,

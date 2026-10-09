@@ -1,4 +1,4 @@
-O2.createObject('O876_Raycaster.MobileDispenser', class MobileDispenser {
+export class MobileDispenser {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -24,15 +24,15 @@ O2.createObject('O876_Raycaster.MobileDispenser', class MobileDispenser {
     }
 
     render() {
-        var sRender = '';
-        for (var sBlueprint in this.aBlueprints) {
+        let sRender = '';
+        for (const sBlueprint in this.aBlueprints) {
             if (this.aBlueprints[sBlueprint].length) {
                 sRender += '[' + sBlueprint + ': ' + this.aBlueprints[sBlueprint].length.toString() + ']'
             }
         }
         return sRender
     }
-});
-Object.assign(O876_Raycaster.MobileDispenser.prototype, {
+}
+Object.assign(MobileDispenser.prototype, {
     aBlueprints: null
 });

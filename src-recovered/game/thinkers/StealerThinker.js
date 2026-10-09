@@ -1,7 +1,10 @@
-O2.createObject('StealerThinker', class StealerThinker extends MobThinker {
+import { MobThinker } from './MobThinker.js';
+import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class StealerThinker extends MobThinker {
     _follow(nTime) {
         if ((nTime % this.TIME_REACTIVITY) === 0) {}
-        for (var i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++) {
             switch (this.move()) {
                 case this.COLLISION_TARGET:
                     if (this.getTarget() == this.oMobile.oMobileCollision) {
@@ -30,19 +33,19 @@ O2.createObject('StealerThinker', class StealerThinker extends MobThinker {
             return
         }
         this.nStealCount--;
-        var oCreature = oMobile.getData('creature');
+        const oCreature = oMobile.getData('creature');
         if ('inventory' in oCreature.oExtraData) {
-            var nLevel = this.oCreature.oExtraData.level;
-            var oInv = oCreature.oExtraData.inventory;
-            var nSize = oInv.getSize();
-            var oItem;
-            var oWantedTypes = {
+            const nLevel = this.oCreature.oExtraData.level;
+            const oInv = oCreature.oExtraData.inventory;
+            const nSize = oInv.getSize();
+            let oItem;
+            const oWantedTypes = {
                 ring: [],
                 earings: [],
                 amulet: [],
                 misc: []
             };
-            for (var iItem = 0; iItem < nSize; iItem++) {
+            for (let iItem = 0; iItem < nSize; iItem++) {
                 oItem = oInv.aBagSlots[iItem];
                 if (oItem) {
                     if (oItem.type in oWantedTypes) {
@@ -50,8 +53,8 @@ O2.createObject('StealerThinker', class StealerThinker extends MobThinker {
                     }
                 }
             }
-            var nChoice = MathTools.rnd(0, 9);
-            var sChosenType;
+            const nChoice = MathTools.rnd(0, 9);
+            let sChosenType;
             switch (nChoice) {
                 case 0:
                 case 1:
@@ -76,20 +79,20 @@ O2.createObject('StealerThinker', class StealerThinker extends MobThinker {
             }
             oItem = MathTools.rndChoose(oWantedTypes[sChosenType]);
             if (oItem) {
-                var nStolen = MathTools.rnd(1, nLevel);
+                const nStolen = MathTools.rnd(1, nLevel);
                 oInv.removeItem(oItem, nStolen);
                 if (oItem.isEquippable()) {
                     this.oCreature.oExtraData.inventory.defineEquipSlot(oItem.slot);
                     this.oGame.gc_equipItem(this.oMobile, oItem)
                 }
                 if (oCreature == G.oDungeon.getPlayerCreature()) {
-                    var sItem = oItem.getName(nStolen);
+                    const sItem = oItem.getName(nStolen);
                     this.oGame.sys_notify('item_steal', [sItem])
                 }
             }
         }
     }
-});
+}
 Object.assign(StealerThinker.prototype, {
     nStealCount: 1
 });

@@ -1,4 +1,4 @@
-O2.createObject('O876_Raycaster.ImageLoader', class ImageLoader {
+export class ImageLoader {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -14,7 +14,7 @@ O2.createObject('O876_Raycaster.ImageLoader', class ImageLoader {
 
     finalize() {
         this.aLoading = null;
-        for (var i in this.oImages) {
+        for (const i in this.oImages) {
             this.oImages[i] = null
         }
         this.oImages = null;
@@ -37,7 +37,7 @@ O2.createObject('O876_Raycaster.ImageLoader', class ImageLoader {
         }
         this.nLoaded = 0;
         this.bComplete = true;
-        for (var i = 0; i < this.aLoading.length; i++) {
+        for (let i = 0; i < this.aLoading.length; i++) {
             if (this.aLoading[i].complete) {
                 this.nLoaded++
             } else {
@@ -46,8 +46,8 @@ O2.createObject('O876_Raycaster.ImageLoader', class ImageLoader {
         }
         if (this.bComplete) {
             this.aLoading = [];
-            var oImg;
-            for (var sImg in this.oImages) {
+            let oImg;
+            for (const sImg in this.oImages) {
                 oImg = this.oImages[sImg];
                 this.oStats.images[sImg] = oImg.width * oImg.height * 4;
                 this.oStats.totalsize += this.oStats.images[sImg]
@@ -67,8 +67,8 @@ O2.createObject('O876_Raycaster.ImageLoader', class ImageLoader {
     countLoaded() {
         return this.nLoaded
     }
-});
-Object.assign(O876_Raycaster.ImageLoader.prototype, {
+}
+Object.assign(ImageLoader.prototype, {
     oImages: null,
     aLoading: null,
     bComplete: false,

@@ -1,4 +1,4 @@
-var SPELLS_DATA = {
+export const SPELLS_DATA = {
     "mis_warlock_1": {
         "blueprint": "p_magbolt",
         "cost": 0,

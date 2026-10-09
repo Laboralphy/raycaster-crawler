@@ -1,4 +1,6 @@
-O2.createObject('TimedThinker', class TimedThinker extends O876_Raycaster.Thinker {
+import { Thinker } from '../../libraries/Raycaster/Thinker.js';
+
+export class TimedThinker extends Thinker {
     start(t) {
         this.nTimeOut = this.oGame.nTimeMs + t;
         this.think = this.thinkAlive
@@ -13,7 +15,7 @@ O2.createObject('TimedThinker', class TimedThinker extends O876_Raycaster.Thinke
     thinkDead() {
         this.oMobile.bActive = false
     }
-});
+}
 Object.assign(TimedThinker.prototype, {
     nTimeOut: 0
 });

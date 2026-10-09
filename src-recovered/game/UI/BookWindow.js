@@ -1,4 +1,9 @@
-O2.createObject('UI.BookWindow', class BookWindow extends UI.Window {
+import { Window } from './Window.js';
+import { STRINGS } from '../data/STRINGS.js';
+import { Image } from '../../libraries/H5UI/Image.js';
+import { Text } from '../../libraries/H5UI/Text.js';
+
+export class BookWindow extends Window {
     __construct(oParams) {
         super.__construct({
             caption: STRINGS._('~win_book')
@@ -10,7 +15,7 @@ O2.createObject('UI.BookWindow', class BookWindow extends UI.Window {
 
     buildWindowContent() {
         this.setSize(this.nWidth, this.nHeight);
-        var oTitle = this.linkControl(new H5UI.Text());
+        const oTitle = this.linkControl(new Text());
         oTitle._bWordWrap = false;
         oTitle._bAutosize = true;
         oTitle.moveTo(this.nPadding, this.yTitle);
@@ -19,13 +24,13 @@ O2.createObject('UI.BookWindow', class BookWindow extends UI.Window {
         oTitle.font.setStyle('bold');
         oTitle.font.setColor('#000000');
         oTitle.setCaption(this.oParams.title);
-        var oText = this.linkControl(new H5UI.Text());
+        const oText = this.linkControl(new Text());
         oText._bWordWrap = true;
         oText._bAutosize = false;
         oText.moveTo(this.nPadding, this.yText);
         if (this.oParams.images) {
             oText.setSize(this.nWidth - (this.nPadding * 3) - this.nImageWidth, this.nHeight - this.yText - this.nPadding);
-            this.oImage = this.linkControl(new H5UI.Image());
+            this.oImage = this.linkControl(new Image());
             this.oImage.hide();
             this.oImage.__imageWidth = this.nImageWidth;
             this.oImage.moveTo(this.nWidth - this.nPadding - this.nImageWidth, this.yText)
@@ -58,12 +63,12 @@ O2.createObject('UI.BookWindow', class BookWindow extends UI.Window {
     }
 
     imageLoaded() {
-        var oImage = this;
-        var t = oImage._oTexture;
-        var w = t.width;
-        var h = t.height;
-        var iw = oImage.__imageWidth;
-        var h2 = h * iw / w | 0;
+        const oImage = this;
+        const t = oImage._oTexture;
+        const w = t.width;
+        const h = t.height;
+        const iw = oImage.__imageWidth;
+        const h2 = h * iw / w | 0;
         oImage.setSize(iw, h2);
         oImage._bAutosize = false;
         oImage.show();
@@ -72,8 +77,8 @@ O2.createObject('UI.BookWindow', class BookWindow extends UI.Window {
 
     readPage(i) {
         this.iPage = Math.min(this.oParams.pages.length - 1, Math.max(0, i));
-        var oBPrev = this.getCommandButton(1);
-        var oBNext = this.getCommandButton(2);
+        const oBPrev = this.getCommandButton(1);
+        const oBNext = this.getCommandButton(2);
         if (this.iPage === 0) {
             oBPrev.hide()
         } else {
@@ -84,7 +89,7 @@ O2.createObject('UI.BookWindow', class BookWindow extends UI.Window {
         } else {
             oBNext.show()
         }
-        var sText = this.oParams.pages[this.iPage];
+        const sText = this.oParams.pages[this.iPage];
         this.oText.setCaption(sText);
         if (this.oParams.images) {
             this.oImage.setImage(this.oParams.images[i % this.oParams.images.length]);
@@ -113,8 +118,8 @@ O2.createObject('UI.BookWindow', class BookWindow extends UI.Window {
             return false
         }
     }
-});
-Object.assign(UI.BookWindow.prototype, {
+}
+Object.assign(BookWindow.prototype, {
     nWidth: 540,
     nHeight: 320,
     nFontSize: 16,

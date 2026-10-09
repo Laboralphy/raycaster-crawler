@@ -1,4 +1,8 @@
-O2.createObject('WORLD_DATA.dungeons', {
+import { LABY } from './LABY.js';
+import { shops } from './WORLD_DATA.shops.js';
+import { MapTranslater } from '../../libraries/O876/MapTranslater.js';
+
+export const dungeons = {
     forest: [{
         generator: 'forest',
         options: '-ls1',
@@ -114,7 +118,7 @@ O2.createObject('WORLD_DATA.dungeons', {
                 levels: [7, 8, 9]
             }
         },
-        shops: [WORLD_DATA.shops.firstaid_2, WORLD_DATA.shops.magic_2]
+        shops: [shops.firstaid_2, shops.magic_2]
     }, {
         generator: 'dungeon',
         options: '-ls2',
@@ -145,7 +149,7 @@ O2.createObject('WORLD_DATA.dungeons', {
                 levels: [7, 8, 9, 10]
             }
         },
-        shops: [WORLD_DATA.shops.jewels_2, WORLD_DATA.shops.potions_1]
+        shops: [shops.jewels_2, shops.potions_1]
     }, {
         generator: 'dungeon',
         options: '-ls2-rs1',
@@ -173,7 +177,7 @@ O2.createObject('WORLD_DATA.dungeons', {
                 levels: [7, 8, 9, 10]
             }
         },
-        shops: [WORLD_DATA.shops.potions_2, WORLD_DATA.shops.jewels_2r]
+        shops: [shops.potions_2, shops.jewels_2r]
     }, {
         generator: 'dungeon',
         options: '-ts3-rs1-t1',
@@ -204,7 +208,7 @@ O2.createObject('WORLD_DATA.dungeons', {
                 levels: [9, 10]
             }
         },
-        shops: [WORLD_DATA.shops.potions_3, WORLD_DATA.shops.firstaid_2, WORLD_DATA.shops.firstaid_2]
+        shops: [shops.potions_3, shops.firstaid_2, shops.firstaid_2]
     }, {
         generator: 'boss',
         options: '',
@@ -276,7 +280,7 @@ O2.createObject('WORLD_DATA.dungeons', {
                 levels: [7, 8, 9, 10]
             }
         },
-        shops: [WORLD_DATA.shops.potions_1, WORLD_DATA.shops.jewels_2b]
+        shops: [shops.potions_1, shops.jewels_2b]
     }, {
         generator: 'mines',
         options: '-ls1',
@@ -303,7 +307,7 @@ O2.createObject('WORLD_DATA.dungeons', {
                 levels: [7, 8, 9, 10]
             }
         },
-        shops: [WORLD_DATA.shops.firstaid_2, WORLD_DATA.shops.blacksmith_2]
+        shops: [shops.firstaid_2, shops.blacksmith_2]
     }, {
         generator: 'boss',
         options: '',
@@ -331,7 +335,7 @@ O2.createObject('WORLD_DATA.dungeons', {
     }],
     medusa: [{
         generator: 'cave',
-        map: O876.MapTranslater.process(['#########################', '####################..###', '###########..o#####....##', '####<#####..............#', '###waw###....###?###.o..#', '#..-[-..##..###.?.##....#', '#.......###o###$!.#....##', '#.......###.#####$#...###', '####.######[########.####', '####[####.......####...##', '####...##.......##......#', '####....#..-]-..#o......#', '###.....###wbw###.......#', '###.#.o#####>####.......#', '###o#.############.....##', '###.#.$############..####', '###.#.#############..####', '##..#######...#####...###', '#....#####.....###.....##', '#....#####.....o........#', '#..o..####.........o....#', '#...............#.......#', '#......###......##......#', '##.....####....####....##', '#########################'], {
+        map: MapTranslater.process(['#########################', '####################..###', '###########..o#####....##', '####<#####..............#', '###waw###....###?###.o..#', '#..-[-..##..###.?.##....#', '#.......###o###$!.#....##', '#.......###.#####$#...###', '####.######[########.####', '####[####.......####...##', '####...##.......##......#', '####....#..-]-..#o......#', '###.....###wbw###.......#', '###.#.o#####>####.......#', '###o#.############.....##', '###.#.$############..####', '###.#.#############..####', '##..#######...#####...###', '#....#####.....###.....##', '#....#####.....o........#', '#..o..####.........o....#', '#...............#.......#', '#......###......##......#', '##.....####....####....##', '#########################'], {
             '.': LABY.BLOCK_VOID,
             '#': LABY.BLOCK_WALL,
             '$': LABY.BLOCK_TREASURE,
@@ -423,4 +427,4 @@ O2.createObject('WORLD_DATA.dungeons', {
         },
         shops: []
     }]
-});
+};

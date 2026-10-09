@@ -1,4 +1,4 @@
-var CRAFT_DATA = {
+export const CRAFT_DATA = {
     "pot_heal_1": {
         "type": "brew",
         "level": 1,

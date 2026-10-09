@@ -1,8 +1,8 @@
-O2.createObject('O876.MapTranslater', {
+export const MapTranslater = {
     process: function(aMap, oDic) {
-        var x, y, aRow;
-        var aOutput = [];
-        var aRowOutput;
+        let x, y, aRow;
+        const aOutput = [];
+        let aRowOutput;
         for (y = 0; y < aMap.length; ++y) {
             aRow = aMap[y].split('');
             aRowOutput = [];
@@ -13,4 +13,4 @@ O2.createObject('O876.MapTranslater', {
         }
         return aOutput
     }
-});
+};

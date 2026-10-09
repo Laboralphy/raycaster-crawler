@@ -1,4 +1,4 @@
-O2.createObject('O876_Raycaster.Thinker', class Thinker {
+export class Thinker {
     constructor(...aArgs) {
         if ('__construct' in this) {
             this.__construct(...aArgs);
@@ -6,8 +6,8 @@ O2.createObject('O876_Raycaster.Thinker', class Thinker {
     }
 
     think() {}
-});
-Object.assign(O876_Raycaster.Thinker.prototype, {
+}
+Object.assign(Thinker.prototype, {
     oMobile: null,
     oGame: null
 });

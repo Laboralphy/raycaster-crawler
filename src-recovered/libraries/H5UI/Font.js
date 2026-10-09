@@ -1,4 +1,4 @@
-O2.createObject('H5UI.Font', class Font {
+export class Font {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -44,7 +44,7 @@ O2.createObject('H5UI.Font', class Font {
     }
 
     setColor(sColor, sOutline) {
-        var bInvalid = false;
+        let bInvalid = false;
         if (this._sColor != sColor) {
             this._sColor = sColor;
             bInvalid = true
@@ -64,15 +64,15 @@ O2.createObject('H5UI.Font', class Font {
     }
 
     update() {
-        var oContext = this._oControl.getSurface();
+        const oContext = this._oControl.getSurface();
         oContext.font = this.getFontString();
         oContext.fillStyle = this._sColor;
         if (this._bOutline) {
             oContext.strokeStyle = this._sOutlineColor
         }
     }
-});
-Object.assign(H5UI.Font.prototype, {
+}
+Object.assign(Font.prototype, {
     _sStyle: '',
     _sFont: 'monospace',
     _nFontSize: 10,

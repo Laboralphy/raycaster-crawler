@@ -1,7 +1,9 @@
-O2.createObject('O876_Raycaster.XMap', class XMap {
+import { CanvasFactory } from '../O876/CanvasFactory.js';
+
+export class XMap {
     setSize(w, h) {
         this.aMap = [];
-        var aBlock, aRow, x, y, nSide;
+        let aBlock, aRow, x, y, nSide;
         this.nWidth = w;
         this.nHeight = h;
         for (y = 0; y < h; y++) {
@@ -38,16 +40,16 @@ O2.createObject('O876_Raycaster.XMap', class XMap {
     }
 
     cloneTexture(oTextures, iTexture, x, y, nSide) {
-        var oCanvas;
-        var oBlock = this.get(x, y, nSide);
+        let oCanvas;
+        const oBlock = this.get(x, y, nSide);
         if (oBlock.oCanvas === null) {
-            oBlock.oCanvas = oCanvas = O876.CanvasFactory.getCanvas()
+            oBlock.oCanvas = oCanvas = CanvasFactory.getCanvas()
         } else {
             oCanvas = oBlock.oCanvas;
             delete oCanvas.__shaded
         }
-        var w = this.nBlockWidth;
-        var h;
+        const w = this.nBlockWidth;
+        let h;
         if (nSide < 4) {
             h = this.nBlockHeight
         } else {
@@ -60,8 +62,8 @@ O2.createObject('O876_Raycaster.XMap', class XMap {
         oCanvas.getContext('2d').drawImage(oTextures, iTexture * w, 0, w, h, 0, 0, w, h);
         return oCanvas
     }
-});
-Object.assign(O876_Raycaster.XMap.prototype, {
+}
+Object.assign(XMap.prototype, {
     aMap: null,
     nWidth: 0,
     nHeight: 0,

@@ -1,9 +1,13 @@
-O2.createObject('GXBlind', class GXBlind extends O876_Raycaster.GXEffect {
+import { CanvasFactory } from '../../libraries/O876/CanvasFactory.js';
+import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
+import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+
+export class GXBlind extends GXEffect {
     __construct(oRaycaster) {
         super.__construct(oRaycaster);
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
-        this.oFlashCanvas = O876.CanvasFactory.getCanvas();
+        this.oFlashCanvas = CanvasFactory.getCanvas();
         this.oFlashCanvas.width = this.oCanvas.width;
         this.oFlashCanvas.height = this.oCanvas.height;
         this.oFlashContext = this.oFlashCanvas.getContext('2d');
@@ -35,8 +39,8 @@ O2.createObject('GXBlind', class GXBlind extends O876_Raycaster.GXEffect {
     }
 
     buildBlindness() {
-        var xGA = this.oFlashContext.globalAlpha;
-        var f = Math.sin(MathTools.toRad(this.nTime << 3));
+        let xGA = this.oFlashContext.globalAlpha;
+        const f = Math.sin(MathTools.toRad(this.nTime << 3));
         if (f < 0) {
             this.oFlashContext.globalAlpha = 0
         } else {
@@ -49,7 +53,7 @@ O2.createObject('GXBlind', class GXBlind extends O876_Raycaster.GXEffect {
         this.oFlashContext.drawImage(this.oCanvas, 0, 0);
         this.oFlashContext.globalCompositeOperation = xGA
     }
-});
+}
 Object.assign(GXBlind.prototype, {
     sClass: 'Blind',
     oCanvas: null,

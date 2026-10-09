@@ -1,4 +1,4 @@
-O2.createObject('WORLD_DATA.shops', {
+export const shops = {
     survive_1: [
         ['ccc_bread', 1],
         ['ccc_h2o', 1],
@@ -99,4 +99,4 @@ O2.createObject('WORLD_DATA.shops', {
         ['ccc_herb5', 5],
         ['ccc_herb5', 5]
     ]
-});
+};

@@ -1,4 +1,4 @@
-O2.createObject('Marker', {
+export const Marker = {
     iterate: function(o, f) {
         o.forEach(function(aRow, x) {
             if (aRow) {
@@ -14,7 +14,7 @@ O2.createObject('Marker', {
         })
     },
     serialize: function(o) {
-        var a = [];
+        const a = [];
         Marker.iterate(o, function(x, y, v) {
             a.push({
                 x: x,
@@ -25,7 +25,7 @@ O2.createObject('Marker', {
         return a
     },
     unserialize: function(d) {
-        var o = Marker.create();
+        const o = Marker.create();
         d.forEach(function(dx) {
             if (dx) {
                 Marker.markXY(o, dx.x, dx.y, dx.v)
@@ -59,11 +59,11 @@ O2.createObject('Marker', {
         o[x][y] = false
     },
     markBlock: function(o, x1, y1, x2, y2, v) {
-        var xFrom = Math.min(x1, x2);
-        var yFrom = Math.min(y1, y2);
-        var xTo = Math.max(x1, x2);
-        var yTo = Math.max(y1, y2);
-        var x, y;
+        const xFrom = Math.min(x1, x2);
+        const yFrom = Math.min(y1, y2);
+        const xTo = Math.max(x1, x2);
+        const yTo = Math.max(y1, y2);
+        let x, y;
         for (x = xFrom; x <= xTo; x++) {
             for (y = yFrom; y <= yTo; y++) {
                 Marker.markXY(o, x, y, v)
@@ -71,15 +71,15 @@ O2.createObject('Marker', {
         }
     },
     clearBlock: function(o, x1, y1, x2, y2) {
-        var xFrom = Math.min(x1, x2);
-        var yFrom = Math.min(y1, y2);
-        var xTo = Math.max(x1, x2);
-        var yTo = Math.max(y1, y2);
-        var x, y;
+        const xFrom = Math.min(x1, x2);
+        const yFrom = Math.min(y1, y2);
+        const xTo = Math.max(x1, x2);
+        const yTo = Math.max(y1, y2);
+        let x, y;
         for (x = xFrom; x <= xTo; x++) {
             for (y = yFrom; y <= yTo; y++) {
                 Marker.clearXY(o, x, y)
             }
         }
     }
-});
+};

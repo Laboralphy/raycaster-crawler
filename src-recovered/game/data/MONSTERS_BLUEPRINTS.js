@@ -1,4 +1,6 @@
-var MONSTERS_BLUEPRINTS = {
+import { RC } from '../../libraries/Raycaster/RC.js';
+
+export const MONSTERS_BLUEPRINTS = {
     "m_myco": {
         "type": RC.OBJECT_TYPE_MOB,
         "tile": "m_myco",

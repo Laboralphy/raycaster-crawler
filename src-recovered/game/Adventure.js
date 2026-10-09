@@ -1,9 +1,16 @@
-O2.createObject('Adventure', class Adventure {
+import { LABY } from './data/LABY.js';
+import { SOUNDS } from './data/SOUNDS.js';
+import { STRINGS } from './data/STRINGS.js';
+import { GXUnderwater } from './gx/GXUnderwater.js';
+import { RC } from '../libraries/Raycaster/RC.js';
+import { MathTools } from '../libraries/Raycaster/Tools/MathTools.js';
+
+export class Adventure {
     setAdventureFlag(oCreature, nFlag, bFlag) {
-        var n32 = nFlag >> 5;
-        var nBit = nFlag & 31;
-        var sFlag = 'f_' + n32.toString();
-        var nValue = oCreature.getAttribute(sFlag);
+        const n32 = nFlag >> 5;
+        const nBit = nFlag & 31;
+        const sFlag = 'f_' + n32.toString();
+        let nValue = oCreature.getAttribute(sFlag);
         if (bFlag) {
             nValue |= 1 << nBit
         } else {
@@ -13,10 +20,10 @@ O2.createObject('Adventure', class Adventure {
     }
 
     getAdventureFlag(oCreature, nFlag) {
-        var n32 = nFlag >> 5;
-        var nBit = nFlag & 31;
-        var sFlag = 'f_' + n32.toString();
-        var nValue = oCreature.getAttribute(sFlag);
+        const n32 = nFlag >> 5;
+        const nBit = nFlag & 31;
+        const sFlag = 'f_' + n32.toString();
+        const nValue = oCreature.getAttribute(sFlag);
         return (nValue & (1 << nBit))
     }
 
@@ -34,7 +41,7 @@ O2.createObject('Adventure', class Adventure {
     }
 
     eventReadBookOfStory(oGame) {
-        var oPlayer = oGame.oDungeon.getPlayerCreature();
+        const oPlayer = oGame.oDungeon.getPlayerCreature();
         if (oPlayer.getAttribute('f_story') === 0) {
             oGame.oBookSystem.read('~book_of_the_story');
             oPlayer.setBaseAttribute('f_story', 1);
@@ -43,13 +50,13 @@ O2.createObject('Adventure', class Adventure {
     }
 
     eventUnsealDoor(oGame, x, y) {
-        var rc = oGame.oRaycaster;
-        var h = rc.oHorde;
-        var nHLen = h.getMobileCount();
-        var iHorde, oMob, oCreature, oBP;
-        var rcp = rc.nPlaneSpacing;
-        var xBlock = x * rcp + (rcp >> 1);
-        var yBlock = y * rcp + (rcp >> 1);
+        const rc = oGame.oRaycaster;
+        const h = rc.oHorde;
+        const nHLen = h.getMobileCount();
+        let iHorde, oMob, oCreature, oBP;
+        const rcp = rc.nPlaneSpacing;
+        const xBlock = x * rcp + (rcp >> 1);
+        const yBlock = y * rcp + (rcp >> 1);
         for (iHorde = 1; iHorde < nHLen; iHorde++) {
             oMob = h.getMobile(iHorde);
             oCreature = oMob.getData('creature');
@@ -71,7 +78,7 @@ O2.createObject('Adventure', class Adventure {
     }
 
     eventGotRelic(oGame) {
-        var nScore = oGame.oDungeon.getScore(oGame.oDungeon.getPlayerCreature());
+        const nScore = oGame.oDungeon.getScore(oGame.oDungeon.getPlayerCreature());
         oGame.oDialogSystem.display(STRINGS._('~m_relic', [nScore.toString()]), [
             [STRINGS._('~key_endgame'), 5, oGame.sys_endGame]
         ])
@@ -91,7 +98,7 @@ O2.createObject('Adventure', class Adventure {
     }
 
     seedLevels(d) {
-        var iLevel, oDungeon, nLevelCount, sDungeon = '';
+        let iLevel, oDungeon, nLevelCount, sDungeon = '';
         for (sDungeon in d) {
             nLevelCount = d[sDungeon].length;
             for (iLevel = 0; iLevel < nLevelCount; iLevel++) {
@@ -106,9 +113,9 @@ O2.createObject('Adventure', class Adventure {
 
     config(d) {
         this.oEvents = {};
-        var d1 = d.d1;
-        var mines = d.mines;
-        var medusa = d.medusa;
+        const d1 = d.d1;
+        const mines = d.mines;
+        const medusa = d.medusa;
         if (this.oVariables === null) {
             this.oVariables = {
                 portalToMines: MathTools.rnd(1, 2),
@@ -118,12 +125,12 @@ O2.createObject('Adventure', class Adventure {
         this.seedLevels(d);
         this.defineEvent('forest', 0, 'enterLevel', 'eventReadBookOfStory');
         this.defineEvent('forest', 0, 'entranceSwitch', 'eventEscapeGame');
-        var nPortalToMines = this.oVariables.portalToMines;
+        const nPortalToMines = this.oVariables.portalToMines;
         d1[nPortalToMines].options += '-p1';
         d1[nPortalToMines].transit = {
             portal: 'mines'
         };
-        var nPortalToMedusa = this.oVariables.portalToMedusa;
+        const nPortalToMedusa = this.oVariables.portalToMedusa;
         d1[nPortalToMedusa].options += '-p1';
         d1[nPortalToMedusa].transit = {
             portal: 'medusa'
@@ -150,15 +157,15 @@ O2.createObject('Adventure', class Adventure {
     }
 
     notify(oGame, s) {
-        var d = oGame.oDungeon.getPlayerLocationArea();
-        var f = oGame.oDungeon.getPlayerLocationFloor();
-        var aArgs = Array.prototype.slice.call(arguments, 2);
+        const d = oGame.oDungeon.getPlayerLocationArea();
+        const f = oGame.oDungeon.getPlayerLocationFloor();
+        const aArgs = Array.prototype.slice.call(arguments, 2);
         aArgs.unshift(oGame);
         if (d in this.oEvents && this.oEvents[d][f] !== undefined && s in this.oEvents[d][f] && this.oEvents[d][f][s]) {
             this[this.oEvents[d][f][s]].apply(this, aArgs)
         }
     }
-});
+}
 Object.assign(Adventure.prototype, {
     oEvents: null,
     oVariables: null,

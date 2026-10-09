@@ -1,4 +1,4 @@
-O2.createObject('Astar.Point', class Point {
+export class Point {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -7,8 +7,8 @@ O2.createObject('Astar.Point', class Point {
         this.x = x;
         this.y = y
     }
-});
-Object.assign(Astar.Point.prototype, {
+}
+Object.assign(Point.prototype, {
     x: 0,
     y: 0
 });

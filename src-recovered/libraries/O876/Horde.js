@@ -1,4 +1,4 @@
-O2.createObject('O876.Horde', class Horde {
+export class Horde {
     constructor(...aArgs) {
         this.__construct(...aArgs);
     }
@@ -8,7 +8,7 @@ O2.createObject('O876.Horde', class Horde {
     }
 
     link(oItem) {
-        var nKey = this.aItems.length;
+        const nKey = this.aItems.length;
         this.aItems.push(oItem);
         return nKey
     }
@@ -34,7 +34,7 @@ O2.createObject('O876.Horde', class Horde {
     }
 
     unlink(xKey) {
-        var nKey;
+        let nKey;
         if (typeof xKey == 'object') {
             nKey = this.indexOf(xKey)
         } else {
@@ -53,7 +53,7 @@ O2.createObject('O876.Horde', class Horde {
     clear() {
         this.aItems = []
     }
-});
-Object.assign(O876.Horde.prototype, {
+}
+Object.assign(Horde.prototype, {
     aItems: null
 });

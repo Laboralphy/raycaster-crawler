@@ -1,31 +1,31 @@
-O2.createObject('O876.LZW', {
+export const LZW = {
     DICT_SIZE: 4096,
     PACKET_SEPARATOR: ':',
     FILE_SIGN: 'O876' + String.fromCharCode(122) + ':',
     nLastRatio: 0,
     nMystificator: 0,
     encode: function(sData) {
-        var aPackets = O876.LZW._createEncodedPackets(sData);
-        var sBin = O876.LZW._bundlePackets(aPackets);
-        O876.LZW.nLastRatio = sBin.length * 100 / sData.length | 0;
-        return O876.LZW.FILE_SIGN + sBin
+        const aPackets = LZW._createEncodedPackets(sData);
+        const sBin = LZW._bundlePackets(aPackets);
+        LZW.nLastRatio = sBin.length * 100 / sData.length | 0;
+        return LZW.FILE_SIGN + sBin
     },
     decode: function(sZData) {
-        if (sZData.substr(0, O876.LZW.FILE_SIGN.length) !== O876.LZW.FILE_SIGN) {
+        if (sZData.substr(0, LZW.FILE_SIGN.length) !== LZW.FILE_SIGN) {
             throw new Error('bad format')
         }
-        var aPacketCount = O876.LZW._getPacketInt(sZData, O876.LZW.FILE_SIGN.length);
-        var nCount = aPacketCount[0];
-        var iOffset = aPacketCount[1];
-        var aPackets = O876.LZW._parsePackets(sZData, nCount, iOffset);
-        return O876.LZW._decodePackets(aPackets)
+        const aPacketCount = LZW._getPacketInt(sZData, LZW.FILE_SIGN.length);
+        const nCount = aPacketCount[0];
+        const iOffset = aPacketCount[1];
+        const aPackets = LZW._parsePackets(sZData, nCount, iOffset);
+        return LZW._decodePackets(aPackets)
     },
     _bundlePackets: function(aPackets) {
-        var aOutput = [];
-        var sSep = O876.LZW.PACKET_SEPARATOR;
+        const aOutput = [];
+        const sSep = LZW.PACKET_SEPARATOR;
         aOutput.push(aPackets.length.toString(16));
         aOutput.push(sSep);
-        for (var i = 0; i < aPackets.length; i++) {
+        for (let i = 0; i < aPackets.length; i++) {
             aOutput.push(aPackets[i].length.toString(16));
             aOutput.push(sSep);
             aOutput.push(aPackets[i])
@@ -33,23 +33,24 @@ O2.createObject('O876.LZW', {
         return aOutput.join('')
     },
     _getPacketInt: function(sPacket, iFrom) {
-        var i = iFrom;
-        var sNumber = '0x';
-        var sSep = O876.LZW.PACKET_SEPARATOR;
+        let i = iFrom;
+        let sNumber = '0x';
+        const sSep = LZW.PACKET_SEPARATOR;
         while (sPacket.substr(i, 1) != sSep) {
             sNumber += sPacket.substr(i, 1);
             i++
         }
-        var nNumber = parseInt(sNumber);
+        const nNumber = parseInt(sNumber);
         if (isNaN(nNumber)) {
             throw new Error('corrupted data ' + sNumber)
         }
         return [parseInt(sNumber), i + 1]
     },
     _parsePackets: function(sPackets, nCount, iFrom) {
-        var aGPI, nLength, aOutput = [];
-        for (var i = 0; i < nCount; i++) {
-            aGPI = O876.LZW._getPacketInt(sPackets, iFrom);
+        let aGPI, nLength;
+        const aOutput = [];
+        for (let i = 0; i < nCount; i++) {
+            aGPI = LZW._getPacketInt(sPackets, iFrom);
             nLength = aGPI[0];
             iFrom = aGPI[1];
             aOutput.push(sPackets.substr(iFrom, nLength));
@@ -58,36 +59,36 @@ O2.createObject('O876.LZW', {
         return aOutput
     },
     _createEncodedPackets: function(s) {
-        var i = 0;
-        var o = [];
-        var aOutput = [];
+        let i = 0;
+        let o = [];
+        const aOutput = [];
         do {
-            o = O876.LZW._encodeFragment(s, i);
+            o = LZW._encodeFragment(s, i);
             i = o[1];
             aOutput.push(o[2])
         } while (!o[0]);
         return aOutput
     },
     _decodePackets: function(a) {
-        var o = [];
-        for (var i = 0; i < a.length; i++) {
-            o.push(O876.LZW._decodeFragment(a[i]))
+        const o = [];
+        for (let i = 0; i < a.length; i++) {
+            o.push(LZW._decodeFragment(a[i]))
         }
         return o.join('')
     },
     _encodeFragment: function(s, iFrom) {
-        var d = {};
-        var i, iCode = 256;
+        const d = {};
+        let i, iCode = 256;
         for (i = 0; i < 256; i++) {
             d[String.fromCharCode(i)] = i
         }
-        var w = '';
-        var c;
-        var wc;
-        var o = [];
-        var iIndex;
-        var nLen = s.length;
-        var bEnd = true;
+        let w = '';
+        let c;
+        let wc;
+        const o = [];
+        let iIndex;
+        const nLen = s.length;
+        let bEnd = true;
         for (iIndex = iFrom; iIndex < nLen; iIndex++) {
             c = s.charAt(iIndex);
             wc = w + c;
@@ -98,7 +99,7 @@ O2.createObject('O876.LZW', {
                 o.push(d[w]);
                 w = c
             }
-            if (d.length >= O876.LZW.DICT_SIZE) {
+            if (d.length >= LZW.DICT_SIZE) {
                 bEnd = false;
                 iIndex++;
                 break
@@ -106,23 +107,23 @@ O2.createObject('O876.LZW', {
         }
         o.push(d[w]);
         for (i = 0; i < o.length; i++) {
-            o[i] = String.fromCharCode(o[i] ^ O876.LZW.nMystificator)
+            o[i] = String.fromCharCode(o[i] ^ LZW.nMystificator)
         }
         return [bEnd, iIndex, o.join('')]
     },
     _decodeFragment: function(s) {
-        var a;
+        let i;
+        let a;
         if (typeof s === 'string') {
             a = s.split('')
         } else {
             a = s
         }
-        for (var i = 0; i < a.length; i++) {
-            a[i] = a[i].charCodeAt(0) ^ O876.LZW.nMystificator
+        for (i = 0; i < a.length; i++) {
+            a[i] = a[i].charCodeAt(0) ^ LZW.nMystificator
         }
-        var c, w, e = '',
-            o = [],
-            d = [];
+        let c, w, e = '';
+        const o = [], d = [];
         for (i = 0; i < 256; i++) {
             d.push(String.fromCharCode(i))
         }
@@ -143,4 +144,4 @@ O2.createObject('O876.LZW', {
         }
         return o.join('')
     }
-});
+};

@@ -1,9 +1,11 @@
-O2.createObject('BoomerThinker', class BoomerThinker extends MobThinker {
+import { MobThinker } from './MobThinker.js';
+
+export class BoomerThinker extends MobThinker {
     _follow(nTime) {
         if ((nTime % this.TIME_REACTIVITY) === 0) {
             this.chaseTarget(this.getTarget())
         }
-        var nCT = this.move();
+        const nCT = this.move();
         if (nCT == this.COLLISION_TARGET) {
             this.setCastMode(0)
         }
@@ -15,4 +17,4 @@ O2.createObject('BoomerThinker', class BoomerThinker extends MobThinker {
     }
 
     _attack(nTime) {}
-});
+}
