@@ -1320,9 +1320,7 @@ export class Game extends Engine {
         let y = oMobile.ySector;
         const oCreature = oMobile.getData('creature');
         const oInv = this.oDungeon.getCreatureInventory(oCreature);
-        let oItem = null,
-            oDropStack;
-        const rc = this.oRaycaster;
+        let oItem = null;
         for (let i = 0; i < 2; i++) {
             oItem = this.oDungeon.peekDrop(x, y);
             if (oItem) {
@@ -1331,13 +1329,7 @@ export class Game extends Engine {
                 this.sys_notify('inventory_full', [])
             }
             oItem = this.oDungeon.pickupDrop(oCreature, x, y);
-            oDropStack = this.oDungeon.getDropStack(x, y);
-            if (oDropStack && oDropStack.length === 0) {
-                const oMobDS = Marker.getMarkXY(this.oLootBags, x, y);
-                if (oMobDS) {
-                    rc.oHorde.unlinkStatic(oMobDS)
-                }
-            }
+            this.gc_removeEmptyLootBag(x, y);
             if (oItem) {
                 return oItem
             }
@@ -1348,14 +1340,68 @@ export class Game extends Engine {
         return oItem
     }
 
+    /** Retire le sac de butin d'une case dont tous les objets ont été ramassés. */
+    gc_removeEmptyLootBag(x, y) {
+        const oDropStack = this.oDungeon.getDropStack(x, y);
+        if (oDropStack && oDropStack.length === 0) {
+            const oLootBag = Marker.getMarkXY(this.oLootBags, x, y);
+            if (oLootBag) {
+                this.oRaycaster.oHorde.unlinkStatic(oLootBag);
+                // sans cela, un objet lâché plus tard sur cette case n'aurait
+                // pas de sac visible
+                Marker.clearXY(this.oLootBags, x, y)
+            }
+        }
+    }
+
+    /**
+     * Ramasse tout le contenu d'un sac de butin quand le joueur marche dessus.
+     *
+     * Un sac n'est ramassé qu'au moment où le joueur entre en contact avec
+     * lui : s'il reste des objets (inventaire plein), il faut s'en éloigner
+     * puis revenir, ou utiliser la touche d'action. Le sac d'un objet que le
+     * joueur vient de lâcher compte comme déjà touché.
+     */
+    gc_autoPickup(oMobile) {
+        const x = oMobile.xSector;
+        const y = oMobile.ySector;
+        const oLootBag = Marker.getMarkXY(this.oLootBags, x, y);
+        let bTouching = false;
+        if (oLootBag) {
+            const dx = oLootBag.x - oMobile.x;
+            const dy = oLootBag.y - oMobile.y;
+            const d = oMobile.nSize + oLootBag.nSize;
+            bTouching = dx * dx + dy * dy < d * d
+        }
+        if (!bTouching) {
+            this.oTouchedLootBag = null;
+            return
+        }
+        if (oLootBag === this.oTouchedLootBag) {
+            return
+        }
+        this.oTouchedLootBag = oLootBag;
+        const oCreature = oMobile.getData('creature');
+        let oItem;
+        while ((oItem = this.oDungeon.pickupDrop(oCreature, x, y)) !== null) {
+            this.sys_notify('item_pickup', [oItem.getName()], oItem.icon)
+        }
+        if (this.oDungeon.peekDrop(x, y)) {
+            this.sys_notify('inventory_full', [])
+        }
+        this.gc_removeEmptyLootBag(x, y)
+    }
+
     gc_dropItem(oMobile, oItem) {
         const oCreature = oMobile.getData('creature');
         const xCell = oMobile.xSector;
         const yCell = oMobile.ySector;
-        this.gc_spawnLootBag(0, xCell, yCell);
+        const oLootBag = this.gc_spawnLootBag(0, xCell, yCell);
         this.oDungeon.dropItem(oCreature, oItem);
         this.oDungeon.addDrop(oMobile.xSector, oMobile.ySector, oItem);
         if (oMobile == this.getPlayer()) {
+            // pas de ramassage automatique de ce qu'on vient de lâcher
+            this.oTouchedLootBag = oLootBag;
             this.sys_notify('item_drop', [oItem.getName()], oItem.icon)
         }
     }
@@ -1372,6 +1418,7 @@ export class Game extends Engine {
             oLootBag.bActive = true;
             Marker.markXY(this.oLootBags, xCell, yCell, oLootBag)
         }
+        return oLootBag
     }
 
     gc_consumeItem(oMobile, oItem, nCount) {
@@ -1393,9 +1440,29 @@ export class Game extends Engine {
         return this.oDungeon.getCreatureInventory(oCreature).removeItemStack(sResRef, nCount)
     }
 
+    /**
+     * Met en main une dague de l'inventaire (la première trouvée), quand la
+     * baguette n'a plus assez d'énergie pour lancer son sort.
+     * @return {boolean} false si la créature n'a pas de dague
+     */
+    gc_equipDagger(oMobile) {
+        const oCreature = oMobile.getData('creature');
+        const oInventory = this.oDungeon.getCreatureInventory(oCreature);
+        const oDagger = oInventory.aBagSlots.find((oItem) => oItem && oItem.type === 'dagger');
+        if (!oDagger) {
+            return false
+        }
+        this.gc_equipItem(oMobile, oDagger);
+        this.sys_notify('weapon_dagger', [oDagger.getName()], oDagger.icon);
+        return true
+    }
+
     gc_attack(oMobile, nChargeTime) {
         const oCreature = oMobile.getData('creature');
         let aMissiles = this.oDungeon.actionAttack(oCreature, nChargeTime, this.nTimeMs);
+        if (aMissiles === 'no_energy' && oMobile == this.getPlayer() && this.gc_equipDagger(oMobile)) {
+            return
+        }
         if (typeof aMissiles === 'string') {
             this.sys_notify(aMissiles);
             aMissiles = this.oDungeon.getWeaponMissileDefinition(SPELLS_DATA.slash_wand)
@@ -1898,6 +1965,7 @@ Object.assign(Game.prototype, {
     aMobRoster: null,
     aSobRoster: null,
     oLootBags: null,
+    oTouchedLootBag: null,
     nDoCommand: 0,
     COMMAND_NONE: 0,
     COMMAND_GAME_RESTORE: 1,

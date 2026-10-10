@@ -15,10 +15,10 @@ import { PI } from './Tools/MathTools.js';
 // Ancien moteur : murs à la distance des rayons non normalisés (vecteurs
 // interpolés entre ±45°, soit perpendiculaire × 1.414), sprites à la
 // distance perpendiculaire × 1.333 : sprite / mur = 1.414 / 1.333 = 1.061.
-// raycaster-386 (focale = largeur / 2 × 16 / 9, rayons entre ±29.36°) :
-// sprite / mur = (16 / 9) / (2 × cos 29.36°) = 1.020 à l'échelle 1.
-// Avec 1.020 / 1.061, centrés sur l'horizon, les pieds touchent le sol.
-const SPRITE_SCALE = 0.961;
+// raycaster-386 projette murs et sprites à la même échelle (pixels carrés) :
+// sprite / mur = 1 à l'échelle 1, quel que soit le champ de vision.
+// Avec 1 / 1.061, centrés sur l'horizon, les pieds touchent le sol.
+const SPRITE_SCALE = 0.943;
 
 /**
  * Monde du jeu (carte, mobiles, caméra, effets) et façade du rendu.
@@ -343,7 +343,8 @@ export class Raycaster {
         const r = new Renderer();
         r.setScreen({
             width: this.oCanvas.width,
-            height: this.oCanvas.height
+            height: this.oCanvas.height,
+            fov: (this.oConfig.fov || this.nFieldOfView) * Math.PI / 180
         });
         r.setMetrics({
             spacing: this.nPlaneSpacing,
@@ -988,6 +989,7 @@ Object.assign(Raycaster.prototype, {
     bFloor: true,
     bCeil: true,
     fViewHeight: 1,
+    nFieldOfView: 90,
     nRayLimit: 100,
     oHorde: null,
     aScanSectors: null,

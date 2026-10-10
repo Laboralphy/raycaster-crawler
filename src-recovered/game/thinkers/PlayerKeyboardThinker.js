@@ -135,7 +135,8 @@ export class PlayerKeyboardThinker extends MouseKeyboardThinker {
         if (this.bActive && !this.isHeld()) {
             this.updateKeys()
         }
-        this.processEffects()
+        this.processEffects();
+        this.oGame.gc_autoPickup(this.oMobile)
     }
 
     isHeld() {

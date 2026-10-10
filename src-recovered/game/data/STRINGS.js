@@ -96,6 +96,7 @@ export const STRINGS = {
         notify_energy_low: 'Warning ! Your energy is low.',
         notify_no_weapon: 'You cannot attack : You weild no weapon.',
         notify_no_energy: 'You do not have enough energy to cast spells.',
+        notify_weapon_dagger: 'You are out of energy: you draw your $0.',
         notify_item_pickup: 'You picked up: $0.',
         notify_item_receive: 'You received: $0.',
         notify_item_craft: 'You crafted: $0.',

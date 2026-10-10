@@ -29,7 +29,19 @@ function getElementPos(oElement) {
     return [x, y]
 }
 
+/**
+ * Met le cadre du jeu à l'échelle de la fenêtre, proportions conservées.
+ * Une transformation CSS ne change pas les coordonnées offsetX / offsetY des
+ * événements souris : l'interface (UI.System) continue de fonctionner.
+ */
+function fitToWindow() {
+    const oFrame = document.getElementById('game');
+    const fScale = Math.min(window.innerWidth / oFrame.offsetWidth, window.innerHeight / oFrame.offsetHeight);
+    oFrame.style.transform = 'translate(-50%, -50%) scale(' + fScale + ')'
+}
+
 function windowResizeEvent(oEvent) {
+    fitToWindow();
     const oCanvas = document.getElementById('screen');
     if (oCanvas) {
         const xy = getElementPos(oCanvas);

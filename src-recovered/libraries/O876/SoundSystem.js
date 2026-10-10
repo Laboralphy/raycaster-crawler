@@ -53,11 +53,22 @@ export class SoundSystem {
             this.oMusic.unload()
         }
         this.sMusicFile = sFile;
-        this.oMusic = new Howl({
+        const oMusic = new Howl({
             src: [sFile],
             html5: true,
-            loop: true
+            loop: true,
+            // le navigateur refuse de lancer un son avant la première action
+            // du joueur (clic, touche) : on rejoue alors le morceau dès que
+            // howler signale que le son est débloqué
+            onplayerror: () => {
+                oMusic.once('unlock', () => {
+                    if (this.oMusic === oMusic && !this.bMute) {
+                        oMusic.play();
+                    }
+                })
+            }
         });
+        this.oMusic = oMusic;
         if (!this.bMute) {
             this.oMusic.play()
         }

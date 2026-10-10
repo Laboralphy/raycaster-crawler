@@ -122,8 +122,8 @@ npm start          # node server.js -> http://localhost:8080/
   personnage, sans erreur.
 
 ### 8. Rendu par raycaster-386
-- Dépendance npm `@laboralphy/raycaster386` (1.0.0, version publiée ; la
-  1.1.0 locale n'est pas publiée).
+- Dépendance `@laboralphy/raycaster386` (1.0.0, puis ^1.1.0 pour le champ
+  de vision : voir 11, puis ^1.1.1 : voir 13).
 - `libraries/Raycaster/Raycaster.js` garde son rôle et son interface pour le
   jeu (carte `aMap`, `getMapXY*`, caméra, `oHorde`, effets GX, arme,
   `castRay` pour la ligne de vue des monstres) mais tout le dessin passe par
@@ -136,7 +136,7 @@ npm start          # node server.js -> http://localhost:8080/
   dans le Renderer avant chaque image.
 - Sprites : chaque image, les mobiles des cases vues reçoivent un sprite 386
   (réserve réutilisée), avec l'image calculée comme avant
-  (direction 8 secteurs, `Animation`) ; échelle 0.961 / `nScale` pour garder
+  (direction 8 secteurs, `Animation`) ; échelle 0.943 / `nScale` pour garder
   le rapport sprites/murs de l'ancien moteur ; surcouches (`oOverlay`)
   rapprochées d'une unité. Le filtre de couleur de l'ancien moteur (sprites
   seulement) est appliqué aux images des sprites.
@@ -164,23 +164,64 @@ npm start          # node server.js -> http://localhost:8080/
   `preload`, `free`. `crossFadeMusic` et la gestion des canaux, inutilisés,
   ont disparu.
 
+### 10. Le jeu s'adapte à la taille de la fenêtre
+- Le cadre (`table#game`) est centré et mis à l'échelle par une
+  transformation CSS (`fitToWindow` dans `main.js`, appelée au chargement et
+  à chaque redimensionnement), proportions conservées, sans barres de
+  défilement. Les coordonnées souris de l'interface (`offsetX`/`offsetY`)
+  restent justes sous une transformation : rien à changer dans `UI.System`.
+
+### 11. Champ de vision : 90°
+- raycaster-386 1.1.0 (npm) accepte
+  `setScreen({ width, height, fov })` (défaut `DEFAULT_FOV`, ~58.7°). La
+  projection n'a plus de constante empirique : focale
+  `(largeur / 2) / tan(fov / 2)`, échelle verticale des murs et sols
+  `focale / (2 cos(fov / 2))` (pixels carrés à tout angle et tout format
+  d'écran, portrait compris), clé de tri des sprites `1 / cos(fov / 2)`
+  (l'ancien `SPRITE_Z_SCALE`). Murs et sols 2 % plus hauts qu'avant au
+  champ par défaut : les 45 images de référence ont été réenregistrées
+  (raison dans `tests/golden/README.md`).
+- Le jeu lit `CONFIG.raycaster.fov` (degrés, 90 par défaut, comme l'ancien
+  moteur).
+- Restent des écarts mineurs : ombrage des sprites (l'ancien moteur
+  calculait leur distance d'ombrage avec un facteur 1.333), murs
+  légèrement plus hauts qu'avant (l'ancien moteur les tassait de 12 %).
+
+### 12. Confort de jeu
+- Musique du menu : le navigateur refuse de lancer un son avant la première
+  action du joueur ; le morceau est relancé dès que howler signale le son
+  débloqué (premier clic ou première touche).
+- Sacs de butin ramassés en marchant dessus (`gc_autoPickup`, appelé par
+  `PlayerKeyboardThinker`) : tout le contenu au moment du contact, message
+  « inventaire plein » s'il en reste. Un objet que le joueur vient de lâcher
+  n'est pas ramassé avant qu'il s'éloigne et revienne. Corrigé au passage :
+  un sac vidé restait inscrit sur sa case, et un objet lâché plus tard au
+  même endroit n'avait plus de sac visible.
+- Baguette sans énergie : le joueur met en main la première dague de son
+  inventaire (`gc_equipDagger`), avec un message.
+
+### 13. Gel du jeu sous Edge (raycaster386 1.1.1)
+- Sous Edge (Windows), le jeu se figeait après 20 à 60 secondes, même
+  immobile et même sans accélération matérielle : chaque lecture du canvas
+  de rendu (`getImageData` du rendu des sols, `drawImage` de `flip`) finissait
+  par bloquer plusieurs secondes. Firefox et Chrome sous Linux n'étaient pas
+  touchés ; le Manoir (raycaster386 1.0.0) avait le même problème.
+- Reproduit hors du jeu par une page minimale : il faut à la fois des
+  centaines de `drawImage` par image sur le canvas et sa relecture complète
+  (`getImageData`/`putImageData`). L'un sans l'autre ne gèle pas.
+- Corrigé dans raycaster386 1.1.1 : le canvas de rendu est créé avec
+  `willReadFrequently: true` (Chromium le garde alors en mémoire
+  ordinaire, la relecture devient une simple copie). Supprime aussi
+  l'avertissement « Multiple readback operations using getImageData » et
+  allège chaque image sous Edge. Le jeu recrée un Renderer à chaque niveau :
+  la correction doit donc être dans la bibliothèque, pas dans le jeu.
+
 ## À faire
 
-### Écarts visuels avec l'ancien moteur
-- **Champ de vision** : 386 dérive la focale de la largeur
-  (`width / 2 × 16 / 9`, soit ~59°), l'ancien moteur avait 90° (et des murs
-  étirés verticalement de 1.25). Tout paraît ~1.8× plus proche. Pour
-  retrouver l'ancienne vue, il faut une focale (ou un FOV) réglable dans
-  raycaster-386.
-- Ombrage des sprites un peu différent (l'ancien moteur calculait leur
-  distance d'ombrage avec un facteur 1.333).
-
-### raycaster386 1.0.0 : à signaler / vérifier en 1.1.0
+### raycaster386 : à signaler
 - Un tileset créé après le premier `render()` n'est jamais ombré (dessiné
   vide). Contourné : tilesets créés au chargement, `compute()` explicite
   pour les suivants.
-- Avertissement Chrome « Multiple readback operations using getImageData »
-  (lecture du canvas par le rendu des sols à chaque image).
 
 ### Suite possible
 - Portes, collisions et déplacements par la couche simulation de 386

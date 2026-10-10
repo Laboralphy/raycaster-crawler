@@ -1,6 +1,17 @@
 body {
   background-color: #333333;
+  margin: 0;
+  overflow: hidden;
 }	
+
+/* cadre du jeu centré dans la fenêtre ; main.js lui applique une échelle
+   (transform) pour qu'il remplisse la fenêtre sans changer ses proportions */
+table#game {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 	
 table.frame {
   border-collapse:collapse;

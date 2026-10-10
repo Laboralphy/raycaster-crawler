@@ -19,6 +19,8 @@ export const CONFIG = {
         ghostVision: 0,
         smoothTextures: false,
         drawMap: false,
+        // champ de vision horizontal, en degrés (celui de l'ancien moteur : 90)
+        fov: 90,
         zoom: 2,
         lowmem: false
     }
