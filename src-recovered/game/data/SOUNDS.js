@@ -5,6 +5,7 @@ export const SOUNDS = {
     DOOR_UNLOCKED: 'a_unlock',
     BLOCK_GETKEY: 'a_key',
     BLOCK_OPENCHEST: 'a_chest',
+    ITEM_TAKE: 'a_take',
     WATER_SPLASH: 'a_splash',
     FOE_SLAIN: 'x_death',
     WEAPON_ATK_FIRE: 'atk_fire',

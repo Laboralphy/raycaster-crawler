@@ -272,24 +272,34 @@ export class Game extends Engine {
         if (this.nIntfMode != UI.INTFMODE_MAINMENU) {
             this.nIntfMode = UI.INTFMODE_MAINMENU;
             this.oContext.clearRect(0, 0, this.oCanvas.width, this.oCanvas.height);
+            // "Continue" n'est proposé que si une sauvegarde exploitable existe
+            this.aMenuActions = this.sys_checkSaveGame()
+                ? ['continue', 'newgame', 'htp', 'credits']
+                : ['newgame', 'htp', 'credits'];
             this.ui_open('Mainmenu', {
-                options: STRINGS._(['~mmenu_newgame', '~mmenu_htp', '~mmenu_credits'])
+                options: STRINGS._(this.aMenuActions.map(s => '~mmenu_' + s))
             })
         }
-        const nMenuAction = this.menuInputProcess();
+        const sMenuAction = this.aMenuActions[this.menuInputProcess() - 1];
         this.ui_render();
-        switch (nMenuAction) {
-            case 1:
+        switch (sMenuAction) {
+            case 'continue':
+                this.ui_close();
+                this.oMenuSystem.finalize();
+                this.oMenuSystem = null;
+                this.setDoomloop('stateContinueAdventure');
+                return false;
+            case 'newgame':
                 this.oBackupSystem.clear();
                 this.ui_close();
                 this.oMenuSystem.finalize();
                 this.oMenuSystem = null;
                 this.sys_cutscene('intro', 'stateStartAdventure');
                 return false;
-            case 2:
+            case 'htp':
                 location.href = 'resources/doc/menu/htp.html';
                 break;
-            case 3:
+            case 'credits':
                 location.href = 'resources/doc/menu/credits.html';
                 break
         }
@@ -543,6 +553,15 @@ export class Game extends Engine {
         this.gc_gotoLocation('forest')
     }
 
+    stateContinueAdventure() {
+        this.newGame();
+        // les variables d'aventure (étages des portails) doivent être restaurées
+        // avant config(), sinon config() les retire au hasard
+        this.oAdventure.oVariables = this.sys_loadData(this.sSaveFile).v;
+        this.oAdventure.config(WORLD_DATA.dungeons);
+        this.sys_restore()
+    }
+
     stateStoryBook() {
         this.ui_render();
         if (this.nIntfMode === UI.INTFMODE_NONE) {
@@ -673,7 +692,7 @@ export class Game extends Engine {
         let nKey;
         while ((nKey = k.inputKey()) !== 0) {
             this.sendPluginSignal('key', nKey);
-            if (this.nIntfMode == UI.INTFMODE_NONE) {
+            if (this.nIntfMode === UI.INTFMODE_NONE) {
                 switch (nKey) {
                     case KEYS._INT_SAVE:
                         this.sys_save();
@@ -1383,8 +1402,15 @@ export class Game extends Engine {
         this.oTouchedLootBag = oLootBag;
         const oCreature = oMobile.getData('creature');
         let oItem;
+        let bTaken = false;
         while ((oItem = this.oDungeon.pickupDrop(oCreature, x, y)) !== null) {
-            this.sys_notify('item_pickup', [oItem.getName()], oItem.icon)
+            this.sys_notify('item_pickup', [oItem.getName()], oItem.icon);
+            bTaken = true
+        }
+        if (bTaken) {
+            // un seul son et un léger éclair jaune, quel que soit le nombre d'objets
+            this.sys_playSound(SOUNDS.ITEM_TAKE);
+            this.sys_flash(0xFFDD00, 25, 10)
         }
         if (this.oDungeon.peekDrop(x, y)) {
             this.sys_notify('inventory_full', [])
@@ -1735,7 +1761,16 @@ export class Game extends Engine {
     }
 
     sys_checkSaveGame() {
-        return this.oBackupSystem.isStoredData(this.sSaveFile)
+        if (!this.oBackupSystem.isStoredData(this.sSaveFile)) {
+            return false
+        }
+        // sys_restore a besoin des données joueur ET du niveau où il se trouve
+        try {
+            const p = this.sys_loadData(this.sSaveFile);
+            return this.oBackupSystem.isStoredData(this.sSaveFile + '-' + p.l.a + '-' + p.l.f.toString())
+        } catch (e) {
+            return false
+        }
     }
 
     sys_restore() {
@@ -1962,6 +1997,7 @@ Object.assign(Game.prototype, {
     sCutsceneNextState: '',
     aPlugins: null,
     sSaveFile: 'reikaster',
+    aMenuActions: null,
     aMobRoster: null,
     aSobRoster: null,
     oLootBags: null,

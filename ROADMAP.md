@@ -154,8 +154,11 @@ npm start          # node server.js -> http://localhost:8080/
 - `SoundSystem` (éléments `<audio>`, 16 canaux recyclés, lecture au premier
   `load()` par `autoplay`) remplacé par une petite couche sur howler.js :
   bruitages décodés une fois (Web Audio) et rejoués sans délai, plusieurs
-  instances d'un même son possibles ; musique lue en flux (html5) et en
-  boucle.
+  instances d'un même son possibles ; musique en boucle, d'abord lue en
+  flux (html5), puis par Web Audio comme les bruitages : en flux, howler
+  rebouclait à la main (stop puis play), ce qui rechargeait le fichier et
+  faisait chuter la cadence d'images à chaque tour. Les morceaux font moins
+  de 2 Mo ; la boucle est maintenant faite par le moteur audio.
 - Les bruitages de `SOUNDS` (sauf `MUSIC_*`) sont préchargés au démarrage.
 - Un même morceau demandé deux fois continue au lieu de recommencer
   (cinématique d'intro puis forêt).
@@ -189,8 +192,8 @@ npm start          # node server.js -> http://localhost:8080/
 
 ### 12. Confort de jeu
 - Musique du menu : le navigateur refuse de lancer un son avant la première
-  action du joueur ; le morceau est relancé dès que howler signale le son
-  débloqué (premier clic ou première touche).
+  action du joueur ; howler attend que le son soit débloqué (premier clic ou
+  première touche) pour lancer le morceau.
 - Sacs de butin ramassés en marchant dessus (`gc_autoPickup`, appelé par
   `PlayerKeyboardThinker`) : tout le contenu au moment du contact, message
   « inventaire plein » s'il en reste. Un objet que le joueur vient de lâcher

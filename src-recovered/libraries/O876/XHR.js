@@ -80,7 +80,7 @@ export const XHR = {
         const xhr = XHR.getInstance();
         xhr.open('GET', sURL, false);
         xhr.send(null);
-        if (xhr.status == 200) {
+        if (xhr.status === 200) {
             return xhr.responseText
         } else {
             throw new Error('XHR failed to load: ' + sURL + ' (' + xhr.status.toString() + ')')
