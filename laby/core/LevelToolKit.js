@@ -300,18 +300,17 @@ function spawnSecretPlaces(oLevel, oSecret = null) {
 
 /** Décore aléatoirement les murs (torches, grilles, alcôves) */
 function makeFancyWalls(oLevel) {
-    const [BLOCK_WALL, BLOCK_WALL_TORCH, BLOCK_WALL_GRATE, BLOCK_WALL_ALCOVE] =
-        getBlockCodes(oLevel, 'BLOCK_WALL', 'BLOCK_WALL_TORCH', 'BLOCK_WALL_GRATE', 'BLOCK_WALL_ALCOVE');
+    const [BLOCK_WALL, BLOCK_WALL_GRATE, BLOCK_WALL_ALCOVE] =
+        getBlockCodes(oLevel, 'BLOCK_WALL', 'BLOCK_WALL_GRATE', 'BLOCK_WALL_ALCOVE');
     const w = oLevel.getWidth();
     const h = oLevel.getHeight();
     for (let y = 1; y < h - 1; y++) {
         for (let x = 1; x < w - 1; x++) {
             if (oLevel.getCell(x, y) == BLOCK_WALL) {
+                // 4 et 5 donnaient un mur à torche : les torches sont
+                // maintenant posées par spawnTorches (tirage conservé pour
+                // que le reste du niveau ne change pas)
                 switch (oLevel.oRnd.getRandom(0, 10)) {
-                    case 4:
-                    case 5:
-                        oLevel.setCell(x, y, BLOCK_WALL_TORCH);
-                        break;
                     case 6:
                         oLevel.setCell(x, y, BLOCK_WALL_GRATE);
                         break;
@@ -355,6 +354,62 @@ function spawnMobs(oLevel, nMoreOrLess = 0) {
     }
 }
 
+/**
+ * Pose des torches murales sur des cases vides devant un mur plein, loin des
+ * ascenseurs et à au moins nSpacing cases les unes des autres. Le code posé
+ * (BLOCK_TORCH_N, _E, _S, _W) indique de quel côté de la case est le mur.
+ * À appeler en dernier : seules les cases restées vides sont choisies.
+ */
+function spawnTorches(oLevel, nSpacing = 4) {
+    const [BLOCK_VOID, BLOCK_WALL, BLOCK_TORCH_N, BLOCK_ELEVATOR_WALL, BLOCK_ELEVATOR_PORTAL] = getBlockCodes(
+        oLevel, 'BLOCK_VOID', 'BLOCK_WALL', 'BLOCK_TORCH_N', 'BLOCK_ELEVATOR_WALL', 'BLOCK_ELEVATOR_PORTAL');
+    if (BLOCK_TORCH_N === null) {
+        return;
+    }
+    // même ordre que BLOCK_TORCH_N, _E, _S, _W
+    const aDirs = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+    const w = oLevel.getWidth();
+    const h = oLevel.getHeight();
+    const isElevator = (n) => n >= BLOCK_ELEVATOR_WALL && n <= BLOCK_ELEVATOR_PORTAL;
+    // le jeu cherche une case vide à deux cases des ascenseurs pour y placer le joueur
+    const nearElevator = (x, y) => {
+        for (let yi = Math.max(0, y - 2); yi <= Math.min(h - 1, y + 2); yi++) {
+            for (let xi = Math.max(0, x - 2); xi <= Math.min(w - 1, x + 2); xi++) {
+                if (isElevator(oLevel.getCell(xi, yi))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+    const aCandidates = [];
+    for (let y = 1; y < h - 1; y++) {
+        for (let x = 1; x < w - 1; x++) {
+            if (oLevel.getCell(x, y) != BLOCK_VOID || nearElevator(x, y)) {
+                continue;
+            }
+            const aWalls = [];
+            aDirs.forEach(([dx, dy], iDir) => {
+                if (oLevel.getCell(x + dx, y + dy) == BLOCK_WALL) {
+                    aWalls.push(iDir);
+                }
+            });
+            if (aWalls.length) {
+                aCandidates.push({ x, y, aWalls });
+            }
+        }
+    }
+    const aTorches = [];
+    for (const c of oLevel.oRnd.shuffle(aCandidates)) {
+        if (aTorches.some((t) => Math.max(Math.abs(t.x - c.x), Math.abs(t.y - c.y)) < nSpacing)) {
+            continue;
+        }
+        const iDir = c.aWalls[oLevel.oRnd.getRandom(0, c.aWalls.length - 1)];
+        oLevel.setCell(c.x, c.y, BLOCK_TORCH_N + iDir);
+        aTorches.push(c);
+    }
+}
+
 /** Efface les marqueurs posés au-delà de l'octet de poids faible (zones sans monstres...) */
 function removeNoSpawn(oLevel) {
     const w = oLevel.getWidth();
@@ -379,5 +434,6 @@ module.exports = {
     spawnSecretPlaces,
     makeFancyWalls,
     spawnMobs,
+    spawnTorches,
     removeNoSpawn,
 };

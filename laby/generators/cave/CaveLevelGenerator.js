@@ -56,6 +56,7 @@ class CaveLevelGenerator extends LevelGenerator {
         LevelToolKit.makeFancyWalls(this);
         LevelToolKit.spawnMobs(this);
         LevelToolKit.removeNoSpawn(this);
+        LevelToolKit.spawnTorches(this);
     }
 
     processRoom(x, y, oRoom) {

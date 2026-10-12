@@ -90,6 +90,18 @@ export const GFX_DATA = {
                 ]
             ]
         },
+        o_torch_1: {
+            src: 'resources/gfx/sprites/o_torch_1.png',
+            width: 12,
+            height: 96,
+            frames: 4,
+            noshading: true,
+            animations: [
+                [
+                    [0, 0, 0, 0, 0, 0, 0, 0], 4, 120, 1
+                ]
+            ]
+        },
         o_tree1: {
             src: 'resources/gfx/sprites/o_tree1.png',
             width: 64,

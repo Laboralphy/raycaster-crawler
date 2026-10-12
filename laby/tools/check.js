@@ -17,6 +17,7 @@ let nFail = 0;
 
 for (const [g, o] of CONFIGS) {
     const aErrors = [];
+    const aTorchCounts = [];
     for (let s = 0; s < nSeeds; s++) {
         let oLevel;
         try {
@@ -51,9 +52,46 @@ for (const [g, o] of CONFIGS) {
                 }
             }
         }
+        if (has('BLOCK_TORCH_N')) {
+            // chaque torche est devant un mur plein, loin des ascenseurs et des autres torches
+            const aDirs = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+            const aTorches = [];
+            aMap.forEach((aRow, y) => aRow.forEach((c, x) => {
+                const iDir = c - B.BLOCK_TORCH_N;
+                if (iDir >= 0 && iDir < 4) {
+                    aTorches.push([x, y]);
+                    const [dx, dy] = aDirs[iDir];
+                    if (aMap[y + dy][x + dx] !== B.BLOCK_WALL) {
+                        aErrors.push(`graine ${s} : torche (${x}, ${y}) sans mur`);
+                    }
+                    for (let yi = Math.max(0, y - 2); yi <= Math.min(aMap.length - 1, y + 2); yi++) {
+                        for (let xi = Math.max(0, x - 2); xi <= Math.min(aRow.length - 1, x + 2); xi++) {
+                            if (aMap[yi][xi] >= B.BLOCK_ELEVATOR_WALL && aMap[yi][xi] <= B.BLOCK_ELEVATOR_PORTAL) {
+                                aErrors.push(`graine ${s} : torche (${x}, ${y}) près d'un ascenseur`);
+                            }
+                        }
+                    }
+                }
+            }));
+            aTorches.forEach(([x, y], i) => aTorches.slice(i + 1).forEach(([x2, y2]) => {
+                if (Math.max(Math.abs(x - x2), Math.abs(y - y2)) < 4) {
+                    aErrors.push(`graine ${s} : torches (${x}, ${y}) et (${x2}, ${y2}) trop proches`);
+                }
+            }));
+            if (count(B.BLOCK_WALL_TORCH)) {
+                aErrors.push(`graine ${s} : ${count(B.BLOCK_WALL_TORCH)} mur(s) à torche`);
+            }
+            aTorchCounts.push(aTorches.length);
+        }
     }
     nFail += aErrors.length;
     console.log(`${g} '${o}' : ${aErrors.length ? aErrors.length + ' problème(s)' : 'ok'}`);
     aErrors.slice(0, 5).forEach((s) => console.log('   ' + s));
+    if (aTorchCounts.length) {
+        const nMin = Math.min(...aTorchCounts);
+        const nMax = Math.max(...aTorchCounts);
+        const nAvg = aTorchCounts.reduce((a, b) => a + b, 0) / aTorchCounts.length;
+        console.log(`   torches par niveau : ${nMin} à ${nMax}, ${nAvg.toFixed(1)} en moyenne`);
+    }
 }
 process.exit(nFail ? 1 : 0);

@@ -87,6 +87,7 @@ class MinesLevelGenerator extends LevelGenerator {
         LevelToolKit.makeFancyWalls(this);
         LevelToolKit.removeNoSpawn(this);
         LevelToolKit.spawnMobs(this);
+        LevelToolKit.spawnTorches(this);
     }
 
     processRoom(x, y, oRoom) {

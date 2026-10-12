@@ -22,6 +22,10 @@ export const CONFIG = {
         // champ de vision horizontal, en degrés (celui de l'ancien moteur : 90)
         fov: 90,
         zoom: 2,
-        lowmem: false
+        lowmem: false,
+        // niveaux éclairés par des torches : distance (en pixels, un bloc en
+        // fait 64) par niveau d'ombre, sur 15 ; plus petit = plus sombre.
+        // Remplace le "light" du visuel s'il est plus grand.
+        torchLevelLight: 35
     }
 };

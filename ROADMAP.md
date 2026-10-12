@@ -219,6 +219,24 @@ npm start          # node server.js -> http://localhost:8080/
   allège chaque image sous Edge. Le jeu recrée un Renderer à chaque niveau :
   la correction doit donc être dans la bibliothèque, pas dans le jeu.
 
+### 14. Torches murales animées et éclairage
+- La texture « mur à torche » n'est plus posée : `makeFancyWalls` garde son
+  tirage (le reste du niveau est identique), et `spawnTorches`
+  (`LevelToolKit`), appelée en dernier par les générateurs dungeon, mines,
+  cave et boss, marque des cases vides devant un mur plein avec
+  `BLOCK_TORCH_N/E/S/W` (0x90-0x93, côté du mur). Au moins 4 cases entre
+  deux torches, aucune à moins de 2 cases d'un ascenseur (le jeu y cherche
+  une case vide pour placer le joueur). `check:laby` vérifie ces règles.
+- Le jeu remplace chaque marque par un sprite `o_torch_1` (4 images,
+  120 ms) collé au mur (`rld_createWallTorch`), non ombré. Son
+  `lightsource` (`r0`, `r1`, `v`, format de raycaster-386) est donné au
+  Renderer (`addLightSource`) ; les murs arrêtent la lumière.
+- Un niveau qui contient des torches est plus sombre :
+  `CONFIG.raycaster.torchLevelLight` (35) plafonne le `light` du visuel. Le
+  menu et les cinématiques, qui partagent ces visuels, ne changent pas.
+- Les niveaux déjà générés d'une sauvegarde gardent leurs anciens murs à
+  torche (texture toujours définie).
+
 ## À faire
 
 ### raycaster386 : à signaler

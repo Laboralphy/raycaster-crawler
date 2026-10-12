@@ -851,6 +851,22 @@ export class Game extends Engine {
         return this.rld_chooseObject(oData, nLevel, 'aMobRoster', 'horde')
     }
 
+    /**
+     * Torche murale de la case centrée en (x64, y64), collée au mur situé au
+     * nord, à l'est, au sud ou à l'ouest (iDir 0 à 3).
+     */
+    rld_createWallTorch(x64, y64, iDir) {
+        const aDirs = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+        const [dx, dy] = aDirs[iDir];
+        const nOffset = (this.oRaycaster.nPlaneSpacing >> 1) - this.nTorchWallDistance;
+        return {
+            blueprint: this.sTorchBlueprint,
+            x: x64 + dx * nOffset,
+            y: y64 + dy * nOffset,
+            angle: Math.atan2(-dy, -dx)
+        }
+    }
+
     rld_chooseSob(oData, nLevel) {
         return this.rld_chooseObject(oData, nLevel, 'aSobRoster', 'statics')
     }
@@ -912,6 +928,7 @@ export class Game extends Engine {
         this.aMobRoster = null;
         this.aSobRoster = null;
         let sChosenBP = null;
+        let nTorches = 0;
         MathTools.rndSeed8();
         for (yBlock = 0; yBlock < aLaby.length; yBlock++) {
             y64 = yBlock * this.oRaycaster.nPlaneSpacing + (this.oRaycaster.nPlaneSpacing >> 1);
@@ -971,6 +988,16 @@ export class Game extends Engine {
                         }
                         nBlock = LABY.BLOCK_VOID;
                         break;
+                    case LABY.BLOCK_TORCH_N:
+                    case LABY.BLOCK_TORCH_E:
+                    case LABY.BLOCK_TORCH_S:
+                    case LABY.BLOCK_TORCH_W:
+                        ++nTorches;
+                        if (bCreateObjects) {
+                            oData.objects.push(this.rld_createWallTorch(x64, y64, nBlock - LABY.BLOCK_TORCH_N))
+                        }
+                        nBlock = LABY.BLOCK_VOID;
+                        break;
                     case LABY.BLOCK_ELEVATOR_ENTRANCE:
                     case LABY.BLOCK_ELEVATOR_EXIT:
                     case LABY.BLOCK_ELEVATOR_PORTAL:
@@ -1017,6 +1044,12 @@ export class Game extends Engine {
                 aRow.push(nCode)
             }
             oData.map.push(aRow)
+        }
+        if (nTorches > 0) {
+            // ambiance plus sombre : ce sont les torches qui éclairent
+            oData.visual = Object.assign({}, oData.visual, {
+                light: Math.min(oData.visual.light, CONFIG.raycaster.torchLevelLight)
+            })
         }
         oData.startpoint = oData.startpoints[xStartPoint];
         for (nCode = 0; nCode < oData.walls.codes.length; nCode++) {
@@ -2000,6 +2033,8 @@ Object.assign(Game.prototype, {
     aMenuActions: null,
     aMobRoster: null,
     aSobRoster: null,
+    sTorchBlueprint: 'o_torch_1',
+    nTorchWallDistance: 6,
     oLootBags: null,
     oTouchedLootBag: null,
     nDoCommand: 0,

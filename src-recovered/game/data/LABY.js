@@ -72,6 +72,11 @@ export const LABY = {
     BLOCK_ELEVATOR_DOOR_NEXT_UNSEALED: 0x89,
     BLOCK_ELEVATOR_SWITCH_PORTAL: 0x8A,
     BLOCK_ELEVATOR_PORTAL: 0x8B,
+    // torche sur une case vide, le mur est au nord / est / sud / ouest
+    BLOCK_TORCH_N: 0x90,
+    BLOCK_TORCH_E: 0x91,
+    BLOCK_TORCH_S: 0x92,
+    BLOCK_TORCH_W: 0x93,
     BLOCK_FOREST_TREE: 0xA0,
     BLOCK_FOREST_WALL: 0xA1,
     BLOCK_FOREST_BUSH: 0xA2,

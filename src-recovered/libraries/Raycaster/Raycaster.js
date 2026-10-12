@@ -378,7 +378,12 @@ export class Raycaster {
             this.oHorde.defineBlueprint(i, oBlueprints[i])
         }
         for (i = 0; i < oMobs.length; i++) {
-            this.oHorde.defineMobile(oMobs[i])
+            const oMobile = this.oHorde.defineMobile(oMobs[i]);
+            // lumière fixe des objets qui en émettent une (torches)
+            const oLight = oBlueprints[oMobs[i].blueprint].lightsource;
+            if (oLight) {
+                this.oRenderer.addLightSource(oMobile.x, oMobile.y, oLight.r0, oLight.r1, oLight.v)
+            }
         }
     }
 

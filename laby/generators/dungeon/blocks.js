@@ -71,6 +71,11 @@ module.exports = Object.freeze({
     BLOCK_ELEVATOR_DOOR_NEXT_UNSEALED: 0x89,
     BLOCK_ELEVATOR_SWITCH_PORTAL: 0x8A,
     BLOCK_ELEVATOR_PORTAL: 0x8B,
+    // torche sur une case vide, le mur est au nord / est / sud / ouest
+    BLOCK_TORCH_N: 0x90,
+    BLOCK_TORCH_E: 0x91,
+    BLOCK_TORCH_S: 0x92,
+    BLOCK_TORCH_W: 0x93,
     BLOCK_MOB_LEVEL_0: 0xF0,
     BLOCK_MOB_LEVEL_1: 0xF1,
     BLOCK_MOB_LEVEL_2: 0xF2,

@@ -41,6 +41,21 @@ export const BLUEPRINTS_DATA = {
             bubbles: true
         }
     },
+    o_torch_1: {
+        type: RC.OBJECT_TYPE_PLACEABLE,
+        tile: 'o_torch_1',
+        width: 12,
+        height: 96,
+        thinker: null,
+        fx: RC.FX_LIGHT_SOURCE,
+        // lumière (raycaster-386) : pleine intensité v jusqu'à r0, nulle à r1
+        lightsource: {
+            r0: 32,
+            r1: 192,
+            v: 0.9
+        },
+        data: {}
+    },
     o_tree1: {
         type: RC.OBJECT_TYPE_PLACEABLE,
         tile: 'o_tree1',
