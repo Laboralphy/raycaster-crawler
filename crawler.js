@@ -36,9 +36,9 @@ This spell raises a reflection field around the caster. This field causes the in
 
 When cast, this spell augments light around the caster. Some levels are dark, and could be very difficult (if not impossible) to explore. This spell is essential in such case.`,`Time Stop
 
-Time is temporary halted when this spell is cast. The entire world is frozen. Only the caster may move and attack. The spell lasts 9 seconds (according to the caster's point of view). If the caster shoots missiles, they will be frozen as well, until the spell ends.`]},craft_brew_recipe:{title:"Recipe : $0",level:1,images:null,pages:["Browsing the shelves, you found a book of alchemy, explaining how to brew a $0. You may brew this potion at any alchemy desk providing you have the required components."]},cs1_credits:`-------------------
-REIKASTER UNDERLAND
--------------------
+Time is temporary halted when this spell is cast. The entire world is frozen. Only the caster may move and attack. The spell lasts 9 seconds (according to the caster's point of view). If the caster shoots missiles, they will be frozen as well, until the spell ends.`]},craft_brew_recipe:{title:"Recipe : $0",level:1,images:null,pages:["Browsing the shelves, you found a book of alchemy, explaining how to brew a $0. You may brew this potion at any alchemy desk providing you have the required components."]},cs1_credits:`----------------------
+GIVE BACK MY GRIMOIRE!
+----------------------
 
 
 ////// STAFF CREDITS //////
@@ -53,6 +53,9 @@ Audio ambience
 
 Music
 - Bjorn A. Lynne (PRS) http://www.shockwave-sound.com (Free licence for non commercial projects)
+
+Wall portraits
+- Dungeon Crawl Stone Soup tiles, by the Crawl artists (CC0) https://opengameart.org/content/dungeon-crawl-32x32-tiles
 
 ////// SOFTWARES //////
 
