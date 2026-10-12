@@ -79,17 +79,47 @@ sons CC0 (freesound.org filtré sur CC0, Kenney.nl, OpenGameArt) ou générés.
 | Portraits muraux `resources/gfx/textures/d_pictures.png` | Dungeon Crawl Stone Soup tiles ([OpenGameArt](https://opengameart.org/content/dungeon-crawl-32x32-tiles)), mis en cadre par nous | CC0 (vérifié sur la page et dans le README du paquet) | ✅ remplace des images de Lineage 2 ; crédité |
 | Logo `resources/gfx/icons/title_128.png` | création, police UnifrakturMaguntia | SIL OFL (police) | ✅ |
 | Torche `resources/gfx/sprites/o_torch_1.png` | création (reprise du projet « mansion ») | personnelle | ✅ |
-| Sprites de monstres et d'objets `resources/gfx/sprites/` | rendus POV-Ray par l'auteur (d'après les crédits) | personnelle | ❓ à confirmer |
-| Textures `resources/gfx/textures/t_*`, `f_*` | dessinées par l'auteur (OpenOffice Draw, Gimp, d'après les crédits) | personnelle | ❓ à confirmer |
-| Icônes `resources/gfx/icons/icons.png` (176 icônes), `digits.png` | probablement l'auteur | — | ❓ à confirmer |
-| Livres `resources/gfx/books/` (dont les pages illustrées `book_of_story0` à `3`) | inconnue | — | ❓ |
-| Cadre de l'interface `resources/gfx/frame/` | inconnue | — | ❓ |
+| Sprites de monstres et d'objets `resources/gfx/sprites/` | modélisés et rendus avec POV-Ray par l'auteur | personnelle | ✅ (confirmé par l'auteur) |
+| Textures `resources/gfx/textures/t_*`, `f_*` | dessinées par l'auteur avec OpenOffice Draw (assemblage Gimp) | personnelle | ✅ (confirmé par l'auteur) |
+| Icônes des objets `resources/gfx/icons/icons.png` (176 icônes) | dessinées par l'auteur avec OpenOffice Draw | personnelle | ✅ (confirmé par l'auteur) |
+| Chiffres du HUD `resources/gfx/icons/digits.png` | dessinés par l'auteur | personnelle | ✅ (confirmé par l'auteur) |
+| Livre de l'histoire `resources/gfx/books/book_of_story0.png` (vieux livre), `book_of_story1.png` (sorcier en prière), `book_of_story3.png` (château la nuit) | images récupérées à droite et à gauche il y a plus de 8 ans ; origine introuvable | inconnue | ❌ à remplacer |
+| Livre de l'histoire `book_of_story2.png` (monstres dans une salle) | ressemble aux monstres POV-Ray du jeu | — | ❓ à confirmer |
+| Autres pages de livres `resources/gfx/books/book_*` (sorts, alchimie, clés, dague, baguette…) | même style que les icônes (OpenOffice Draw ?) | — | ❓ à confirmer |
+| Cadre décoratif autour de l'écran (ancien `resources/gfx/frame/`) | extrait d'une vidéo d'histoires pour enfants, il y a 13 ans | non libre | ✅ supprimé (le jeu n'a plus de cadre) |
 
 ## Polices
 
 | Police | Où | Licence | État |
 |---|---|---|---|
 | UnifrakturMaguntia | dessinée dans le logo (pas livrée en fichier) | SIL OFL 1.1 | ✅ |
+
+## Assistance par IA
+
+Ce qui a été fait avec un assistant IA (Claude, Anthropic), à déclarer selon
+les règles de chaque plateforme. Le jeu d'origine (2010-2013) — moteur,
+code, sprites, textures, histoire — est le travail de l'auteur, sans IA.
+
+| Partie | Rôle de l'IA | Depuis |
+|---|---|---|
+| **Code** : reprise du projet en 2026 (récupération des sources, classes ES, modules ES, `const`/`let`), générateur de niveaux en JavaScript, torches et éclairage, outils de vérification | code écrit ou modifié avec l'assistant, relu et testé par l'auteur | octobre 2026 |
+| **Musique** : `forest_ambience.xm`, `forest_night.xm` | composition (notes, harmonies, structure) et synthèse des instruments écrites par l'IA, sous forme de scripts (`tools/music/`) ; choix et validation par l'auteur | octobre 2026 |
+| **Logo** `title_128.png` | rendu par un script écrit par l'IA (police libre UnifrakturMaguntia, effets) ; pas de générateur d'images | octobre 2026 |
+| **Portraits muraux** `d_pictures.png` | choix et mise en cadre par un script ; les dessins sont ceux, humains, des artistes de Dungeon Crawl (CC0) : pas de contenu généré | octobre 2026 |
+| **Textes** | renommage du livre en « Grimoire of Power » dans les textes existants ; titre « Give Back My Grimoire! » choisi par l'auteur parmi des propositions | octobre 2026 |
+
+Déclarations correspondantes :
+
+- **itch.io** (champ « Generative AI Disclosure ») : oui ; cocher **Code** et
+  **Sound** ; **Graphics** par prudence (logo).
+- **Steam** (règles de janvier 2026) : l'aide au développement (code) n'est
+  plus à déclarer ; déclarer la **musique** générée et, par prudence, le
+  **logo**.
+- **Page du projet** (portfolio) : dire clairement ce qui vient de l'auteur
+  et ce qui a été fait avec l'IA.
+
+À tenir à jour : toute nouvelle ressource produite avec l'IA s'ajoute à ce
+tableau.
 
 ## Anomalies relevées
 
