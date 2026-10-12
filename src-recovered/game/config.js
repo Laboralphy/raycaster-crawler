@@ -26,6 +26,13 @@ export const CONFIG = {
         // niveaux éclairés par des torches : distance (en pixels, un bloc en
         // fait 64) par niveau d'ombre, sur 15 ; plus petit = plus sombre.
         // Remplace le "light" du visuel s'il est plus grand.
-        torchLevelLight: 35
+        torchLevelLight: 35,
+        // lumière posée au centre de chaque case vide qui touche une cheminée
+        // (raycaster-386, en pixels) : pleine intensité v jusqu'à r0, nulle à r1
+        fireplaceLight: {
+            r0: 32,
+            r1: 160,
+            v: 0.8
+        }
     }
 };

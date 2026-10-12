@@ -354,6 +354,7 @@ export class Game extends Engine {
                 }
             }
         }
+        this.rld_addFireplaceLights();
         this.oPathFinder.init(this.oRaycaster.aMap);
         this.oMPL.setHook(null);
         const oPlayerThinker = this.oThinkerManager.createThinker('PlayerKeyboard');
@@ -864,6 +865,36 @@ export class Game extends Engine {
             x: x64 + dx * nOffset,
             y: y64 + dy * nOffset,
             angle: Math.atan2(-dy, -dx)
+        }
+    }
+
+    /**
+     * Les cheminées (blocs animés avec lesquels on interagit pour cuisiner)
+     * éclairent : une source de lumière au centre de chaque case vide voisine.
+     */
+    rld_addFireplaceLights() {
+        const rc = this.oRaycaster;
+        const aArea = this.oDungeon.getArea();
+        const nSpacing = rc.nPlaneSpacing;
+        const oLight = CONFIG.raycaster.fireplaceLight;
+        const aDirs = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+        for (let y = 0; y < aArea.length; y++) {
+            for (let x = 0; x < aArea[y].length; x++) {
+                if (aArea[y][x] !== LABY.BLOCK_LIVING_FIREPLACE) {
+                    continue
+                }
+                for (const [dx, dy] of aDirs) {
+                    const xn = x + dx;
+                    const yn = y + dy;
+                    if (rc.insideMap(xn) && rc.insideMap(yn) && rc.getMapXYPhysical(xn, yn) === 0) {
+                        rc.oRenderer.addLightSource(
+                            xn * nSpacing + (nSpacing >> 1),
+                            yn * nSpacing + (nSpacing >> 1),
+                            oLight.r0, oLight.r1, oLight.v
+                        )
+                    }
+                }
+            }
         }
     }
 
@@ -1970,11 +2001,11 @@ export class Game extends Engine {
         switch (s) {
             case 'intro':
                 this.oCutscene = new CutsceneIntro();
-                this.sys_playMusic('mus_night_ambience');
+                this.sys_playMusic(SOUNDS.MUSIC_CUTSCENE);
                 break;
             case 'end':
                 this.oCutscene = new CutsceneEnd();
-                this.sys_playMusic('mus_bjorn_lynne_methydias_cloudship');
+                this.sys_playMusic(SOUNDS.MUSIC_END);
                 break;
             default:
                 this.oCutscene = null

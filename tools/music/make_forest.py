@@ -292,7 +292,9 @@ def build_patterns():
         if melody:
             write_melody(pat, CH_FLUTE, MELODIES[melody], 0x10 + 44, CH_ECHO, 3, 0x10 + 14)
         else:
+            # la flûte et son écho : sinon la dernière note de l'écho tient tout le motif
             put(pat, 0, CH_FLUTE, KEY_OFF)
+            put(pat, 0, CH_ECHO, KEY_OFF)
         if i_pat == 0:
             put(pat, 0, CH_WIND, xm_note(60), WIND, 0x10 + 40)
         # quelques oiseaux, à des moments irréguliers
