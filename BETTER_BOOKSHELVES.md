@@ -1,14 +1,28 @@
 # Better Bookshelves
 
+## What is now ?
+
+Currently bookshelves deliver random information, if we ask several time a bookshelf we have different information.
+Some bookshelf give recipes, some give hints.
+We want to change that.
+
+
 ## Bookshelves deliver seeded information
 
-Currently bookshelves deliver random information, if we ask several time a bookshelf we have different information. We want to change that.
-Now we want the bookshelf block to have a special value computed out of the level number and the block coordinates.
+Now we want each bookshelf block to always deliver the same content deterministically.
+To do so each black should have a special value computed out of the level number and the block coordinates.
 This will give a seed, and this value will determine a random index.
+We will refer to the index of the Registry of bookshelf contents to see what we get by activating the bookshelf. 
 
 ## Registry of bookshelf contents
 
-This is a file with items in an array.
+This is a JSON with items in an array.
+
+Each items would be :
+
+{
+    type: 'spell',
+}
 
 ```
 z.array(z.object({

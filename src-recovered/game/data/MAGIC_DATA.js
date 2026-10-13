@@ -7,7 +7,8 @@ export const MAGIC_DATA = {
         visual: [0xFF0000, 66, 7, 0x0000FF, 66, 5],
         sound: 'SPELL_1',
         icon: 'eff_sdrn',
-        target: false
+        target: false,
+        level: 3,
     },
     Teleport: {
         cooldown: MAGIC_DATA_PARAMS.COOLDOWN.SHORT,
@@ -15,7 +16,8 @@ export const MAGIC_DATA = {
         visual: [0x008800, 66, 7, 0x0000FF, 66, 5],
         sound: 'FX_TELEPORT',
         icon: 'spl_tele',
-        target: true
+        target: true,
+        level: 3,
     },
     Knock: {
         cooldown: MAGIC_DATA_PARAMS.COOLDOWN.LONG,
@@ -23,7 +25,8 @@ export const MAGIC_DATA = {
         visual: [0xFF00FF, 66, 7, 0x88FF00, 66, 3],
         sound: 'SPELL_1',
         icon: 'spl_knock',
-        target: false
+        target: false,
+        level: 1,
     },
     DeathSpell: {
         cooldown: MAGIC_DATA_PARAMS.COOLDOWN.LONG,
@@ -31,7 +34,8 @@ export const MAGIC_DATA = {
         visual: [0x000000, 66, 12, 0xCCFFFF, 66, 8],
         sound: 'SPELL_1',
         icon: 'eff_xdth',
-        target: true
+        target: true,
+        level: 5,
     },
     MagicMapping: {
         cooldown: MAGIC_DATA_PARAMS.COOLDOWN.LONG,
@@ -39,7 +43,8 @@ export const MAGIC_DATA = {
         visual: [0x00FF00, 66, 7, 0xFFAA00, 66, 5],
         sound: 'SPELL_1',
         icon: 'spl_mmap',
-        target: false
+        target: false,
+        level: 2,
     },
     SummonFood: {
         cooldown: MAGIC_DATA_PARAMS.COOLDOWN.LONG,
@@ -47,7 +52,8 @@ export const MAGIC_DATA = {
         visual: [0xFFFF00, 66, 7, 0x008800, 66, 5],
         sound: 'SPELL_0',
         icon: 'spl_sfood',
-        target: false
+        target: false,
+        level: 3,
     },
     Reflect: {
         cooldown: MAGIC_DATA_PARAMS.COOLDOWN.MEDIUM,
@@ -55,7 +61,8 @@ export const MAGIC_DATA = {
         visual: [0x00FFFF, 66, 7, 0x0066FF, 66, 5],
         sound: 'SPELL_1',
         icon: 'eff_bref',
-        target: false
+        target: false,
+        level: 4,
     },
     Light: {
         cooldown: MAGIC_DATA_PARAMS.COOLDOWN.SHORT,
@@ -63,7 +70,8 @@ export const MAGIC_DATA = {
         visual: [0xFFFFFF, 66, 5, 0xFFFF88, 66, 2],
         sound: 'SPELL_1',
         icon: 'spl_light',
-        target: false
+        target: false,
+        level: 1
     },
     TimeStop: {
         cooldown: MAGIC_DATA_PARAMS.COOLDOWN.LONG,
@@ -71,6 +79,7 @@ export const MAGIC_DATA = {
         visual: [0xFFFFFF, 50, 5],
         sound: 'SPELL_1',
         icon: 'spl_stf',
-        target: false
+        target: false,
+        level: 5,
     },
 };
