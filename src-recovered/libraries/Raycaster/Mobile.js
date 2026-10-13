@@ -79,18 +79,17 @@ export class Mobile {
         this.setAngle(this.fTheta + f)
     }
 
+    // angle ramené dans [-PI, PI[ ; une valeur non finie est ignorée
     setAngle(f) {
-        this.fTheta = f;
-        const f2Pi = 2 * PI;
-        if (f > 0) {
-            while (this.fTheta >= PI) {
-                this.fTheta -= f2Pi
-            }
-        } else {
-            while (this.fTheta < -PI) {
-                this.fTheta += f2Pi
-            }
+        if (!isFinite(f)) {
+            return
         }
+        const f2Pi = 2 * PI;
+        f = (f + PI) % f2Pi;
+        if (f < 0) {
+            f += f2Pi
+        }
+        this.fTheta = f - PI
     }
 
     getAngle(f) {

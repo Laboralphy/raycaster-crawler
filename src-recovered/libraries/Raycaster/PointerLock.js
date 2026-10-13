@@ -5,6 +5,13 @@ export const PointerLock = {
     bInitialized: null,
     bLocked: false,
     bEnabled: true,
+    // instant du dernier changement de verrouillage (ms)
+    nChangeTime: 0,
+    // les navigateurs (Chrome/Edge sous Windows surtout) envoient parfois un
+    // mousemove aberrant à l'entrée ou à la sortie du verrouillage : on ignore
+    // les mouvements pendant ce délai, et ceux dont l'amplitude est absurde
+    IGNORE_DELAY: 100,
+    MAX_MOVEMENT: 250,
     hasPointerLockFeature: function() {
         return 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document
     },
@@ -50,8 +57,8 @@ export const PointerLock = {
         document.exitPointerLock()
     },
     eventChange: function(e) {
-        const oPointerLockElement = document.pointerLockElement || document.mozPointerLockElement || document.webkitPointerLockElement;
-        if (oPointerLockElement) {
+        PointerLock.nChangeTime = performance.now();
+        if (PointerLock.getLockedElement()) {
             document.addEventListener('mousemove', PointerLock.eventMouseMove, false);
             PointerLock.bLocked = true
         } else {
@@ -60,6 +67,9 @@ export const PointerLock = {
             PointerLock.bLocked = false
         }
     },
+    getLockedElement: function() {
+        return document.pointerLockElement || document.mozPointerLockElement || document.webkitPointerLockElement || null
+    },
     eventError: function(e) {
         console.error('PointerLock error', e)
     },
@@ -67,6 +77,12 @@ export const PointerLock = {
         const xMove = e.movementX || e.mozMovementX || e.webkitMovementX || 0;
         const yMove = e.movementY || e.mozMovementY || e.webkitMovementY || 0;
         const p = PointerLock;
+        if (!p.getLockedElement() || (performance.now() - p.nChangeTime) < p.IGNORE_DELAY) {
+            return
+        }
+        if (Math.abs(xMove) > p.MAX_MOVEMENT || Math.abs(yMove) > p.MAX_MOVEMENT) {
+            return
+        }
         if (p.oHookFunction) {
             p.oHookFunction.apply(p.oHookInstance, [xMove, yMove])
         }

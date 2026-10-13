@@ -23,6 +23,11 @@ We will refer to the index of the Registry of bookshelf contents to see what we 
 
 ## Books that unlock recipe or spells
 
-When a bookshelf is elligible to unlock spell or recipe, it will unlock one of the recipe or spell with the
+When a bookshelf is eligible to unlock spell or recipe, it will unlock one of the recipe or spell with the
 lowest level (see .level in CRAFT_DATA or MAGIC_DATA).
-Once unlocked, this block is "deactivated". I don't know how, maybe a "#level-x-y" key that is stored in a registry. Or a change of block code 
+Once unlocked, this block is "deactivated". I don't know how, maybe a "#level-x-y" key that is stored in a registry. Or a change of block code
+
+## Spell learning
+
+Of course at start all spells must be deactivated (Timeout infinity maybe ? or a new boolean).
+When acquiring a new spell, the spell is made available.

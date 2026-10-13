@@ -16,7 +16,7 @@
     "js-beautify": "^1.15.1"
   },
   "dependencies": {
-    "@laboralphy/raycaster386": "^1.1.1",
+    "@laboralphy/raycaster386": "^1.1.2",
     "howler": "^2.2.4"
   }
 }

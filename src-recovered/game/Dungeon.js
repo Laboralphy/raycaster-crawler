@@ -56,7 +56,8 @@ export class Dungeon {
             level: nLevel,
             magic: {
                 cooldown: {},
-                book: ['DrainLife', 'Teleport', 'Knock', 'DeathSpell', 'MagicMapping', 'SummonFood', 'Reflect', 'Light', 'TimeStop']
+                // sorts appris dans les bibliothèques (BookPlugin.readShelf)
+                book: []
             }
         };
         return oCreature
@@ -86,6 +87,8 @@ export class Dungeon {
             }
         }
         c.oExtraData.craft = ['pot_heal_1', 'pot_ether_1', 'ccc_meal'];
+        // bibliothèques déjà étudiées : clé 'zone-étage-x-y'
+        c.oExtraData.shelves = {};
         return oCreature
     }
 

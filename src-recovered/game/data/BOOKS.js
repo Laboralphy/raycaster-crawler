@@ -71,6 +71,48 @@ export const BOOKS = {
             level: 1,
             images: null,
             pages: ["Browsing the shelves, you found a book of alchemy, explaining how to brew a $0. You may brew this potion at any alchemy desk providing you have the required components."]
+        },
+        spell_learned: {
+            title: 'Spell : $0',
+            level: 1,
+            images: null,
+            pages: ["Browsing the shelves, you found an old grimoire and learned a new spell : $0.\n\n$1\n\nCast it with the $2 key."]
+        },
+        shelf_junk_1: {
+            title: 'Rotten pages',
+            level: 1,
+            images: null,
+            pages: ["The damp has eaten these books. The pages crumble between your fingers before you can read a single line."]
+        },
+        shelf_junk_2: {
+            title: 'A tax ledger',
+            level: 1,
+            images: null,
+            pages: ["Column after column of numbers : grain, salt, candles, and a very long list of unpaid debts. Nothing magical here, except maybe the size of the debts."]
+        },
+        shelf_junk_3: {
+            title: 'An unknown script',
+            level: 1,
+            images: null,
+            pages: ["The book is written in strange, twisted letters. You stare at them for a long while, but they make no sense to you."]
+        },
+        shelf_junk_4: {
+            title: 'A love letter',
+            level: 1,
+            images: null,
+            pages: ["\"My dearest, I count the days until the Warlock lets me go home. The food is awful and the skeletons never laugh at my jokes...\" The rest is too personal to read."]
+        },
+        shelf_junk_5: {
+            title: 'Poems',
+            level: 1,
+            images: null,
+            pages: ["A collection of very bad poems about the moon, the rain and a cat named Mortimer. You put the book back quickly."]
+        },
+        shelf_junk_6: {
+            title: 'Blank pages',
+            level: 1,
+            images: null,
+            pages: ["All the pages are blank. Maybe the ink faded long ago, or maybe the author never found anything to say."]
         }
     },
     fr: {
@@ -145,6 +187,48 @@ export const BOOKS = {
             level: 1,
             images: null,
             pages: ["En fouillant les étagères, vous trouvez un livre d'alchimie qui explique comment brasser : $0. Vous pourrez la brasser à n'importe quelle table d'alchimie si vous avez les ingrédients."]
+        },
+        spell_learned: {
+            title: "Sort : $0",
+            level: 1,
+            images: null,
+            pages: ["En fouillant les étagères, vous trouvez un vieux grimoire et apprenez un nouveau sort : $0.\n\n$1\n\nLancez-le avec la touche $2."]
+        },
+        shelf_junk_1: {
+            title: "Pages pourries",
+            level: 1,
+            images: null,
+            pages: ["L'humidité a rongé ces livres. Les pages s'effritent entre vos doigts avant que vous puissiez lire une seule ligne."]
+        },
+        shelf_junk_2: {
+            title: "Un registre d'impôts",
+            level: 1,
+            images: null,
+            pages: ["Des colonnes de chiffres à n'en plus finir : grain, sel, chandelles, et une très longue liste de dettes impayées. Rien de magique, sauf peut-être le montant des dettes."]
+        },
+        shelf_junk_3: {
+            title: "Une écriture inconnue",
+            level: 1,
+            images: null,
+            pages: ["Le livre est écrit en lettres étranges et tordues. Vous les fixez longtemps, sans rien y comprendre."]
+        },
+        shelf_junk_4: {
+            title: "Une lettre d'amour",
+            level: 1,
+            images: null,
+            pages: ["« Ma chérie, je compte les jours jusqu'à ce que le Sorcier me laisse rentrer. La nourriture est infâme et les squelettes ne rient jamais à mes blagues... » La suite est trop intime pour être lue."]
+        },
+        shelf_junk_5: {
+            title: "Poèmes",
+            level: 1,
+            images: null,
+            pages: ["Un recueil de très mauvais poèmes sur la lune, la pluie et un chat nommé Mortimer. Vous reposez vite le livre."]
+        },
+        shelf_junk_6: {
+            title: "Pages blanches",
+            level: 1,
+            images: null,
+            pages: ["Toutes les pages sont blanches. L'encre s'est peut-être effacée il y a longtemps, ou l'auteur n'a jamais rien trouvé à dire."]
         }
     }
 }

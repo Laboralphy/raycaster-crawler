@@ -4,7 +4,6 @@ import { UI } from '../UI/UI.js';
 import { CRAFT_DATA } from '../data/CRAFT_DATA.js';
 import { LABY } from '../data/LABY.js';
 import { STRINGS } from '../data/STRINGS.js';
-import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class CraftPlugin {
     uiController(sCommand, xParams) {
@@ -90,28 +89,19 @@ export class CraftPlugin {
                     return true;
                 case LABY.BLOCK_LABO_BOOK:
                     this.oGame.oDungeon.setAreaBlockProperty(x, y, LABY.BLOCK_LIBRARY_BOOK);
-                    this.readRandomRecipe('brew', 1, oMobile.getData('creature'));
+                    this.oGame.oBookSystem.readShelf(x, y, 'recipe');
                     return true;
                 case LABY.BLOCK_WATCH_WALL_2_X:
                     this.oGame.oDungeon.setAreaBlockProperty(x, y, LABY.BLOCK_WATCH_WALL_2_X_USED);
-                    this.readRandomRecipe('brew', 1, oMobile.getData('creature'));
+                    this.oGame.oBookSystem.readShelf(x, y, 'recipe');
                     return true;
                 case LABY.BLOCK_WATCH_WALL_2_Y:
                     this.oGame.oDungeon.setAreaBlockProperty(x, y, LABY.BLOCK_WATCH_WALL_2_Y_USED);
-                    this.readRandomRecipe('brew', 1, oMobile.getData('creature'));
+                    this.oGame.oBookSystem.readShelf(x, y, 'recipe');
                     return true
             }
         }
         return false
-    }
-
-    readRandomRecipe(sType, nLevel, oCreature) {
-        const aList = this.getCraftRecipeList(sType, nLevel, oCreature);
-        if (aList.length) {
-            const sRec = MathTools.rndChoose(aList);
-            this.oGame.oBookSystem.read('~craft_' + sType + '_recipe', ['~item_' + sRec]);
-            this.oGame.oDungeon.learnCraft(oCreature, sRec)
-        }
     }
 
     setGame(g) {

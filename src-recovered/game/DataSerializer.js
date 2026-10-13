@@ -139,7 +139,8 @@ export class DataSerializer {
             retrigger: oCreature.oExtraData.retrigger,
             level: oCreature.oExtraData.level,
             craft: oCreature.oExtraData.craft,
-            magic: oCreature.oExtraData.magic
+            magic: oCreature.oExtraData.magic,
+            shelves: oCreature.oExtraData.shelves
         };
         const aCreaEff = [];
         for (let iEff = 0; iEff < oCreature.oEffects.length; iEff++) {
@@ -165,6 +166,7 @@ export class DataSerializer {
         oCreature.oExtraData.level = oData.level;
         oCreature.oExtraData.retrigger = oData.retrigger;
         oCreature.oExtraData.magic = oData.magic;
+        oCreature.oExtraData.shelves = oData.shelves || {};
         oCreature.oExtraData.inventory = this.restoreInventory(oData.inventory, oCreature.oEffects);
         return oCreature
     }
