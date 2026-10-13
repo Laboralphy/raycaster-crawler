@@ -12,6 +12,9 @@ export const CONFIG = {
         interval: 40,
         doomloop: 'interval',
         cpumonitor: false,
+        // langue des textes : 'en', 'fr', ou 'auto' (celle du navigateur) ;
+        // l'URL peut la forcer : index.html?lang=fr
+        lang: 'auto',
         mouse: PointerLock.init()
     },
     raycaster: {

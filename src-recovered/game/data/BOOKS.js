@@ -74,6 +74,77 @@ export const BOOKS = {
         }
     },
     fr: {
-
+        book_of_the_keys: {
+            title: "Le livre des clés",
+            level: 1,
+            images: ['resources/gfx/books/book_of_the_keys.png'],
+            pages: ["Les portes des donjons sont parfois verrouillées : il faut des clés pour les ouvrir. " + "Il existe 5 sortes de clés. Les clés rouge, bleue, verte et jaune ouvrent les portes " + "de la même couleur, mais seulement dans le niveau où elles ont été trouvées. " + "La cinquième, la clé grise, fonctionne comme un crochet et ouvre " + "n'importe quelle porte grise verrouillée. Elles se cumulent et se gardent."]
+        },
+        book_of_cooking: {
+            title: "Le livre de cuisine",
+            level: 1,
+            images: ['resources/gfx/books/book_of_cooking.png'],
+            pages: ["Un bon aventurier ne descend jamais dans un donjon le ventre vide. Apprenez à cuisiner et " + "vous ne craindrez plus de mourir de faim.\n" + "Pour un bon repas, il vous faut :\n" + "Viande crue - Légumes - Herbes aromatiques - Eau.\n" + "Avec tout cela, activez une cheminée ou un autre foyer pour cuire votre repas. Bon appétit."]
+        },
+        book_of_the_keyboard: {
+            title: "Le livre du clavier",
+            level: 1,
+            images: null,
+            pages: ["Retenez les touches les plus importantes du clavier. E ouvre l'inventaire. " + "F12 sauvegarde la partie et revient au menu principal. " + "ESPACE active les objets du jeu : portes, bibliothèques, coffres. "]
+        },
+        book_of_magical_energy: {
+            title: "Le livre de l'énergie magique",
+            level: 1,
+            images: ['resources/gfx/books/book_of_magical_energy.png'],
+            pages: ["Les projectiles lancés avec une baguette puisent dans une réserve de points de magie. Chaque tir en consomme. " + "Sans points de magie, vous ne pouvez plus tirer. Pour en récupérer, buvez une potion de mana."]
+        },
+        book_of_the_dagger: {
+            title: "Le livre de la dague",
+            level: 1,
+            images: ['resources/gfx/books/book_of_the_dagger.png'],
+            pages: ["La dague est une épée très courte, à la portée de tous : nul besoin de talent particulier pour s'en servir. " + "Elle permet d'économiser votre énergie magique. Certaines dagues rares sont très tranchantes et font de gros dégâts. " + "Mais attention : sa faible allonge est risquée face aux tireurs ou aux ennemis lourdement cuirassés."]
+        },
+        book_of_the_wand: {
+            title: "Le livre de la baguette",
+            level: 1,
+            images: ['resources/gfx/books/book_of_the_wand.png'],
+            pages: ["La baguette est votre arme principale. Elle tire des projectiles et consomme des points de magie. " + "Certaines ont des attaques spéciales : triple boule de feu, projectiles rebondissants... Maintenez le bouton d'attaque quelques secondes pour charger " + "votre arme, puis relâchez-le pour lancer de puissants projectiles."]
+        },
+        book_of_alchemy: {
+            title: "Le livre de l'alchimie",
+            level: 1,
+            images: ['resources/gfx/books/book_of_alchemy.png'],
+            pages: ["Les aventuriers chevronnés savent brasser des potions : des breuvages magiques qui renforcent force ou talents pendant un court moment. " + "Utile au combat ! La bonne potion vous fait infliger ou encaisser plus de dégâts, courir plus vite ou regagner de la santé. ", "Avec des herbes médicinales ou magiques, vous pouvez brasser vos potions à une table d'alchimie. Mais il vous faut d'abord des recettes. " + "Elles se trouvent dans les livres d'alchimie, sur les étagères des laboratoires."]
+        },
+        book_of_the_spacebar: {
+            title: "Le livre de la barre d'espace",
+            level: 1,
+            images: null,
+            pages: ["La barre d'espace est la plus grande touche du clavier. Elle sert à activer les tables d'alchimie (pour fabriquer) et les bibliothèques (pour lire). " + "Elle sert aussi à ramasser les objets, ouvrir les coffres, les portes et les passages secrets..."]
+        },
+        book_of_the_inventory: {
+            title: "Le livre de l'inventaire",
+            level: 1,
+            images: null,
+            pages: ["Les aventuriers rangent leurs objets dans un sac. Pour l'ouvrir, appuyez sur la touche E. " + "La fenêtre d'inventaire s'affiche. Choisissez un objet à la souris, et double-cliquez pour l'utiliser, " + "l'équiper ou le consommer (s'il s'y prête). "]
+        },
+        book_of_the_story: {
+            title: "L'histoire commence...",
+            level: 1,
+            images: ['resources/gfx/books/book_of_story0.png', 'resources/gfx/books/book_of_story3.png'],
+            pages: ["Bienvenue, aventurier ! Vous êtes versé dans les arts magiques.\n" + "Vous avez reçu pour quête de rapporter l'Ancien Grimoire du Pouvoir au Sanctuaire des arcanes.\n\n" + "Hélas, vous êtes tombé dans une embuscade au cœur d'une sombre forêt, et un Étrange Sorcier vous a volé le Grimoire.", "Vous suivez les traces de votre agresseur jusqu'à un fortin en ruine, au plus profond de la forêt. " + "C'est à coup sûr le repaire du Sorcier !\n\n" + "L'heure de la vengeance a sonné ! Vous entrez dans le donjon pour reprendre le Grimoire au Sorcier !\n"]
+        },
+        book_of_spells: {
+            title: "Le livre des sorts",
+            level: 1,
+            images: ['resources/gfx/books/book_spells_info.png', 'resources/gfx/books/book_spells_vampyre.png', 'resources/gfx/books/book_spells_teleport.png', 'resources/gfx/books/book_spells_knock.png', 'resources/gfx/books/book_spells_death.png', 'resources/gfx/books/book_spells_map.png', 'resources/gfx/books/book_spells_food.png', 'resources/gfx/books/book_spells_reflect.png', 'resources/gfx/books/book_spells_light.png', 'resources/gfx/books/book_spells_timestop.png'],
+            pages: ["Les sorts se lancent avec les touches de fonction du clavier (F1, F2...).\n\n" + "Sorts ciblés : ils demandent de la précision. Choisissez-les d'abord avec leur touche de fonction, " + "puis visez et cliquez avec le bouton droit de la souris (ou la touche V).", "Drain de vie\n\n" + "Utile quand votre santé baisse. " + "Ce sort vous rend vampire pour un temps : vos attaques réussies à la baguette ou à la dague dévorent " + "la santé de l'ennemi et vous la rendent.", "Téléportation\n\n" + "Vous avancez instantanément jusqu'au premier mur. " + "Vous êtes ensuite retourné de 180 degrés : le mur se retrouve dans votre dos.\n\n" + "C'est un sort ciblé (voir la première page). ", "Ouverture\n\n" + "Ce sort déverrouille n'importe quelle porte. Placez-vous juste devant la porte, " + "puis lancez le sort : elle s'ouvre aussitôt.", "Sort de mort\n\n" + "Ce sort lance un rayon invisible. Toute créature touchée meurt sur le coup.\n\n" + "C'est un sort ciblé (voir la première page). ", "Cartographie\n\n" + "Un sort utile pour se repérer dans le donjon. " + "Il dessine une carte sur un mur : trouvez un mur nu et lancez le sort.\n" + "La carte montre les portes, verrouillées ou non, les clés, les coffres et même les passages secrets. Elle est centrée sur votre position.", "Invocation de nourriture\n\n" + "À utiliser si vous mourez de faim. " + "Un sac de nourriture apparaît à vos pieds, avec du pain ou du gâteau. " + "Il ne reste qu'à ramasser le sac et à manger.", "Champ réfléchissant\n\n" + "Ce sort entoure le lanceur d'un champ qui renvoie les attaques ennemies. " + "Le lanceur ne subit qu'une partie des dégâts, et les effets néfastes des projectiles sont atténués. " + "Le champ protège des projectiles comme des attaques au corps à corps.", "Lumière\n\n" + "Ce sort éclaire les alentours du lanceur. Certains niveaux sont si sombres qu'ils sont difficiles (voire impossibles) à explorer. " + "Ce sort y est indispensable.", "Arrêt du temps\n\n" + "Le temps s'arrête : le monde entier est figé. Seul le lanceur peut bouger et attaquer. " + "Le sort dure 9 secondes (du point de vue du lanceur). " + "Les projectiles qu'il tire sont figés eux aussi, jusqu'à la fin du sort."]
+        },
+        craft_brew_recipe: {
+            title: "Recette : $0",
+            level: 1,
+            images: null,
+            pages: ["En fouillant les étagères, vous trouvez un livre d'alchimie qui explique comment brasser : $0. Vous pourrez la brasser à n'importe quelle table d'alchimie si vous avez les ingrédients."]
+        }
     }
 }

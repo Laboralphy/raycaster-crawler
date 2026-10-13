@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head> 
+    <meta charset="UTF-8"/>
+    <title>Rends-moi mon Grimoire ! - Comment jouer</title>
+    <link href="styles.css" rel="stylesheet" media="screen"></link>
+    <script type="text/javascript">
+
+function hasPointerLockFeature() {
+	return 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
+}
+
+function main() {
+	var sDisplay;
+	if (hasPointerLockFeature()) {
+		sDisplay = 'kbd_mouse';
+	} else {
+		sDisplay = 'kbd_only';
+	}
+	document.getElementById(sDisplay).removeAttribute('class');
+	window.addEventListener('keydown', function(e) {
+		if (e.keyCode === 27) {
+			parent.location.href = '../../../?lang=fr';
+		}
+	});
+}
+
+    </script>
+  </head> 
+  <body onload="main()">
+    <div class="main">
+      <h1>Comment jouer - <i>Rends-moi mon Grimoire !</i></h1>
+      <div id="kbd_only" class="hidden">
+		<p>Ce jeu est un jeu de tir à la première personne. <b>Votre navigateur ne gère pas le verrouillage du pointeur</b> (Pointer Lock) :
+		vous devez donc diriger votre personnage au clavier.</p>
+		<img src="htp-keyboard-only.png" />
+		<p>La souris sert tout de même pour l'interface (fenêtre d'inventaire...).</p>
+      </div>
+      <div id="kbd_mouse" class="hidden">
+		<p>Ce jeu est un jeu de tir à la première personne. <b>Votre navigateur gère le verrouillage du pointeur</b> (Pointer Lock) :
+		vous dirigez votre personnage au clavier et à la souris, comme dans la plupart des jeux de tir modernes.</p>
+		<img src="htp-keyboard-mouse.png" />
+		<p>Cliquez sur l'écran de jeu pour activer le verrouillage du pointeur.</p>
+      </div>
+      <hr />
+      Pour revenir au menu, <a href="../../../?lang=fr">[cliquez ici]</a> ou appuyez sur ÉCHAP.
+    </div>
+  </body> 
+</html> 

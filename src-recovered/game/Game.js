@@ -173,7 +173,8 @@ export class Game extends Engine {
     onInitialize() {
         this.aPopupMessages = [];
         this.aPopupMessages.__currentMessage = null;
-        STRINGS.l = STRINGS.en;
+        // langue : paramètre d'URL ?lang=fr, sinon CONFIG.game.lang
+        STRINGS.setLanguage(new URLSearchParams(location.search).get('lang') || CONFIG.game.lang);
         this.oStrings = STRINGS.l;
         KEYS._INT_ESCAPE = KEYS.ESCAPE;
         KEYS._INT_SAVE = KEYS.F12;
@@ -297,13 +298,18 @@ export class Game extends Engine {
                 this.sys_cutscene('intro', 'stateStartAdventure');
                 return false;
             case 'htp':
-                location.href = 'resources/doc/menu/htp.html';
+                location.href = 'resources/doc/menu/htp' + this.docSuffix() + '.html';
                 break;
             case 'credits':
-                location.href = 'resources/doc/menu/credits.html';
+                location.href = 'resources/doc/menu/credits' + this.docSuffix() + '.html';
                 break
         }
         return false
+    }
+
+    // pages d'aide traduites : htp.fr.html... ; l'anglais n'a pas de suffixe
+    docSuffix() {
+        return STRINGS.lang === STRINGS.languages[0] ? '' : '.' + STRINGS.lang;
     }
 
     onLoading(sWhat, nLoaded, nTotal) {
