@@ -56,6 +56,21 @@ export const BLUEPRINTS_DATA = {
         },
         data: {}
     },
+    // perle lumineuse au bout d'une chaîne : remplace les torches sous l'eau
+    o_underwater_light: {
+        type: RC.OBJECT_TYPE_PLACEABLE,
+        tile: 'o_underwater_light',
+        width: 14,
+        height: 96,
+        thinker: null,
+        fx: RC.FX_LIGHT_SOURCE,
+        lightsource: {
+            r0: 32,
+            r1: 192,
+            v: 0.9
+        },
+        data: {}
+    },
     o_tree1: {
         type: RC.OBJECT_TYPE_PLACEABLE,
         tile: 'o_tree1',

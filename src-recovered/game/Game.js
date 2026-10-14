@@ -860,14 +860,15 @@ export class Game extends Engine {
 
     /**
      * Torche murale de la case centrée en (x64, y64), collée au mur situé au
-     * nord, à l'est, au sud ou à l'ouest (iDir 0 à 3).
+     * nord, à l'est, au sud ou à l'ouest (iDir 0 à 3). sBlueprint : propriété
+     * "torch" de l'étage (WORLD_DATA.dungeons), sinon sTorchBlueprint.
      */
-    rld_createWallTorch(x64, y64, iDir) {
+    rld_createWallTorch(x64, y64, iDir, sBlueprint) {
         const aDirs = [[0, -1], [1, 0], [0, 1], [-1, 0]];
         const [dx, dy] = aDirs[iDir];
         const nOffset = (this.oRaycaster.nPlaneSpacing >> 1) - this.nTorchWallDistance;
         return {
-            blueprint: this.sTorchBlueprint,
+            blueprint: sBlueprint || this.sTorchBlueprint,
             x: x64 + dx * nOffset,
             y: y64 + dy * nOffset,
             angle: Math.atan2(-dy, -dx)
@@ -1031,7 +1032,7 @@ export class Game extends Engine {
                     case LABY.BLOCK_TORCH_W:
                         ++nTorches;
                         if (bCreateObjects) {
-                            oData.objects.push(this.rld_createWallTorch(x64, y64, nBlock - LABY.BLOCK_TORCH_N))
+                            oData.objects.push(this.rld_createWallTorch(x64, y64, nBlock - LABY.BLOCK_TORCH_N, d.torch))
                         }
                         nBlock = LABY.BLOCK_VOID;
                         break;

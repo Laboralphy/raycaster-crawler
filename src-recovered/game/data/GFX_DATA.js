@@ -102,6 +102,18 @@ export const GFX_DATA = {
                 ]
             ]
         },
+        o_underwater_light: {
+            src: 'resources/gfx/sprites/o_underwater_light.png',
+            width: 14,
+            height: 96,
+            frames: 1,
+            noshading: true,
+            animations: [
+                [
+                    [0, 0, 0, 0, 0, 0, 0, 0], 1, 1, 0
+                ]
+            ]
+        },
         o_tree1: {
             src: 'resources/gfx/sprites/o_tree1.png',
             width: 64,
