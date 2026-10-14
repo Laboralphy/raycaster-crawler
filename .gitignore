@@ -19,3 +19,5 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 __pycache__/
+tools/music/**/*.wav
+tools/music/**/*.ogg

@@ -59,6 +59,23 @@ forêts du jeu (`forest`, visuel `forest`, et `darkfall`) partagent
 aujourd'hui `MUSIC_FOREST` : une clé `MUSIC_FOREST_NIGHT` permettrait la
 version nuit dans la seconde.
 
+### Musiques MIDI (`tools/music/midi/`)
+
+Partitions General MIDI générées par script (`midi_kit.py`), dans l'esprit
+de Heretic et Hexen. Le jeu lit de l'OGG : `render.sh` rend le MIDI avec
+FluidSynth (via VLC) puis l'encode.
+
+14 morceaux, tous en boucle : menu, forêt de nuit, 4 donjons, 3 mines,
+salles inondées, boss Méduse, salle du trésor, boss sorcier, fin. Liste,
+ambiances et commandes : `tools/music/midi/README.md`.
+
+⚠️ **Banque de sons** : l'OGG livré contient les échantillons de la banque
+SoundFont utilisée pour le rendu. La banque « Yamaha Tyros 4 » est une copie
+non officielle d'échantillons Yamaha : très bien pour écouter, mais à ne pas
+utiliser pour l'OGG publié. `render.sh` prend par défaut **MuseScore
+General** (licence MIT) : le rendu peut être livré sans restriction. Toute
+autre banque utilisée pour un OGG livré doit être notée ici avec sa licence.
+
 ## Bruitages (`resources/snd/ogg/`)
 
 | Fichiers | Utilisés pour | Origine | État |
@@ -103,7 +120,7 @@ code, sprites, textures, histoire — est le travail de l'auteur, sans IA.
 | Partie | Rôle de l'IA | Depuis |
 |---|---|---|
 | **Code** : reprise du projet en 2026 (récupération des sources, classes ES, modules ES, `const`/`let`), générateur de niveaux en JavaScript, torches et éclairage, outils de vérification | code écrit ou modifié avec l'assistant, relu et testé par l'auteur | octobre 2026 |
-| **Musique** : `forest_ambience.xm`, `forest_night.xm` | composition (notes, harmonies, structure) et synthèse des instruments écrites par l'IA, sous forme de scripts (`tools/music/`) ; choix et validation par l'auteur | octobre 2026 |
+| **Musique** : modules XM (`tools/music/xm/`) et partitions MIDI (`tools/music/midi/`) | composition (notes, harmonies, structure) et synthèse des instruments écrites par l'IA, sous forme de scripts (`tools/music/`) ; choix et validation par l'auteur | octobre 2026 |
 | **Logo** `title_128.png` | rendu par un script écrit par l'IA (police libre UnifrakturMaguntia, effets) ; pas de générateur d'images | octobre 2026 |
 | **Portraits muraux** `d_pictures.png` | choix et mise en cadre par un script ; les dessins sont ceux, humains, des artistes de Dungeon Crawl (CC0) : pas de contenu généré | octobre 2026 |
 | **Textes** | renommage du livre en « Grimoire of Power » dans les textes existants ; titre « Give Back My Grimoire! » choisi par l'auteur parmi des propositions | octobre 2026 |
