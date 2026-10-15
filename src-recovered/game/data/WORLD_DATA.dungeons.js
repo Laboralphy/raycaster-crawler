@@ -8,6 +8,9 @@ export const dungeons = {
         options: '-ls1',
         textures: 't_forest',
         flats: 'resources/gfx/textures/f_forest1.png',
+        // ciel (panorama de 360°), à ciel ouvert : pas de plafond
+        sky: 'resources/gfx/textures/sky_night.png',
+        ceiling: false,
         visual: 'forest',
         music: 'MUSIC_FOREST',
         level: 1,
@@ -41,6 +44,9 @@ export const dungeons = {
         options: '-w1',
         textures: 't_darkwoods',
         flats: 'resources/gfx/textures/f_forest2.png',
+        // ciel (panorama de 360°), à ciel ouvert : pas de plafond
+        sky: 'resources/gfx/textures/sky_night.png',
+        ceiling: false,
         visual: 'darkfall',
         music: 'MUSIC_FOREST',
         level: 1,
@@ -68,6 +74,8 @@ export const dungeons = {
         options: '',
         textures: 't_gray',
         flats: 'resources/gfx/textures/f_gray.png',
+        // ciel vu par les fenêtres du bord de la carte
+        sky: 'resources/gfx/textures/sky_night.png',
         visual: 'dark',
         music: 'MUSIC_DUNGEON',
         level: 1,
@@ -80,13 +88,13 @@ export const dungeons = {
             bigchest: 'basic_bigchest'
         },
         horde: {
-            m_bigface: {
+            m_zombie: {
                 levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             },
             m_wasp: {
                 levels: [4, 5, 6, 7, 8, 9]
             },
-            m_madface: {
+            m_skeleton: {
                 levels: [7, 8, 9, 10]
             }
         },
@@ -96,6 +104,8 @@ export const dungeons = {
         options: '-rs1-ls1',
         textures: 't_blue',
         flats: 'resources/gfx/textures/f_blue.png',
+        // ciel vu par les fenêtres du bord de la carte
+        sky: 'resources/gfx/textures/sky_night.png',
         visual: 'darkblue',
         music: 'MUSIC_DUNGEON',
         level: 1,
@@ -105,10 +115,10 @@ export const dungeons = {
             bigchest: 'basic_bigchest'
         },
         horde: {
-            m_bigface: {
+            m_zombie: {
                 levels: [0, 1, 2, 3, 4, 5, 6]
             },
-            m_madface: {
+            m_skeleton: {
                 levels: [3, 4, 5, 6, 7, 8, 9, 10]
             },
             m_acidblob: {
@@ -124,6 +134,8 @@ export const dungeons = {
         options: '-ls2',
         textures: 't_green',
         flats: 'resources/gfx/textures/f_green.png',
+        // ciel vu par les fenêtres du bord de la carte
+        sky: 'resources/gfx/textures/sky_night.png',
         visual: 'darkgreen',
         music: 'MUSIC_DUNGEON',
         level: 1,
@@ -155,6 +167,8 @@ export const dungeons = {
         options: '-ls2-rs1',
         textures: 't_iron',
         flats: 'resources/gfx/textures/f_gray.png',
+        // ciel vu par les fenêtres du bord de la carte
+        sky: 'resources/gfx/textures/sky_night.png',
         visual: 'dark',
         music: 'MUSIC_DUNGEON',
         level: 1,
@@ -183,6 +197,8 @@ export const dungeons = {
         options: '-ts3-rs1-t1',
         textures: 't_crimson',
         flats: 'resources/gfx/textures/f_red.png',
+        // ciel vu par les fenêtres du bord de la carte
+        sky: 'resources/gfx/textures/sky_night.png',
         visual: 'hellish',
         music: 'MUSIC_DUNGEON',
         level: 1,
@@ -275,7 +291,7 @@ export const dungeons = {
             m_spider: {
                 levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             },
-            m_madface: {
+            m_skeleton: {
                 levels: [3, 4, 5, 6, 7, 8, 9]
             },
             m_imp1: {
@@ -297,7 +313,7 @@ export const dungeons = {
             bigchest: 'basic_bigchest'
         },
         horde: {
-            m_madface: {
+            m_skeleton: {
                 levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             },
             m_imp1: {
@@ -310,7 +326,7 @@ export const dungeons = {
                 levels: [7, 8, 9, 10]
             }
         },
-        shops: [shops.firstaid_2, shops.blacksmith_2]
+        shops: [shops.firstaid_2, shops.blacksmith_3]
     }, {
         generator: 'boss',
         options: '',
@@ -325,13 +341,13 @@ export const dungeons = {
             bigchest: 'basic_bigchest'
         },
         horde: {
-            m_bigface: {
+            m_zombie: {
                 levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             },
-            m_madface: {
+            m_skeleton: {
                 levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             },
-            m_bigfaceboss: {
+            m_zombie_monarch: {
                 levels: [10]
             }
         },
@@ -395,7 +411,7 @@ export const dungeons = {
             m_pira: {
                 levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             },
-            m_bigpirate: {
+            m_zombie_drowned: {
                 levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             },
             m_medusa: {

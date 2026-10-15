@@ -49,9 +49,9 @@ export const MONSTERS_BLUEPRINTS = {
             "score": 200
         }
     },
-    "m_bigface": {
+    "m_zombie": {
         "type": RC.OBJECT_TYPE_MOB,
-        "tile": "m_bigface",
+        "tile": "m_zombie",
         "width": 50,
         "height": 64,
         "thinker": "Rusher",
@@ -65,9 +65,9 @@ export const MONSTERS_BLUEPRINTS = {
             "score": 100
         }
     },
-    "m_madface": {
+    "m_skeleton": {
         "type": RC.OBJECT_TYPE_MOB,
-        "tile": "m_bigface2",
+        "tile": "m_skeleton",
         "width": 50,
         "height": 64,
         "thinker": "Rusher",
@@ -97,9 +97,9 @@ export const MONSTERS_BLUEPRINTS = {
             "score": 200
         }
     },
-    "m_bigpirate": {
+    "m_zombie_drowned": {
         "type": RC.OBJECT_TYPE_MOB,
-        "tile": "m_bigpirate",
+        "tile": "m_zombie_drowned",
         "width": 50,
         "height": 64,
         "thinker": "Rusher",
@@ -353,9 +353,9 @@ export const MONSTERS_BLUEPRINTS = {
             "score": 250
         }
     },
-    "m_bigfaceboss": {
+    "m_zombie_monarch": {
         "type": RC.OBJECT_TYPE_MOB,
-        "tile": "m_bigfaceboss",
+        "tile": "m_zombie_monarch",
         "width": 50,
         "height": 64,
         "thinker": "Rusher",

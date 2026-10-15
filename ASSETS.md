@@ -94,6 +94,7 @@ sons CC0 (freesound.org filtré sur CC0, Kenney.nl, OpenGameArt) ou générés.
 | Sprites de monstres et d'objets `resources/gfx/sprites/` | modélisés et rendus avec POV-Ray par l'auteur | personnelle | ✅ (confirmé par l'auteur) |
 | Textures `resources/gfx/textures/t_*`, `f_*` | dessinées par l'auteur avec OpenOffice Draw (assemblage Gimp) | personnelle | ✅ (confirmé par l'auteur) |
 | Panneau de magasin (panneau 79 des textures `t_*` de 5120 px) | sac d'or provisoire dessiné par `tools/gfx/make_shop_panel.py` ; remplace une marchande qui ressemblait à Shantae (WayForward) | personnelle | 🔄 provisoire, en attendant le dessin définitif |
+| Ciel de nuit `resources/gfx/textures/sky_night.png` (forêts) | dessiné par `tools/gfx/make_sky.py` | personnelle | ✅ |
 | Icônes des objets `resources/gfx/icons/icons.png` (176 icônes) | dessinées par l'auteur avec OpenOffice Draw | personnelle | ✅ (confirmé par l'auteur) |
 | Chiffres du HUD `resources/gfx/icons/digits.png` | dessinés par l'auteur | personnelle | ✅ (confirmé par l'auteur) |
 | Livre de l'histoire `resources/gfx/books/book_of_story0.png` (vieux livre), `book_of_story1.png` (sorcier en prière), `book_of_story3.png` (château la nuit) | images récupérées à droite et à gauche il y a plus de 8 ans ; origine introuvable | inconnue | ❌ à remplacer |
@@ -119,6 +120,7 @@ code, sprites, textures, histoire — est le travail de l'auteur, sans IA.
 | **Musique** : modules XM (`tools/music/xm/`) et partitions MIDI (`tools/music/midi/`) | composition (notes, harmonies, structure) et synthèse des instruments écrites par l'IA, sous forme de scripts (`tools/music/`) ; choix et validation par l'auteur | octobre 2026 |
 | **Logo** `title_128.png` | rendu par un script écrit par l'IA (police libre UnifrakturMaguntia, effets) ; pas de générateur d'images | octobre 2026 |
 | **Panneau de magasin provisoire** (sac d'or, panneau 79 des textures de murs) | dessiné par un script écrit par l'IA (`tools/gfx/make_shop_panel.py`, formes simples) ; pas de générateur d'images | octobre 2026 |
+| **Ciel de nuit** `sky_night.png` (lune, étoiles, nuages, montagnes) | dessiné par un script écrit par l'IA (`tools/gfx/make_sky.py`, formes simples) ; pas de générateur d'images | octobre 2026 |
 | **Portraits muraux** `d_pictures.png` | choix et mise en cadre par un script ; les dessins sont ceux, humains, des artistes de Dungeon Crawl (CC0) : pas de contenu généré | octobre 2026 |
 | **Textes** | renommage du livre en « Grimoire of Power » dans les textes existants ; titre « Give Back My Grimoire! » choisi par l'auteur parmi des propositions | octobre 2026 |
 

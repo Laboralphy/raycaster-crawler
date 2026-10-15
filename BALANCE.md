@@ -143,7 +143,7 @@ pas à la génération du niveau.
 | `basic_chest` | 1,3 | 0,42 | 0,24 |
 | `basic_bigchest` | 3,5 | 2,17 | 0,57 |
 | `basic_closet` | 1,0 | 0 | 0 |
-| `m_bigface`, `m_madface` | 0,5 | 0,25 | 0 |
+| `m_zombie`, `m_skeleton` | 0,5 | 0,25 | 0 |
 | la plupart des autres monstres | 0,5 à 0,75 | 0,31 à 0,47 | 0 |
 | `m_wasp` | 0,25 | 0 | 0 |
 | boss (sauf la reine Méduse) | 0,75 | 0,47 | 0 |
@@ -225,8 +225,8 @@ shops: [shops.firstaid_2, shops.magic_2]
 
 Magasins actuels : `d1[1]` premiers soins et magie, `d1[2]` bijoux et
 potions, `d1[3]` potions et bijoux, `d1[4]` potions et deux premiers soins,
-`mines[0]` potions et bijoux, `mines[1]` premiers soins et forgeron (voir
-[Anomalies](#anomalies-relevées)).
+`mines[0]` potions et bijoux, `mines[1]` premiers soins et forgeron
+(`blacksmith_3`).
 
 ### Repères de prix
 
@@ -248,7 +248,7 @@ demi-étage de fouille.
 ### Les caractéristiques (`MONSTERS_BLUEPRINTS.js`)
 
 ```js
-"m_madface": {
+"m_skeleton": {
     ...
     "data": {
         "vitality": 15,        // points de vie
@@ -265,7 +265,7 @@ demi-étage de fouille.
 - **Dégâts** : ils viennent de l'**arme** (`weapon`, dans `ITEMS_DATA.js`),
   qui renvoie à un sort de `SPELLS_DATA.js`. Pour un monstre plus dangereux,
   lui donner une autre arme ou créer une arme qui lui est propre
-  (`dag_madface`…) avec un sort plus fort. Changer `dag_brass` changerait
+  (`dag_skeleton`…) avec un sort plus fort. Changer `dag_brass` changerait
   tous les monstres qui l'utilisent.
 - **Résistances** : `properties`, par exemple `"nrphyC/"` (résistance
   physique de niveau 2, permanente) : −24 % de dégâts physiques reçus.
@@ -273,10 +273,10 @@ demi-étage de fouille.
 | Monstre | Vitalité | Arme | Dégâts moyens par coup |
 |---|---|---|---|
 | `m_myco` | 4 | `dag_brass` | 7 |
-| `m_bigface` | 6 | `dag_brass` | 7 |
+| `m_zombie` | 6 | `dag_brass` | 7 |
 | `m_wasp` | 3 | `dag_poisonsting_1` | 7 + poison |
 | `m_spider` | 6 | `dag_poisonsting_1` | 7 + poison |
-| `m_madface`, `m_pira` | 15 | `dag_brass` | 7 |
+| `m_skeleton`, `m_pira` | 15 | `dag_brass` | 7 |
 | `m_acidblob`, `m_fireblob` | 10 | explosion | 17,5 |
 | `m_imp1`, `m_imp2` | 13, 11 | `wand_imp_1` | 14 |
 | `m_cube` | 10 | 3 boules de feu | 3 × 7 |
@@ -307,8 +307,8 @@ changement de code, à faire ensemble si tu choisis cette voie.
 
 ```js
 horde: {
-    m_bigface: { levels: [0, 1, 2, 3, 4, 5, 6] },
-    m_madface: { levels: [3, 4, 5, 6, 7, 8, 9, 10] },
+    m_zombie: { levels: [0, 1, 2, 3, 4, 5, 6] },
+    m_skeleton: { levels: [3, 4, 5, 6, 7, 8, 9, 10] },
 },
 ```
 
@@ -471,9 +471,6 @@ que le jeu. Voir la discussion du 15 octobre 2026.
 
 À corriger ou à décider :
 
-- **`mines[1]` utilise `shops.blacksmith_2`, qui n'existe pas** (il n'y a
-  que `blacksmith_3`) : le second magasin de cet étage est indéfini.
-  Remplacer par `shops.blacksmith_3`, ou créer `blacksmith_2`.
 - **`pot_regen_1` soigne 5 fois plus que `pot_heal_1`** (60 PV contre 12)
   pour 3 pièces au lieu de 2.
 - **Les boss donnent le même butin qu'un monstre ordinaire** (0,47 pièce

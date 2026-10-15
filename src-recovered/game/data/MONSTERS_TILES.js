@@ -59,7 +59,7 @@ export const MONSTERS_TILES = {
             ]
         ]
     },
-    m_bigface: {
+    m_zombie: {
         src: 'resources/gfx/sprites/m_zombie.png',
         width: 64,
         height: 96,
@@ -79,7 +79,7 @@ export const MONSTERS_TILES = {
             ]
         ]
     },
-    m_bigface2: {
+    m_skeleton: {
         src: 'resources/gfx/sprites/m_skeleton.png',
         width: 64,
         height: 96,
@@ -119,8 +119,8 @@ export const MONSTERS_TILES = {
             ]
         ]
     },
-    m_bigpirate: {
-        src: 'resources/gfx/sprites/m_zombie_2.png',
+    m_zombie_drowned: {
+        src: 'resources/gfx/sprites/m_zombie_drowned.png',
         width: 64,
         height: 96,
         frames: 94,
@@ -479,7 +479,7 @@ export const MONSTERS_TILES = {
             ]
         ]
     },
-    m_bigfaceboss: {
+    m_zombie_monarch: {
         src: 'resources/gfx/sprites/m_zombie_monarch.png',
         width: 64,
         height: 96,

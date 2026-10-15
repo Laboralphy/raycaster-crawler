@@ -1,5 +1,5 @@
 export const LOOT_DATA = {
-    m_bigface: {
+    m_zombie: {
         chances: {
             0: 1,
             1: 1
@@ -10,7 +10,7 @@ export const LOOT_DATA = {
             ccc_meat: 2
         }
     },
-    m_madface: {
+    m_skeleton: {
         chances: {
             0: 1,
             1: 1
@@ -32,7 +32,7 @@ export const LOOT_DATA = {
             ccc_meat: 2
         }
     },
-    m_bigpirate: {
+    m_zombie_drowned: {
         chances: {
             0: 1,
             1: 1
@@ -240,7 +240,7 @@ export const LOOT_DATA = {
             ccc_meat: 2
         }
     },
-    m_bigfaceboss: {
+    m_zombie_monarch: {
         chances: {
             0: 1,
             1: 3
@@ -300,8 +300,11 @@ export const LOOT_DATA = {
         items: {
             GKEY: 5,
             'GKEY*2': 2,
-            gold: 20,
-            'gold*2': 5,
+            gold: 5,
+            'gold*2': 10,
+            'gold*3': 15,
+            'gold*4': 10,
+            'gold*5': 5,
             pot_heal_1: 9,
             pot_heal_2: 3,
             pot_regen_1: 5,
@@ -327,10 +330,11 @@ export const LOOT_DATA = {
             4: 1
         },
         items: {
-            gold: 20,
-            'gold*2': 5,
-            'gold*3': 5,
-            'gold*4': 5,
+            gold: 5,
+            'gold*3': 10,
+            'gold*5': 15,
+            'gold*7': 10,
+            'gold*11': 5,
             pot_heal_1: 9,
             pot_heal_2: 3,
             pot_regen_1: 5,

@@ -111,7 +111,10 @@ export class Raycaster {
             this.registerMaterial(nCode)
         }
         if (this.oBackground) {
-            r.setBackground(this.toCanvas(this.oBackground))
+            const oSky = this.toCanvas(this.oBackground);
+            r.setBackground(oSky);
+            // largeur une fois l'image mise à la hauteur de l'écran
+            this.nBackgroundWidth = oSky.width * this.oCanvas.height / oSky.height
         }
         // les tilesets créés avant le premier rendu sont ombrés par celui-ci
         for (const sTile in this.oHorde.oTiles) {
@@ -771,6 +774,12 @@ export class Raycaster {
         this.drawHorde();
         const c = this.oCamera;
         const r = this.oRenderer;
+        if (this.oBackground) {
+            // raycaster386 fait défiler l'image d'une largeur par quart de
+            // tour (elle se répète 4 fois) : on la ralentit pour qu'une
+            // largeur fasse un tour complet, l'image est un panorama de 360°
+            r.backgroundOffset = -3 * c.fTheta * this.nBackgroundWidth / (2 * Math.PI)
+        }
         r.render(c.x, c.y, c.fTheta, this.fViewHeight);
         this.bRendered = true;
         r.flip(this.oRenderContext);
@@ -977,6 +986,7 @@ Object.assign(Raycaster.prototype, {
     oWall: null,
     oFloor: null,
     oBackground: null,
+    nBackgroundWidth: 0,
     nMapSize: 0,
     aMap: null,
     oVisual: null,

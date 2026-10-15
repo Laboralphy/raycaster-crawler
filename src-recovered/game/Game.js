@@ -1093,13 +1093,17 @@ export class Game extends Engine {
                 }
             }
         }
+        if (d.sky) {
+            oData.background = d.sky
+        }
         if ('flats' in d) {
             oData.flats = {
                 src: d.flats,
                 codes: []
             };
+            // ceiling: false : pas de plafond, on voit le ciel (-1 : rien n'est dessiné)
             for (nCode = 0; nCode < oData.walls.codes.length; nCode++) {
-                oData.flats.codes.push([0, 1])
+                oData.flats.codes.push([0, d.ceiling === false ? -1 : 1])
             }
         }
         d.data = oData;
