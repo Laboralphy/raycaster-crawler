@@ -1,5 +1,6 @@
 import { Adventure } from './Adventure.js';
 import { BackupSystem } from './BackupSystem.js';
+import { Cheats } from './Cheats.js';
 import { DataSerializer } from './DataSerializer.js';
 import { Dungeon } from './Dungeon.js';
 import { EventLog } from './EventLog.js';
@@ -258,7 +259,12 @@ export class Game extends Engine {
         this.oBackupSystem = new BackupSystem();
         this.oBackupSystem.init(this.sSaveFile);
         this.sWorldBackup = JSON.stringify(WORLD_DATA);
-        this.oEventLog = new EventLog()
+        this.oEventLog = new EventLog();
+        this.oCheats = new Cheats(this);
+        if (this.oCheats.bDebug) {
+            // console du navigateur : cheat('kill'), cheat('go mines 1')...
+            window.cheat = (s) => this.oCheats.run(s)
+        }
     }
 
     onMenuLoop() {
@@ -639,7 +645,7 @@ export class Game extends Engine {
 
     pausedKeyboardProcess() {
         const k = this._getKeyboardDevice();
-        let nKey, sCmd, aCmd;
+        let nKey, sCmd;
         while ((nKey = k.inputKey()) !== 0) {
             switch (nKey) {
                 case KEYS._INT_PAUSE:
@@ -649,29 +655,7 @@ export class Game extends Engine {
                 case KEYS.ALPHANUM.X:
                     sCmd = prompt(STRINGS._('~m_cheat_prompt'));
                     if (sCmd) {
-                        aCmd = sCmd.split(' ');
-                        switch (aCmd[0]) {
-                            case 'mellon':
-                                this.gc_gotoLocation('mines', 0);
-                                break;
-                            case 'go':
-                                if (aCmd.length === 2) {
-                                    this.gc_gotoLocation(aCmd[1], 0)
-                                } else if (aCmd.length === 3) {
-                                    this.gc_gotoLocation(aCmd[1], aCmd[2] | 0)
-                                }
-                                break;
-                            case 'seed':
-                                this.sys_popup('seed : ' + WORLD_DATA.dungeons[this.oDungeon.getPlayerLocationArea()][this.oDungeon.getPlayerLocationFloor()].seed);
-                                break;
-                            case 'give':
-                                if (aCmd.length === 2) {
-                                    this.oDungeon.pickupItem(this.oDungeon.getPlayerCreature(), new Item(aCmd[1]))
-                                } else if (aCmd.length === 3) {
-                                    this.oDungeon.pickupItem(this.oDungeon.getPlayerCreature(), new Item(aCmd[1]), aCmd[2] | 0)
-                                }
-                                break
-                        }
+                        this.oCheats.run(sCmd)
                     }
                     break
             }
@@ -2060,6 +2044,7 @@ Object.assign(Game.prototype, {
     oDescriptorSystem: null,
     oPlayerSheetSystem: null,
     oShopSystem: null,
+    oCheats: null,
     oMagicSystem: null,
     oConsole: null,
     oUnderwater: null,

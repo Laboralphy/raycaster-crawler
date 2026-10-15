@@ -15,6 +15,9 @@ export const CONFIG = {
         // langue des textes : 'en', 'fr', ou 'auto' (celle du navigateur) ;
         // l'URL peut la forcer : index.html?lang=fr
         lang: 'auto',
+        // codes de triche de débogage (kill, god, regen...) : touche X en
+        // pause, ou cheat('help') dans la console ; l'URL ?debug=1 les active aussi
+        debug: false,
         mouse: PointerLock.init()
     },
     raycaster: {
