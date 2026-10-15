@@ -23,6 +23,19 @@ Hexen, rendues en OGG pour le jeu. Composition écrite avec Claude Code
 | `boss_warlock` | `make_boss_warlock.py` | boss final : le sorcier | épique ; thème du Grimoire en furie (ré mineur) | 1:33 |
 | `ending_homeward` | `make_ending_homeward.py` | cinématique de fin | joyeux ; thème du Grimoire en majeur (ré majeur) | 1:23 |
 
+Hors jeu, pour un projet futur (absent de `make_all.sh`) :
+`danmaku_harpsichord` (`make_danmaku_harpsichord.py`), morceau original dans
+l'esprit de Touhou Project, clavecin en voix principale (la mineur, 160 bpm,
+1:36). Rendu : `SUFFIX=.gu OGG_RMS=-19 ./render.sh danmaku_harpsichord.mid`.
+`prelude_dminor` (`make_prelude_dminor.py`), prélude pour clavecin seul dans
+le style de BWV 846, écrit pour être joué sur un vrai clavecin (main droite
+et main gauche sur deux pistes ; ré mineur, 66 bpm, 2:07, sans boucle).
+Rendu : `NOLOOP=1 ./render.sh prelude_dminor.mid`.
+`chaconne_gminor` (`make_chaconne_gminor.py`), chaconne pour clavecin seul :
+basse obstinée de lamento et sept variations (sol mineur, 3/4, 76 bpm, 2:32,
+sans boucle ; partition `chaconne_gminor.ly`). Rendu :
+`NOLOOP=1 ./render.sh chaconne_gminor.mid`.
+
 Tous bouclent : la fin enchaîne sur le début, et le rendu replie la queue de
 réverbération sur le début du fichier.
 
@@ -31,19 +44,32 @@ réverbération sur le début du fichier.
 ```sh
 ./make_all.sh                          # tout : MIDI puis OGG
 ./make_all.sh boss_warlock             # un ou plusieurs morceaux
-python3 make_boss_warlock.py           # le MIDI seul (à écouter dans VLC)
+python3 make_boss_warlock.py           # le MIDI seul
+fluidsynth -a pulseaudio banque.sf2 boss_warlock.mid  # l'écouter
 ./render.sh boss_warlock.mid autre.sf2 # rendu avec une autre banque, pour écouter
 python3 analyse.py boss_warlock.wav 144  # durée, crête, niveau, spectre
 ```
 
-Prérequis : Python 3 et NumPy, VLC avec son module FluidSynth, FFmpeg.
-Banque de rendu par défaut : MuseScore General (licence MIT) ; ne livrer
-que des OGG rendus avec une banque libre (voir `ASSETS.md`).
+Prérequis : Python 3 et NumPy, FluidSynth (`apt install fluidsynth`), FFmpeg.
+Banque de rendu par défaut : GeneralUser GS v1.471, celle des OGG du jeu,
+dans `~/Musique/soundfonts/`. Ne livrer que des OGG rendus avec une banque
+libre (voir `ASSETS.md`).
+
+Pour comparer des banques, `SF2` et `SUFFIX` changent la banque et le nom
+des fichiers produits :
+
+```sh
+SF2=~/Musique/soundfonts/MuseScore_General\(v0.2.0\).sf2 SUFFIX=.mus ./make_all.sh
+ffplay -nodisp -autoexit boss_warlock.mus.ogg
+```
+
+Le rendu reste ici (fichiers ignorés par git) ; dans le jeu, chaque morceau
+est copié en `resources/snd/ogg/mus_<nom>.ogg`.
 
 ## Fichiers
 
 - `midi_kit.py` : écriture de fichiers MIDI, sans dépendance.
 - `compose.py` : accords, progressions, mélodies, arpèges, batterie, échos...
 - `motifs.py` : thème du Grimoire (menu), en mineur et en majeur.
-- `render.sh` : rendu FluidSynth (VLC), bouclage et niveau (`finish.py`), OGG.
+- `render.sh` : rendu FluidSynth, bouclage et niveau (`finish.py`), OGG.
 - `make_all.sh` : tout régénérer, avec le niveau de chaque morceau.

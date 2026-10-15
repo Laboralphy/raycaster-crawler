@@ -15,7 +15,7 @@ PPQ = 480
 
 # programmes General MIDI utiles (numéro 0-127)
 GM = {
-    'Piano': 0, 'Celesta': 8, 'Glockenspiel': 9, 'MusicBox': 10, 'TubularBells': 14,
+    'Piano': 0, 'Harpsichord': 6, 'Celesta': 8, 'Glockenspiel': 9, 'MusicBox': 10, 'TubularBells': 14,
     'ChurchOrgan': 19, 'ReedOrgan': 20,
     'NylonGuitar': 24, 'MutedGuitar': 28, 'OverdriveGuitar': 29, 'DistortionGuitar': 30,
     'AcousticBass': 32, 'FingerBass': 33, 'Fretless': 35, 'SynthBass1': 38,

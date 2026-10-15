@@ -54,7 +54,9 @@ mid, path, target = sys.argv[1], sys.argv[2], float(sys.argv[3])
 w = wave.open(path); p = w.getparams()
 x = np.frombuffer(w.readframes(p.nframes), '<i2').reshape(-1, 2).astype(np.float32) / 32768
 L = int(round(midi_seconds(mid) * p.framerate))
-if len(x) > L:
+if sys.argv[4:] == ['noloop']:
+    L, y = len(x), x
+elif len(x) > L:
     tail = x[L:]
     y = x[:L].copy()
     y[:len(tail)] += tail[:L]

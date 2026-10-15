@@ -28,53 +28,48 @@ Légende : ✅ réglé · 🔄 remplacement prêt, pas encore branché · ❌ à
 ## Musiques (`resources/snd/ogg/`)
 
 Les musiques sont choisies par `src-recovered/game/data/SOUNDS.js` (clés
-`MUSIC_*`) et par `Game.sys_cutscene` (cinématiques).
+`MUSIC_*`), et chaque niveau nomme sa clé dans `WORLD_DATA.dungeons.js`.
+Toutes sont des créations personnelles : partitions MIDI générées par script
+(`tools/music/midi/`), rendues en OGG avec la banque GeneralUser GS.
 
-| Fichier | Utilisé pour | Auteur / origine | Licence | État | Remplacement |
-|---|---|---|---|---|---|
-| `mus_bjorn_lynne_no_survivors` | menu (`MUSIC_MENU`) | Bjorn A. Lynne (Shockwave-Sound) | « libre pour projets non commerciaux » | ❌ | à composer |
-| `mus_bjorn_lynne_in_the_cave` | mines (`MUSIC_MINES`) | Bjorn A. Lynne | idem | ❌ | à composer |
-| `mus_bjorn_lynne_proud_warriors` | combats de boss (`MUSIC_BOSS`) | Bjorn A. Lynne | idem | ❌ | à composer |
-| `mus_bjorn_lynne_victorious_days` | salle du trésor (`MUSIC_TREASURE`) | Bjorn A. Lynne | idem | ❌ | à composer |
-| `mus_bjorn_lynne_the_long_journey_home` | salle du trésor (`MUSIC_TREASURE`) | Bjorn A. Lynne | idem | ❌ | à composer — voir « Anomalies » |
-| `mus_bjorn_lynne_methydias_cloudship` | cinématique de fin | Bjorn A. Lynne | idem | ❌ | à composer |
-| `mus_night_ambience` | forêt (`MUSIC_FOREST`) et cinématique d'intro | inconnue | inconnue | 🔄 | `tools/music/forest_ambience.xm` (jour) et `forest_night.xm` (nuit) |
-| `mus_yewbic_ambience01`, `02`, `03`, `07` | donjons (`MUSIC_DUNGEON`) | Yewbic (freesound.org) | ❓ Freesound mélange CC0, CC BY et CC BY-NC : vérifier chaque son | ❓ | selon la licence |
-| `mus_laurent_underwater_mamori` | niveaux sous l'eau (`MUSIC_UNDERWATER`) | inconnue (« Laurent » ?) | inconnue | ❓ | à identifier, sinon à composer |
-
-### Musiques composées (création personnelle)
-
-Générées par script, au format XM (ouvrable et modifiable dans OpenMPT) :
-aucune contrainte de licence. Instruments synthétisés (FM, bruit filtré), pas
-d'échantillons extérieurs.
-
-| Fichier | Script | Ambiance | Durée |
+| Fichier | Clé | Utilisé pour | État |
 |---|---|---|---|
-| `tools/music/forest_ambience.xm` | `tools/music/make_forest.py` | forêt de jour, paisible (ré dorien, 80 bpm) | 1:36, en boucle |
-| `tools/music/forest_night.xm` | `tools/music/make_forest_night.py` | forêt de nuit, inquiétante (mi phrygien, 60 bpm) | 1:36, en boucle |
-
-Pour les brancher : exporter en OGG (le jeu ne lit pas le XM), les placer
-dans `resources/snd/ogg/` et les référencer dans `SOUNDS.js`. Les deux
-forêts du jeu (`forest`, visuel `forest`, et `darkfall`) partagent
-aujourd'hui `MUSIC_FOREST` : une clé `MUSIC_FOREST_NIGHT` permettrait la
-version nuit dans la seconde.
+| `mus_main_menu` | `MUSIC_MENU` | menu principal | ✅ |
+| `mus_forest_night` | `MUSIC_FOREST`, `MUSIC_CUTSCENE` | les deux forêts, cinématique d'intro | ✅ |
+| `mus_dungeon_gate`, `_vaults`, `_chains`, `_sanctum` | `MUSIC_DUNGEON` | donjons (tirage au hasard) | ✅ |
+| `mus_mines_depths`, `_echoes`, `_burrow` | `MUSIC_MINES` | mines (tirage au hasard) | ✅ |
+| `mus_underwater_flooded` | `MUSIC_UNDERWATER` | niveau sous l'eau, salles inondées | ✅ |
+| `mus_boss_warlock` | `MUSIC_BOSS` | boss sorcier, boss des mines | ✅ |
+| `mus_boss_medusa` | `MUSIC_BOSS_MEDUSA` | boss reine Méduse | ✅ |
+| `mus_treasure_hoard` | `MUSIC_TREASURE` | salle du trésor | ✅ |
+| `mus_ending_homeward` | `MUSIC_END` | cinématique de fin | ✅ |
 
 ### Musiques MIDI (`tools/music/midi/`)
 
 Partitions General MIDI générées par script (`midi_kit.py`), dans l'esprit
 de Heretic et Hexen. Le jeu lit de l'OGG : `render.sh` rend le MIDI avec
-FluidSynth (via VLC) puis l'encode.
-
-14 morceaux, tous en boucle : menu, forêt de nuit, 4 donjons, 3 mines,
-salles inondées, boss Méduse, salle du trésor, boss sorcier, fin. Liste,
-ambiances et commandes : `tools/music/midi/README.md`.
+FluidSynth puis l'encode. Liste, ambiances et commandes :
+`tools/music/midi/README.md`.
 
 ⚠️ **Banque de sons** : l'OGG livré contient les échantillons de la banque
-SoundFont utilisée pour le rendu. La banque « Yamaha Tyros 4 » est une copie
-non officielle d'échantillons Yamaha : très bien pour écouter, mais à ne pas
-utiliser pour l'OGG publié. `render.sh` prend par défaut **MuseScore
-General** (licence MIT) : le rendu peut être livré sans restriction. Toute
-autre banque utilisée pour un OGG livré doit être notée ici avec sa licence.
+SoundFont utilisée pour le rendu ; seule une banque à licence libre convient.
+
+- Banque des OGG livrés : **GeneralUser GS v1.471**, par S. Christian
+  Collins (https://schristiancollins.com/generaluser.php). Sa licence permet
+  d'utiliser librement, y compris commercialement, la musique produite avec
+  elle — à confirmer en relisant le fichier de licence fourni avec la banque
+  (non relu au 14 octobre 2026).
+- Autre banque libre, pour comparer : **MuseScore General** 0.2 (licence
+  MIT ; créditer FluidR3 de Frank Wen et les auteurs cités dans sa licence
+  si elle sert à un OGG livré).
+- À ne pas utiliser pour l'OGG publié (échantillons d'origine commerciale ou
+  inconnue) : « Yamaha Tyros 4 », « Timbres of Heaven ».
+
+### Anciennes musiques XM (`tools/music/xm/`)
+
+Modules XM générés par script (instruments synthétisés FM, sans
+échantillons extérieurs), exportés par `export_ogg.py`. Remplacés dans le jeu
+par les musiques MIDI le 14 octobre 2026 ; les scripts restent disponibles.
 
 ## Bruitages (`resources/snd/ogg/`)
 
@@ -140,12 +135,11 @@ tableau.
 
 ## Anomalies relevées
 
-- `MUSIC_TREASURE` référence `mus_bjorn_lynne_the_log_journey_home`
-  (faute de frappe) alors que le fichier s'appelle `…_long_journey_home` :
-  ce morceau ne peut pas être joué. Sans objet une fois la musique remplacée.
+Aucune pour l'instant.
 
 ## Avant la publication sur Steam
 
 - [ ] Plus aucun ❌ ni ❓ dans ce document.
+- [ ] Licence de GeneralUser GS v1.471 relue (musiques).
 - [ ] Crédits à jour dans le jeu (`cs1_credits`) et dans `credits.html`.
 - [ ] Les fichiers remplacés sont supprimés du dépôt et du paquet livré.

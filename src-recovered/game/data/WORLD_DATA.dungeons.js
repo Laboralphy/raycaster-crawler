@@ -415,7 +415,7 @@ export const dungeons = {
         flats: 'resources/gfx/textures/f_water.png',
         torch: 'o_underwater_light',
         visual: 'underwater',
-        music: 'MUSIC_BOSS',
+        music: 'MUSIC_BOSS_MEDUSA',
         level: 1,
         loot: {
             chest: 'basic_chest',
