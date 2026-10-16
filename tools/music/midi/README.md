@@ -13,15 +13,24 @@ Hexen, rendues en OGG pour le jeu. Composition écrite avec Claude Code
 | `dungeon_gate` | `make_dungeon_gate.py` | donjon | marche lourde, guitare étouffée, cuivres (ré phrygien) | 1:44 |
 | `dungeon_vaults` | `make_dungeon_vaults.py` | donjon | mystérieux, harpe 3+3+2, orgue, violoncelle (la mineur) | 1:47 |
 | `dungeon_chains` | `make_dungeon_chains.py` | donjon | pédale de do, guitare saturée, trombones (do mineur) | 1:36 |
-| `dungeon_sanctum` | `make_dungeon_sanctum.py` | donjon | oriental, shanai, tympanon, peaux (mi phrygien dominant) | 1:31 |
+| `dungeon_crypt` | `make_dungeon_crypt.py` | donjon | harpe en boucle, chœur sur pédale, comme Hexen (ré mineur) | 1:51 |
+| `dungeon_ritual` | `make_dungeon_ritual.py` | donjon | triton, guitare saturée, percussions, comme E1M1 (do phrygien) | 1:43 |
+| `dungeon_requiem` | `make_dungeon_requiem.py` | donjon | valse funèbre à 3/4, orgue, cor, chœur (mi mineur) | 1:38 |
+| `dungeon_gauntlet` | `make_dungeon_gauntlet.py` | donjon | poursuite, riff à l'unisson en doubles croches, comme E2M3 (la mineur) | 1:31 |
 | `mines_depths` | `make_mines_depths.py` | mines | grotte immense, gouttes, pioches en écho (fa mineur) | 1:42 |
 | `mines_echoes` | `make_mines_echoes.py` | mines | galeries, marimba, clarinette, échos (si mineur) | 1:31 |
-| `mines_burrow` | `make_mines_burrow.py` | mines | araignées et diablotins, pizzicati qui grouillent (mi mineur) | 1:26 |
-| `underwater_flooded` | `make_underwater_flooded.py` | salles inondées | humide, dangereux, menace qui monte (do dièse mineur) | 1:48 |
+| `mines_pit` | `make_mines_pit.py` | mines | hostile, guitare étouffée 3+3+2, triton, comme « Deep » de Hexen (do mineur) | 1:44 |
+| `underwater_hunt` | `make_underwater_hunt.py` | salles inondées | traque : basse fretless en doubles croches, taiko, cuivres (si bémol mineur) | 1:36 |
 | `boss_medusa` | `make_boss_medusa.py` | boss : la reine Méduse | combat sous l'eau, rapide (fa dièse mineur) | 1:27 |
-| `treasure_hoard` | `make_treasure_hoard.py` | salle du trésor | or qui scintille, émerveillement (mi lydien) | 1:00 |
+| `treasure_guardian` | `make_treasure_guardian.py` | salle du trésor | l'or et son gardien : harpe, trombones et tuba (mi phrygien) | 1:29 |
 | `boss_warlock` | `make_boss_warlock.py` | boss final : le sorcier | épique ; thème du Grimoire en furie (ré mineur) | 1:33 |
 | `ending_homeward` | `make_ending_homeward.py` | cinématique de fin | joyeux ; thème du Grimoire en majeur (ré majeur) | 1:23 |
+
+Écartés du jeu (absents de `make_all.sh`, scripts gardés) : le style ne
+collait pas à l'ambiance. `dungeon_sanctum` (trop oriental, l'acte II de
+Diablo II), `mines_burrow` (trop « nains au travail dans la mine »),
+`treasure_hoard` (mignon mais trop paisible), `underwater_flooded` (trop
+paisible pour un niveau de méduses et de barracudas).
 
 Hors jeu, pour un projet futur (absent de `make_all.sh`) :
 `danmaku_harpsichord` (`make_danmaku_harpsichord.py`), morceau original dans

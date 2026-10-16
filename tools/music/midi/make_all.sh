@@ -6,9 +6,10 @@
 set -e
 cd "$(dirname "$0")"
 LEVELS="main_menu:-20 forest_night:-22
-dungeon_gate:-20 dungeon_vaults:-21 dungeon_chains:-19 dungeon_sanctum:-20
-mines_depths:-22 mines_echoes:-21 mines_burrow:-20
-underwater_flooded:-22 boss_medusa:-18 treasure_hoard:-20
+dungeon_gate:-20 dungeon_vaults:-21 dungeon_chains:-19
+dungeon_crypt:-20 dungeon_ritual:-19 dungeon_requiem:-21 dungeon_gauntlet:-19
+mines_depths:-22 mines_echoes:-21 mines_pit:-21
+underwater_hunt:-19 boss_medusa:-18 treasure_guardian:-20
 boss_warlock:-18 ending_homeward:-20"
 for entry in $LEVELS; do
     name=${entry%%:*}

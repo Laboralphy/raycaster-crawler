@@ -125,6 +125,21 @@ class Piece:
                 if t < d:
                     tr.chord(self.bar(b0 + i, s + t), [r + x for x in intervals], dur, self.hum(v, 4))
 
+    def riff(self, tr, b0, prog, pattern, lo, step=0.25, dur=0.2, vel=90, accents=(), accent=14, intervals=(0,)):
+        """Motif en pas réguliers sur la basse de chaque accord (riff de guitare,
+        timbales en doubles croches...) : pattern donne le décalage en demi-tons
+        à chaque pas (None = silence), compté depuis b0, donc un motif peut
+        couvrir plusieurs mesures."""
+        for i, s, d, c in segments(prog, self.beats):
+            r = bass_note(c, lo)
+            for k in range(int(round(d / step))):
+                pos = int(round(((i * self.beats) + s) / step)) + k
+                off = pattern[pos % len(pattern)]
+                if off is None:
+                    continue
+                v = vel + (accent if pos % len(pattern) in accents else 0)
+                tr.chord(self.bar(b0 + i, s + k * step), [r + off + x for x in intervals], dur, self.hum(v, 4))
+
     # ------------------------------------------------------------ rythme
     def drums(self, tr, b0, nbars, pattern, skip=()):
         """pattern : {nom de percussion: [(temps, vélocité)]}, répété à chaque mesure."""

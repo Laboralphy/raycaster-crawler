@@ -36,12 +36,12 @@ Toutes sont des créations personnelles : partitions MIDI générées par script
 |---|---|---|---|
 | `mus_main_menu` | `MUSIC_MENU` | menu principal | ✅ |
 | `mus_forest_night` | `MUSIC_FOREST`, `MUSIC_CUTSCENE` | les deux forêts, cinématique d'intro | ✅ |
-| `mus_dungeon_gate`, `_vaults`, `_chains`, `_sanctum` | `MUSIC_DUNGEON` | donjons (tirage au hasard) | ✅ |
-| `mus_mines_depths`, `_echoes`, `_burrow` | `MUSIC_MINES` | mines (tirage au hasard) | ✅ |
-| `mus_underwater_flooded` | `MUSIC_UNDERWATER` | niveau sous l'eau, salles inondées | ✅ |
+| `mus_dungeon_gate`, `_vaults`, `_chains`, `_crypt`, `_ritual`, `_requiem`, `_gauntlet` | `MUSIC_DUNGEON` | donjons (tirage au hasard) | ✅ |
+| `mus_mines_depths`, `_echoes`, `_pit` | `MUSIC_MINES` | mines (tirage au hasard) | ✅ |
+| `mus_underwater_hunt` | `MUSIC_UNDERWATER` | niveau sous l'eau, salles inondées | ✅ |
 | `mus_boss_warlock` | `MUSIC_BOSS` | boss sorcier, boss des mines | ✅ |
 | `mus_boss_medusa` | `MUSIC_BOSS_MEDUSA` | boss reine Méduse | ✅ |
-| `mus_treasure_hoard` | `MUSIC_TREASURE` | salle du trésor | ✅ |
+| `mus_treasure_guardian` | `MUSIC_TREASURE` | salle du trésor | ✅ |
 | `mus_ending_homeward` | `MUSIC_END` | cinématique de fin | ✅ |
 
 ### Musiques MIDI (`tools/music/midi/`)

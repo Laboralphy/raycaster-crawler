@@ -161,8 +161,22 @@ export const LABY = {
                 [26, 26],
                 [27, 27],
                 [28, 28],
-                [29, 29]
+                [29, 29],
+                // second étage : haut de mur en pierre, puis feuillages
+                [30, 30],
+                [31, 31],
+                [32, 32],
+                [33, 33]
             ],
+            // second étage posé sur les blocs pleins (phys mur), selon la
+            // texture du bloc du dessous : codes possibles du bloc du dessus
+            storey: [{
+                textures: [0, 21, 22, 23, 24, 25, 28, 29],
+                codes: [25]
+            }, {
+                textures: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                codes: [26, 27, 28]
+            }],
             metacodes: {
                 0: 0,
                 1: 0x100,
@@ -211,8 +225,22 @@ export const LABY = {
                 [26, 26],
                 [27, 27],
                 [28, 28],
-                [29, 29]
+                [29, 29],
+                // second étage : haut de mur en pierre, puis feuillages
+                [30, 30],
+                [31, 31],
+                [32, 32],
+                [33, 33]
             ],
+            // second étage posé sur les blocs pleins (phys mur), selon la
+            // texture du bloc du dessous : codes possibles du bloc du dessus
+            storey: [{
+                textures: [0, 21, 22, 23, 24, 25, 28, 29],
+                codes: [25]
+            }, {
+                textures: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                codes: [26, 27, 28]
+            }],
             metacodes: {
                 0: 0,
                 1: 0x100,

@@ -469,12 +469,14 @@ export const GFX_DATA = {
         t_forest: {
             src: 'resources/gfx/textures/t_forest1.png',
             codes: LABY.MAPS.forest.codes,
-            metacodes: LABY.MAPS.forest.metacodes
+            metacodes: LABY.MAPS.forest.metacodes,
+            storey: LABY.MAPS.forest.storey
         },
         t_darkwoods: {
             src: 'resources/gfx/textures/t_forest2.png',
             codes: LABY.MAPS.forestwall.codes,
-            metacodes: LABY.MAPS.forestwall.metacodes
+            metacodes: LABY.MAPS.forestwall.metacodes,
+            storey: LABY.MAPS.forestwall.storey
         },
         t_gray: {
             src: 'resources/gfx/textures/t_gray.png',

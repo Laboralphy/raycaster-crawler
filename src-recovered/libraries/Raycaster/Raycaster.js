@@ -355,6 +355,16 @@ export class Raycaster {
         });
         r.setTextureSmoothing(!!this.oConfig.smoothTextures);
         r.setMapSize(this.nMapSize);
+        // second étage (fixe) : partage les matériaux et textures du rez-de-chaussée
+        const aUpper = this.aWorld.uppermap;
+        if (aUpper) {
+            const oStorey = r.createStorey();
+            aUpper.forEach((aRow, y) => aRow.forEach((nCode, x) => {
+                oStorey.setCellMaterial(x, y, nCode & 0xFF);
+                oStorey.setCellPhys(x, y, (nCode >> 8) & 0xFF);
+                oStorey.setCellOffset(x, y, (nCode >> 16) & 0xFF)
+            }))
+        }
         this.oRenderer = r;
         this.bRendererReady = false;
         this.bRendered = false;
