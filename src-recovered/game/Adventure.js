@@ -114,29 +114,38 @@ export class Adventure {
     config(d) {
         this.oEvents = {};
         const d1 = d.d1;
+        const d2 = d.d2;
         const mines = d.mines;
         const medusa = d.medusa;
         if (this.oVariables === null) {
             this.oVariables = {
-                portalToMines: MathTools.rnd(1, 2),
-                portalToMedusa: 4
+                portalToMines: MathTools.rnd(1, 2)
             }
         }
+        // ajoute des sorties sans écraser celles déjà posées (un étage peut
+        // avoir à la fois un portail et une sortie vers une autre zone)
+        const link = (oLevel, oTransit) => {
+            oLevel.transit = Object.assign({}, oLevel.transit, oTransit)
+        };
         this.seedLevels(d);
         this.defineEvent('forest', 0, 'enterLevel', 'eventReadBookOfStory');
         this.defineEvent('forest', 0, 'entranceSwitch', 'eventEscapeGame');
+        // parcours principal : d1 -> cryptes -> donjon infernal -> d2 -> trésor
+        // (point d'arrivée 1 : ascenseur d'entrée, 2 : ascenseur de sortie)
+        link(d1[3], { exit: ['crypts', 0, 1] });
+        link(d.crypts[0], { entrance: ['d1', 3, 2] });
+        link(d.crypts[2], { exit: ['hellkeep', 0, 1] });
+        link(d.hellkeep[0], { entrance: ['crypts', 2, 2] });
+        link(d.hellkeep[2], { exit: ['d2', 0, 1] });
+        link(d2[0], { entrance: ['hellkeep', 2, 2] });
+        this.defineEvent('crypts', 2, 'activateSealedDoor', 'eventUnsealDoor');
+        this.defineEvent('hellkeep', 2, 'activateSealedDoor', 'eventUnsealDoor');
+        this.defineEvent('d2', 1, 'activateSealedDoor', 'eventUnsealDoor');
+        this.defineEvent('treasure', 0, 'openRelicChest', 'eventGotRelic');
+        // zones annexes, par portail (point d'arrivée 3 : ascenseur du portail)
         const nPortalToMines = this.oVariables.portalToMines;
         d1[nPortalToMines].options += '-p1';
-        d1[nPortalToMines].transit = {
-            portal: 'mines'
-        };
-        const nPortalToMedusa = this.oVariables.portalToMedusa;
-        d1[nPortalToMedusa].options += '-p1';
-        d1[nPortalToMedusa].transit = {
-            portal: 'medusa'
-        };
-        this.defineEvent('d1', 5, 'activateSealedDoor', 'eventUnsealDoor');
-        this.defineEvent('treasure', 0, 'openRelicChest', 'eventGotRelic');
+        link(d1[nPortalToMines], { portal: 'mines' });
         mines[0].transit = {
             entrance: ['d1', nPortalToMines, 3]
         };
@@ -144,11 +153,14 @@ export class Adventure {
             exit: ['d1', nPortalToMines, 3]
         };
         this.defineEvent('mines', 2, 'activateSealedDoor', 'eventUnsealDoor');
+        // la méduse reste sur l'ancien d1[4], devenu d2[0]
+        d2[0].options += '-p1';
+        link(d2[0], { portal: 'medusa' });
         medusa[0].transit = {
-            entrance: ['d1', nPortalToMedusa, 3]
+            entrance: ['d2', 0, 3]
         };
         medusa[2].transit = {
-            exit: ['d1', nPortalToMedusa, 3]
+            exit: ['d2', 0, 3]
         };
         this.defineEvent('medusa', 0, 'enterLevel', 'eventEnterValvedLevel');
         this.defineEvent('medusa', 1, 'enterLevel', 'eventEnterUnderwaterLevel');

@@ -723,6 +723,18 @@ export const ITEMS_DATA = {
             "time": 0
         }]
     },
+    "dag_golem": {
+        "name": "~item_dag_golem",
+        "slot": "hand",
+        "type": "dagger",
+        "model": "steel",
+        "icon": ICONS.itm_dag_0i,
+        "speed": 700,
+        "spells": [{
+            "ref": "punch_golem",
+            "time": 0
+        }]
+    },
     "dag_poisonsting_1": {
         "name": "~item_dag_poisonsting_1",
         "slot": "hand",
@@ -771,6 +783,42 @@ export const ITEMS_DATA = {
         "speed": 1000,
         "spells": [{
             "ref": "mis_cubefire_2",
+            "time": 0
+        }]
+    },
+    "wand_witch_1": {
+        "name": "~item_wand_witch_1",
+        "slot": "hand",
+        "type": "wand",
+        "model": "thunder",
+        "icon": ICONS.itm_wnd_0p,
+        "speed": 600,
+        "spells": [{
+            "ref": "mis_witch_1",
+            "time": 0
+        }]
+    },
+    "wand_witch_queen_1": {
+        "name": "~item_wand_witch_queen_1",
+        "slot": "hand",
+        "type": "wand",
+        "model": "thunder",
+        "icon": ICONS.itm_wnd_0p,
+        "speed": 700,
+        "spells": [{
+            "ref": "mis_witch_queen_1",
+            "time": 0
+        }]
+    },
+    "wand_succubus_1": {
+        "name": "~item_wand_succubus_1",
+        "slot": "hand",
+        "type": "wand",
+        "model": "fyre",
+        "icon": ICONS.itm_wnd_0p,
+        "speed": 600,
+        "spells": [{
+            "ref": "mis_succubus_1",
             "time": 0
         }]
     },

@@ -65,6 +65,38 @@ export const MONSTERS_BLUEPRINTS = {
             "score": 100
         }
     },
+    "m_goblin": {
+        "type": RC.OBJECT_TYPE_MOB,
+        "tile": "m_goblin",
+        "width": 40,
+        "height": 64,
+        "thinker": "Rusher",
+        "fx": 0,
+        "data": {
+            "vitality": 5,
+            "speed": 100,
+            "weapon": "dag_brass",
+            "flags": "0",
+            "properties": null,
+            "score": 100
+        }
+    },
+    "m_goblin_warrior": {
+        "type": RC.OBJECT_TYPE_MOB,
+        "tile": "m_goblin_warrior",
+        "width": 50,
+        "height": 64,
+        "thinker": "Rusher",
+        "fx": 0,
+        "data": {
+            "vitality": 12,
+            "speed": 100,
+            "weapon": "dag_brass",
+            "flags": "0",
+            "properties": null,
+            "score": 150
+        }
+    },
     "m_skeleton": {
         "type": RC.OBJECT_TYPE_MOB,
         "tile": "m_skeleton",
@@ -289,6 +321,54 @@ export const MONSTERS_BLUEPRINTS = {
             "score": 500
         }
     },
+    "m_witch": {
+        "type": RC.OBJECT_TYPE_MOB,
+        "tile": "m_witch",
+        "width": 40,
+        "height": 64,
+        "thinker": "Shooter",
+        "fx": 0,
+        "data": {
+            "vitality": 15,
+            "speed": 90,
+            "weapon": "wand_witch_1",
+            "flags": "0",
+            "properties": null,
+            "score": 300
+        }
+    },
+    "m_witch_queen": {
+        "type": RC.OBJECT_TYPE_MOB,
+        "tile": "m_witch_queen",
+        "width": 40,
+        "height": 64,
+        "thinker": "Shooter",
+        "fx": 0,
+        "data": {
+            "vitality": 60,
+            "speed": 90,
+            "weapon": "wand_witch_queen_1",
+            "flags": "0",
+            "properties": ["nrmagC/", "nreleE/"],
+            "score": 800
+        }
+    },
+    "m_succubus": {
+        "type": RC.OBJECT_TYPE_MOB,
+        "tile": "m_succubus",
+        "width": 40,
+        "height": 64,
+        "thinker": "Shooter",
+        "fx": 0,
+        "data": {
+            "vitality": 25,
+            "speed": 110,
+            "weapon": "wand_succubus_1",
+            "flags": "0",
+            "properties": ["nrfirE/"],
+            "score": 400
+        }
+    },
     "m_warlock": {
         "type": RC.OBJECT_TYPE_MOB,
         "tile": "m_warlock",
@@ -351,6 +431,22 @@ export const MONSTERS_BLUEPRINTS = {
             "flags": "0",
             "properties": ["nbantH/"],
             "score": 250
+        }
+    },
+    "m_golem": {
+        "type": RC.OBJECT_TYPE_MOB,
+        "tile": "m_golem",
+        "width": 50,
+        "height": 64,
+        "thinker": "Rusher",
+        "fx": 2,
+        "data": {
+            "vitality": 300,
+            "speed": 160,
+            "weapon": "dag_golem",
+            "flags": "B",
+            "properties": ["nrphyE/"],
+            "score": 3000
         }
     },
     "m_zombie_monarch": {

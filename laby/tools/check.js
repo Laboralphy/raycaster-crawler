@@ -10,7 +10,7 @@ const CONFIGS = [
     ['forest', '-ls1'], ['forest', '-w1'],
     ['dungeon', ''], ['dungeon', '-rs1-ls1'], ['dungeon', '-ls2'], ['dungeon', '-ls2-rs1'], ['dungeon', '-ts3-rs1-t1'],
     ['boss', ''], ['boss', '-d1'], ['special', ''],
-    ['mines', ''], ['mines', '-ls1'], ['cave', ''], ['cave', '-ls1-d1'],
+    ['mines', ''], ['mines', '-ls1'], ['mines', '-ls2'], ['boss', '-ls1'], ['cave', ''], ['cave', '-ls1-d1'],
 ];
 const nSeeds = Number(process.argv[2] || 300);
 let nFail = 0;

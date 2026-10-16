@@ -488,6 +488,21 @@ export const GFX_DATA = {
             codes: LABY.MAPS.normal.codes,
             metacodes: LABY.MAPS.normal.metacodes
         },
+        t_crypt: {
+            src: 'resources/gfx/textures/t_crypt.png',
+            codes: LABY.MAPS.normal.codes,
+            metacodes: LABY.MAPS.normal.metacodes
+        },
+        t_crypt_2: {
+            src: 'resources/gfx/textures/t_crypt_2.png',
+            codes: LABY.MAPS.normal.codes,
+            metacodes: LABY.MAPS.normal.metacodes
+        },
+        t_gothic: {
+            src: 'resources/gfx/textures/t_gothic.png',
+            codes: LABY.MAPS.normal.codes,
+            metacodes: LABY.MAPS.normal.metacodes
+        },
         t_brown: {
             src: 'resources/gfx/textures/t_brown.png',
             codes: LABY.MAPS.normal.codes,
@@ -845,6 +860,27 @@ export const GFX_DATA = {
                 r: 0,
                 g: 0,
                 b: 0
+            }
+        },
+        // donjon infernal : textures déjà rouges (pas de filtre), brume cramoisie très sombre
+        hellkeep: {
+            ceilColor: {
+                r: 24,
+                g: 6,
+                b: 8
+            },
+            floorColor: {
+                r: 48,
+                g: 12,
+                b: 14
+            },
+            filter: false,
+            light: 80,
+            fogDistance: 0.75,
+            fogColor: {
+                r: 12,
+                g: 1,
+                b: 3
             }
         },
         hellish: {

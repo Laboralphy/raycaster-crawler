@@ -39,6 +39,11 @@ export class DataSerializer {
         if ('p' in oData) {
             oGame.oDungeon.resetData();
             oGame.oDungeon.oData.player.creature = this.restoreCreature(oData.p.c, oGame);
+            // anciennes sauvegardes : d1[4] et d1[5] sont devenus d2[0] et d2[1]
+            if (oData.p.l.a === 'd1' && oData.p.l.f >= 4) {
+                oData.p.l.a = 'd2';
+                oData.p.l.f -= 4
+            }
             oGame.oDungeon.setPlayerLocation(oData.p.l.a, oData.p.l.f, 0);
             oGame.oDungeon.oData.player.keys = oData.p.k;
             oGame.oWeaponInUse = oGame.oDungeon.getCreatureEquippedWeapon(oGame.oDungeon.oData.player.creature);

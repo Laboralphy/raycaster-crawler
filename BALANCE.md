@@ -143,7 +143,7 @@ pas à la génération du niveau.
 | `basic_chest` | 1,3 | 0,42 | 0,24 |
 | `basic_bigchest` | 3,5 | 2,17 | 0,57 |
 | `basic_closet` | 1,0 | 0 | 0 |
-| `m_zombie`, `m_skeleton` | 0,5 | 0,25 | 0 |
+| `m_zombie`, `m_skeleton`, `m_goblin`, `m_goblin_warrior` | 0,5 | 0,25 | 0 |
 | la plupart des autres monstres | 0,5 à 0,75 | 0,31 à 0,47 | 0 |
 | `m_wasp` | 0,25 | 0 | 0 |
 | boss (sauf la reine Méduse) | 0,75 | 0,47 | 0 |
@@ -274,6 +274,8 @@ demi-étage de fouille.
 |---|---|---|---|
 | `m_myco` | 4 | `dag_brass` | 7 |
 | `m_zombie` | 6 | `dag_brass` | 7 |
+| `m_goblin` | 5 | `dag_brass` | 7 |
+| `m_goblin_warrior` | 12 | `dag_brass` | 7 |
 | `m_wasp` | 3 | `dag_poisonsting_1` | 7 + poison |
 | `m_spider` | 6 | `dag_poisonsting_1` | 7 + poison |
 | `m_skeleton`, `m_pira` | 15 | `dag_brass` | 7 |
@@ -283,9 +285,13 @@ demi-étage de fouille.
 | `m_turret` | 30 | `wand_turret_1` | 10,5 |
 | `m_bigarmor` | 25 | `dag_steel` | 10,5 |
 | `m_warlock` | 25 | `wand_warlock_1` | 7 + aveuglement, vulnérabilité |
+| `m_witch` | 15 | `wand_witch_1` (éclair) | 7 |
+| `m_witch_queen` | 60, résist. magie 2 / élec. 4 | `wand_witch_queen_1` (3 éclairs en éventail) | 3 × 10,5 |
+| `m_succubus` | 25, résist. feu 4 | `wand_succubus_1` (boule de feu) | 10,5 |
 | `m_medusa` | 15 | `wand_medusa_1` | 14 + poison |
 | `m_phanto` | 30 | `wand_imp_1` | 14 |
 | boss | 200 à 220 | selon le boss | 7 à 14 |
+| `m_golem` (boss des mines) | 300, résistance physique 4 (−35 %) | `dag_golem` | 21 |
 
 Le joueur a 100 PV : un monstre à 7 de dégâts doit le toucher environ
 14 fois.

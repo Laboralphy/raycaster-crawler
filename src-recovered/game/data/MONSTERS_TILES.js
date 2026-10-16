@@ -79,6 +79,46 @@ export const MONSTERS_TILES = {
             ]
         ]
     },
+    m_goblin: {
+        src: 'resources/gfx/sprites/m_goblin.png',
+        width: 64,
+        height: 96,
+        frames: 94,
+        animations: [
+            [
+                [0, 2, 4, 6, 8, 10, 12, 14], 2, 400, 2
+            ],
+            [
+                [16, 20, 24, 28, 32, 36, 40, 44], 4, 110, 1
+            ],
+            [
+                [48, 51, 54, 57, 60, 63, 66, 69], 3, 130, 0
+            ],
+            [
+                [88, 88, 88, 88, 88, 88, 88, 88], 6, 120, 0
+            ]
+        ]
+    },
+    m_goblin_warrior: {
+        src: 'resources/gfx/sprites/m_goblin_warrior.png',
+        width: 64,
+        height: 96,
+        frames: 94,
+        animations: [
+            [
+                [0, 2, 4, 6, 8, 10, 12, 14], 2, 400, 2
+            ],
+            [
+                [16, 20, 24, 28, 32, 36, 40, 44], 4, 110, 1
+            ],
+            [
+                [48, 51, 54, 57, 60, 63, 66, 69], 3, 130, 0
+            ],
+            [
+                [88, 88, 88, 88, 88, 88, 88, 88], 6, 120, 0
+            ]
+        ]
+    },
     m_skeleton: {
         src: 'resources/gfx/sprites/m_skeleton.png',
         width: 64,
@@ -103,19 +143,19 @@ export const MONSTERS_TILES = {
         src: 'resources/gfx/sprites/m_bigarmor.png',
         width: 64,
         height: 96,
-        frames: 91,
+        frames: 94,
         animations: [
             [
-                [40, 50, 60, 70, 0, 10, 20, 30], 1, 50, 0
+                [0, 2, 4, 6, 8, 10, 12, 14], 2, 400, 2
             ],
             [
-                [41, 51, 61, 71, 1, 11, 21, 31], 7, 100, 1
+                [16, 20, 24, 28, 32, 36, 40, 44], 4, 150, 1
             ],
             [
-                [48, 58, 68, 78, 8, 18, 28, 38], 2, 250, 1
+                [48, 51, 54, 57, 60, 63, 66, 69], 3, 150, 0
             ],
             [
-                [80, 80, 80, 80, 80, 80, 80, 80], 11, 50, 0
+                [88, 88, 88, 88, 88, 88, 88, 88], 6, 120, 0
             ]
         ]
     },
@@ -359,6 +399,66 @@ export const MONSTERS_TILES = {
             ]
         ]
     },
+    m_witch: {
+        src: 'resources/gfx/sprites/m_witch.png',
+        width: 64,
+        height: 96,
+        frames: 86,
+        animations: [
+            [
+                [0, 2, 4, 6, 8, 10, 12, 14], 2, 400, 2
+            ],
+            [
+                [16, 20, 24, 28, 32, 36, 40, 44], 4, 150, 1
+            ],
+            [
+                [48, 50, 52, 54, 56, 58, 60, 62], 2, 150, 0
+            ],
+            [
+                [80, 80, 80, 80, 80, 80, 80, 80], 6, 120, 0
+            ]
+        ]
+    },
+    m_witch_queen: {
+        src: 'resources/gfx/sprites/m_witch_queen.png',
+        width: 64,
+        height: 96,
+        frames: 86,
+        animations: [
+            [
+                [0, 2, 4, 6, 8, 10, 12, 14], 2, 400, 2
+            ],
+            [
+                [16, 20, 24, 28, 32, 36, 40, 44], 4, 150, 1
+            ],
+            [
+                [48, 50, 52, 54, 56, 58, 60, 62], 2, 150, 0
+            ],
+            [
+                [80, 80, 80, 80, 80, 80, 80, 80], 6, 120, 0
+            ]
+        ]
+    },
+    m_succubus: {
+        src: 'resources/gfx/sprites/m_succubus.png',
+        width: 64,
+        height: 96,
+        frames: 86,
+        animations: [
+            [
+                [0, 2, 4, 6, 8, 10, 12, 14], 2, 400, 2
+            ],
+            [
+                [16, 20, 24, 28, 32, 36, 40, 44], 4, 150, 1
+            ],
+            [
+                [48, 50, 52, 54, 56, 58, 60, 62], 2, 150, 0
+            ],
+            [
+                [80, 80, 80, 80, 80, 80, 80, 80], 6, 120, 0
+            ]
+        ]
+    },
     m_warlock: {
         src: 'resources/gfx/sprites/m_warlock.png',
         width: 64,
@@ -479,6 +579,26 @@ export const MONSTERS_TILES = {
             ]
         ]
     },
+    m_golem: {
+        src: 'resources/gfx/sprites/m_golem.png',
+        width: 96,
+        height: 96,
+        frames: 94,
+        animations: [
+            [
+                [0, 2, 4, 6, 8, 10, 12, 14], 2, 450, 2
+            ],
+            [
+                [16, 20, 24, 28, 32, 36, 40, 44], 4, 180, 1
+            ],
+            [
+                [48, 51, 54, 57, 60, 63, 66, 69], 3, 150, 0
+            ],
+            [
+                [88, 88, 88, 88, 88, 88, 88, 88], 6, 120, 0
+            ]
+        ]
+    },
     m_zombie_monarch: {
         src: 'resources/gfx/sprites/m_zombie_monarch.png',
         width: 64,
@@ -501,21 +621,21 @@ export const MONSTERS_TILES = {
     },
     m_bigarmorboss: {
         src: 'resources/gfx/sprites/m_bigarmorboss.png',
-        width: 64,
+        width: 96,
         height: 96,
-        frames: 83,
+        frames: 94,
         animations: [
             [
-                [40, 50, 60, 70, 0, 10, 20, 30], 1, 50, 0
+                [0, 2, 4, 6, 8, 10, 12, 14], 2, 400, 2
             ],
             [
-                [41, 51, 61, 71, 1, 11, 21, 31], 7, 150, 1
+                [16, 20, 24, 28, 32, 36, 40, 44], 4, 150, 1
             ],
             [
-                [48, 58, 68, 78, 8, 18, 28, 38], 2, 250, 1
+                [48, 51, 54, 57, 60, 63, 66, 69], 3, 150, 0
             ],
             [
-                [80, 80, 80, 80, 80, 80, 80, 80], 11, 50, 0
+                [88, 88, 88, 88, 88, 88, 88, 88], 6, 120, 0
             ]
         ]
     },

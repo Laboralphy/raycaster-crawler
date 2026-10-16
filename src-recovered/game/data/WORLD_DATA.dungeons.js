@@ -88,13 +88,13 @@ export const dungeons = {
             bigchest: 'basic_bigchest'
         },
         horde: {
-            m_zombie: {
+            m_goblin: {
                 levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             },
             m_wasp: {
                 levels: [4, 5, 6, 7, 8, 9]
             },
-            m_skeleton: {
+            m_goblin_warrior: {
                 levels: [7, 8, 9, 10]
             }
         },
@@ -115,10 +115,10 @@ export const dungeons = {
             bigchest: 'basic_bigchest'
         },
         horde: {
-            m_zombie: {
+            m_goblin: {
                 levels: [0, 1, 2, 3, 4, 5, 6]
             },
-            m_skeleton: {
+            m_goblin_warrior: {
                 levels: [3, 4, 5, 6, 7, 8, 9, 10]
             },
             m_acidblob: {
@@ -192,7 +192,9 @@ export const dungeons = {
             }
         },
         shops: [shops.potions_2, shops.jewels_2r]
-    }, {
+    }],
+    // fin du donjon : on y revient du donjon infernal ; le boss mène au trésor
+    d2: [{
         generator: 'dungeon',
         options: '-ts3-rs1-t1',
         textures: 't_crimson',
@@ -262,7 +264,7 @@ export const dungeons = {
         visual: 'darkbrown',
         music: 'MUSIC_TREASURE',
         transit: {
-            entrance: ['d1', 5, 1],
+            entrance: ['d2', 1, 1],
             exit: false
         },
         level: 1,
@@ -272,6 +274,160 @@ export const dungeons = {
             bigchest: 'basic_bigchest'
         },
         horde: {},
+        shops: []
+    }],
+    // cryptes : plus grandes que les mines (6x6 pièces au lieu de 4x4 et 5x5)
+    crypts: [{
+        generator: 'mines',
+        options: '-ls2',
+        textures: 't_crypt',
+        flats: 'resources/gfx/textures/f_crypt.png',
+        music: 'MUSIC_DUNGEON',
+        visual: 'deeper',
+        level: 1,
+        loot: {
+            chest: 'basic_chest',
+            closet: 'basic_closet',
+            bigchest: 'basic_bigchest'
+        },
+        horde: {
+            m_spider: {
+                levels: [0, 1, 2, 3, 4]
+            },
+            m_zombie: {
+                levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            m_skeleton: {
+                levels: [6, 7, 8, 9, 10]
+            }
+        },
+        shops: [shops.potions_1, shops.jewels_2b]
+    }, {
+        generator: 'mines',
+        options: '-ls2',
+        textures: 't_crypt_2',
+        flats: 'resources/gfx/textures/f_crypt_2.png',
+        music: 'MUSIC_DUNGEON',
+        visual: 'darker',
+        level: 1,
+        loot: {
+            chest: 'basic_chest',
+            closet: 'basic_closet',
+            bigchest: 'basic_bigchest'
+        },
+        horde: {
+            m_spider: {
+                levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            m_zombie: {
+                levels: [0, 1, 2, 3, 4, 5, 6, 7]
+            },
+            m_skeleton: {
+                levels: [3, 4, 5, 6, 7, 8, 9, 10]
+            }
+        },
+        shops: [shops.firstaid_2, shops.blacksmith_3]
+    }, {
+        generator: 'boss',
+        options: '-ls1',
+        textures: 't_crypt_2',
+        flats: 'resources/gfx/textures/f_crypt_2.png',
+        visual: 'darker',
+        music: 'MUSIC_BOSS',
+        level: 1,
+        loot: {
+            chest: 'basic_chest',
+            closet: 'basic_closet',
+            bigchest: 'basic_bigchest'
+        },
+        horde: {
+            m_zombie: {
+                levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            m_skeleton: {
+                levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            m_zombie_monarch: {
+                levels: [10]
+            }
+        },
+        shops: []
+    }],
+    // donjon infernal : chevaliers, succubes, cubes ; le chevalier noir au bout
+    hellkeep: [{
+        generator: 'dungeon',
+        options: '-ls2',
+        textures: 't_gothic',
+        flats: 'resources/gfx/textures/f_gothic.png',
+        sky: 'resources/gfx/textures/sky_hell.png',
+        visual: 'hellkeep',
+        music: 'MUSIC_DUNGEON',
+        level: 1,
+        loot: {
+            chest: 'basic_chest',
+            closet: 'basic_closet',
+            bigchest: 'basic_bigchest'
+        },
+        horde: {
+            m_succubus: {
+                levels: [0, 1, 2, 3, 4, 5, 6]
+            },
+            m_cube: {
+                levels: [3, 4, 5, 6, 7, 8, 9]
+            },
+            m_bigarmor: {
+                levels: [5, 6, 7, 8, 9, 10]
+            }
+        },
+        shops: [shops.potions_3, shops.firstaid_2]
+    }, {
+        generator: 'dungeon',
+        options: '-ls2-rs1',
+        textures: 't_gothic',
+        flats: 'resources/gfx/textures/f_gothic.png',
+        sky: 'resources/gfx/textures/sky_hell.png',
+        visual: 'hellkeep',
+        music: 'MUSIC_DUNGEON',
+        level: 1,
+        loot: {
+            chest: 'basic_chest',
+            closet: 'basic_closet',
+            bigchest: 'basic_bigchest'
+        },
+        horde: {
+            m_bigarmor: {
+                levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            m_succubus: {
+                levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            m_cube: {
+                levels: [6, 7, 8, 9, 10]
+            }
+        },
+        shops: [shops.firstaid_2, shops.magic_2]
+    }, {
+        generator: 'boss',
+        options: '-ls1',
+        textures: 't_gothic',
+        flats: 'resources/gfx/textures/f_gothic.png',
+        sky: 'resources/gfx/textures/sky_hell.png',
+        visual: 'hellkeep',
+        music: 'MUSIC_BOSS',
+        level: 1,
+        loot: {
+            chest: 'basic_chest',
+            closet: 'basic_closet',
+            bigchest: 'basic_bigchest'
+        },
+        horde: {
+            m_succubus: {
+                levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            m_bigarmorboss: {
+                levels: [10]
+            }
+        },
         shops: []
     }],
     mines: [{
@@ -347,7 +503,7 @@ export const dungeons = {
             m_skeleton: {
                 levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             },
-            m_zombie_monarch: {
+            m_golem: {
                 levels: [10]
             }
         },

@@ -6,6 +6,27 @@ export const SPELLS_DATA = {
         "effects": ["mxmagCA", "mabldBF", "mavulCF", "maillCF"],
         "chances": [1, 0.1, 0.25, 0.2]
     },
+    "mis_witch_1": {
+        "blueprint": "p_thunbolt",
+        "cost": 0,
+        "options": "l1",
+        "effects": ["mxeleCA"],
+        "chances": [1]
+    },
+    "mis_witch_queen_1": {
+        "blueprint": "p_thunbolt",
+        "cost": 0,
+        "options": "l3",
+        "effects": ["mxeleDA"],
+        "chances": [1]
+    },
+    "mis_succubus_1": {
+        "blueprint": "p_fireball",
+        "cost": 0,
+        "options": "l1",
+        "effects": ["mxfirDA"],
+        "chances": [1]
+    },
     "mis_boomacid_1": {
         "blueprint": "p_exptoxic",
         "cost": 0,
@@ -144,6 +165,13 @@ export const SPELLS_DATA = {
         "cost": 0,
         "options": "l1",
         "effects": ["hxdthBA"],
+        "chances": [1]
+    },
+    "punch_golem": {
+        "blueprint": "p_slash",
+        "cost": 0,
+        "options": "l1h",
+        "effects": ["xxphyGA"],
         "chances": [1]
     },
     "slash_poison_1": {

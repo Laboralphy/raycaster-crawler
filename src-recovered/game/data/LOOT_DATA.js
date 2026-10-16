@@ -10,6 +10,28 @@ export const LOOT_DATA = {
             ccc_meat: 2
         }
     },
+    m_goblin: {
+        chances: {
+            0: 1,
+            1: 1
+        },
+        items: {
+            gold: 8,
+            ccc_bread: 4,
+            ccc_meat: 2
+        }
+    },
+    m_goblin_warrior: {
+        chances: {
+            0: 1,
+            1: 1
+        },
+        items: {
+            gold: 10,
+            ccc_bread: 4,
+            ccc_meat: 2
+        }
+    },
     m_skeleton: {
         chances: {
             0: 1,
@@ -240,6 +262,17 @@ export const LOOT_DATA = {
             ccc_meat: 2
         }
     },
+    m_golem: {
+        chances: {
+            0: 1,
+            1: 3
+        },
+        items: {
+            gold: 16,
+            ccc_bread: 4,
+            ccc_meat: 2
+        }
+    },
     m_zombie_monarch: {
         chances: {
             0: 1,
@@ -255,6 +288,39 @@ export const LOOT_DATA = {
         chances: {
             0: 1,
             1: 3
+        },
+        items: {
+            gold: 10,
+            ccc_bread: 4,
+            ccc_meat: 2
+        }
+    },
+    m_witch: {
+        chances: {
+            0: 1,
+            1: 1
+        },
+        items: {
+            gold: 8,
+            ccc_bread: 4,
+            ccc_meat: 2
+        }
+    },
+    m_witch_queen: {
+        chances: {
+            0: 1,
+            1: 1
+        },
+        items: {
+            gold: 14,
+            ccc_bread: 4,
+            ccc_meat: 2
+        }
+    },
+    m_succubus: {
+        chances: {
+            0: 1,
+            1: 1
         },
         items: {
             gold: 10,
