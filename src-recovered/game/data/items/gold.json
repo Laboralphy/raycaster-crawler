@@ -1,0 +1,6 @@
+{
+    "name": "~item_gold",
+    "type": "misc",
+    "icon": "itm_gold",
+    "stack": 999
+}

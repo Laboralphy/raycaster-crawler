@@ -1,0 +1,9 @@
+{
+    "name": "~item_ccc_vegs",
+    "type": "ccc",
+    "icon": "itm_ccc_vegs",
+    "stack": 10,
+    "properties": [
+        "brfdpCA"
+    ]
+}

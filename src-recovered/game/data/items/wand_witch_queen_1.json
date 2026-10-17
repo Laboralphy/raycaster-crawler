@@ -1,0 +1,14 @@
+{
+    "name": "~item_wand_witch_queen_1",
+    "slot": "hand",
+    "type": "wand",
+    "model": "thunder",
+    "icon": "itm_wnd_0p",
+    "speed": 700,
+    "spells": [
+        {
+            "ref": "mis_witch_queen_1",
+            "time": 0
+        }
+    ]
+}

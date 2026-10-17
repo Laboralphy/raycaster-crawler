@@ -33,7 +33,10 @@ export class BookWindow extends Window {
             this.oImage = this.linkControl(new Image());
             this.oImage.hide();
             this.oImage.__imageWidth = this.nImageWidth;
-            this.oImage.moveTo(this.nWidth - this.nPadding - this.nImageWidth, this.yText)
+            this.oImage.__imageHeight = this.nHeight - this.yText - this.nPadding;
+            this.oImage.__imageX = this.nWidth - this.nPadding - this.nImageWidth;
+            this.oImage.__imageY = this.yText;
+            this.oImage.moveTo(this.oImage.__imageX, this.oImage.__imageY)
         } else {
             oText.setSize(this.nWidth - (this.nPadding * 2), this.nHeight - this.yText - this.nPadding)
         }
@@ -68,8 +71,14 @@ export class BookWindow extends Window {
         const w = t.width;
         const h = t.height;
         const iw = oImage.__imageWidth;
-        const h2 = h * iw / w | 0;
-        oImage.setSize(iw, h2);
+        const ih = oImage.__imageHeight;
+        // largeur de la colonne, sauf pour une image trop haute (créature
+        // debout) : elle est réduite à la hauteur disponible et centrée
+        const f = Math.min(iw / w, ih / h);
+        const w2 = w * f | 0;
+        const h2 = h * f | 0;
+        oImage.moveTo(oImage.__imageX + ((iw - w2) >> 1), oImage.__imageY);
+        oImage.setSize(w2, h2);
         oImage._bAutosize = false;
         oImage.show();
         oImage.invalidate()

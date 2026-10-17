@@ -27,6 +27,8 @@ export const LABY = {
     BLOCK_LOCKEDDOOR_3: 0x1B,
     BLOCK_UNLOCKEDDOOR: 0x1C,
     BLOCK_LIBRARY_BOOK: 0x20,
+    // bibliothèque déjà consultée : rayonnages en désordre (tuile 60)
+    BLOCK_LIBRARY_BOOK_READ: 0x25,
     BLOCK_CHURCH_STAINED_GLASS: 0x2A,
     BLOCK_CHURCH_DEATH_IDOL: 0x2B,
     BLOCK_CHURCH_RUNES: 0x2C,
@@ -359,10 +361,13 @@ export const LABY = {
                 [74, 74],
                 [75, 75],
                 [76, 76],
-                [77, 77]
+                [77, 77],
+                // 95 : bibliothèque consultée
+                [60, 60]
             ],
             metacodes: {
                 0: 0,
+                0x25: 0x15F,
                 1: [0x100, 0x14C, 0x14D, 0x14E, 0x14F, 0x150, 0x151, 0x152],
                 2: 0x804,
                 3: 0x10A,

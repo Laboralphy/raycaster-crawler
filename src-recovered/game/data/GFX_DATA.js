@@ -182,9 +182,9 @@ export const GFX_DATA = {
         },
         e_hazes: {
             src: 'resources/gfx/sprites/e_hazes.png',
-            width: 16,
-            height: 24,
-            frames: 12,
+            width: 64,
+            height: 96,
+            frames: 16,
             noshading: true,
             animations: []
         },
@@ -483,7 +483,7 @@ export const GFX_DATA = {
             codes: LABY.MAPS.normal.codes,
             metacodes: LABY.MAPS.normal.metacodes
         },
-        t_purple: {
+        t_mozaic: {
             src: 'resources/gfx/textures/t_mozaic.png',
             codes: LABY.MAPS.normal.codes,
             metacodes: LABY.MAPS.normal.metacodes
@@ -642,6 +642,26 @@ export const GFX_DATA = {
         }
     },
     visuals: {
+        normal: {
+            ceilColor: {
+                r: 64,
+                g: 64,
+                b: 64
+            },
+            floorColor: {
+                r: 128,
+                g: 128,
+                b: 128
+            },
+            filter: false,
+            light: 200,
+            fogDistance: 1.6,
+            fogColor: {
+                r: 0,
+                g: 0,
+                b: 0
+            }
+        },
         dark: {
             ceilColor: {
                 r: 64,

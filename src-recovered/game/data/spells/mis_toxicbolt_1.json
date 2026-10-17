@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_toxicbolt",
+    "cost": 2,
+    "options": "w2",
+    "effects": ["mxtoxCA"],
+    "chances": [1]
+}

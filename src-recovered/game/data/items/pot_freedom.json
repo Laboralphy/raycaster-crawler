@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_freedom",
+    "type": "potion",
+    "icon": "itm_pot_0y",
+    "stack": 10,
+    "properties": [
+        "brmovBP"
+    ]
+}

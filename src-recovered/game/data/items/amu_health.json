@@ -1,0 +1,11 @@
+{
+    "name": "~item_amu_health",
+    "type": "ring",
+    "slot": "neck",
+    "icon": "itm_amu_0c",
+    "properties": [
+        "irantB/",
+        "irbodB/",
+        "irminB/"
+    ]
+}

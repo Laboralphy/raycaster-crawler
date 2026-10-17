@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_toxicspit",
+    "cost": 0,
+    "options": "l1",
+    "effects": ["mxtoxBA", "macnfBK"],
+    "chances": [1, 0.2]
+}

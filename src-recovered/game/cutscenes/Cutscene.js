@@ -2,6 +2,7 @@ import { CanvasFactory } from '../../libraries/O876/CanvasFactory.js';
 import { GXMessage } from '../../libraries/Raycaster/GXMessage.js';
 import { Raycaster } from '../../libraries/Raycaster/Raycaster.js';
 import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
+import { buildUpperMap } from '../storey.js';
 
 export class Cutscene {
     constructor(...aArgs) {
@@ -95,6 +96,10 @@ export class Cutscene {
                 aRow.push(nCode)
             }
             this.RAYCASTER_LEVEL.map.push(aRow)
+        }
+        const oWalls = this.RAYCASTER_LEVEL.walls;
+        if (oWalls.storey) {
+            this.RAYCASTER_LEVEL.uppermap = buildUpperMap(this.RAYCASTER_LEVEL.map, oWalls.codes, oWalls.storey)
         }
     }
 

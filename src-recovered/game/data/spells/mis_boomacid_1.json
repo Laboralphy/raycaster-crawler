@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_exptoxic",
+    "cost": 0,
+    "options": "l1a4h",
+    "effects": ["axtoxFA"],
+    "chances": [1]
+}

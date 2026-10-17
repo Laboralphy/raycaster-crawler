@@ -1,0 +1,14 @@
+{
+    "name": "~item_dag_golem",
+    "slot": "hand",
+    "type": "dagger",
+    "model": "steel",
+    "icon": "itm_dag_0i",
+    "speed": 700,
+    "spells": [
+        {
+            "ref": "punch_golem",
+            "time": 0
+        }
+    ]
+}

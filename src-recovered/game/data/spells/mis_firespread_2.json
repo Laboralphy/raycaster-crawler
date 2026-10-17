@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_fireball",
+    "cost": 5,
+    "options": "l3b",
+    "effects": ["mxfirCA"],
+    "chances": [1]
+}

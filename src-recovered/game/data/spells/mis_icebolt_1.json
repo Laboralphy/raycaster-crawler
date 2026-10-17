@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_icebolt",
+    "cost": 1,
+    "options": "l1",
+    "effects": ["mxcldBA"],
+    "chances": [1]
+}

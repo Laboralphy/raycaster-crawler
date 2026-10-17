@@ -280,10 +280,10 @@ export class MobThinker extends Thinker {
             }
         }
         if (bHaze) {
-            if (this.oMobile.oSprite.oOverlay === null) {
-                this.oMobile.oSprite.oOverlay = this.oGame.oRaycaster.oHorde.oTiles.e_hazes;
-                this.oMobile.oSprite.nOverlayFrame = nHaze
-            }
+            // l'image suit l'effet prioritaire, même si une surcouche est déjà
+            // posée (un effet qui s'ajoute ou qui se termine change la couleur)
+            this.oMobile.oSprite.oOverlay = this.oGame.oRaycaster.oHorde.oTiles.e_hazes;
+            this.oMobile.oSprite.nOverlayFrame = nHaze
         } else {
             if (this.oMobile.oSprite.oOverlay) {
                 this.oMobile.oSprite.oOverlay = null
@@ -530,6 +530,7 @@ Object.assign(MobThinker.prototype, {
     bVulnerable: false,
     bDisease: false,
     bWeak: false,
+    bReflect: false,
     nCastAttack: 0,
     aCastTimes: null,
     TIME_REACTIVITY: 1,
@@ -543,7 +544,16 @@ Object.assign(MobThinker.prototype, {
     COLLISION_WALL_X: 3,
     COLLISION_WALL_Y: 4,
     MAX_BORING_TIME: 10000,
+    // surcouche (e_hazes, 64 x 96) des effets en cours ; le premier effet
+    // actif de la liste l'emporte. Images : 0 vert, 1 cyan, 2 bleu clair,
+    // 3 bleu, 4 violet, 5 magenta, 6 rouge, 7 orange, 8 jaune, 9 blanc,
+    // 10 gris, 11 noir, 12 bouclier bleu, 13 bouclier jaune, 14 bouclier de
+    // feu, 15 bouclier sacré
     EFFECT_HAZES: {
+        reflect: {
+            property: 'bReflect',
+            haze: 13
+        },
         blind: {
             property: 'bBlind',
             haze: 11

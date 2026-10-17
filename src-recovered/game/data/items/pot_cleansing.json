@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_cleansing",
+    "type": "potion",
+    "icon": "itm_pot_0p",
+    "stack": 10,
+    "properties": [
+        "brminBP"
+    ]
+}

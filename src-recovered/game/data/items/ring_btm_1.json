@@ -1,0 +1,10 @@
+{
+    "name": "~item_ring_btm_1",
+    "type": "ring",
+    "slot": "finger",
+    "icon": "itm_rng_2f",
+    "properties": [
+        "ireneB/",
+        "ixphyB/"
+    ]
+}

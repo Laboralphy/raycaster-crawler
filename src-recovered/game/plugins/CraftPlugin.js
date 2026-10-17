@@ -88,8 +88,8 @@ export class CraftPlugin {
                     this.openCraft(this.oGame.oDungeon.getPlayerCreature(), 'brew');
                     return true;
                 case LABY.BLOCK_LABO_BOOK:
-                    this.oGame.oDungeon.setAreaBlockProperty(x, y, LABY.BLOCK_LIBRARY_BOOK);
                     this.oGame.oBookSystem.readShelf(x, y, 'recipe');
+                    this.oGame.oBookSystem.markShelfRead(x, y);
                     return true;
                 case LABY.BLOCK_WATCH_WALL_2_X:
                     this.oGame.oDungeon.setAreaBlockProperty(x, y, LABY.BLOCK_WATCH_WALL_2_X_USED);

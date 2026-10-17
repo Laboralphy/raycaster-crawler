@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_resmag_3",
+    "type": "potion",
+    "icon": "itm_pot_2p",
+    "stack": 10,
+    "properties": [
+        "brmagG8"
+    ]
+}

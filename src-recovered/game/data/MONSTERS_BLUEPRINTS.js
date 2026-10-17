@@ -209,6 +209,22 @@ export const MONSTERS_BLUEPRINTS = {
             "score": 200
         }
     },
+    "m_bat": {
+        "type": RC.OBJECT_TYPE_MOB,
+        "tile": "m_bat",
+        "width": 30,
+        "height": 64,
+        "thinker": "Wavedasher",
+        "fx": 0,
+        "data": {
+            "vitality": 4,
+            "speed": 90,
+            "weapon": "dag_brass",
+            "flags": "0",
+            "properties": null,
+            "score": 150
+        }
+    },
     "m_spider": {
         "type": RC.OBJECT_TYPE_MOB,
         "tile": "m_spider",
@@ -337,6 +353,22 @@ export const MONSTERS_BLUEPRINTS = {
             "score": 300
         }
     },
+    "m_witch_dark": {
+        "type": RC.OBJECT_TYPE_MOB,
+        "tile": "m_witch_dark",
+        "width": 40,
+        "height": 64,
+        "thinker": "Shooter",
+        "fx": 0,
+        "data": {
+            "vitality": 15,
+            "speed": 90,
+            "weapon": "wand_witch_dark_1",
+            "flags": "0",
+            "properties": null,
+            "score": 300
+        }
+    },
     "m_witch_queen": {
         "type": RC.OBJECT_TYPE_MOB,
         "tile": "m_witch_queen",
@@ -348,9 +380,15 @@ export const MONSTERS_BLUEPRINTS = {
             "vitality": 60,
             "speed": 90,
             "weapon": "wand_witch_queen_1",
-            "flags": "0",
+            "flags": "B",
             "properties": ["nrmagC/", "nreleE/"],
-            "score": 800
+            "score": 800,
+            // se lance le champ réfléchissant (15 s) quand elle est blessée,
+            // au plus une fois toutes les 30 s (WoundPlugin)
+            "onWound": {
+                "spell": "Reflect",
+                "cooldown": "MEDIUM"
+            }
         }
     },
     "m_succubus": {
@@ -365,7 +403,7 @@ export const MONSTERS_BLUEPRINTS = {
             "speed": 110,
             "weapon": "wand_succubus_1",
             "flags": "0",
-            "properties": ["nrfirE/"],
+            "properties": ["nrfirI/"],
             "score": 400
         }
     },

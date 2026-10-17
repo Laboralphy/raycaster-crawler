@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_haste",
+    "type": "potion",
+    "icon": "itm_pot_1g",
+    "stack": 10,
+    "properties": [
+        "bbhstFe"
+    ]
+}

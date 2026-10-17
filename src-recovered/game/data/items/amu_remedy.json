@@ -1,0 +1,9 @@
+{
+    "name": "~item_amu_remedy",
+    "type": "ring",
+    "slot": "neck",
+    "icon": "itm_amu_0mp",
+    "properties": [
+        "irbodB/"
+    ]
+}

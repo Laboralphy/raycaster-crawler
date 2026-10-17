@@ -1,0 +1,18 @@
+{
+    "name": "~item_wand_witch_dark_1",
+    "slot": "hand",
+    "type": "wand",
+    "model": "arcane",
+    "icon": "itm_wnd_0p",
+    "speed": 500,
+    "spells": [
+        {
+            "ref": "mis_witch_dark_1",
+            "time": 0
+        },
+        {
+            "ref": "mis_heal_1",
+            "time": 100
+        }
+    ]
+}

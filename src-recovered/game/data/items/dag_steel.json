@@ -1,0 +1,14 @@
+{
+    "name": "~item_dag_steel",
+    "slot": "hand",
+    "type": "dagger",
+    "model": "steel",
+    "icon": "itm_dag_0i",
+    "speed": 700,
+    "spells": [
+        {
+            "ref": "slash_steel",
+            "time": 0
+        }
+    ]
+}

@@ -97,6 +97,16 @@ export const LOOT_DATA = {
             ccc_herb1: 2
         }
     },
+    m_bat: {
+        chances: {
+            0: 3,
+            1: 1
+        },
+        items: {
+            gold: 10,
+            ccc_herb0: 1
+        }
+    },
     m_raven: {
         chances: {
             0: 1,
@@ -306,15 +316,23 @@ export const LOOT_DATA = {
             ccc_meat: 2
         }
     },
-    m_witch_queen: {
+    m_witch_dark: {
         chances: {
             0: 1,
             1: 1
         },
         items: {
-            gold: 14,
+            gold: 8,
             ccc_bread: 4,
             ccc_meat: 2
+        }
+    },
+    m_witch_queen: {
+        chances: {
+            1: 1
+        },
+        items: {
+            wand_lyte_3: 1
         }
     },
     m_succubus: {
@@ -344,8 +362,9 @@ export const LOOT_DATA = {
             1: 1
         },
         items: {
-            wand_lyte_3: 1
-        }
+            amu_fireward: 1
+        },
+        always: ['ring_thermdef_3']
     },
     spell_summon_food: {
         chances: {
@@ -399,8 +418,6 @@ export const LOOT_DATA = {
             gold: 5,
             'gold*3': 10,
             'gold*5': 15,
-            'gold*7': 10,
-            'gold*11': 5,
             pot_heal_1: 9,
             pot_heal_2: 3,
             pot_regen_1: 5,

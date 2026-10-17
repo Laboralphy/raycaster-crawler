@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_restox_3",
+    "type": "potion",
+    "icon": "itm_pot_2g",
+    "stack": 10,
+    "properties": [
+        "brtoxG8"
+    ]
+}

@@ -51,6 +51,11 @@ export class ScorePlugin {
     }
 
     kill(oKiller, oVictim) {
+        // tué sans agresseur connu (explosion d'un blob, par exemple) :
+        // personne à créditer
+        if (oKiller === null) {
+            return
+        }
         this.givePoints(oKiller, this.getMonsterValue(oVictim))
     }
 

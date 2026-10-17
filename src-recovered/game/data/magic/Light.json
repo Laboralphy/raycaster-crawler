@@ -1,0 +1,9 @@
+{
+    "cooldown": "SHORT",
+    "mp": 0,
+    "visual": ["0xFFFFFF", 66, 5, "0xFFFF88", 66, 2],
+    "sound": "SPELL_1",
+    "icon": "spl_light",
+    "target": false,
+    "level": 1
+}

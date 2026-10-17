@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_slash",
+    "cost": 0,
+    "options": "l1h",
+    "effects": ["axphyCA", "pxtoxCF"],
+    "chances": [1, 0.25]
+}

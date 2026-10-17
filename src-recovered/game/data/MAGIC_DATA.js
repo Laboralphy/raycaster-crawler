@@ -1,85 +1,38 @@
 import { MAGIC_DATA_PARAMS } from './MAGIC_DATA_PARAMS.js';
+import DrainLife from './magic/DrainLife.json' with { type: 'json' };
+import Teleport from './magic/Teleport.json' with { type: 'json' };
+import Knock from './magic/Knock.json' with { type: 'json' };
+import DeathSpell from './magic/DeathSpell.json' with { type: 'json' };
+import MagicMapping from './magic/MagicMapping.json' with { type: 'json' };
+import SummonFood from './magic/SummonFood.json' with { type: 'json' };
+import Reflect from './magic/Reflect.json' with { type: 'json' };
+import Light from './magic/Light.json' with { type: 'json' };
+import TimeStop from './magic/TimeStop.json' with { type: 'json' };
 
-export const MAGIC_DATA = {
-    DrainLife: {
-        cooldown: MAGIC_DATA_PARAMS.COOLDOWN.MEDIUM,
-        mp: 10,
-        visual: [0xFF0000, 66, 7, 0x0000FF, 66, 5],
-        sound: 'SPELL_1',
-        icon: 'eff_sdrn',
-        target: false,
-        level: 3,
-    },
-    Teleport: {
-        cooldown: MAGIC_DATA_PARAMS.COOLDOWN.SHORT,
-        mp: 5,
-        visual: [0x008800, 66, 7, 0x0000FF, 66, 5],
-        sound: 'FX_TELEPORT',
-        icon: 'spl_tele',
-        target: true,
-        level: 3,
-    },
-    Knock: {
-        cooldown: MAGIC_DATA_PARAMS.COOLDOWN.LONG,
-        mp: 10,
-        visual: [0xFF00FF, 66, 7, 0x88FF00, 66, 3],
-        sound: 'SPELL_1',
-        icon: 'spl_knock',
-        target: false,
-        level: 1,
-    },
-    DeathSpell: {
-        cooldown: MAGIC_DATA_PARAMS.COOLDOWN.LONG,
-        mp: 10,
-        visual: [0x000000, 66, 12, 0xCCFFFF, 66, 8],
-        sound: 'SPELL_1',
-        icon: 'eff_xdth',
-        target: true,
-        level: 5,
-    },
-    MagicMapping: {
-        cooldown: MAGIC_DATA_PARAMS.COOLDOWN.LONG,
-        mp: 10,
-        visual: [0x00FF00, 66, 7, 0xFFAA00, 66, 5],
-        sound: 'SPELL_1',
-        icon: 'spl_mmap',
-        target: false,
-        level: 2,
-    },
-    SummonFood: {
-        cooldown: MAGIC_DATA_PARAMS.COOLDOWN.LONG,
-        mp: 10,
-        visual: [0xFFFF00, 66, 7, 0x008800, 66, 5],
-        sound: 'SPELL_0',
-        icon: 'spl_sfood',
-        target: false,
-        level: 3,
-    },
-    Reflect: {
-        cooldown: MAGIC_DATA_PARAMS.COOLDOWN.MEDIUM,
-        mp: 5,
-        visual: [0x00FFFF, 66, 7, 0x0066FF, 66, 5],
-        sound: 'SPELL_1',
-        icon: 'eff_bref',
-        target: false,
-        level: 4,
-    },
-    Light: {
-        cooldown: MAGIC_DATA_PARAMS.COOLDOWN.SHORT,
-        mp: 0,
-        visual: [0xFFFFFF, 66, 5, 0xFFFF88, 66, 2],
-        sound: 'SPELL_1',
-        icon: 'spl_light',
-        target: false,
-        level: 1
-    },
-    TimeStop: {
-        cooldown: MAGIC_DATA_PARAMS.COOLDOWN.LONG,
-        mp: 15,
-        visual: [0xFFFFFF, 50, 5],
-        sound: 'SPELL_1',
-        icon: 'spl_stf',
-        target: false,
-        level: 5,
-    },
+/**
+ * Un sort par fichier, dans magic/<nom>.json (le nom du fichier est la clé).
+ * Dans le JSON, « cooldown » est un nom de MAGIC_DATA_PARAMS.COOLDOWN (SHORT,
+ * MEDIUM...) et les couleurs de « visual » sont des chaînes hexadécimales
+ * ("0xFF0000") ; elles redeviennent ici des nombres.
+ */
+export const MAGIC = {
+    DrainLife,
+    Teleport,
+    Knock,
+    DeathSpell,
+    MagicMapping,
+    SummonFood,
+    Reflect,
+    Light,
+    TimeStop
 };
+
+export const MAGIC_DATA = {};
+for (const sSpell in MAGIC) {
+    const oSpell = Object.assign({}, MAGIC[sSpell]);
+    if (typeof oSpell.cooldown === 'string') {
+        oSpell.cooldown = MAGIC_DATA_PARAMS.COOLDOWN[oSpell.cooldown];
+    }
+    oSpell.visual = oSpell.visual.map((v) => typeof v === 'string' ? Number(v) : v);
+    MAGIC_DATA[sSpell] = oSpell;
+}

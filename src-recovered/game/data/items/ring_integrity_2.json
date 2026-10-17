@@ -1,0 +1,10 @@
+{
+    "name": "~item_ring_integrity_2",
+    "type": "ring",
+    "slot": "finger",
+    "icon": "itm_rng_0g",
+    "properties": [
+        "irtoxE/",
+        "irphyE/"
+    ]
+}

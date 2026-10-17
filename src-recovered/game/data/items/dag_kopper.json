@@ -1,0 +1,14 @@
+{
+    "name": "~item_dag_kopper",
+    "slot": "hand",
+    "type": "dagger",
+    "model": "kopper",
+    "icon": "itm_dag_0c",
+    "speed": 700,
+    "spells": [
+        {
+            "ref": "slash_kopper",
+            "time": 0
+        }
+    ]
+}

@@ -20,6 +20,12 @@ export class CutsceneIntro extends Cutscene {
             map: [],
             walls: GFX_DATA.textures.t_forest,
             visual: GFX_DATA.visuals.forest,
+            // comme forest[0] : ciel de nuit, sol de la forêt, pas de plafond
+            background: 'resources/gfx/textures/sky_night.png',
+            flats: {
+                src: 'resources/gfx/textures/f_forest1.png',
+                codes: GFX_DATA.textures.t_forest.codes.map(() => [0, -1])
+            },
             startpoint: {
                 x: 320,
                 y: 416,

@@ -1,0 +1,10 @@
+{
+    "name": "~item_ccc_meal",
+    "type": "ccc",
+    "icon": "itm_ccc_meal",
+    "stack": 10,
+    "properties": [
+        "brfdpKA",
+        "breneCA"
+    ]
+}

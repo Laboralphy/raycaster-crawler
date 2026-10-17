@@ -28,7 +28,7 @@ Légende : ✅ réglé · 🔄 remplacement prêt, pas encore branché · ❌ à
 ## Musiques (`resources/snd/ogg/`)
 
 Les musiques sont choisies par `src-recovered/game/data/SOUNDS.js` (clés
-`MUSIC_*`), et chaque niveau nomme sa clé dans `WORLD_DATA.dungeons.js`.
+`MUSIC_*`), et chaque niveau nomme sa clé dans son fichier `data/dungeons/<biome>.js`.
 Toutes sont des créations personnelles : partitions MIDI générées par script
 (`tools/music/midi/`), rendues en OGG avec la banque GeneralUser GS.
 

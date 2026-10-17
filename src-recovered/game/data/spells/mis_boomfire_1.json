@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_expfire",
+    "cost": 0,
+    "options": "l1a4h",
+    "effects": ["axfirFA"],
+    "chances": [1]
+}

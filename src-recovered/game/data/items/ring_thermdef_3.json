@@ -1,0 +1,10 @@
+{
+    "name": "~item_ring_thermdef_3",
+    "type": "ring",
+    "slot": "finger",
+    "icon": "itm_rng_0y",
+    "properties": [
+        "irfirG/",
+        "ircldG/"
+    ]
+}

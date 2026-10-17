@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_rescld_3",
+    "type": "potion",
+    "icon": "itm_pot_2c",
+    "stack": 10,
+    "properties": [
+        "brcldG8"
+    ]
+}

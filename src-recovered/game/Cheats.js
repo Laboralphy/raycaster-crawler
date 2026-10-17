@@ -1,5 +1,6 @@
 import { CONFIG } from './config.js';
 import { Item } from './Item.js';
+import { BOOKS } from './data/BOOKS.js';
 import { ITEMS_DATA } from './data/ITEMS_DATA.js';
 import { WORLD_DATA } from './data/WORLD_DATA.js';
 import { RC } from '../libraries/Raycaster/RC.js';
@@ -8,7 +9,7 @@ import { RC } from '../libraries/Raycaster/RC.js';
  * Codes de triche, tapés en pause (touche X) ou, en mode débogage, dans la
  * console du navigateur : cheat('kill').
  *
- * Les codes « joueur » (mellon, go, seed, give) marchent toujours ; les codes
+ * Les codes « joueur » (mellon, go, seed, give, read) marchent toujours ; les codes
  * de débogage seulement avec CONFIG.game.debug ou l'URL ?debug=1.
  */
 export class Cheats {
@@ -147,6 +148,27 @@ Object.assign(Cheats.prototype, {
                 }
                 const n = this.giveItem(sItem, sCount === undefined ? 1 : sCount | 0);
                 return this.bDebug ? '+' + n + ' ' + sItem : null;
+            }
+        },
+        read: {
+            ingame: true,
+            help: 'read <book>: open a book (read alone: list)',
+            run(sBook) {
+                const aBooks = Object.keys(BOOKS.en);
+                if (sBook === undefined) {
+                    const aLines = [];
+                    for (let i = 0; i < aBooks.length; i += 4) {
+                        aLines.push(aBooks.slice(i, i + 4).join(' '));
+                    }
+                    return aLines;
+                }
+                sBook = sBook.replace(/^~/, '');
+                if (!(sBook in BOOKS.en)) {
+                    return 'unknown book "' + sBook + '" (read)';
+                }
+                // le livre s'ouvre en quittant la pause
+                this.oGame.oBookSystem.read('~' + sBook);
+                return null;
             }
         }
     },

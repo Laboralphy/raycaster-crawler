@@ -1,0 +1,9 @@
+{
+    "cooldown": "SHORT",
+    "mp": 5,
+    "visual": ["0x008800", 66, 7, "0x0000FF", 66, 5],
+    "sound": "FX_TELEPORT",
+    "icon": "spl_tele",
+    "target": true,
+    "level": 3
+}

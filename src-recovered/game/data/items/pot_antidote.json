@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_antidote",
+    "type": "potion",
+    "icon": "itm_pot_0g",
+    "stack": 10,
+    "properties": [
+        "brantBP"
+    ]
+}

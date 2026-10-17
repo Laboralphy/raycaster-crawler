@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_luck_1",
+    "type": "potion",
+    "icon": "itm_pot_1b",
+    "stack": 10,
+    "properties": [
+        "bblckD8"
+    ]
+}

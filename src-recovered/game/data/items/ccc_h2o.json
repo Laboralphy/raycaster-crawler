@@ -1,0 +1,10 @@
+{
+    "name": "~item_ccc_h2o",
+    "type": "ccc",
+    "icon": "itm_ccc_h2o",
+    "stack": 10,
+    "properties": [
+        "brfdpBA",
+        "breneBA"
+    ]
+}

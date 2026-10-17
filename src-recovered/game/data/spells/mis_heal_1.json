@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_healbolt",
+    "cost": 0,
+    "options": "l1",
+    "effects": ["mrheaEA"],
+    "chances": [1]
+}

@@ -1,0 +1,9 @@
+{
+    "cooldown": "MEDIUM",
+    "mp": 5,
+    "visual": ["0x00FFFF", 66, 7, "0x0066FF", 66, 5],
+    "sound": "SPELL_1",
+    "icon": "eff_bref",
+    "target": false,
+    "level": 4
+}

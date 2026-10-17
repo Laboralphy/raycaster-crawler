@@ -1,0 +1,9 @@
+{
+    "name": "~item_ccc_cake",
+    "type": "ccc",
+    "icon": "itm_ccc_cake",
+    "stack": 10,
+    "properties": [
+        "brfdpDA"
+    ]
+}

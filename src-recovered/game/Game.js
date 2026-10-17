@@ -11,6 +11,7 @@ import { HUD } from './UI/HUD.js';
 import { System } from './UI/System.js';
 import { UI } from './UI/UI.js';
 import { WeaponAnimator } from './WeaponAnimator.js';
+import { buildUpperMap } from './storey.js';
 import { CONFIG } from './config.js';
 import { CutsceneEnd } from './cutscenes/CutsceneEnd.js';
 import { CutsceneIntro } from './cutscenes/CutsceneIntro.js';
@@ -54,6 +55,7 @@ import { ScorePlugin } from './plugins/ScorePlugin.js';
 import { ShopPlugin } from './plugins/ShopPlugin.js';
 import { StubPlugin } from './plugins/StubPlugin.js';
 import { UnderwaterPlugin } from './plugins/UnderwaterPlugin.js';
+import { WoundPlugin } from './plugins/WoundPlugin.js';
 
 // plugins disponibles pour Game.addPlugin, par nom
 const PLUGINS = {
@@ -68,7 +70,8 @@ const PLUGINS = {
     Score: ScorePlugin,
     Shop: ShopPlugin,
     Stub: StubPlugin,
-    Underwater: UnderwaterPlugin
+    Underwater: UnderwaterPlugin,
+    Wound: WoundPlugin
 };
 
 export class Game extends Engine {
@@ -256,6 +259,7 @@ export class Game extends Engine {
         this.oConsole = this.addPlugin('Console');
         this.oUnderwater = this.addPlugin('Underwater');
         this.oScore = this.addPlugin('Score');
+        this.addPlugin('Wound');
         this.oBackupSystem = new BackupSystem();
         this.oBackupSystem.init(this.sSaveFile);
         this.sWorldBackup = JSON.stringify(WORLD_DATA);
@@ -897,26 +901,6 @@ export class Game extends Engine {
         return this.oRaycaster.aWorld
     }
 
-    /**
-     * Second étage : un bloc par-dessus chaque bloc plein dont la texture
-     * figure dans une règle de aStorey ({ textures, codes }), choisi parmi les
-     * codes de la règle (toujours le même pour une case donnée).
-     */
-    rld_buildUpperMap(aMap, aCodes, aStorey) {
-        return aMap.map((aRow, y) => aRow.map((nCode, x) => {
-            if (((nCode >> 8) & 0xFF) !== 1) {
-                return 0
-            }
-            const nTexture = aCodes[nCode & 0xFF][0];
-            const oRule = aStorey.find(r => r.textures.includes(nTexture));
-            if (!oRule) {
-                return 0
-            }
-            const nHash = Math.imul(x * 73856093 ^ y * 19349663, 0x9E3779B1) >>> 0;
-            return 0x100 | oRule.codes[(nHash >>> 16) % oRule.codes.length]
-        }))
-    }
-
     rld_loadLevel() {
         let y64, x64, xBlock, yBlock, nBlock, aRow, nCode, i;
         let oStartPoint = {
@@ -1087,7 +1071,13 @@ export class Game extends Engine {
             }
             oData.map.push(aRow)
         }
-        if (nTorches > 0) {
+        if (typeof d.light === 'number') {
+            // lumière imposée par l'étage (WORLD_DATA.dungeons) : passe avant
+            // le plafond des étages à torches
+            oData.visual = Object.assign({}, oData.visual, {
+                light: d.light
+            })
+        } else if (nTorches > 0) {
             // ambiance plus sombre : ce sont les torches qui éclairent
             oData.visual = Object.assign({}, oData.visual, {
                 light: Math.min(oData.visual.light, CONFIG.raycaster.torchLevelLight)
@@ -1095,7 +1085,7 @@ export class Game extends Engine {
         }
         oData.startpoint = oData.startpoints[xStartPoint];
         if (t.storey) {
-            oData.uppermap = this.rld_buildUpperMap(oData.map, aCodes, t.storey)
+            oData.uppermap = buildUpperMap(oData.map, aCodes, t.storey)
         }
         for (nCode = 0; nCode < oData.walls.codes.length; nCode++) {
             if (oData.walls.codes[nCode].length > 2) {
@@ -1129,6 +1119,15 @@ export class Game extends Engine {
                 oData.flats.codes.push([0, d.ceiling === false ? -1 : 1])
             }
         }
+        // retouche propre à l'étage (Adventure.defineLevelProcessor) : second
+        // étage, nouveaux blocs... avant la création du rendu
+        this.oAdventure.notify(this, 'buildLevel', {
+            area: this.oDungeon.getPlayerLocationArea(),
+            floor: this.oDungeon.getPlayerLocationFloor(),
+            seed: d.seed | 0,
+            blocks: aLaby,
+            data: oData
+        });
         d.data = oData;
         return oData
     }

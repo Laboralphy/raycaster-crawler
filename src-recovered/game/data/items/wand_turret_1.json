@@ -1,0 +1,14 @@
+{
+    "name": "~item_wand_turret_1",
+    "slot": "hand",
+    "type": "wand",
+    "model": "fyre",
+    "icon": "itm_wnd_0p",
+    "speed": 500,
+    "spells": [
+        {
+            "ref": "mis_turretfire_1",
+            "time": 0
+        }
+    ]
+}

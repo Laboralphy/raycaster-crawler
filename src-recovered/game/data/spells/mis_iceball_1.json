@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_iceball",
+    "cost": 3,
+    "options": "l3",
+    "effects": ["mxcldDA", "masnrDF"],
+    "chances": [1, 1]
+}

@@ -1,0 +1,14 @@
+{
+    "name": "~item_wand_cube_1",
+    "slot": "hand",
+    "type": "wand",
+    "model": "fyre",
+    "icon": "itm_wnd_0p",
+    "speed": 1000,
+    "spells": [
+        {
+            "ref": "mis_cubefire_2",
+            "time": 0
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "name": "~item_ring_elecdef_2",
+    "type": "ring",
+    "slot": "finger",
+    "icon": "itm_rng_0b",
+    "properties": [
+        "ireleE/"
+    ]
+}

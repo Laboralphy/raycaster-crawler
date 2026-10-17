@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_shadbolt",
+    "cost": 0,
+    "options": "l1",
+    "effects": ["mxmagEA"],
+    "chances": [1]
+}

@@ -11,6 +11,7 @@ export class MagicMissileThinker extends MissileThinker {
         this.bHeavy = false;
         this.bAoE = false;
         this.nAoE = 0;
+        this.bSpareBoss = false;
         const nOptLen = sOptions.length;
         for (let iOpt = 0; iOpt < nOptLen; iOpt++) {
             switch (sOptions.charAt(iOpt)) {
@@ -28,6 +29,10 @@ export class MagicMissileThinker extends MissileThinker {
                     break;
                 case 'r':
                     this.bRandom = true;
+                    break;
+                case 'p':
+                    // épargne les boss : le projectile éclate sur eux sans effet
+                    this.bSpareBoss = true;
                     break;
                 case 'a':
                     this.bAoE = true;
@@ -79,6 +84,9 @@ export class MagicMissileThinker extends MissileThinker {
             }
             if (oMC) {
                 const oMCC = oMC.getData('creature');
+                if (this.isSpared(oMC)) {
+                    return b
+                }
                 const nReflect = oMCC.getAttribute('reflect');
                 if (nReflect > 0) {
                     this.oMobile.rollbackXY();
@@ -120,6 +128,9 @@ export class MagicMissileThinker extends MissileThinker {
         let i, oVictim;
         for (i = 0; i < nBodyCount; i++) {
             oVictim = aVictims[i];
+            if (this.isSpared(oVictim)) {
+                continue
+            }
             if (this.bHeavy) {
                 xVic = oVictim.x;
                 yVic = oVictim.y;
@@ -129,6 +140,17 @@ export class MagicMissileThinker extends MissileThinker {
             }
             this.oGame.gc_affect(oVictim, this.aEffects, this.aChances, this.nPower)
         }
+    }
+
+    /**
+     * Option « p » : les boss (drapeau « B ») ne subissent rien.
+     */
+    isSpared(oMobile) {
+        if (!this.bSpareBoss) {
+            return false
+        }
+        const oCreature = oMobile.getData('creature');
+        return !!oCreature && !!oCreature.getAttribute('f_boss')
     }
 
     advance() {
@@ -181,6 +203,7 @@ Object.assign(MagicMissileThinker.prototype, {
     bCosine: false,
     bAoE: false,
     nAoE: 0,
+    bSpareBoss: false,
     aEffects: null,
     aChances: null,
     nPower: 0,

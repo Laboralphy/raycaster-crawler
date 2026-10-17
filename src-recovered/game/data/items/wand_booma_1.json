@@ -1,0 +1,14 @@
+{
+    "name": "~item_wand_booma_1",
+    "slot": "hand",
+    "type": "wand",
+    "model": "toxyc",
+    "icon": "itm_wnd_0p",
+    "speed": 50,
+    "spells": [
+        {
+            "ref": "mis_boomacid_1",
+            "time": 250
+        }
+    ]
+}

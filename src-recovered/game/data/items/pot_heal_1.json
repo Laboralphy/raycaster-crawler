@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_heal_1",
+    "type": "potion",
+    "icon": "itm_pot_0r",
+    "stack": 10,
+    "properties": [
+        "brheaCA"
+    ]
+}

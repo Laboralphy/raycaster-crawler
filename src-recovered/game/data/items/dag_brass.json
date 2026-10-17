@@ -1,0 +1,14 @@
+{
+    "name": "~item_dag_brass",
+    "slot": "hand",
+    "type": "dagger",
+    "model": "brass",
+    "icon": "itm_dag_0b",
+    "speed": 700,
+    "spells": [
+        {
+            "ref": "slash_brass",
+            "time": 0
+        }
+    ]
+}

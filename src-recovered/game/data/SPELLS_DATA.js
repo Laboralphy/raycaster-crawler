@@ -1,240 +1,77 @@
+import mis_warlock_1 from './spells/mis_warlock_1.json' with { type: 'json' };
+import mis_witch_1 from './spells/mis_witch_1.json' with { type: 'json' };
+import mis_witch_queen_1 from './spells/mis_witch_queen_1.json' with { type: 'json' };
+import mis_succubus_1 from './spells/mis_succubus_1.json' with { type: 'json' };
+import mis_boomacid_1 from './spells/mis_boomacid_1.json' with { type: 'json' };
+import mis_boomfire_1 from './spells/mis_boomfire_1.json' with { type: 'json' };
+import mis_impwand_1 from './spells/mis_impwand_1.json' with { type: 'json' };
+import mis_witch_dark_1 from './spells/mis_witch_dark_1.json' with { type: 'json' };
+import mis_heal_1 from './spells/mis_heal_1.json' with { type: 'json' };
+import mis_cubefire_2 from './spells/mis_cubefire_2.json' with { type: 'json' };
+import mis_turretfire_1 from './spells/mis_turretfire_1.json' with { type: 'json' };
+import mis_toxicspit_1 from './spells/mis_toxicspit_1.json' with { type: 'json' };
+import mis_medtoxic_2 from './spells/mis_medtoxic_2.json' with { type: 'json' };
+import mis_firespread_2 from './spells/mis_firespread_2.json' with { type: 'json' };
+import mis_firebolt_1 from './spells/mis_firebolt_1.json' with { type: 'json' };
+import mis_firebolt_2 from './spells/mis_firebolt_2.json' with { type: 'json' };
+import mis_toxicbolt_1 from './spells/mis_toxicbolt_1.json' with { type: 'json' };
+import mis_thunbolt_1 from './spells/mis_thunbolt_1.json' with { type: 'json' };
+import mis_magbolt_1 from './spells/mis_magbolt_1.json' with { type: 'json' };
+import mis_icebolt_1 from './spells/mis_icebolt_1.json' with { type: 'json' };
+import mis_shadbolt_1 from './spells/mis_shadbolt_1.json' with { type: 'json' };
+import mis_iceball_1 from './spells/mis_iceball_1.json' with { type: 'json' };
+import mis_lightbolt_1 from './spells/mis_lightbolt_1.json' with { type: 'json' };
+import mis_thunbolt_3 from './spells/mis_thunbolt_3.json' with { type: 'json' };
+import mis_deathspell_1 from './spells/mis_deathspell_1.json' with { type: 'json' };
+import punch_golem from './spells/punch_golem.json' with { type: 'json' };
+import slash_poison_1 from './spells/slash_poison_1.json' with { type: 'json' };
+import slash_ravenbeak_1 from './spells/slash_ravenbeak_1.json' with { type: 'json' };
+import slash_wand from './spells/slash_wand.json' with { type: 'json' };
+import slash_brass from './spells/slash_brass.json' with { type: 'json' };
+import slash_kopper from './spells/slash_kopper.json' with { type: 'json' };
+import slash_steel from './spells/slash_steel.json' with { type: 'json' };
+import slash_sylver from './spells/slash_sylver.json' with { type: 'json' };
+import slash_jade from './spells/slash_jade.json' with { type: 'json' };
+import slash_gawld from './spells/slash_gawld.json' with { type: 'json' };
+
+/**
+ * Ce que tire chaque arme : un projectile (ou un coup) par fichier, dans
+ * spells/<nom>.json (le nom du fichier est la clé).
+ */
 export const SPELLS_DATA = {
-    "mis_warlock_1": {
-        "blueprint": "p_magbolt",
-        "cost": 0,
-        "options": "l1",
-        "effects": ["mxmagCA", "mabldBF", "mavulCF", "maillCF"],
-        "chances": [1, 0.1, 0.25, 0.2]
-    },
-    "mis_witch_1": {
-        "blueprint": "p_thunbolt",
-        "cost": 0,
-        "options": "l1",
-        "effects": ["mxeleCA"],
-        "chances": [1]
-    },
-    "mis_witch_queen_1": {
-        "blueprint": "p_thunbolt",
-        "cost": 0,
-        "options": "l3",
-        "effects": ["mxeleDA"],
-        "chances": [1]
-    },
-    "mis_succubus_1": {
-        "blueprint": "p_fireball",
-        "cost": 0,
-        "options": "l1",
-        "effects": ["mxfirDA"],
-        "chances": [1]
-    },
-    "mis_boomacid_1": {
-        "blueprint": "p_exptoxic",
-        "cost": 0,
-        "options": "l1a4h",
-        "effects": ["axtoxFA"],
-        "chances": [1]
-    },
-    "mis_boomfire_1": {
-        "blueprint": "p_expfire",
-        "cost": 0,
-        "options": "l1a4h",
-        "effects": ["axfirFA"],
-        "chances": [1]
-    },
-    "mis_impwand_1": {
-        "blueprint": "p_shadbolt",
-        "cost": 0,
-        "options": "l1",
-        "effects": ["mxmagEA"],
-        "chances": [1]
-    },
-    "mis_heal_1": {
-        "blueprint": "p_healbolt",
-        "cost": 0,
-        "options": "l1",
-        "effects": ["mrheaEA"],
-        "chances": [1]
-    },
-    "mis_cubefire_2": {
-        "blueprint": "p_fireball",
-        "cost": 0,
-        "options": "l3b",
-        "effects": ["mxfirCA"],
-        "chances": [1]
-    },
-    "mis_turretfire_1": {
-        "blueprint": "p_firebolt",
-        "cost": 0,
-        "options": "l1",
-        "effects": ["mxfirDA"],
-        "chances": [1]
-    },
-    "mis_toxicspit_1": {
-        "blueprint": "p_toxicspit",
-        "cost": 0,
-        "options": "l1",
-        "effects": ["mxtoxBA", "macnfBK"],
-        "chances": [1, 0.2]
-    },
-    "mis_medtoxic_2": {
-        "blueprint": "p_medbolt",
-        "cost": 0,
-        "options": "w1",
-        "effects": ["mxphyEA", "pxtoxCU"],
-        "chances": [1, 1]
-    },
-    "mis_firespread_2": {
-        "blueprint": "p_fireball",
-        "cost": 5,
-        "options": "l3b",
-        "effects": ["mxfirCA"],
-        "chances": [1]
-    },
-    "mis_firebolt_1": {
-        "blueprint": "p_firebolt",
-        "cost": 1,
-        "options": "l1",
-        "effects": ["mxfirBA"],
-        "chances": [1]
-    },
-    "mis_firebolt_2": {
-        "blueprint": "p_firebolt",
-        "cost": 1,
-        "options": "l1",
-        "effects": ["mxfirCA"],
-        "chances": [1]
-    },
-    "mis_toxicbolt_1": {
-        "blueprint": "p_toxicbolt",
-        "cost": 2,
-        "options": "w2",
-        "effects": ["mxtoxCA"],
-        "chances": [1]
-    },
-    "mis_thunbolt_1": {
-        "blueprint": "p_thunbolt",
-        "cost": 2,
-        "options": "l1",
-        "effects": ["mxeleCA"],
-        "chances": [1]
-    },
-    "mis_magbolt_1": {
-        "blueprint": "p_magbolt",
-        "cost": 2,
-        "options": "l1",
-        "effects": ["mxmagBA"],
-        "chances": [1]
-    },
-    "mis_icebolt_1": {
-        "blueprint": "p_icebolt",
-        "cost": 1,
-        "options": "l1",
-        "effects": ["mxcldBA"],
-        "chances": [1]
-    },
-    "mis_shadbolt_1": {
-        "blueprint": "p_shadbolt",
-        "cost": 1,
-        "options": "l1",
-        "effects": ["mxmagBA"],
-        "chances": [1]
-    },
-    "mis_iceball_1": {
-        "blueprint": "p_iceball",
-        "cost": 3,
-        "options": "l3",
-        "effects": ["mxcldDA", "masnrDF"],
-        "chances": [1, 1]
-    },
-    "mis_lightbolt_1": {
-        "blueprint": "p_lightbolt",
-        "cost": 1,
-        "options": "l1",
-        "effects": ["mxeleCA"],
-        "chances": [1]
-    },
-    "mis_thunbolt_3": {
-        "blueprint": "p_thunbolt",
-        "cost": 3,
-        "options": "l5r",
-        "effects": ["mxeleDA"],
-        "chances": [1]
-    },
-    "mis_deathspell_1": {
-        "blueprint": "p_deathspell",
-        "cost": 0,
-        "options": "l1",
-        "effects": ["hxdthBA"],
-        "chances": [1]
-    },
-    "punch_golem": {
-        "blueprint": "p_slash",
-        "cost": 0,
-        "options": "l1h",
-        "effects": ["xxphyGA"],
-        "chances": [1]
-    },
-    "slash_poison_1": {
-        "blueprint": "p_slash",
-        "cost": 0,
-        "options": "l1h",
-        "effects": ["axphyCA", "pxtoxCF"],
-        "chances": [1, 0.25]
-    },
-    "slash_ravenbeak_1": {
-        "blueprint": "p_slash",
-        "cost": 0,
-        "options": "l1h",
-        "effects": ["axphyCA"],
-        "chances": [1]
-    },
-    "slash_wand": {
-        "blueprint": "p_slash",
-        "cost": 0,
-        "options": "l1h",
-        "effects": ["xxphyBA"],
-        "chances": [1]
-    },
-    "slash_brass": {
-        "blueprint": "p_slash",
-        "cost": 0,
-        "options": "l1h",
-        "effects": ["xxphyCA"],
-        "chances": [1]
-    },
-    "slash_kopper": {
-        "blueprint": "p_slash",
-        "cost": 0,
-        "options": "l1h",
-        "effects": ["xxphyCA", "xxeleEA"],
-        "chances": [1, 0.25]
-    },
-    "slash_steel": {
-        "blueprint": "p_slash",
-        "cost": 0,
-        "options": "l1h",
-        "effects": ["xxphyDA"],
-        "chances": [1]
-    },
-    "slash_sylver": {
-        "blueprint": "p_slash",
-        "cost": 0,
-        "options": "l1h",
-        "effects": ["xxphyEA"],
-        "chances": [1]
-    },
-    "slash_jade": {
-        "blueprint": "p_slash",
-        "cost": 0,
-        "options": "l1h",
-        "effects": ["xxphyFA"],
-        "chances": [1]
-    },
-    "slash_gawld": {
-        "blueprint": "p_slash",
-        "cost": 0,
-        "options": "l1h",
-        "effects": ["xxphyGA"],
-        "chances": [1]
-    }
+    mis_warlock_1,
+    mis_witch_1,
+    mis_witch_queen_1,
+    mis_succubus_1,
+    mis_boomacid_1,
+    mis_boomfire_1,
+    mis_impwand_1,
+    mis_witch_dark_1,
+    mis_heal_1,
+    mis_cubefire_2,
+    mis_turretfire_1,
+    mis_toxicspit_1,
+    mis_medtoxic_2,
+    mis_firespread_2,
+    mis_firebolt_1,
+    mis_firebolt_2,
+    mis_toxicbolt_1,
+    mis_thunbolt_1,
+    mis_magbolt_1,
+    mis_icebolt_1,
+    mis_shadbolt_1,
+    mis_iceball_1,
+    mis_lightbolt_1,
+    mis_thunbolt_3,
+    mis_deathspell_1,
+    punch_golem,
+    slash_poison_1,
+    slash_ravenbeak_1,
+    slash_wand,
+    slash_brass,
+    slash_kopper,
+    slash_steel,
+    slash_sylver,
+    slash_jade,
+    slash_gawld
 };

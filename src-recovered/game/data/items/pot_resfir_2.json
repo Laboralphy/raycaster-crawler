@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_resfir_2",
+    "type": "potion",
+    "icon": "itm_pot_2o",
+    "stack": 10,
+    "properties": [
+        "brfirE8"
+    ]
+}

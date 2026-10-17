@@ -1,0 +1,9 @@
+{
+    "name": "~item_ccc_meat",
+    "type": "ccc",
+    "icon": "itm_ccc_meat",
+    "stack": 10,
+    "properties": [
+        "brfdpEA"
+    ]
+}

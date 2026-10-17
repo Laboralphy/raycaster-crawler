@@ -81,38 +81,75 @@ export const BOOKS = {
         shelf_junk_1: {
             title: 'Rotten pages',
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["The damp has eaten these books. The pages crumble between your fingers before you can read a single line."]
         },
         shelf_junk_2: {
             title: 'A tax ledger',
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["Column after column of numbers : grain, salt, candles, and a very long list of unpaid debts. Nothing magical here, except maybe the size of the debts."]
         },
         shelf_junk_3: {
             title: 'An unknown script',
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["The book is written in strange, twisted letters. You stare at them for a long while, but they make no sense to you."]
         },
         shelf_junk_4: {
             title: 'A love letter',
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["\"My dearest, I count the days until the Warlock lets me go home. The food is awful and the skeletons never laugh at my jokes...\" The rest is too personal to read."]
         },
         shelf_junk_5: {
             title: 'Poems',
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["A collection of very bad poems about the moon, the rain and a cat named Mortimer. You put the book back quickly."]
         },
         shelf_junk_6: {
             title: 'Blank pages',
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["All the pages are blank. Maybe the ink faded long ago, or maybe the author never found anything to say."]
+        },
+        // bestiaire, écrit par le Sorcier : une page et une image par créature
+        book_of_goblinoids: {
+            title: 'Bestiary : the goblinoids',
+            level: 1,
+            images: ['resources/gfx/books/book_m_goblin.png', 'resources/gfx/books/book_m_goblin_warrior.png'],
+            pages: ["The Goblin\n\n" + "My doorkeepers. Small, greedy, and quick on their feet : they rush at any intruder with a cheap brass dagger. " + "Five honest blows are enough to break one. I keep them for their numbers, not for their brains. " + "If you are reading this, adventurer, they have already failed me. I expected nothing less.", "The Goblin Warrior\n\n" + "A goblin who survived long enough to steal some armour. Twelve wounds before it falls, " + "but the same brass dagger and the same lack of imagination. " + "They guard the upper halls of my keep. Do not flatter yourself if you beat a few of them : I breed them by the hundred."]
+        },
+        book_of_creepers: {
+            title: 'Bestiary : the creepers',
+            level: 1,
+            images: ['resources/gfx/books/book_m_wasp.png', 'resources/gfx/books/book_m_spider.png', 'resources/gfx/books/book_m_raven.png', 'resources/gfx/books/book_m_bat.png'],
+            pages: ["The Giant Wasp\n\n" + "I fed the common wasp on alchemical honey. The result darts in, stings, and darts away before you can strike back. " + "Its body is fragile, three wounds at most, but one sting in four leaves a poison in the blood. " + "A fitting welcome for uninvited guests.", "The Giant Spider\n\n" + "The fastest thing that crawls in my crypts and my mines, far faster than you. " + "Its venomous bite is the same as the wasp's, and it never lets go. " + "Six wounds will kill it, if you can hit it. Most visitors die trying to run away from it.", "The Raven\n\n" + "My favourite pet, and the only creature here with a sense of humour. It does not fight to kill : " + "it pecks, then flies off with something from your bag. A trinket, a ring, an amulet... " + "Everything it steals comes back to me. Thank you for your gifts.", "The Bat\n\n" + "A tiny thing, as frail as the raven, that the witches keep in their coven. " + "It never flies straight : it flutters left and right in a mad zigzag and bites when you finally lose track of it. " + "Swing at it as much as you like. You will mostly hit the air."]
+        },
+        book_of_undead: {
+            title: 'Bestiary : the undead',
+            level: 1,
+            images: ['resources/gfx/books/zombie_attack_front-left.png', 'resources/gfx/books/book_m_skeleton.png', 'resources/gfx/books/book_m_zombie_monarch.png'],
+            pages: ["The Zombie\n\n" + "Death is no excuse to stop working in my service. The corpses of my crypts walk again, " + "slow and stupid, and claw at the living with whatever is left of their hands. " + "Six wounds put one back to rest. Until I wake it up again, of course.", "The Skeleton\n\n" + "Once the flesh has rotted away, what remains is lighter, harder and far more obedient. " + "My skeletons take fifteen wounds before they crumble, and you will find them everywhere : crypts, mines, deep halls. " + "Bones are cheap. Your bones will do, too.", "The Zombie Monarch\n\n" + "He was a king, once, and he ruled these lands before I came. Now he rules only my crypts, as my slave. " + "Two hundred wounds, a steel blade, and a grudge against every living thing. " + "While he stands, the gate of his throne room stays sealed. It will stay sealed forever, I suspect."]
+        },
+        book_of_coven: {
+            title: 'Bestiary : the coven',
+            level: 1,
+            images: ['resources/gfx/books/book_m_witch.png', 'resources/gfx/books/book_m_dark_witch.png', 'resources/gfx/books/book_m_witch_queen.png'],
+            pages: ["The Witch\n\n" + "The coven believes it is my ally. I let it believe so. " + "A witch keeps her distance and hurls bolts of lightning, fifteen wounds deep. " + "Their spells are shaped to spare their queen : in a crowded corridor they burst against her without a scratch. " + "Clever, for a witch.", "The Dark Witch\n\n" + "The same frail body as her sisters, but she has dabbled in shadow : her dark bolts burn the mind, not the flesh. " + "Worse, she mends her sisters' wounds with a healing spell. Kill her first, if you have the wit. " + "And like her sisters, she would never harm her queen.", "The Witch Queen\n\n" + "The queen of the coven calls herself my equal. Amusing. " + "Sixty wounds, a skin that shrugs off magic and lightning, and three toxic bolts at once from her throne. " + "While she lives, the way out of her throne room stays sealed. I would almost wish you luck. Almost."]
+        },
+        book_of_infernal_creatures: {
+            title: 'Bestiary : the infernal creatures',
+            level: 1,
+            images: ['resources/gfx/books/book_m_cube.png', 'resources/gfx/books/book_m_knight.png', 'resources/gfx/books/book_m_succubus.png'],
+            pages: ["The Cube\n\n" + "I opened a door to the Pit, and this came through first. A floating block of infernal stone " + "that spits three fireballs at a time, and the fireballs bounce off the walls. " + "Ten wounds will crack it. Corners will not save you.", "The Knight\n\n" + "A suit of black armour bound to a burning soul. It is slow, but its steel blade cuts deep, " + "and daggers and fists barely dent its plates : twenty-five wounds, and most of them wasted. " + "Its one weakness is lightning, which runs through the metal. Not that you will think of it in time.", "The Succubus\n\n" + "The most charming guest of my infernal keep. Quick on her feet, she keeps her distance and hurls fireballs, twenty-five wounds deep. " + "Fire is her element : she shrugs off half the damage of any flame you throw at her. " + "Bring something colder. Or do not come at all."]
+        },
+        book_of_failed_experiments: {
+            title: 'Bestiary : the failed experiments',
+            level: 1,
+            images: ['resources/gfx/books/book_m_myco.png', 'resources/gfx/books/book_m_myco2.png', 'resources/gfx/books/book_m_acid_blob.png', 'resources/gfx/books/book_m_fire_blob.png'],
+            pages: ["The Myco\n\n" + "My first attempt at breeding guards from mushrooms. A failure : it crawls so slowly that a snail would overtake it, " + "and four wounds are enough to squash it. I threw the lot of them out into the forest. " + "Let them be the first thing you meet, and the first thing you underestimate.", "The Spitting Myco\n\n" + "My second attempt. It still crawls, but now it spits toxic spores from afar. " + "Six wounds to kill, and one spit in five leaves the victim confused, stumbling about like a drunkard. " + "Still a failure. A useful one.", "The Acid Blob\n\n" + "I wanted a living potion. I got a bag of acid with a mind of its own, ten wounds deep, immune to most poisons. " + "It rushes at you and bursts, splashing acid all around, on you and on anything else near it. " + "Kill it from afar, if you can. I keep mine well away from my laboratory.", "The Fire Blob\n\n" + "The acid blob's brother, filled with liquid fire instead. Same ten wounds, same charge, same burst : " + "but this one sets everything around it ablaze, and fire does not trouble it much. " + "I find them delightful. From a distance."]
         }
     },
     fr: {
@@ -197,38 +234,74 @@ export const BOOKS = {
         shelf_junk_1: {
             title: "Pages pourries",
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["L'humidité a rongé ces livres. Les pages s'effritent entre vos doigts avant que vous puissiez lire une seule ligne."]
         },
         shelf_junk_2: {
             title: "Un registre d'impôts",
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["Des colonnes de chiffres à n'en plus finir : grain, sel, chandelles, et une très longue liste de dettes impayées. Rien de magique, sauf peut-être le montant des dettes."]
         },
         shelf_junk_3: {
             title: "Une écriture inconnue",
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["Le livre est écrit en lettres étranges et tordues. Vous les fixez longtemps, sans rien y comprendre."]
         },
         shelf_junk_4: {
             title: "Une lettre d'amour",
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["« Ma chérie, je compte les jours jusqu'à ce que le Sorcier me laisse rentrer. La nourriture est infâme et les squelettes ne rient jamais à mes blagues... » La suite est trop intime pour être lue."]
         },
         shelf_junk_5: {
             title: "Poèmes",
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["Un recueil de très mauvais poèmes sur la lune, la pluie et un chat nommé Mortimer. Vous reposez vite le livre."]
         },
         shelf_junk_6: {
             title: "Pages blanches",
             level: 1,
-            images: null,
+            images: ['resources/gfx/books/book_of_junk.png'],
             pages: ["Toutes les pages sont blanches. L'encre s'est peut-être effacée il y a longtemps, ou l'auteur n'a jamais rien trouvé à dire."]
+        },
+        book_of_goblinoids: {
+            title: "Bestiaire : les gobelinoïdes",
+            level: 1,
+            images: ['resources/gfx/books/book_m_goblin.png', 'resources/gfx/books/book_m_goblin_warrior.png'],
+            pages: ["Le Gobelin\n\n" + "Mes portiers. Petits, avides et vifs : ils se ruent sur tout intrus, une méchante dague de laiton à la main. " + "Cinq bons coups suffisent à en briser un. Je les garde pour leur nombre, pas pour leur cervelle. " + "Si vous lisez ceci, aventurier, c'est qu'ils ont déjà échoué. Je n'en attendais pas moins.", "Le Gobelin guerrier\n\n" + "Un gobelin qui a vécu assez longtemps pour voler une armure. Il encaisse douze blessures avant de tomber, " + "mais garde la même dague de laiton et le même manque d'imagination. " + "Ils gardent les salles hautes de mon fort. Ne vous flattez pas d'en abattre quelques-uns : j'en élève des centaines."]
+        },
+        book_of_creepers: {
+            title: "Bestiaire : les rampants et les volants",
+            level: 1,
+            images: ['resources/gfx/books/book_m_wasp.png', 'resources/gfx/books/book_m_spider.png', 'resources/gfx/books/book_m_raven.png', 'resources/gfx/books/book_m_bat.png'],
+            pages: ["La Guêpe géante\n\n" + "J'ai nourri la guêpe commune de miel alchimique. Le résultat fond sur vous, pique, et repart avant que vous puissiez riposter. " + "Son corps est fragile, trois blessures tout au plus, mais une piqûre sur quatre laisse un poison dans le sang. " + "Un accueil digne des invités qu'on n'attendait pas.", "L'Araignée géante\n\n" + "Ce qui rampe le plus vite dans mes cryptes et mes mines, bien plus vite que vous. " + "Sa morsure est aussi venimeuse que la piqûre de la guêpe, et elle ne lâche jamais prise. " + "Six blessures la tuent, si vous arrivez à la toucher. La plupart de mes visiteurs meurent en essayant de la fuir.", "Le Corbeau\n\n" + "Mon animal préféré, et la seule créature d'ici qui ait de l'humour. Il ne se bat pas pour tuer : " + "il donne un coup de bec, puis s'envole avec un objet pris dans votre sac. Une babiole, un anneau, une amulette... " + "Tout ce qu'il vole finit chez moi. Merci pour vos cadeaux.", "La Chauve-souris\n\n" + "Une petite chose, aussi frêle que le corbeau, que les sorcières élèvent dans leur cercle. " + "Elle ne vole jamais droit : elle zigzague follement à gauche, à droite, et mord quand vous l'avez enfin perdue de vue. " + "Frappez-la tant que vous voudrez. Vous toucherez surtout l'air."]
+        },
+        book_of_undead: {
+            title: "Bestiaire : les morts-vivants",
+            level: 1,
+            images: ['resources/gfx/books/zombie_attack_front-left.png', 'resources/gfx/books/book_m_skeleton.png', 'resources/gfx/books/book_m_zombie_monarch.png'],
+            pages: ["Le Zombie\n\n" + "La mort n'est pas une excuse pour quitter mon service. Les cadavres de mes cryptes marchent de nouveau, " + "lents et stupides, et griffent les vivants avec ce qui leur reste de mains. " + "Six blessures en renvoient un au repos. Jusqu'à ce que je le réveille, bien sûr.", "Le Squelette\n\n" + "Une fois la chair pourrie, ce qui reste est plus léger, plus dur et bien plus obéissant. " + "Mes squelettes encaissent quinze blessures avant de s'effondrer, et vous en trouverez partout : cryptes, mines, salles profondes. " + "Les os ne coûtent rien. Les vôtres feront l'affaire, eux aussi.", "Le Monarque zombie\n\n" + "Il fut roi, autrefois, et régnait sur ces terres avant mon arrivée. Il ne règne plus que sur mes cryptes, en esclave. " + "Deux cents blessures, une lame d'acier et une rancune envers tout ce qui vit. " + "Tant qu'il tient debout, la porte de sa salle du trône reste scellée. Pour toujours, je le crains."]
+        },
+        book_of_coven: {
+            title: "Bestiaire : le cercle des sorcières",
+            level: 1,
+            images: ['resources/gfx/books/book_m_witch.png', 'resources/gfx/books/book_m_dark_witch.png', 'resources/gfx/books/book_m_witch_queen.png'],
+            pages: ["La Sorcière\n\n" + "Le cercle se croit mon allié. Je le laisse le croire. " + "Une sorcière garde ses distances et lance des éclairs ; il faut quinze blessures pour l'abattre. " + "Ses sorts épargnent sa reine : dans un couloir encombré, ils éclatent contre elle sans l'égratigner. " + "Habile, pour une sorcière.", "La Sorcière noire\n\n" + "Le même corps frêle que ses sœurs, mais elle s'est essayée aux ténèbres : ses traits d'ombre brûlent l'esprit, pas la chair. " + "Pire, elle referme les blessures de ses sœurs d'un sort de soin. Tuez-la d'abord, si vous en avez l'esprit. " + "Comme ses sœurs, jamais elle ne blesserait sa reine.", "La Reine des sorcières\n\n" + "La reine du cercle se dit mon égale. Amusant. " + "Soixante blessures, une peau sur laquelle glissent la magie et la foudre, et trois traits toxiques à la fois depuis son trône. " + "Tant qu'elle vit, la sortie de sa salle du trône reste scellée. Je vous souhaiterais presque bonne chance. Presque."]
+        },
+        book_of_infernal_creatures: {
+            title: "Bestiaire : les créatures infernales",
+            level: 1,
+            images: ['resources/gfx/books/book_m_cube.png', 'resources/gfx/books/book_m_knight.png', 'resources/gfx/books/book_m_succubus.png'],
+            pages: ["Le Cube\n\n" + "J'ai ouvert une porte sur l'Abîme, et ceci l'a franchie en premier. Un bloc de pierre infernale flottant, " + "qui crache trois boules de feu à la fois, et ces boules rebondissent sur les murs. " + "Dix blessures le fendent. Les recoins ne vous sauveront pas.", "Le Chevalier\n\n" + "Une armure noire liée à une âme qui brûle. Il est lent, mais sa lame d'acier taille profond, " + "et dagues et poings entament à peine ses plaques : vingt-cinq blessures, presque toutes perdues. " + "Sa seule faiblesse est la foudre, qui court dans le métal. Encore faudrait-il y penser à temps.", "La Succube\n\n" + "L'invitée la plus charmante de mon fort infernal. Vive, elle garde ses distances et lance des boules de feu ; il faut vingt-cinq blessures pour l'abattre. " + "Le feu est son élément : elle ignore la moitié des dégâts de toute flamme que vous lui lancez. " + "Apportez quelque chose de plus froid. Ou ne venez pas."]
+        },
+        book_of_failed_experiments: {
+            title: "Bestiaire : les expériences ratées",
+            level: 1,
+            images: ['resources/gfx/books/book_m_myco.png', 'resources/gfx/books/book_m_myco2.png', 'resources/gfx/books/book_m_acid_blob.png', 'resources/gfx/books/book_m_fire_blob.png'],
+            pages: ["Le Myco\n\n" + "Mon premier essai pour élever des gardes à partir de champignons. Un échec : il rampe si lentement qu'un escargot le doublerait, " + "et quatre blessures suffisent à l'écraser. J'ai jeté toute la portée dans la forêt. " + "Qu'il soit la première chose que vous croisez, et la première que vous sous-estimez.", "Le Myco cracheur\n\n" + "Mon deuxième essai. Il rampe toujours, mais il crache désormais des spores toxiques de loin. " + "Six blessures pour le tuer, et un crachat sur cinq laisse la victime confuse, titubant comme un ivrogne. " + "Encore un échec. Un échec utile.", "Le Blob acide\n\n" + "Je voulais une potion vivante. J'ai obtenu un sac d'acide doué de volonté, dix blessures, insensible à la plupart des poisons. " + "Il se rue sur vous et éclate, éclaboussant d'acide tout ce qui l'entoure, vous compris. " + "Tuez-le de loin, si vous le pouvez. Je garde les miens loin de mon laboratoire.", "Le Blob de feu\n\n" + "Le frère du blob acide, rempli de feu liquide. Mêmes dix blessures, même charge, même explosion : " + "mais celui-ci embrase tout autour de lui, et le feu ne le gêne guère. " + "Je les trouve délicieux. De loin."]
         }
     }
 }

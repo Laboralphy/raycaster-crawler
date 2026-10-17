@@ -1,0 +1,9 @@
+{
+    "name": "~item_ccc_bread",
+    "type": "ccc",
+    "icon": "itm_ccc_bread",
+    "stack": 10,
+    "properties": [
+        "brfdpCA"
+    ]
+}

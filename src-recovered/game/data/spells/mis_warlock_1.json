@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_magbolt",
+    "cost": 0,
+    "options": "l1",
+    "effects": ["mxmagCA", "mabldBF", "mavulCF", "maillCF"],
+    "chances": [1, 0.1, 0.25, 0.2]
+}

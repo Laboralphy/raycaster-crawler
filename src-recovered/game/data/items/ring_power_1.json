@@ -1,0 +1,9 @@
+{
+    "name": "~item_ring_power_1",
+    "type": "ring",
+    "slot": "finger",
+    "icon": "itm_rng_0p",
+    "properties": [
+        "ibpowC/"
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_power_3",
+    "type": "potion",
+    "icon": "itm_pot_1o",
+    "stack": 10,
+    "properties": [
+        "bbpowDe"
+    ]
+}

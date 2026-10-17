@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_firebolt",
+    "cost": 1,
+    "options": "l1",
+    "effects": ["mxfirCA"],
+    "chances": [1]
+}

@@ -24,6 +24,8 @@ export class EffectProcessor {
     }
 
     setEffectLevel(sEffect, nLevel) {
+        // un seul caractère base 64 : 0 à 63 (au-delà, le code serait cassé)
+        nLevel = Math.max(0, Math.min(63, nLevel));
         return sEffect.substr(0, 5) + this.BASE64.charAt(nLevel) + sEffect.charAt(6)
     }
 

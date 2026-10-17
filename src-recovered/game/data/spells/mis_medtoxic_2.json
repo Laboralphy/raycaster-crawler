@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_medbolt",
+    "cost": 0,
+    "options": "w1",
+    "effects": ["mxphyEA", "pxtoxCU"],
+    "chances": [1, 1]
+}

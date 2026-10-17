@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_magbolt",
+    "cost": 2,
+    "options": "l1",
+    "effects": ["mxmagBA"],
+    "chances": [1]
+}

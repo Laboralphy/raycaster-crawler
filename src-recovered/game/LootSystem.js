@@ -17,13 +17,16 @@ export class LootSystem {
             if (sType in LOOT_DATA) {
                 this._oTable[sType] = {
                     chances: this.generateDistribution(LOOT_DATA[sType].chances),
-                    items: this.generateDistribution(LOOT_DATA[sType].items)
+                    items: this.generateDistribution(LOOT_DATA[sType].items),
+                    // objets lâchés à coup sûr, en plus du tirage
+                    always: LOOT_DATA[sType].always || []
                 }
             } else {
                 return aLoot
             }
         }
         const oData = this._oTable[sType];
+        aLoot.push(...oData.always);
         let nItemCount = MathTools.rndChoose(oData.chances);
         while (nItemCount > 0) {
             aLoot.push(MathTools.rndChoose(oData.items));

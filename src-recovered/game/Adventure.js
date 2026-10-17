@@ -2,6 +2,7 @@ import { LABY } from './data/LABY.js';
 import { SOUNDS } from './data/SOUNDS.js';
 import { STRINGS } from './data/STRINGS.js';
 import { GXUnderwater } from './gx/GXUnderwater.js';
+import { CovenThrone } from './levels/CovenThrone.js';
 import { RC } from '../libraries/Raycaster/RC.js';
 import { MathTools } from '../libraries/Raycaster/Tools/MathTools.js';
 
@@ -25,6 +26,23 @@ export class Adventure {
         const sFlag = 'f_' + n32.toString();
         const nValue = oCreature.getAttribute(sFlag);
         return (nValue & (1 << nBit))
+    }
+
+    /**
+     * Retouche d'un étage au chargement : une sous-classe de LevelProcessor
+     * (game/levels), lancée par l'évènement « buildLevel ».
+     */
+    defineLevelProcessor(d, f, pClass) {
+        if (this.oLevelProcessors === null) {
+            this.oLevelProcessors = {}
+        }
+        this.oLevelProcessors[d + '/' + f] = pClass;
+        this.defineEvent(d, f, 'buildLevel', 'eventProcessLevel')
+    }
+
+    eventProcessLevel(oGame, oLevel) {
+        const pClass = this.oLevelProcessors[oLevel.area + '/' + oLevel.floor];
+        new pClass(oLevel).run()
     }
 
     defineEvent(d, f, s, p) {
@@ -113,6 +131,7 @@ export class Adventure {
 
     config(d) {
         this.oEvents = {};
+        this.oLevelProcessors = {};
         const d1 = d.d1;
         const d2 = d.d2;
         const mines = d.mines;
@@ -141,6 +160,8 @@ export class Adventure {
         this.defineEvent('crypts', 2, 'activateSealedDoor', 'eventUnsealDoor');
         this.defineEvent('hellkeep', 2, 'activateSealedDoor', 'eventUnsealDoor');
         this.defineEvent('d2', 1, 'activateSealedDoor', 'eventUnsealDoor');
+        this.defineEvent('coven', 1, 'activateSealedDoor', 'eventUnsealDoor');
+        this.defineLevelProcessor('coven', 1, CovenThrone);
         this.defineEvent('treasure', 0, 'openRelicChest', 'eventGotRelic');
         // zones annexes, par portail (point d'arrivée 3 : ascenseur du portail)
         const nPortalToMines = this.oVariables.portalToMines;
@@ -180,6 +201,7 @@ export class Adventure {
 }
 Object.assign(Adventure.prototype, {
     oEvents: null,
+    oLevelProcessors: null,
     oVariables: null,
     AF_STORY_READ: 0
 });

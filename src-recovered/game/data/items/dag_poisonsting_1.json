@@ -1,0 +1,14 @@
+{
+    "name": "~item_dag_poisonsting_1",
+    "slot": "hand",
+    "type": "dagger",
+    "model": "jade",
+    "icon": "itm_dag_0g",
+    "speed": 700,
+    "spells": [
+        {
+            "ref": "slash_poison_1",
+            "time": 0
+        }
+    ]
+}

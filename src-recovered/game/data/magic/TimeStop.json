@@ -1,0 +1,9 @@
+{
+    "cooldown": "LONG",
+    "mp": 15,
+    "visual": ["0xFFFFFF", 50, 5],
+    "sound": "SPELL_1",
+    "icon": "spl_stf",
+    "target": false,
+    "level": 5
+}

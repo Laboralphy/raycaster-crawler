@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_regen_2",
+    "type": "potion",
+    "icon": "itm_pot_0gc",
+    "stack": 10,
+    "properties": [
+        "brheaFe"
+    ]
+}

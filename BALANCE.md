@@ -28,12 +28,12 @@ Tout est dans `src-recovered/game/data/`, sauf mention contraire.
 
 | Fichier | Ce qu'on y règle |
 |---|---|
-| `WORLD_DATA.dungeons.js` | Pour chaque étage : monstres possibles (`horde`), tables de butin (`loot`), magasins (`shops`), générateur et options (taille du niveau) |
+| `dungeons/<biome>.js` (regroupés par `WORLD_DATA.dungeons.js`) | Pour chaque étage : monstres possibles (`horde`), tables de butin (`loot`), magasins (`shops`), générateur et options (taille du niveau) |
 | `LOOT_DATA.js` | Contenu des coffres, gros coffres, placards, et butin de chaque monstre |
 | `WORLD_DATA.shops.js` | Ce que vend chaque magasin, et à quel prix |
 | `MONSTERS_BLUEPRINTS.js` | Vitalité, vitesse, arme, résistances et score de chaque monstre |
-| `ITEMS_DATA.js` | Objets : potions, nourriture, armes, bijoux (effets, taille des piles) |
-| `SPELLS_DATA.js` | Ce que tire chaque arme : dégâts, coût en énergie, nombre de projectiles |
+| `ITEMS_DATA.js` | Objets : potions, nourriture, armes, bijoux (effets, taille des piles). Un fichier par objet dans `data/items/<nom>.json` (icône donnée par son nom dans `ICONS.js`) ; un nouvel objet s'ajoute aussi aux imports et à `ITEMS` de `ITEMS_DATA.js` |
+| `SPELLS_DATA.js` | Ce que tire chaque arme : dégâts, coût en énergie, nombre de projectiles. Un fichier par projectile dans `data/spells/<nom>.json` ; un nouveau projectile s'ajoute aussi aux imports et à la liste de `SPELLS_DATA.js` |
 | `CRAFT_DATA.js` | Recettes d'artisanat |
 | `../Dungeon.js` | Le joueur au départ (`setupPlayerCreature`) ; le niveau des monstres (`setupMobCreature`) |
 | `../EffectProcessor.js` | Facteurs de dégâts, de soin, de résistance (fin du fichier) |
@@ -109,7 +109,8 @@ basic_chest: {
         GKEY: 5,                     // 1 clé de fer (clé générique)
         pot_heal_1: 9,
         ...
-    }
+    },
+    always: ['ring_thermdef_3']      // facultatif : lâchés à chaque fois, en plus du tirage
 }
 ```
 
@@ -127,7 +128,7 @@ basic_chest: {
 
 | Source | Table | Où c'est décidé |
 |---|---|---|
-| Coffre (`BLOCK_TREASURE`, souvent derrière un passage secret) | `loot.chest` de l'étage | `WORLD_DATA.dungeons.js` |
+| Coffre (`BLOCK_TREASURE`, souvent derrière un passage secret) | `loot.chest` de l'étage | `dungeons/<biome>.js` |
 | Gros coffre (`BLOCK_WATCH_TREASURE`, dans les salles de garde) | `loot.bigchest` de l'étage | idem |
 | Placard (laboratoires, cuisines) | `loot.closet` de l'étage | idem |
 | Monstre tué | la table qui porte **le nom du monstre** (`m_spider`…) | `LOOT_DATA.js` |
@@ -146,8 +147,10 @@ pas à la génération du niveau.
 | `m_zombie`, `m_skeleton`, `m_goblin`, `m_goblin_warrior` | 0,5 | 0,25 | 0 |
 | la plupart des autres monstres | 0,5 à 0,75 | 0,31 à 0,47 | 0 |
 | `m_wasp` | 0,25 | 0 | 0 |
-| boss (sauf la reine Méduse) | 0,75 | 0,47 | 0 |
-| `m_medusaqueen` | 1 | 0 | baguette `wand_lyte_3` à coup sûr |
+| `m_bat` | 0,25 | 0,23 | 0 |
+| boss (sauf les deux reines) | 0,75 | 0,47 | 0 |
+| `m_medusaqueen` | 2 | 0 | amulette `amu_fireward` et anneau `ring_thermdef_3` à coup sûr (`always`) |
+| `m_witch_queen` | 1 | 0 | baguette `wand_lyte_3` à coup sûr |
 
 Un étage de donjon ou de mine compte environ 35 à 45 coffres et 40 à
 60 monstres : **15 à 20 pièces d'or dans les coffres, à peu près autant sur
@@ -176,7 +179,7 @@ aujourd'hui les trois mêmes tables. Créer des tables par zone dans
 potions de niveau 2), puis les indiquer dans l'étage :
 
 ```js
-// WORLD_DATA.dungeons.js, étage mines[0]
+// dungeons/mines.js, étage mines[0]
 loot: {
     chest: 'mines_chest',
     closet: 'basic_closet',
@@ -210,7 +213,7 @@ firstaid_2: [
 
 ### Quels magasins à quel étage
 
-Dans `WORLD_DATA.dungeons.js`, la propriété `shops` de chaque étage :
+Dans `dungeons/<biome>.js`, la propriété `shops` de chaque étage :
 
 ```js
 shops: [shops.firstaid_2, shops.magic_2]
@@ -277,6 +280,7 @@ demi-étage de fouille.
 | `m_goblin` | 5 | `dag_brass` | 7 |
 | `m_goblin_warrior` | 12 | `dag_brass` | 7 |
 | `m_wasp` | 3 | `dag_poisonsting_1` | 7 + poison |
+| `m_bat` | 4 | `dag_brass` | 7 |
 | `m_spider` | 6 | `dag_poisonsting_1` | 7 + poison |
 | `m_skeleton`, `m_pira` | 15 | `dag_brass` | 7 |
 | `m_acidblob`, `m_fireblob` | 10 | explosion | 17,5 |
@@ -285,9 +289,10 @@ demi-étage de fouille.
 | `m_turret` | 30 | `wand_turret_1` | 10,5 |
 | `m_bigarmor` | 25 | `dag_steel` | 10,5 |
 | `m_warlock` | 25 | `wand_warlock_1` | 7 + aveuglement, vulnérabilité |
-| `m_witch` | 15 | `wand_witch_1` (éclair) | 7 |
-| `m_witch_queen` | 60, résist. magie 2 / élec. 4 | `wand_witch_queen_1` (3 éclairs en éventail) | 3 × 10,5 |
-| `m_succubus` | 25, résist. feu 4 | `wand_succubus_1` (boule de feu) | 10,5 |
+| `m_witch` | 15 | `wand_witch_1` (éclair, épargne les boss) | 7 |
+| `m_witch_dark` | 15 | `wand_witch_dark_1` (missile sombre des diablotins, épargne les boss) | 14 |
+| `m_witch_queen` | 60, résist. magie 2 / élec. 4 ; blessée, se lance le champ réfléchissant (15 s, au plus toutes les 30 s : `onWound`) | `wand_witch_queen_1` (3 traits toxiques en éventail, confusion 1 fois sur 5 par trait, comme `m_myco2`) | 3 × 10,5 (toxique) |
+| `m_succubus` | 25, résist. feu 8, soit 9 au niveau 1 (50 % des dégâts de feu) | `wand_succubus_1` (boule de feu) | 10,5 |
 | `m_medusa` | 15 | `wand_medusa_1` | 14 + poison |
 | `m_phanto` | 30 | `wand_imp_1` | 14 |
 | boss | 200 à 220 | selon le boss | 7 à 14 |
@@ -392,6 +397,8 @@ permanents tant qu'ils sont portés (durée `/`).
 |---|---|
 | `ring_power_1` / `2` / `3` | +2 / +4 / +6 dés de dégâts (`ibpowC/`…) : très fort, +7 à +21 par projectile |
 | `ring_thermdef_*`, `ring_elecdef_*`, `ring_integrity_*`, `ear_magres_*` | résistances 2 / 4 / 6 |
+| `amu_fireward` (reine Méduse) | résistance au feu 5 (−39 %) |
+| `ring_thermdef_3` (reine Méduse) | résistance feu et froid 6 (−42 %) |
 | `ear_magplus_*` | énergie max +20 / +40… |
 | `amu_luck_*` | chance : réduit la probabilité que les effets secondaires des attaques ennemies (aveuglement, poison, ralentissement…) vous touchent |
 | `amu_health`, `amu_antidote`… | immunités (poison, maladies…) |
@@ -410,6 +417,13 @@ Armes : `ITEMS_DATA.js` donne le délai (`speed`) et la liste des sorts
 }
 ```
 
+Après `l1`/`l3`/`l5`, des lettres modifient le projectile : `a4` explosion
+(rayon en demi-cases), `h` lourd (repousse), `b` rebondit sur les murs, `r`
+erratique, `s`/`c` ondule, `p` **épargne les boss** : il éclate sur un
+monstre marqué `"B"` sans lui faire de mal (et l'explosion ne le touche pas).
+Les tirs des sorcières (`mis_witch_1`, `mis_witch_dark_1`) l'ont, pour ne pas
+blesser la reine ; les autres monstres restent touchés par les tirs perdus.
+
 ## Artisanat
 
 `CRAFT_DATA.js` : chaque recette donne son type (`brew` pour les potions),
@@ -425,7 +439,7 @@ magasin perdent leur intérêt. Garder ces deux prix cohérents.
 
 ## Taille et densité des niveaux
 
-### Les options du générateur (`options` dans `WORLD_DATA.dungeons.js`)
+### Les options du générateur (`options` dans `dungeons/<biome>.js`)
 
 | Option | Sens |
 |---|---|

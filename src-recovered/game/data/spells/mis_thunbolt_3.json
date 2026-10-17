@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_thunbolt",
+    "cost": 3,
+    "options": "l5r",
+    "effects": ["mxeleDA"],
+    "chances": [1]
+}

@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_lightbolt",
+    "cost": 1,
+    "options": "l1",
+    "effects": ["mxeleCA"],
+    "chances": [1]
+}

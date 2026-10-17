@@ -1,0 +1,14 @@
+{
+    "name": "~item_dag_gawld",
+    "slot": "hand",
+    "type": "dagger",
+    "model": "gawld",
+    "icon": "itm_dag_0g",
+    "speed": 700,
+    "spells": [
+        {
+            "ref": "slash_gawld",
+            "time": 0
+        }
+    ]
+}

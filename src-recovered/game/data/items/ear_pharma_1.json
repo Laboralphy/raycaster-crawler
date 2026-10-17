@@ -1,0 +1,9 @@
+{
+    "name": "~item_ear_pharma_1",
+    "type": "earings",
+    "slot": "ears",
+    "icon": "itm_ear_0c",
+    "properties": [
+        "ibphaB/"
+    ]
+}

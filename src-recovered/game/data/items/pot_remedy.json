@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_remedy",
+    "type": "potion",
+    "icon": "itm_pot_0o",
+    "stack": 10,
+    "properties": [
+        "brbodBP"
+    ]
+}

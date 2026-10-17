@@ -1,0 +1,9 @@
+{
+    "name": "~item_pot_esp",
+    "type": "potion",
+    "icon": "itm_pot_1m",
+    "stack": 10,
+    "properties": [
+        "bbespBe"
+    ]
+}

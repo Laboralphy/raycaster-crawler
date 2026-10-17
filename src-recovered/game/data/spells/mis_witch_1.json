@@ -1,0 +1,7 @@
+{
+    "blueprint": "p_thunbolt",
+    "cost": 0,
+    "options": "l1p",
+    "effects": ["mxeleCA"],
+    "chances": [1]
+}

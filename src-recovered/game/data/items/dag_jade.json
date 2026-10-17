@@ -1,0 +1,14 @@
+{
+    "name": "~item_dag_jade",
+    "slot": "hand",
+    "type": "dagger",
+    "model": "jade",
+    "icon": "itm_dag_0j",
+    "speed": 700,
+    "spells": [
+        {
+            "ref": "slash_jade",
+            "time": 0
+        }
+    ]
+}

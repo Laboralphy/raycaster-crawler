@@ -1,0 +1,10 @@
+{
+    "name": "~item_ear_affmag_3",
+    "type": "earings",
+    "slot": "ears",
+    "icon": "itm_ear_1p",
+    "properties": [
+        "ibxmpG/",
+        "irmagG/"
+    ]
+}

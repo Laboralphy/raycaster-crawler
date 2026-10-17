@@ -7,7 +7,8 @@
     "start": "node server.js",
     "build": "esbuild src-recovered/game/main.js --bundle --format=iife --minify --target=es2015 --outfile=crawler.js",
     "check:laby": "node laby/tools/check.js",
-    "check:data": "node --no-warnings tools/check_data.mjs"
+    "check:data": "node --no-warnings tools/check_data.mjs",
+    "estimate:loot": "node --no-warnings tools/estimate_loot.mjs"
   },
   "devDependencies": {
     "acorn": "^8.14.0",

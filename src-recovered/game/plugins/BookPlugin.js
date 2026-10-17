@@ -37,6 +37,10 @@ export class BookPlugin {
                 case LABY.BLOCK_LIBRARY_BOOK:
                 case LABY.BLOCK_LIVING_BOOK:
                     this.readShelf(x, y);
+                    this.markShelfRead(x, y);
+                    return true;
+                case LABY.BLOCK_LIBRARY_BOOK_READ:
+                    this.readShelf(x, y);
                     return true
             }
         }
@@ -46,6 +50,21 @@ export class BookPlugin {
     setGame(g) {
         this.oGame = g;
         this.oGame.registerPluginSignal('block', this)
+    }
+
+    /**
+     * La bibliothèque consultée devient un bloc de rayonnages en désordre
+     * (BLOCK_LIBRARY_BOOK_READ, tuile 60), qu'on peut encore consulter. Le
+     * changement est noté dans la carte de l'étage, donc sauvegardé.
+     */
+    markShelfRead(x, y) {
+        const rc = this.oGame.oRaycaster;
+        const nCode = rc.aWorld.walls.metacodes[LABY.BLOCK_LIBRARY_BOOK_READ];
+        if (nCode === undefined) {
+            return
+        }
+        this.oGame.oDungeon.setAreaBlockProperty(x, y, LABY.BLOCK_LIBRARY_BOOK_READ);
+        rc.setMapXY(x, y, nCode)
     }
 
     read(sBook, aParams) {

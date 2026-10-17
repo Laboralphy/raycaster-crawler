@@ -1,0 +1,11 @@
+{
+    "name": "~item_ccc_holyh2o",
+    "type": "ccc",
+    "icon": "itm_ccc_holyh2o",
+    "stack": 10,
+    "properties": [
+        "brfdpBA",
+        "breneCA",
+        "brheaBA"
+    ]
+}

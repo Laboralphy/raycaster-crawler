@@ -1,0 +1,10 @@
+{
+    "name": "~item_ccc_herb4",
+    "type": "ccc",
+    "icon": "itm_ccc_herb4",
+    "stack": 10,
+    "properties": [
+        "brfdpBA",
+        "breneBA"
+    ]
+}

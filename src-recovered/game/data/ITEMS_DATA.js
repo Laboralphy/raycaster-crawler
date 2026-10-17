@@ -1,942 +1,255 @@
 import { ICONS } from './ICONS.js';
+import pot_heal_1 from './items/pot_heal_1.json' with { type: 'json' };
+import pot_heal_2 from './items/pot_heal_2.json' with { type: 'json' };
+import pot_heal_3 from './items/pot_heal_3.json' with { type: 'json' };
+import pot_regen_1 from './items/pot_regen_1.json' with { type: 'json' };
+import pot_regen_2 from './items/pot_regen_2.json' with { type: 'json' };
+import pot_regen_3 from './items/pot_regen_3.json' with { type: 'json' };
+import pot_ether_1 from './items/pot_ether_1.json' with { type: 'json' };
+import pot_ether_2 from './items/pot_ether_2.json' with { type: 'json' };
+import pot_ether_3 from './items/pot_ether_3.json' with { type: 'json' };
+import pot_star_1 from './items/pot_star_1.json' with { type: 'json' };
+import pot_star_2 from './items/pot_star_2.json' with { type: 'json' };
+import pot_power_1 from './items/pot_power_1.json' with { type: 'json' };
+import pot_power_2 from './items/pot_power_2.json' with { type: 'json' };
+import pot_power_3 from './items/pot_power_3.json' with { type: 'json' };
+import pot_haste from './items/pot_haste.json' with { type: 'json' };
+import pot_esp from './items/pot_esp.json' with { type: 'json' };
+import pot_vital_1 from './items/pot_vital_1.json' with { type: 'json' };
+import pot_vital_2 from './items/pot_vital_2.json' with { type: 'json' };
+import pot_vital_3 from './items/pot_vital_3.json' with { type: 'json' };
+import pot_luck_1 from './items/pot_luck_1.json' with { type: 'json' };
+import pot_luck_2 from './items/pot_luck_2.json' with { type: 'json' };
+import pot_luck_3 from './items/pot_luck_3.json' with { type: 'json' };
+import pot_antidote from './items/pot_antidote.json' with { type: 'json' };
+import pot_remedy from './items/pot_remedy.json' with { type: 'json' };
+import pot_cleansing from './items/pot_cleansing.json' with { type: 'json' };
+import pot_freedom from './items/pot_freedom.json' with { type: 'json' };
+import pot_resphy_1 from './items/pot_resphy_1.json' with { type: 'json' };
+import pot_resphy_2 from './items/pot_resphy_2.json' with { type: 'json' };
+import pot_resphy_3 from './items/pot_resphy_3.json' with { type: 'json' };
+import pot_resfir_1 from './items/pot_resfir_1.json' with { type: 'json' };
+import pot_resfir_2 from './items/pot_resfir_2.json' with { type: 'json' };
+import pot_resfir_3 from './items/pot_resfir_3.json' with { type: 'json' };
+import pot_rescld_1 from './items/pot_rescld_1.json' with { type: 'json' };
+import pot_rescld_2 from './items/pot_rescld_2.json' with { type: 'json' };
+import pot_rescld_3 from './items/pot_rescld_3.json' with { type: 'json' };
+import pot_resele_1 from './items/pot_resele_1.json' with { type: 'json' };
+import pot_resele_2 from './items/pot_resele_2.json' with { type: 'json' };
+import pot_resele_3 from './items/pot_resele_3.json' with { type: 'json' };
+import pot_restox_1 from './items/pot_restox_1.json' with { type: 'json' };
+import pot_restox_2 from './items/pot_restox_2.json' with { type: 'json' };
+import pot_restox_3 from './items/pot_restox_3.json' with { type: 'json' };
+import pot_resmag_1 from './items/pot_resmag_1.json' with { type: 'json' };
+import pot_resmag_2 from './items/pot_resmag_2.json' with { type: 'json' };
+import pot_resmag_3 from './items/pot_resmag_3.json' with { type: 'json' };
+import pot_dispell from './items/pot_dispell.json' with { type: 'json' };
+import ccc_h2o from './items/ccc_h2o.json' with { type: 'json' };
+import ccc_holyh2o from './items/ccc_holyh2o.json' with { type: 'json' };
+import ccc_bread from './items/ccc_bread.json' with { type: 'json' };
+import ccc_cake from './items/ccc_cake.json' with { type: 'json' };
+import ccc_herb0 from './items/ccc_herb0.json' with { type: 'json' };
+import ccc_herb1 from './items/ccc_herb1.json' with { type: 'json' };
+import ccc_herb2 from './items/ccc_herb2.json' with { type: 'json' };
+import ccc_herb3 from './items/ccc_herb3.json' with { type: 'json' };
+import ccc_herb4 from './items/ccc_herb4.json' with { type: 'json' };
+import ccc_herb5 from './items/ccc_herb5.json' with { type: 'json' };
+import ccc_meat from './items/ccc_meat.json' with { type: 'json' };
+import ccc_vegs from './items/ccc_vegs.json' with { type: 'json' };
+import ccc_meal from './items/ccc_meal.json' with { type: 'json' };
+import gold from './items/gold.json' with { type: 'json' };
+import amu_luck_1 from './items/amu_luck_1.json' with { type: 'json' };
+import amu_luck_2 from './items/amu_luck_2.json' with { type: 'json' };
+import amu_luck_3 from './items/amu_luck_3.json' with { type: 'json' };
+import amu_deathward from './items/amu_deathward.json' with { type: 'json' };
+import amu_antidote from './items/amu_antidote.json' with { type: 'json' };
+import amu_remedy from './items/amu_remedy.json' with { type: 'json' };
+import amu_cleansing from './items/amu_cleansing.json' with { type: 'json' };
+import amu_freedom from './items/amu_freedom.json' with { type: 'json' };
+import amu_health from './items/amu_health.json' with { type: 'json' };
+import amu_fireward from './items/amu_fireward.json' with { type: 'json' };
+import ring_power_1 from './items/ring_power_1.json' with { type: 'json' };
+import ring_power_2 from './items/ring_power_2.json' with { type: 'json' };
+import ring_power_3 from './items/ring_power_3.json' with { type: 'json' };
+import ring_thermdef_1 from './items/ring_thermdef_1.json' with { type: 'json' };
+import ring_thermdef_2 from './items/ring_thermdef_2.json' with { type: 'json' };
+import ring_thermdef_3 from './items/ring_thermdef_3.json' with { type: 'json' };
+import ring_elecdef_1 from './items/ring_elecdef_1.json' with { type: 'json' };
+import ring_elecdef_2 from './items/ring_elecdef_2.json' with { type: 'json' };
+import ring_elecdef_3 from './items/ring_elecdef_3.json' with { type: 'json' };
+import ring_integrity_1 from './items/ring_integrity_1.json' with { type: 'json' };
+import ring_integrity_2 from './items/ring_integrity_2.json' with { type: 'json' };
+import ring_integrity_3 from './items/ring_integrity_3.json' with { type: 'json' };
+import ring_btm_1 from './items/ring_btm_1.json' with { type: 'json' };
+import ear_pharma_1 from './items/ear_pharma_1.json' with { type: 'json' };
+import ear_pharma_2 from './items/ear_pharma_2.json' with { type: 'json' };
+import ear_pharma_3 from './items/ear_pharma_3.json' with { type: 'json' };
+import ear_magres_1 from './items/ear_magres_1.json' with { type: 'json' };
+import ear_magres_2 from './items/ear_magres_2.json' with { type: 'json' };
+import ear_magres_3 from './items/ear_magres_3.json' with { type: 'json' };
+import ear_magplus_1 from './items/ear_magplus_1.json' with { type: 'json' };
+import ear_magplus_2 from './items/ear_magplus_2.json' with { type: 'json' };
+import ear_magplus_3 from './items/ear_magplus_3.json' with { type: 'json' };
+import ear_affmag_1 from './items/ear_affmag_1.json' with { type: 'json' };
+import ear_affmag_2 from './items/ear_affmag_2.json' with { type: 'json' };
+import ear_affmag_3 from './items/ear_affmag_3.json' with { type: 'json' };
+import dag_brass from './items/dag_brass.json' with { type: 'json' };
+import dag_steel from './items/dag_steel.json' with { type: 'json' };
+import dag_kopper from './items/dag_kopper.json' with { type: 'json' };
+import dag_gawld from './items/dag_gawld.json' with { type: 'json' };
+import dag_jade from './items/dag_jade.json' with { type: 'json' };
+import dag_sylver from './items/dag_sylver.json' with { type: 'json' };
+import dag_golem from './items/dag_golem.json' with { type: 'json' };
+import dag_poisonsting_1 from './items/dag_poisonsting_1.json' with { type: 'json' };
+import dag_ravenbeak_1 from './items/dag_ravenbeak_1.json' with { type: 'json' };
+import wand_imp_1 from './items/wand_imp_1.json' with { type: 'json' };
+import wand_witch_dark_1 from './items/wand_witch_dark_1.json' with { type: 'json' };
+import wand_cube_1 from './items/wand_cube_1.json' with { type: 'json' };
+import wand_witch_1 from './items/wand_witch_1.json' with { type: 'json' };
+import wand_witch_queen_1 from './items/wand_witch_queen_1.json' with { type: 'json' };
+import wand_succubus_1 from './items/wand_succubus_1.json' with { type: 'json' };
+import wand_warlock_1 from './items/wand_warlock_1.json' with { type: 'json' };
+import wand_booma_1 from './items/wand_booma_1.json' with { type: 'json' };
+import wand_boomf_1 from './items/wand_boomf_1.json' with { type: 'json' };
+import wand_turret_1 from './items/wand_turret_1.json' with { type: 'json' };
+import wand_myco_1 from './items/wand_myco_1.json' with { type: 'json' };
+import wand_medusa_1 from './items/wand_medusa_1.json' with { type: 'json' };
+import wand_fyre_2 from './items/wand_fyre_2.json' with { type: 'json' };
+import wand_yce_1 from './items/wand_yce_1.json' with { type: 'json' };
+import wand_lyte_3 from './items/wand_lyte_3.json' with { type: 'json' };
 
-export const ITEMS_DATA = {
-    "pot_heal_1": {
-        "name": "~item_pot_heal_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0r,
-        "stack": 10,
-        "properties": ["brheaCA"]
-    },
-    "pot_heal_2": {
-        "name": "~item_pot_heal_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0r,
-        "stack": 10,
-        "properties": ["brheaFA"]
-    },
-    "pot_heal_3": {
-        "name": "~item_pot_heal_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0r,
-        "stack": 10,
-        "properties": ["brheaKA"]
-    },
-    "pot_regen_1": {
-        "name": "~item_pot_regen_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0gc,
-        "stack": 10,
-        "properties": ["brheaCe"]
-    },
-    "pot_regen_2": {
-        "name": "~item_pot_regen_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0gc,
-        "stack": 10,
-        "properties": ["brheaFe"]
-    },
-    "pot_regen_3": {
-        "name": "~item_pot_regen_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0gc,
-        "stack": 10,
-        "properties": ["brheaKe"]
-    },
-    "pot_ether_1": {
-        "name": "~item_pot_ether_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0b,
-        "stack": 10,
-        "properties": ["breneCA"]
-    },
-    "pot_ether_2": {
-        "name": "~item_pot_ether_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0b,
-        "stack": 10,
-        "properties": ["breneFA"]
-    },
-    "pot_ether_3": {
-        "name": "~item_pot_ether_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0b,
-        "stack": 10,
-        "properties": ["breneKA"]
-    },
-    "pot_star_1": {
-        "name": "~item_pot_star_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1c,
-        "stack": 10,
-        "properties": ["bbinvBL"]
-    },
-    "pot_star_2": {
-        "name": "~item_pot_star_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1c,
-        "stack": 10,
-        "properties": ["bbinvBT"]
-    },
-    "pot_power_1": {
-        "name": "~item_pot_power_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1o,
-        "stack": 10,
-        "properties": ["bbpowBe"]
-    },
-    "pot_power_2": {
-        "name": "~item_pot_power_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1o,
-        "stack": 10,
-        "properties": ["bbpowCe"]
-    },
-    "pot_power_3": {
-        "name": "~item_pot_power_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1o,
-        "stack": 10,
-        "properties": ["bbpowDe"]
-    },
-    "pot_haste": {
-        "name": "~item_pot_haste",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1g,
-        "stack": 10,
-        "properties": ["bbhstFe"]
-    },
-    "pot_esp": {
-        "name": "~item_pot_esp",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1m,
-        "stack": 10,
-        "properties": ["bbespBe"]
-    },
-    "pot_vital_1": {
-        "name": "~item_pot_vital_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1r,
-        "stack": 10,
-        "properties": ["bbxhpD8"]
-    },
-    "pot_vital_2": {
-        "name": "~item_pot_vital_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1r,
-        "stack": 10,
-        "properties": ["bbxhpG8"]
-    },
-    "pot_vital_3": {
-        "name": "~item_pot_vital_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1r,
-        "stack": 10,
-        "properties": ["bbxhpJ8"]
-    },
-    "pot_luck_1": {
-        "name": "~item_pot_luck_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1b,
-        "stack": 10,
-        "properties": ["bblckD8"]
-    },
-    "pot_luck_2": {
-        "name": "~item_pot_luck_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1b,
-        "stack": 10,
-        "properties": ["bblckG8"]
-    },
-    "pot_luck_3": {
-        "name": "~item_pot_luck_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_1b,
-        "stack": 10,
-        "properties": ["bblckJ8"]
-    },
-    "pot_antidote": {
-        "name": "~item_pot_antidote",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0g,
-        "stack": 10,
-        "properties": ["brantBP"]
-    },
-    "pot_remedy": {
-        "name": "~item_pot_remedy",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0o,
-        "stack": 10,
-        "properties": ["brbodBP"]
-    },
-    "pot_cleansing": {
-        "name": "~item_pot_cleansing",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0p,
-        "stack": 10,
-        "properties": ["brminBP"]
-    },
-    "pot_freedom": {
-        "name": "~item_pot_freedom",
-        "type": "potion",
-        "icon": ICONS.itm_pot_0y,
-        "stack": 10,
-        "properties": ["brmovBP"]
-    },
-    "pot_resphy_1": {
-        "name": "~item_pot_resphy_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2k,
-        "stack": 10,
-        "properties": ["brphyC8"]
-    },
-    "pot_resphy_2": {
-        "name": "~item_pot_resphy_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2k,
-        "stack": 10,
-        "properties": ["brphyE8"]
-    },
-    "pot_resphy_3": {
-        "name": "~item_pot_resphy_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2k,
-        "stack": 10,
-        "properties": ["brphyG8"]
-    },
-    "pot_resfir_1": {
-        "name": "~item_pot_resfir_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2o,
-        "stack": 10,
-        "properties": ["brfirC8"]
-    },
-    "pot_resfir_2": {
-        "name": "~item_pot_resfir_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2o,
-        "stack": 10,
-        "properties": ["brfirE8"]
-    },
-    "pot_resfir_3": {
-        "name": "~item_pot_resfir_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2o,
-        "stack": 10,
-        "properties": ["brfirG8"]
-    },
-    "pot_rescld_1": {
-        "name": "~item_pot_rescld_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2c,
-        "stack": 10,
-        "properties": ["brcldC8"]
-    },
-    "pot_rescld_2": {
-        "name": "~item_pot_rescld_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2c,
-        "stack": 10,
-        "properties": ["brcldE8"]
-    },
-    "pot_rescld_3": {
-        "name": "~item_pot_rescld_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2c,
-        "stack": 10,
-        "properties": ["brcldG8"]
-    },
-    "pot_resele_1": {
-        "name": "~item_pot_resele_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2b,
-        "stack": 10,
-        "properties": ["breleC8"]
-    },
-    "pot_resele_2": {
-        "name": "~item_pot_resele_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2b,
-        "stack": 10,
-        "properties": ["breleE8"]
-    },
-    "pot_resele_3": {
-        "name": "~item_pot_resele_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2b,
-        "stack": 10,
-        "properties": ["breleG8"]
-    },
-    "pot_restox_1": {
-        "name": "~item_pot_restox_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2g,
-        "stack": 10,
-        "properties": ["brtoxC8"]
-    },
-    "pot_restox_2": {
-        "name": "~item_pot_restox_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2g,
-        "stack": 10,
-        "properties": ["brtoxE8"]
-    },
-    "pot_restox_3": {
-        "name": "~item_pot_restox_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2g,
-        "stack": 10,
-        "properties": ["brtoxG8"]
-    },
-    "pot_resmag_1": {
-        "name": "~item_pot_resmag_1",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2p,
-        "stack": 10,
-        "properties": ["brmagC8"]
-    },
-    "pot_resmag_2": {
-        "name": "~item_pot_resmag_2",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2p,
-        "stack": 10,
-        "properties": ["brmagE8"]
-    },
-    "pot_resmag_3": {
-        "name": "~item_pot_resmag_3",
-        "type": "potion",
-        "icon": ICONS.itm_pot_2p,
-        "stack": 10,
-        "properties": ["brmagG8"]
-    },
-    "pot_dispell": {
-        "name": "~item_pot_dispell",
-        "type": "potion",
-        "icon": ICONS.itm_pot_3c,
-        "stack": 10,
-        "properties": ["bdispBA"]
-    },
-    "ccc_h2o": {
-        "name": "~item_ccc_h2o",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_h2o,
-        "stack": 10,
-        "properties": ["brfdpBA", "breneBA"]
-    },
-    "ccc_holyh2o": {
-        "name": "~item_ccc_holyh2o",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_holyh2o,
-        "stack": 10,
-        "properties": ["brfdpBA", "breneCA", "brheaBA"]
-    },
-    "ccc_bread": {
-        "name": "~item_ccc_bread",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_bread,
-        "stack": 10,
-        "properties": ["brfdpCA"]
-    },
-    "ccc_cake": {
-        "name": "~item_ccc_cake",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_cake,
-        "stack": 10,
-        "properties": ["brfdpDA"]
-    },
-    "ccc_herb0": {
-        "name": "~item_ccc_herb0",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_herb0,
-        "stack": 10,
-        "properties": ["brfdpBA"]
-    },
-    "ccc_herb1": {
-        "name": "~item_ccc_herb1",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_herb1,
-        "stack": 10,
-        "properties": ["brfdpBA"]
-    },
-    "ccc_herb2": {
-        "name": "~item_ccc_herb2",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_herb2,
-        "stack": 10,
-        "properties": ["brfdpBA"]
-    },
-    "ccc_herb3": {
-        "name": "~item_ccc_herb3",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_herb3,
-        "stack": 10,
-        "properties": ["brfdpBA"]
-    },
-    "ccc_herb4": {
-        "name": "~item_ccc_herb4",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_herb4,
-        "stack": 10,
-        "properties": ["brfdpBA", "breneBA"]
-    },
-    "ccc_herb5": {
-        "name": "~item_ccc_herb5",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_herb5,
-        "stack": 10,
-        "properties": ["bxfdpBA", "bxtoxCF"]
-    },
-    "ccc_meat": {
-        "name": "~item_ccc_meat",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_meat,
-        "stack": 10,
-        "properties": ["brfdpEA"]
-    },
-    "ccc_vegs": {
-        "name": "~item_ccc_vegs",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_vegs,
-        "stack": 10,
-        "properties": ["brfdpCA"]
-    },
-    "ccc_meal": {
-        "name": "~item_ccc_meal",
-        "type": "ccc",
-        "icon": ICONS.itm_ccc_meal,
-        "stack": 10,
-        "properties": ["brfdpKA", "breneCA"]
-    },
-    "gold": {
-        "name": "~item_gold",
-        "type": "misc",
-        "icon": ICONS.itm_gold,
-        "stack": 999
-    },
-    "amu_luck_1": {
-        "name": "~item_amu_luck_1",
-        "type": "ring",
-        "slot": "neck",
-        "icon": ICONS.itm_amu_0b,
-        "properties": ["iblckC/"]
-    },
-    "amu_luck_2": {
-        "name": "~item_amu_luck_2",
-        "type": "ring",
-        "slot": "neck",
-        "icon": ICONS.itm_amu_0b,
-        "properties": ["iblckE/"]
-    },
-    "amu_luck_3": {
-        "name": "~item_amu_luck_3",
-        "type": "ring",
-        "slot": "neck",
-        "icon": ICONS.itm_amu_0b,
-        "properties": ["iblckG/"]
-    },
-    "amu_deathward": {
-        "name": "~item_amu_deathward",
-        "type": "ring",
-        "slot": "neck",
-        "icon": ICONS.itm_amu_0p,
-        "properties": ["irdthB/"]
-    },
-    "amu_antidote": {
-        "name": "~item_amu_antidote",
-        "type": "ring",
-        "slot": "neck",
-        "icon": ICONS.itm_amu_0g,
-        "properties": ["irantB/"]
-    },
-    "amu_remedy": {
-        "name": "~item_amu_remedy",
-        "type": "ring",
-        "slot": "neck",
-        "icon": ICONS.itm_amu_0mp,
-        "properties": ["irbodB/"]
-    },
-    "amu_cleansing": {
-        "name": "~item_amu_cleansing",
-        "type": "ring",
-        "slot": "neck",
-        "icon": ICONS.itm_amu_0b,
-        "properties": ["irminB/"]
-    },
-    "amu_freedom": {
-        "name": "~item_amu_freedom",
-        "type": "ring",
-        "slot": "neck",
-        "icon": ICONS.itm_amu_0ro,
-        "properties": ["irmovB/"]
-    },
-    "amu_health": {
-        "name": "~item_amu_health",
-        "type": "ring",
-        "slot": "neck",
-        "icon": ICONS.itm_amu_0c,
-        "properties": ["irantB/", "irbodB/", "irminB/"]
-    },
-    "ring_power_1": {
-        "name": "~item_ring_power_1",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0p,
-        "properties": ["ibpowC/"]
-    },
-    "ring_power_2": {
-        "name": "~item_ring_power_2",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0p,
-        "properties": ["ibpowE/"]
-    },
-    "ring_power_3": {
-        "name": "~item_ring_power_3",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0p,
-        "properties": ["ibpowG/"]
-    },
-    "ring_thermdef_1": {
-        "name": "~item_ring_thermdef_1",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0y,
-        "properties": ["irfirC/", "ircldC/"]
-    },
-    "ring_thermdef_2": {
-        "name": "~item_ring_thermdef_2",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0y,
-        "properties": ["irfirE/", "ircldE/"]
-    },
-    "ring_thermdef_3": {
-        "name": "~item_ring_thermdef_3",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0y,
-        "properties": ["irfirG/", "ircldG/"]
-    },
-    "ring_elecdef_1": {
-        "name": "~item_ring_elecdef_1",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0b,
-        "properties": ["ireleC/"]
-    },
-    "ring_elecdef_2": {
-        "name": "~item_ring_elecdef_2",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0b,
-        "properties": ["ireleE/"]
-    },
-    "ring_elecdef_3": {
-        "name": "~item_ring_elecdef_3",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0b,
-        "properties": ["ireleG/"]
-    },
-    "ring_integrity_1": {
-        "name": "~item_ring_integrity_1",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0g,
-        "properties": ["irtoxC/", "irphyC/"]
-    },
-    "ring_integrity_2": {
-        "name": "~item_ring_integrity_2",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0g,
-        "properties": ["irtoxE/", "irphyE/"]
-    },
-    "ring_integrity_3": {
-        "name": "~item_ring_integrity_3",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_0g,
-        "properties": ["irtoxG/", "irphyG/"]
-    },
-    "ring_btm_1": {
-        "name": "~item_ring_btm_1",
-        "type": "ring",
-        "slot": "finger",
-        "icon": ICONS.itm_rng_2f,
-        "properties": ["ireneB/", "ixphyB/"]
-    },
-    "ear_pharma_1": {
-        "name": "~item_ear_pharma_1",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_0c,
-        "properties": ["ibphaB/"]
-    },
-    "ear_pharma_2": {
-        "name": "~item_ear_pharma_2",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_0c,
-        "properties": ["ibphaC/"]
-    },
-    "ear_pharma_3": {
-        "name": "~item_ear_pharma_3",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_0c,
-        "properties": ["ibphaD/"]
-    },
-    "ear_magres_1": {
-        "name": "~item_ear_magres_1",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_0p,
-        "properties": ["irmagC/"]
-    },
-    "ear_magres_2": {
-        "name": "~item_ear_magres_2",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_0p,
-        "properties": ["irmagE/"]
-    },
-    "ear_magres_3": {
-        "name": "~item_ear_magres_3",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_0p,
-        "properties": ["irmagG/"]
-    },
-    "ear_magplus_1": {
-        "name": "~item_ear_magplus_1",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_1b,
-        "properties": ["ibxmpC/"]
-    },
-    "ear_magplus_2": {
-        "name": "~item_ear_magplus_2",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_1b,
-        "properties": ["ibxmpE/"]
-    },
-    "ear_magplus_3": {
-        "name": "~item_ear_magplus_3",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_1b,
-        "properties": ["ibxmpG/"]
-    },
-    "ear_affmag_1": {
-        "name": "~item_ear_affmag_1",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_1p,
-        "properties": ["ibxmpC/", "irmagC/"]
-    },
-    "ear_affmag_2": {
-        "name": "~item_ear_affmag_2",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_1p,
-        "properties": ["ibxmpE/", "irmagE/"]
-    },
-    "ear_affmag_3": {
-        "name": "~item_ear_affmag_3",
-        "type": "earings",
-        "slot": "ears",
-        "icon": ICONS.itm_ear_1p,
-        "properties": ["ibxmpG/", "irmagG/"]
-    },
-    "dag_brass": {
-        "name": "~item_dag_brass",
-        "slot": "hand",
-        "type": "dagger",
-        "model": "brass",
-        "icon": ICONS.itm_dag_0b,
-        "speed": 700,
-        "spells": [{
-            "ref": "slash_brass",
-            "time": 0
-        }]
-    },
-    "dag_steel": {
-        "name": "~item_dag_steel",
-        "slot": "hand",
-        "type": "dagger",
-        "model": "steel",
-        "icon": ICONS.itm_dag_0i,
-        "speed": 700,
-        "spells": [{
-            "ref": "slash_steel",
-            "time": 0
-        }]
-    },
-    "dag_kopper": {
-        "name": "~item_dag_kopper",
-        "slot": "hand",
-        "type": "dagger",
-        "model": "kopper",
-        "icon": ICONS.itm_dag_0c,
-        "speed": 700,
-        "spells": [{
-            "ref": "slash_kopper",
-            "time": 0
-        }]
-    },
-    "dag_gawld": {
-        "name": "~item_dag_gawld",
-        "slot": "hand",
-        "type": "dagger",
-        "model": "gawld",
-        "icon": ICONS.itm_dag_0g,
-        "speed": 700,
-        "spells": [{
-            "ref": "slash_gawld",
-            "time": 0
-        }]
-    },
-    "dag_jade": {
-        "name": "~item_dag_jade",
-        "slot": "hand",
-        "type": "dagger",
-        "model": "jade",
-        "icon": ICONS.itm_dag_0j,
-        "speed": 700,
-        "spells": [{
-            "ref": "slash_jade",
-            "time": 0
-        }]
-    },
-    "dag_sylver": {
-        "name": "~item_dag_sylver",
-        "slot": "hand",
-        "type": "dagger",
-        "model": "sylver",
-        "icon": ICONS.itm_dag_0s,
-        "speed": 700,
-        "spells": [{
-            "ref": "slash_sylver",
-            "time": 0
-        }]
-    },
-    "dag_golem": {
-        "name": "~item_dag_golem",
-        "slot": "hand",
-        "type": "dagger",
-        "model": "steel",
-        "icon": ICONS.itm_dag_0i,
-        "speed": 700,
-        "spells": [{
-            "ref": "punch_golem",
-            "time": 0
-        }]
-    },
-    "dag_poisonsting_1": {
-        "name": "~item_dag_poisonsting_1",
-        "slot": "hand",
-        "type": "dagger",
-        "model": "jade",
-        "icon": ICONS.itm_dag_0g,
-        "speed": 700,
-        "spells": [{
-            "ref": "slash_poison_1",
-            "time": 0
-        }]
-    },
-    "dag_ravenbeak_1": {
-        "name": "~item_dag_ravenbeak_1",
-        "slot": "hand",
-        "type": "dagger",
-        "model": "brass",
-        "icon": ICONS.itm_dag_0i,
-        "speed": 700,
-        "spells": [{
-            "ref": "slash_ravenbeak_1",
-            "time": 0
-        }]
-    },
-    "wand_imp_1": {
-        "name": "~item_wand_imp_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "arcane",
-        "icon": ICONS.itm_wnd_0p,
-        "speed": 500,
-        "spells": [{
-            "ref": "mis_impwand_1",
-            "time": 0
-        }, {
-            "ref": "mis_heal_1",
-            "time": 100
-        }]
-    },
-    "wand_cube_1": {
-        "name": "~item_wand_cube_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "fyre",
-        "icon": ICONS.itm_wnd_0p,
-        "speed": 1000,
-        "spells": [{
-            "ref": "mis_cubefire_2",
-            "time": 0
-        }]
-    },
-    "wand_witch_1": {
-        "name": "~item_wand_witch_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "thunder",
-        "icon": ICONS.itm_wnd_0p,
-        "speed": 600,
-        "spells": [{
-            "ref": "mis_witch_1",
-            "time": 0
-        }]
-    },
-    "wand_witch_queen_1": {
-        "name": "~item_wand_witch_queen_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "thunder",
-        "icon": ICONS.itm_wnd_0p,
-        "speed": 700,
-        "spells": [{
-            "ref": "mis_witch_queen_1",
-            "time": 0
-        }]
-    },
-    "wand_succubus_1": {
-        "name": "~item_wand_succubus_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "fyre",
-        "icon": ICONS.itm_wnd_0p,
-        "speed": 600,
-        "spells": [{
-            "ref": "mis_succubus_1",
-            "time": 0
-        }]
-    },
-    "wand_warlock_1": {
-        "name": "~item_wand_warlock_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "arcane",
-        "icon": ICONS.itm_wnd_0p,
-        "speed": 500,
-        "spells": [{
-            "ref": "mis_warlock_1",
-            "time": 0
-        }]
-    },
-    "wand_booma_1": {
-        "name": "~item_wand_booma_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "toxyc",
-        "icon": ICONS.itm_wnd_0p,
-        "speed": 50,
-        "spells": [{
-            "ref": "mis_boomacid_1",
-            "time": 250
-        }]
-    },
-    "wand_boomf_1": {
-        "name": "~item_wand_boomf_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "toxyc",
-        "icon": ICONS.itm_wnd_0p,
-        "speed": 50,
-        "spells": [{
-            "ref": "mis_boomfire_1",
-            "time": 250
-        }]
-    },
-    "wand_turret_1": {
-        "name": "~item_wand_turret_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "fyre",
-        "icon": ICONS.itm_wnd_0p,
-        "speed": 500,
-        "spells": [{
-            "ref": "mis_turretfire_1",
-            "time": 0
-        }]
-    },
-    "wand_myco_1": {
-        "name": "~item_wand_myco_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "toxyc",
-        "icon": ICONS.itm_wnd_0p,
-        "speed": 1000,
-        "spells": [{
-            "ref": "mis_toxicspit_1",
-            "time": 0
-        }]
-    },
-    "wand_medusa_1": {
-        "name": "~item_wand_medusa_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "toxyc",
-        "icon": ICONS.itm_wnd_0p,
-        "speed": 1000,
-        "spells": [{
-            "ref": "mis_medtoxic_2",
-            "time": 0
-        }]
-    },
-    "wand_fyre_2": {
-        "name": "~item_wand_fyre_2",
-        "slot": "hand",
-        "type": "wand",
-        "model": "fyre",
-        "icon": ICONS.itm_wnd_0y,
-        "speed": 300,
-        "spells": [{
-            "ref": "mis_firebolt_2",
-            "time": 0
-        }, {
-            "ref": "mis_firespread_2",
-            "time": 500
-        }]
-    },
-    "wand_yce_1": {
-        "name": "~item_wand_yce_1",
-        "slot": "hand",
-        "type": "wand",
-        "model": "yce",
-        "icon": ICONS.itm_wnd_0b,
-        "speed": 300,
-        "spells": [{
-            "ref": "mis_icebolt_1",
-            "time": 0
-        }, {
-            "ref": "mis_iceball_1",
-            "time": 500
-        }]
-    },
-    "wand_lyte_3": {
-        "name": "~item_wand_lyte_3",
-        "slot": "hand",
-        "type": "wand",
-        "model": "thunder",
-        "icon": ICONS.itm_wnd_1c,
-        "speed": 300,
-        "spells": [{
-            "ref": "mis_lightbolt_1",
-            "time": 0
-        }, {
-            "ref": "mis_thunbolt_3",
-            "time": 500
-        }]
-    }
+/**
+ * Un objet par fichier, dans items/<nom>.json (le nom du fichier est la clé).
+ * Dans le JSON, « icon » est le nom de l'icône (ICONS) ; il est remplacé ici
+ * par son numéro. ITEMS garde les noms, pour tools/check_data.mjs.
+ */
+export const ITEMS = {
+    pot_heal_1,
+    pot_heal_2,
+    pot_heal_3,
+    pot_regen_1,
+    pot_regen_2,
+    pot_regen_3,
+    pot_ether_1,
+    pot_ether_2,
+    pot_ether_3,
+    pot_star_1,
+    pot_star_2,
+    pot_power_1,
+    pot_power_2,
+    pot_power_3,
+    pot_haste,
+    pot_esp,
+    pot_vital_1,
+    pot_vital_2,
+    pot_vital_3,
+    pot_luck_1,
+    pot_luck_2,
+    pot_luck_3,
+    pot_antidote,
+    pot_remedy,
+    pot_cleansing,
+    pot_freedom,
+    pot_resphy_1,
+    pot_resphy_2,
+    pot_resphy_3,
+    pot_resfir_1,
+    pot_resfir_2,
+    pot_resfir_3,
+    pot_rescld_1,
+    pot_rescld_2,
+    pot_rescld_3,
+    pot_resele_1,
+    pot_resele_2,
+    pot_resele_3,
+    pot_restox_1,
+    pot_restox_2,
+    pot_restox_3,
+    pot_resmag_1,
+    pot_resmag_2,
+    pot_resmag_3,
+    pot_dispell,
+    ccc_h2o,
+    ccc_holyh2o,
+    ccc_bread,
+    ccc_cake,
+    ccc_herb0,
+    ccc_herb1,
+    ccc_herb2,
+    ccc_herb3,
+    ccc_herb4,
+    ccc_herb5,
+    ccc_meat,
+    ccc_vegs,
+    ccc_meal,
+    gold,
+    amu_luck_1,
+    amu_luck_2,
+    amu_luck_3,
+    amu_deathward,
+    amu_antidote,
+    amu_remedy,
+    amu_cleansing,
+    amu_freedom,
+    amu_health,
+    amu_fireward,
+    ring_power_1,
+    ring_power_2,
+    ring_power_3,
+    ring_thermdef_1,
+    ring_thermdef_2,
+    ring_thermdef_3,
+    ring_elecdef_1,
+    ring_elecdef_2,
+    ring_elecdef_3,
+    ring_integrity_1,
+    ring_integrity_2,
+    ring_integrity_3,
+    ring_btm_1,
+    ear_pharma_1,
+    ear_pharma_2,
+    ear_pharma_3,
+    ear_magres_1,
+    ear_magres_2,
+    ear_magres_3,
+    ear_magplus_1,
+    ear_magplus_2,
+    ear_magplus_3,
+    ear_affmag_1,
+    ear_affmag_2,
+    ear_affmag_3,
+    dag_brass,
+    dag_steel,
+    dag_kopper,
+    dag_gawld,
+    dag_jade,
+    dag_sylver,
+    dag_golem,
+    dag_poisonsting_1,
+    dag_ravenbeak_1,
+    wand_imp_1,
+    wand_witch_dark_1,
+    wand_cube_1,
+    wand_witch_1,
+    wand_witch_queen_1,
+    wand_succubus_1,
+    wand_warlock_1,
+    wand_booma_1,
+    wand_boomf_1,
+    wand_turret_1,
+    wand_myco_1,
+    wand_medusa_1,
+    wand_fyre_2,
+    wand_yce_1,
+    wand_lyte_3
 };
+
+export const ITEMS_DATA = {};
+for (const sItem in ITEMS) {
+    const oItem = Object.assign({}, ITEMS[sItem]);
+    // une icône inconnue donne undefined (npm run check:data la signale)
+    if (typeof oItem.icon === 'string') {
+        oItem.icon = ICONS[oItem.icon];
+    }
+    ITEMS_DATA[sItem] = oItem;
+}
