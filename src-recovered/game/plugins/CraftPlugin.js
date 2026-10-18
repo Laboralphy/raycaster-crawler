@@ -6,6 +6,11 @@ import { LABY } from '../data/LABY.js';
 import { STRINGS } from '../data/STRINGS.js';
 
 export class CraftPlugin {
+    oGame = null;
+    bCrafting = false;
+    oCraftRecipes = null;
+    oRecipeList = null;
+
     uiController(sCommand, xParams) {
         let w;
         switch (sCommand) {
@@ -244,9 +249,3 @@ export class CraftPlugin {
         return false
     }
 }
-Object.assign(CraftPlugin.prototype, {
-    oGame: null,
-    bCrafting: false,
-    oCraftRecipes: null,
-    oRecipeList: null
-});

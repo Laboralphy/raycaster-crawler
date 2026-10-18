@@ -29,6 +29,66 @@ const SPRITE_SCALE = 0.943;
  * le Renderer avant chaque image (seules les cases modifiées).
  */
 export class Raycaster {
+    PHYS_NONE = 0x00;
+    PHYS_WALL = 0x01;
+    PHYS_FIRST_DOOR = 0x02;
+    PHYS_DOOR_SLIDING_UP = 0x02;
+    PHYS_CURT_SLIDING_UP = 0x03;
+    PHYS_DOOR_SLIDING_DOWN = 0x04;
+    PHYS_CURT_SLIDING_DOWN = 0x05;
+    PHYS_DOOR_SLIDING_LEFT = 0x06;
+    PHYS_DOOR_SLIDING_RIGHT = 0x07;
+    PHYS_DOOR_SLIDING_DOUBLE = 0x08;
+    PHYS_LAST_DOOR = 0x08;
+    PHYS_SECRET_BLOCK = 0x09;
+    PHYS_TRANSPARENT_BLOCK = 0x0A;
+    PHYS_INVISIBLE_BLOCK = 0x0B;
+    PHYS_OFFSET_BLOCK = 0x0C;
+    PHYS_DOOR_D = 0x0D;
+    PHYS_DOOR_E = 0x0E;
+    PHYS_DOOR_F = 0x0F;
+    TIME_FACTOR = 50;
+    oWall = null;
+    oFloor = null;
+    oBackground = null;
+    nBackgroundWidth = 0;
+    nMapSize = 0;
+    aMap = null;
+    oVisual = null;
+    nPlaneSpacing = 64;
+    nShadingFactor = 50;
+    nShadingThreshold = 15;
+    oDoors = null;
+    oMinimap = null;
+    xTexture = 64;
+    yTexture = 96;
+    oCanvas = null;
+    oContext = null;
+    oRenderCanvas = null;
+    oRenderContext = null;
+    bFloor = true;
+    bCeil = true;
+    fViewHeight = 1;
+    nFieldOfView = 90;
+    nRayLimit = 100;
+    oHorde = null;
+    aScanSectors = null;
+    oMobileSectors = null;
+    oThinkerManager = null;
+    oWeaponLayer = null;
+    oImages = null;
+    oEffects = null;
+    aWorld = null;
+    oConfig = null;
+    oRenderer = null;
+    bRendererReady = false;
+    bRendered = false;
+    aPendingPaints = null;
+    aRenderedMap = null;
+    oTileSets = null;
+    aSpritePool = null;
+    nSpriteCount = 0;
+
     setConfig(oConfig) {
         if (this.oConfig === null) {
             this.oConfig = oConfig
@@ -219,8 +279,9 @@ export class Raycaster {
 
     /**
      * Matériau 386 d'un code de texture : codes[n][0] pour les faces nord et
-     * sud, codes[n][1] pour les faces est et ouest ; sol et plafond d'après
-     * flats.codes (-1 : rien, le fond se voit).
+     * sud, codes[n][1] pour les faces est et ouest (-1 : face non dessinée,
+     * pour un bloc transparent) ; sol et plafond d'après flats.codes (-1 :
+     * rien, le fond se voit).
      */
     registerMaterial(nCode) {
         const aWall = this.oWall.codes[nCode];
@@ -228,11 +289,13 @@ export class Raycaster {
             return
         }
         const aFlat = this.bFloor ? this.oFloor.codes[nCode] : null;
+        const nNS = aWall[0] >= 0 ? aWall[0] : null;
+        const nEW = aWall[1] >= 0 ? aWall[1] : null;
         this.oRenderer.registerCellMaterial(nCode, {
-            n: aWall[0],
-            s: aWall[0],
-            e: aWall[1],
-            w: aWall[1],
+            n: nNS,
+            s: nNS,
+            e: nEW,
+            w: nEW,
             f: aFlat && aFlat[0] >= 0 ? aFlat[0] : null,
             c: aFlat && this.bCeil && aFlat[1] >= 0 ? aFlat[1] : null
         })
@@ -973,64 +1036,3 @@ export class Raycaster {
         }
     }
 }
-Object.assign(Raycaster.prototype, {
-    PHYS_NONE: 0x00,
-    PHYS_WALL: 0x01,
-    PHYS_FIRST_DOOR: 0x02,
-    PHYS_DOOR_SLIDING_UP: 0x02,
-    PHYS_CURT_SLIDING_UP: 0x03,
-    PHYS_DOOR_SLIDING_DOWN: 0x04,
-    PHYS_CURT_SLIDING_DOWN: 0x05,
-    PHYS_DOOR_SLIDING_LEFT: 0x06,
-    PHYS_DOOR_SLIDING_RIGHT: 0x07,
-    PHYS_DOOR_SLIDING_DOUBLE: 0x08,
-    PHYS_LAST_DOOR: 0x08,
-    PHYS_SECRET_BLOCK: 0x09,
-    PHYS_TRANSPARENT_BLOCK: 0x0A,
-    PHYS_INVISIBLE_BLOCK: 0x0B,
-    PHYS_OFFSET_BLOCK: 0x0C,
-    PHYS_DOOR_D: 0x0D,
-    PHYS_DOOR_E: 0x0E,
-    PHYS_DOOR_F: 0x0F,
-    TIME_FACTOR: 50,
-    oWall: null,
-    oFloor: null,
-    oBackground: null,
-    nBackgroundWidth: 0,
-    nMapSize: 0,
-    aMap: null,
-    oVisual: null,
-    nPlaneSpacing: 64,
-    nShadingFactor: 50,
-    nShadingThreshold: 15,
-    oDoors: null,
-    oMinimap: null,
-    xTexture: 64,
-    yTexture: 96,
-    oCanvas: null,
-    oContext: null,
-    oRenderCanvas: null,
-    oRenderContext: null,
-    bFloor: true,
-    bCeil: true,
-    fViewHeight: 1,
-    nFieldOfView: 90,
-    nRayLimit: 100,
-    oHorde: null,
-    aScanSectors: null,
-    oMobileSectors: null,
-    oThinkerManager: null,
-    oWeaponLayer: null,
-    oImages: null,
-    oEffects: null,
-    aWorld: null,
-    oConfig: null,
-    oRenderer: null,
-    bRendererReady: false,
-    bRendered: false,
-    aPendingPaints: null,
-    aRenderedMap: null,
-    oTileSets: null,
-    aSpritePool: null,
-    nSpriteCount: 0
-});

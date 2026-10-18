@@ -1,4 +1,13 @@
 export class Animation {
+    nStart = 0;
+    nIndex = 0;
+    nCount = 0;
+    nDuration = 0;
+    nTime = 0;
+    nLoop = 0;
+    nFrame = 0;
+    nDirLoop = 1;
+
     assign(a) {
         if (a) {
             this.nStart = a.nStart;
@@ -56,13 +65,3 @@ export class Animation {
         this.nDirLoop = 1
     }
 }
-Object.assign(Animation.prototype, {
-    nStart: 0,
-    nIndex: 0,
-    nCount: 0,
-    nDuration: 0,
-    nTime: 0,
-    nLoop: 0,
-    nFrame: 0,
-    nDirLoop: 1
-});

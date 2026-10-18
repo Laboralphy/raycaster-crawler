@@ -14,6 +14,13 @@
  * (bits 16-23) ; voir cell().
  */
 export class LevelProcessor {
+    static PHYS_NONE = 0x00;
+    static PHYS_WALL = 0x01;
+    static PHYS_SECRET_BLOCK = 0x09;
+    static PHYS_TRANSPARENT_BLOCK = 0x0A;
+    static PHYS_INVISIBLE_BLOCK = 0x0B;
+    static PHYS_OFFSET_BLOCK = 0x0C;
+
     /**
      * @param oLevel {object}
      *   area {string}, floor {number}, seed {number} : l'étage
@@ -163,12 +170,3 @@ export class LevelProcessor {
         }
     }
 }
-
-Object.assign(LevelProcessor, {
-    PHYS_NONE: 0x00,
-    PHYS_WALL: 0x01,
-    PHYS_SECRET_BLOCK: 0x09,
-    PHYS_TRANSPARENT_BLOCK: 0x0A,
-    PHYS_INVISIBLE_BLOCK: 0x0B,
-    PHYS_OFFSET_BLOCK: 0x0C
-});

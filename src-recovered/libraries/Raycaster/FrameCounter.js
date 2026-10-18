@@ -1,4 +1,12 @@
 export class FrameCounter {
+    bCheck = false;
+    bLoop = true;
+    nFPS = 0;
+    nTimeStart = 0;
+    nCount = 0;
+    nSeconds = 0;
+    nAcc = 0;
+
     start(nTimeStamp) {
         this.nTimeStart = nTimeStamp;
         this.bCheck = true;
@@ -26,12 +34,3 @@ export class FrameCounter {
         return false
     }
 }
-Object.assign(FrameCounter.prototype, {
-    bCheck: false,
-    bLoop: true,
-    nFPS: 0,
-    nTimeStart: 0,
-    nCount: 0,
-    nSeconds: 0,
-    nAcc: 0
-});

@@ -1,6 +1,8 @@
 import { WORLD_DATA } from './data/WORLD_DATA.js';
 
 export class EventLog {
+    oProgressDigest = null;
+
     getItemRef(oInv, sSlot) {
         if (sSlot in oInv.oEquipSlots && oInv.oEquipSlots[sSlot]) {
             return oInv.oEquipSlots[sSlot].resref
@@ -73,6 +75,3 @@ export class EventLog {
         }
     }
 }
-Object.assign(EventLog.prototype, {
-    oProgressDigest: null
-});

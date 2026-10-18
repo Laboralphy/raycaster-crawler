@@ -4,6 +4,21 @@ import { Point } from './Point.js';
 import { MathTools } from '../../Raycaster/Tools/MathTools.js';
 
 export class Land {
+    bUseDiagonals = false;
+    MAX_ITERATIONS = 2048;
+    nIterations = 0;
+    aTab = null;
+    nWidth = 0;
+    nHeight = 0;
+    oOpList = null;
+    oClList = null;
+    aPath = null;
+    aMoves = null;
+    xLast = 0;
+    yLast = 0;
+    nLastDir = 0;
+    LAND_BLOCK_WALKABLE = 0;
+
     init(a) {
         this.aTab = a;
         this.nHeight = a.length;
@@ -199,19 +214,3 @@ export class Land {
         this.aMoves.push(n)
     }
 }
-Object.assign(Land.prototype, {
-    bUseDiagonals: false,
-    MAX_ITERATIONS: 2048,
-    nIterations: 0,
-    aTab: null,
-    nWidth: 0,
-    nHeight: 0,
-    oOpList: null,
-    oClList: null,
-    aPath: null,
-    aMoves: null,
-    xLast: 0,
-    yLast: 0,
-    nLastDir: 0,
-    LAND_BLOCK_WALKABLE: 0
-});

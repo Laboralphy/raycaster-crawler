@@ -13,6 +13,9 @@ import { RC } from '../libraries/Raycaster/RC.js';
  * de débogage seulement avec CONFIG.game.debug ou l'URL ?debug=1.
  */
 export class Cheats {
+    oGame = null;
+    bDebug = false;
+
     constructor(oGame) {
         this.oGame = oGame;
         this.bDebug = !!CONFIG.game.debug || new URLSearchParams(location.search).get('debug') === '1';
@@ -22,9 +25,9 @@ export class Cheats {
     run(sLine) {
         const aArgs = String(sLine).trim().split(/\s+/);
         const sCmd = aArgs.shift().toLowerCase();
-        let oCmd = this.PLAYER[sCmd];
+        let oCmd = Cheats.PLAYER[sCmd];
         if (!oCmd && this.bDebug) {
-            oCmd = this.DEBUG[sCmd];
+            oCmd = Cheats.DEBUG[sCmd];
         }
         if (!oCmd) {
             return this.bDebug ? this.say('unknown command "' + sCmd + '" (help)') : null;
@@ -105,14 +108,9 @@ export class Cheats {
         });
         this.oGame.oShopSystem.oShopRegistry = null;
     }
-}
-
-Object.assign(Cheats.prototype, {
-    oGame: null,
-    bDebug: false,
 
     // toujours disponibles
-    PLAYER: {
+    static PLAYER = {
         mellon: {
             ingame: true,
             run() {
@@ -171,15 +169,15 @@ Object.assign(Cheats.prototype, {
                 return null;
             }
         }
-    },
+    };
 
     // mode débogage seulement
-    DEBUG: {
+    static DEBUG = {
         help: {
             help: 'help: this list',
             run() {
                 const aLines = [];
-                [this.PLAYER, this.DEBUG].forEach((o) => {
+                [Cheats.PLAYER, Cheats.DEBUG].forEach((o) => {
                     for (const s in o) {
                         if (o[s].help) {
                             aLines.push(o[s].help);
@@ -343,5 +341,5 @@ Object.assign(Cheats.prototype, {
                 return aLines.length ? aLines : 'no item matches "' + sFilter + '"';
             }
         }
-    }
-});
+    };
+}

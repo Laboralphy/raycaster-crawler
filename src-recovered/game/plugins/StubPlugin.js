@@ -1,6 +1,8 @@
 import { StubWindow } from '../UI/StubWindow.js';
 
 export class StubPlugin {
+    oGame = null;
+
     setGame(g) {
         this.oGame = g;
         this.oGame.registerPluginSignal('block', this)
@@ -25,6 +27,3 @@ export class StubPlugin {
         }
     }
 }
-Object.assign(StubPlugin.prototype, {
-    oGame: null
-});

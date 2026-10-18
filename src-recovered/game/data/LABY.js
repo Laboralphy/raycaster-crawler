@@ -14,6 +14,9 @@ export const LABY = {
     BLOCK_WALL_ALCOVE: 0xC,
     BLOCK_RELIC_CHEST: 0xD,
     BLOCK_SHOP: 0xE,
+    // vide (cartes fixes) : traduit par un LevelProcessor, jamais produit par
+    // le générateur ni présent dans les metacodes
+    BLOCK_ABYSS: 0xF,
     BLOCK_KEY_0: 0x10,
     BLOCK_KEY_1: 0x11,
     BLOCK_KEY_2: 0x12,
@@ -21,6 +24,9 @@ export const LABY = {
     BLOCK_EMPTY_KEY: 0x14,
     BLOCK_EMPTY_CHEST: 0x15,
     BLOCK_EMPTY_RELIC_CHEST: 0x16,
+    // garde-fou du pont de la porte de l'enfer (cartes fixes) : traduit par un
+    // LevelProcessor (HellgateBridge), comme BLOCK_ABYSS
+    BLOCK_HELL_FENCE: 0x17,
     BLOCK_LOCKEDDOOR_0: 0x18,
     BLOCK_LOCKEDDOOR_1: 0x19,
     BLOCK_LOCKEDDOOR_2: 0x1A,
@@ -121,7 +127,10 @@ export const LABY = {
                 [19, 0],
                 [0, 19],
                 [17, 17],
-                [11, 11]
+                [11, 11],
+                // 17 : levier du portail (tuiles 26 à 29, animées, copiées
+                // des feuilles normales)
+                [26, 26, 26, 26, 27, 27, 27, 27, 28, 28, 28, 28, 29, 29, 29, 29, 28, 28, 28, 28, 27, 27, 27, 27]
             ],
             metacodes: {
                 0: 0,
@@ -134,7 +143,9 @@ export const LABY = {
                 0x15: 0x200A0A,
                 0x16: 0x200A0C,
                 0x88: 0x110,
-                0x85: 0
+                0x85: 0,
+                0x8A: 0x111,
+                0x8B: 0
             }
         },
         forest: {

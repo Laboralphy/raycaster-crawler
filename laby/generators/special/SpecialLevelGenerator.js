@@ -130,6 +130,30 @@ class Treasure extends LabyRoomHelper {
         oRoom.setCell(w2 - yDir * w2 - 2 * xDir, h2 - xDir * h2 - 2 * yDir, B.BLOCK_TREASURE);
         oRoom.setCell(w2 + yDir * (w2 - 1) - 3 * xDir, h2 + xDir * (h2 - 1) - 3 * yDir, B.BLOCK_TREASURE);
         oRoom.setCell(w2 - yDir * (w2 - 1) - 3 * xDir, h2 - xDir * (h2 - 1) - 3 * yDir, B.BLOCK_TREASURE);
+        if (oRoom.getRoomData('portal')) {
+            this.digPortal(oRoom, -xDir, -yDir);
+        }
+    }
+
+    /**
+     * Portail au centre de la pièce de la relique, ouvert vers la porte de la
+     * pièce (xDoor, yDoor) : cabine (BLOCK_ELEVATOR_PORTAL), levier au fond.
+     * Murs sur les côtés et aux deux coins avant ; les coins arrière restent
+     * libres pour contourner la cabine jusqu'à la relique, placée derrière.
+     * Le jeu place le point d'arrivée devant l'ouverture (Game.rld_loadLevel).
+     */
+    digPortal(oRoom, xDoor, yDoor) {
+        const B = this.B;
+        const w2 = oRoom.getWidth() >> 1;
+        const h2 = oRoom.getHeight() >> 1;
+        const xSide = yDoor, ySide = xDoor;
+        for (const n of [-1, 1]) {
+            oRoom.setCell(w2 + n * xSide, h2 + n * ySide, B.BLOCK_WALL);
+            oRoom.setCell(w2 + xDoor + n * xSide, h2 + yDoor + n * ySide, B.BLOCK_WALL);
+        }
+        oRoom.setCell(w2 + xDoor, h2 + yDoor, B.BLOCK_VOID);
+        oRoom.setCell(w2 - xDoor, h2 - yDoor, B.BLOCK_ELEVATOR_SWITCH_PORTAL);
+        oRoom.setCell(w2, h2, B.BLOCK_ELEVATOR_PORTAL);
     }
 }
 
@@ -138,6 +162,7 @@ class Treasure extends LabyRoomHelper {
  * -rsX : taille des pièces
  * -lsX : taille du labyrinthe
  * -tX : type de labyrinthe 0:exploration 1:fusion
+ * -p1 : portail au centre de la pièce de la relique
  */
 class SpecialLevelGenerator extends LevelGenerator {
     generate(nSeed = null) {
@@ -157,6 +182,10 @@ class SpecialLevelGenerator extends LevelGenerator {
 
     processRoom(x, y, oRoom) {
         oRoom.setRoomData('helper', oRoom.getRoomData('type') === 'entrance' ? 'dungeon/Elevator' : 'special/Treasure');
+        // -p1 : un portail dans la pièce de la relique
+        if (oRoom.getRoomData('type') === 'exit' && this.getOption('p')) {
+            oRoom.setRoomData('portal', true);
+        }
     }
 }
 

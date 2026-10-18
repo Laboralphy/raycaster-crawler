@@ -1,6 +1,20 @@
 import { Animation } from './Animation.js';
 
 export class Sprite {
+    oBlueprint = null;
+    oAnimation = null;
+    nAnimation = -1;
+    nFrame = 0;
+    nLight = 0;
+    nAngle8 = 0;
+    nAnimationType = 0;
+    sCompose = '';
+    bVisible = true;
+    oOverlay = null;
+    nOverlayFrame = null;
+    bTranslucent = false;
+    nAlpha = 2;
+
     playAnimation(n) {
         if (n == this.nAnimation) {
             return
@@ -47,18 +61,3 @@ export class Sprite {
         }
     }
 }
-Object.assign(Sprite.prototype, {
-    oBlueprint: null,
-    oAnimation: null,
-    nAnimation: -1,
-    nFrame: 0,
-    nLight: 0,
-    nAngle8: 0,
-    nAnimationType: 0,
-    sCompose: '',
-    bVisible: true,
-    oOverlay: null,
-    nOverlayFrame: null,
-    bTranslucent: false,
-    nAlpha: 2
-});

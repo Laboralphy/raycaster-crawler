@@ -2,6 +2,10 @@ import { DialogWindow } from '../UI/DialogWindow.js';
 import { UI } from '../UI/UI.js';
 
 export class DialogPlugin {
+    oGame = null;
+    sMe = 'dialog';
+    oEvents = null;
+
     uiController(sCommand, xParams) {
         switch (sCommand) {
             case 'on':
@@ -32,8 +36,3 @@ export class DialogPlugin {
         this.oEvents = oKeyEvents
     }
 }
-Object.assign(DialogPlugin.prototype, {
-    oGame: null,
-    sMe: 'dialog',
-    oEvents: null
-});

@@ -8,6 +8,14 @@ import { Marker } from '../../libraries/O876/Marker.js';
 import { KEYS } from '../../libraries/Raycaster/KEYS.js';
 
 export class ShopPlugin {
+    oGame = null;
+    oEffectProcessor = null;
+    nPreviousMode = 0;
+    aShop = null;
+    sCurrentArea = '';
+    nCurrentFloor = -1;
+    oShopRegistry = null;
+
     uiController(sCommand, xParams) {
         switch (sCommand) {
             case 'on':
@@ -138,12 +146,3 @@ export class ShopPlugin {
         return false
     }
 }
-Object.assign(ShopPlugin.prototype, {
-    oGame: null,
-    oEffectProcessor: null,
-    nPreviousMode: 0,
-    aShop: null,
-    sCurrentArea: '',
-    nCurrentFloor: -1,
-    oShopRegistry: null
-});

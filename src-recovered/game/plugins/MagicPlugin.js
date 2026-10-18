@@ -12,6 +12,18 @@ import { Raycaster } from '../../libraries/Raycaster/Raycaster.js';
 import { MathTools, PI } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class MagicPlugin {
+    oGame = null;
+    oCanvas = null;
+    oContext = null;
+    bDisplayInvalid = true;
+    oDisplay = null;
+    sSelected = '';
+    nTimeStop = 0;
+    nTimeStopGameTime = 0;
+    oTimeStopMobile = null;
+    oTimeStopGX = null;
+    __timestopThink = null;
+
     triggerSpell(b, n) {
         const s = b[n];
         if (s === undefined) {
@@ -534,16 +546,3 @@ export class MagicPlugin {
         this.oGame.registerPluginSignal('exitlevel', this)
     }
 }
-Object.assign(MagicPlugin.prototype, {
-    oGame: null,
-    oCanvas: null,
-    oContext: null,
-    bDisplayInvalid: true,
-    oDisplay: null,
-    sSelected: '',
-    nTimeStop: 0,
-    nTimeStopGameTime: 0,
-    oTimeStopMobile: null,
-    oTimeStopGX: null,
-    __timestopThink: null
-});

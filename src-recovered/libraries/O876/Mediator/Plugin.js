@@ -1,4 +1,6 @@
 export class Plugin {
+    _oMediator = null;
+
     getName() {
         return ''
     }
@@ -19,6 +21,3 @@ export class Plugin {
         return this._oMediator.getPlugin(s)
     }
 }
-Object.assign(Plugin.prototype, {
-    _oMediator: null
-});

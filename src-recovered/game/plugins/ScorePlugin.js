@@ -2,6 +2,13 @@ import { CRAFT_DATA } from '../data/CRAFT_DATA.js';
 import { LABY } from '../data/LABY.js';
 
 export class ScorePlugin {
+    oGame = null;
+    oMonsters = null;
+    POINTS_INVENTORY = 5;
+    POINTS_CRAFT_PER_LEVEL = 25;
+    POINTS_SECRET = 50;
+    POINTS_COLOR_KEY = 50;
+
     setGame(g) {
         this.oGame = g;
         this.oMonsters = {};
@@ -77,11 +84,3 @@ export class ScorePlugin {
         this.givePoints(oCrafter, CRAFT_DATA[oItem.resref].level * this.POINTS_CRAFT_PER_LEVEL)
     }
 }
-Object.assign(ScorePlugin.prototype, {
-    oGame: null,
-    oMonsters: null,
-    POINTS_INVENTORY: 5,
-    POINTS_CRAFT_PER_LEVEL: 25,
-    POINTS_SECRET: 50,
-    POINTS_COLOR_KEY: 50
-});

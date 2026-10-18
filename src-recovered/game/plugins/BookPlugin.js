@@ -18,6 +18,8 @@ const SHELF_WEIGHTS = [
 const SHELF_EXCLUDED_BOOKS = ['book_of_the_story', 'book_of_spells'];
 
 export class BookPlugin {
+    oGame = null;
+
     uiController(sCommand, xParams) {
         switch (sCommand) {
             case 'on':
@@ -181,6 +183,3 @@ export class BookPlugin {
         this.read('~' + this.shelfPick(sKey, this.getShelfTexts('book_')))
     }
 }
-Object.assign(BookPlugin.prototype, {
-    oGame: null
-});

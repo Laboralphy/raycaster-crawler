@@ -32,7 +32,6 @@ import { GXConfused } from './gx/GXConfused.js';
 import { GXIconPad } from './gx/GXIconPad.js';
 import { ArrayTools } from '../libraries/O876/ArrayTools.js';
 import { Land } from '../libraries/O876/Astar/Land.js';
-import { LZW } from '../libraries/O876/LZW.js';
 import { Marker } from '../libraries/O876/Marker.js';
 import { SoundSystem } from '../libraries/O876/SoundSystem.js';
 import { XHR } from '../libraries/O876/XHR.js';
@@ -842,6 +841,36 @@ export class Game extends Engine {
         return MathTools.rndChoose(this[sRoster][nLevel])
     }
 
+    /**
+     * Point d'arrivée d'une cabine (ascenseur ou portail) : la case vide à deux
+     * pas, face à la sortie. Si plusieurs côtés conviennent (cabine au milieu
+     * d'une pièce), on préfère celui dont la case voisine est vide aussi :
+     * c'est l'ouverture de la cabine (les autres côtés sont murs ou levier).
+     */
+    rld_getCabStartPoint(aLaby, xBlock, yBlock, x64, y64) {
+        const nSpacing2 = this.oRaycaster.nPlaneSpacing << 1;
+        const cell = (x, y) => aLaby[y] === undefined ? undefined : aLaby[y][x];
+        let oStartPoint = null;
+        let bOpen = false;
+        // même ordre que l'ancien code : à égalité, le dernier côté l'emporte
+        for (const [dx, dy, fAngle] of [[0, -1, -PI / 2], [-1, 0, PI], [0, 1, PI / 2], [1, 0, 0]]) {
+            if (cell(xBlock + 2 * dx, yBlock + 2 * dy) !== LABY.BLOCK_VOID) {
+                continue
+            }
+            const bSideOpen = cell(xBlock + dx, yBlock + dy) === LABY.BLOCK_VOID;
+            if (bOpen && !bSideOpen) {
+                continue
+            }
+            bOpen = bSideOpen;
+            oStartPoint = {
+                x: x64 + dx * nSpacing2,
+                y: y64 + dy * nSpacing2,
+                angle: fAngle
+            }
+        }
+        return oStartPoint
+    }
+
     rld_chooseMob(oData, nLevel) {
         return this.rld_chooseObject(oData, nLevel, 'aMobRoster', 'horde')
     }
@@ -1027,34 +1056,7 @@ export class Game extends Engine {
                     case LABY.BLOCK_ELEVATOR_ENTRANCE:
                     case LABY.BLOCK_ELEVATOR_EXIT:
                     case LABY.BLOCK_ELEVATOR_PORTAL:
-                        if (aLaby[yBlock - 2][xBlock] == LABY.BLOCK_VOID) {
-                            oStartPoint = {
-                                y: y64 - (this.oRaycaster.nPlaneSpacing << 1),
-                                x: x64,
-                                angle: -PI / 2
-                            }
-                        }
-                        if (aLaby[yBlock][xBlock - 2] == LABY.BLOCK_VOID) {
-                            oStartPoint = {
-                                y: y64,
-                                x: x64 - (this.oRaycaster.nPlaneSpacing << 1),
-                                angle: PI
-                            }
-                        }
-                        if (aLaby[yBlock + 2][xBlock] == LABY.BLOCK_VOID) {
-                            oStartPoint = {
-                                y: y64 + (this.oRaycaster.nPlaneSpacing << 1),
-                                x: x64,
-                                angle: PI / 2
-                            }
-                        }
-                        if (aLaby[yBlock][xBlock + 2] == LABY.BLOCK_VOID) {
-                            oStartPoint = {
-                                y: y64,
-                                x: x64 + (this.oRaycaster.nPlaneSpacing << 1),
-                                angle: 0
-                            }
-                        }
+                        oStartPoint = this.rld_getCabStartPoint(aLaby, xBlock, yBlock, x64, y64) || oStartPoint;
                         if (nBlock == LABY.BLOCK_ELEVATOR_ENTRANCE) {
                             oData.startpoints[1] = oStartPoint
                         } else if (nBlock == LABY.BLOCK_ELEVATOR_EXIT) {
@@ -1774,17 +1776,7 @@ export class Game extends Engine {
     }
 
     sys_endGame() {
-        const oSave = this.sys_save();
-        this.pause();
-        const sName = prompt(STRINGS._('~m_whatisyourname'));
-        const nNow = Date.now();
-        const oFields = {
-            c: oSave.p.c,
-            d: nNow,
-            s: this.oDungeon.getScore(this.oDungeon.getPlayerCreature())
-        };
-        this.sys_storeData('ru_hof_rei_' + sName + '_' + nNow.toString(16), LZW.encode(JSON.stringify(oFields)), true);
-        this.resume();
+        this.sys_save();
         this.sys_cutscene('end', 'stateMenuLoop')
     }
 
@@ -1793,11 +1785,12 @@ export class Game extends Engine {
             bRemote = false
         }
         if (bRemote) {
-            const oPostData = {
-                f: sKey,
-                d: xData
-            }
-        } else {}
+            // ancien stockage distant (crawlerfs) : plus de serveur, rien n'est envoyé
+            return
+        }
+        // sauvegarde locale (localStorage) : le jeu d'origine ne l'écrivait pas,
+        // si bien que « Continuer » n'apparaissait jamais au menu
+        this.oBackupSystem.storeData(sKey, xData)
     }
 
     sys_loadData(sKey, bRemote) {

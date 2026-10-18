@@ -3,10 +3,16 @@ import { SOUNDS } from './data/SOUNDS.js';
 import { STRINGS } from './data/STRINGS.js';
 import { GXUnderwater } from './gx/GXUnderwater.js';
 import { CovenThrone } from './levels/CovenThrone.js';
+import { HellgateBridge } from './levels/HellgateBridge.js';
 import { RC } from '../libraries/Raycaster/RC.js';
 import { MathTools } from '../libraries/Raycaster/Tools/MathTools.js';
 
 export class Adventure {
+    oEvents = null;
+    oLevelProcessors = null;
+    oVariables = null;
+    AF_STORY_READ = 0;
+
     setAdventureFlag(oCreature, nFlag, bFlag) {
         const n32 = nFlag >> 5;
         const nBit = nFlag & 31;
@@ -96,10 +102,11 @@ export class Adventure {
     }
 
     eventGotRelic(oGame) {
-        const nScore = oGame.oDungeon.getScore(oGame.oDungeon.getPlayerCreature());
-        oGame.oDialogSystem.display(STRINGS._('~m_relic', [nScore.toString()]), [
-            [STRINGS._('~key_endgame'), 5, oGame.sys_endGame]
-        ])
+        // le score est tenu par ScorePlugin (Dungeon n'a pas de getScore)
+        const nScore = oGame.oScore.getScore(oGame.getPlayer());
+        oGame.oDialogSystem.display(STRINGS._('~m_relic', [nScore.toString()]), {
+            'dlg_endgame': [STRINGS._('~key_endgame'), 5, oGame.sys_endGame]
+        })
     }
 
     eventEscapeGame(oGame) {
@@ -163,6 +170,11 @@ export class Adventure {
         this.defineEvent('coven', 1, 'activateSealedDoor', 'eventUnsealDoor');
         this.defineLevelProcessor('coven', 1, CovenThrone);
         this.defineEvent('treasure', 0, 'openRelicChest', 'eventGotRelic');
+        // portail de la pièce de la relique -> porte de l'enfer -> donjon infernal
+        d.treasure[0].options += '-p1';
+        link(d.treasure[0], { portal: 'hellgate' });
+        link(d.hellgate[0], { entrance: ['treasure', 0, 3], exit: ['hellkeep', 0, 1] });
+        this.defineLevelProcessor('hellgate', 0, HellgateBridge);
         // zones annexes, par portail (point d'arrivée 3 : ascenseur du portail)
         const nPortalToMines = this.oVariables.portalToMines;
         d1[nPortalToMines].options += '-p1';
@@ -199,9 +211,3 @@ export class Adventure {
         }
     }
 }
-Object.assign(Adventure.prototype, {
-    oEvents: null,
-    oLevelProcessors: null,
-    oVariables: null,
-    AF_STORY_READ: 0
-});

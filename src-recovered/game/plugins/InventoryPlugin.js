@@ -4,6 +4,8 @@ import { STRINGS } from '../data/STRINGS.js';
 import { KEYS } from '../../libraries/Raycaster/KEYS.js';
 
 export class InventoryPlugin {
+    oGame = null;
+
     uiController(sCommand, xParams) {
         let n;
         let w;
@@ -101,6 +103,3 @@ export class InventoryPlugin {
         this.oGame.registerPluginSignal('key', this)
     }
 }
-Object.assign(InventoryPlugin.prototype, {
-    oGame: null
-});

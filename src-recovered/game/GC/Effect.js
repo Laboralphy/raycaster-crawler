@@ -1,4 +1,9 @@
 export class Effect {
+    sEffect = '';
+    nTimeOut = 0;
+    bExpirable = true;
+    bExpired = false;
+
     expire() {
         this.bExpirable = true;
         this.bExpired = true;
@@ -17,9 +22,3 @@ export class Effect {
         return this.bExpired
     }
 }
-Object.assign(Effect.prototype, {
-    sEffect: '',
-    nTimeOut: 0,
-    bExpirable: true,
-    bExpired: false
-});

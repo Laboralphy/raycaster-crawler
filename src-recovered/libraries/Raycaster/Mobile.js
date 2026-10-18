@@ -2,6 +2,39 @@ import { RC } from './RC.js';
 import { PI } from './Tools/MathTools.js';
 
 export class Mobile {
+    oRaycaster = null;
+    x = 0;
+    y = 0;
+    xSave = 0;
+    ySave = 0;
+    bActive = false;
+    bEthereal = false;
+    fTheta = 0;
+    fMovingAngle = 0;
+    fSpeed = 0;
+    fMovingSpeed = 0;
+    fRotSpeed = 0;
+    xInertie = 0;
+    yInertie = 0;
+    xSpeed = 0;
+    ySpeed = 0;
+    xSector = -1;
+    ySector = -1;
+    nSectorRank = -1;
+    nSize = 16;
+    oSprite = null;
+    xCollisions = [0, 1, 0, -1];
+    yCollisions = [-1, 0, 1, 0];
+    oThinker = null;
+    oWallCollision = null;
+    oMobileCollision = null;
+    oFrontCell = null;
+    nBlueprintType = null;
+    bSlideWall = true;
+    bVisible = true;
+    bWallCollision = false;
+    oData = null;
+
     getBlueprint(sXData) {
         if (this.oSprite) {
             if (sXData === undefined) {
@@ -251,37 +284,3 @@ export class Mobile {
         this.move(this.fTheta + PI / 2, this.fSpeed)
     }
 }
-Object.assign(Mobile.prototype, {
-    oRaycaster: null,
-    x: 0,
-    y: 0,
-    xSave: 0,
-    ySave: 0,
-    bActive: false,
-    bEthereal: false,
-    fTheta: 0,
-    fMovingAngle: 0,
-    fSpeed: 0,
-    fMovingSpeed: 0,
-    fRotSpeed: 0,
-    xInertie: 0,
-    yInertie: 0,
-    xSpeed: 0,
-    ySpeed: 0,
-    xSector: -1,
-    ySector: -1,
-    nSectorRank: -1,
-    nSize: 16,
-    oSprite: null,
-    xCollisions: [0, 1, 0, -1],
-    yCollisions: [-1, 0, 1, 0],
-    oThinker: null,
-    oWallCollision: null,
-    oMobileCollision: null,
-    oFrontCell: null,
-    nBlueprintType: null,
-    bSlideWall: true,
-    bVisible: true,
-    bWallCollision: false,
-    oData: null
-});

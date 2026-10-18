@@ -4,6 +4,14 @@ import { GXFlood } from '../gx/GXFlood.js';
 import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class UnderwaterPlugin {
+    oGame = null;
+    MAX_APNEA = 20;
+    MAX_BUBBLES = 5;
+    HUD_BUBBLE = 51;
+    HUD_POP = 52;
+    APNEA_DAMAGE = 5;
+    bInWater = false;
+
     setGame(g) {
         this.oGame = g;
         this.oGame.registerPluginSignal('gamerestart', this)
@@ -138,12 +146,3 @@ export class UnderwaterPlugin {
         this.waterOut()
     }
 }
-Object.assign(UnderwaterPlugin.prototype, {
-    oGame: null,
-    MAX_APNEA: 20,
-    MAX_BUBBLES: 5,
-    HUD_BUBBLE: 51,
-    HUD_POP: 52,
-    APNEA_DAMAGE: 5,
-    bInWater: false
-});

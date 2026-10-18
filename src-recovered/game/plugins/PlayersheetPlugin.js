@@ -3,6 +3,10 @@ import { UI } from '../UI/UI.js';
 import { KEYS } from '../../libraries/Raycaster/KEYS.js';
 
 export class PlayersheetPlugin {
+    oGame = null;
+    oEffectProcessor = null;
+    nPreviousMode = 0;
+
     uiController(sCommand, xParams) {
         switch (sCommand) {
             case 'on':
@@ -31,8 +35,3 @@ export class PlayersheetPlugin {
         this.oGame.registerPluginSignal('key', this)
     }
 }
-Object.assign(PlayersheetPlugin.prototype, {
-    oGame: null,
-    oEffectProcessor: null,
-    nPreviousMode: 0
-});

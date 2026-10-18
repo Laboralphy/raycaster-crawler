@@ -13,6 +13,8 @@ import { SOUNDS } from '../data/SOUNDS.js';
  * ou un nombre de millisecondes ; par défaut, la recharge du sort (MAGIC_DATA).
  */
 export class WoundPlugin {
+    oGame = null;
+
     setGame(g) {
         this.oGame = g;
         this.oGame.registerPluginSignal('damage', this)
@@ -49,6 +51,3 @@ export class WoundPlugin {
         return typeof xCooldown === 'number' ? xCooldown : nDefault
     }
 }
-Object.assign(WoundPlugin.prototype, {
-    oGame: null
-});

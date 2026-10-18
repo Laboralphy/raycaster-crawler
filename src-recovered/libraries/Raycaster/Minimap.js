@@ -3,6 +3,15 @@ import { Marker } from '../O876/Marker.js';
 import { RC } from './RC.js';
 
 export class Minimap {
+    oRaycaster = null;
+    aSquares = null;
+    aModified = null;
+    aColors = null;
+    oCanvas = null;
+    oContext = null;
+    aPixels = null;
+    bRestricted = true;
+
     reset(oRaycaster) {
         this.aColors = ['#000000', '#FF8888', '#00FF00', '#00FFFF', '#5588AA', '#FF00FF', '#FFFF00', '#555555', '#777777'];
         this.oRaycaster = oRaycaster;
@@ -119,13 +128,3 @@ export class Minimap {
         rc.oRenderContext.drawImage(this.oCanvas, 2, 2)
     }
 }
-Object.assign(Minimap.prototype, {
-    oRaycaster: null,
-    aSquares: null,
-    aModified: null,
-    aColors: null,
-    oCanvas: null,
-    oContext: null,
-    aPixels: null,
-    bRestricted: true
-});

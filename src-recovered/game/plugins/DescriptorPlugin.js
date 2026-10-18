@@ -5,6 +5,10 @@ import { STRINGS } from '../data/STRINGS.js';
 import { KEYS } from '../../libraries/Raycaster/KEYS.js';
 
 export class DescriptorPlugin {
+    oGame = null;
+    oEffectProcessor = null;
+    nPreviousMode = 0;
+
     uiController(sCommand, xParams) {
         let w;
         switch (sCommand) {
@@ -309,8 +313,3 @@ export class DescriptorPlugin {
         this.oGame.nIntfMode = UI.INTFMODE_DESCRIPTOR
     }
 }
-Object.assign(DescriptorPlugin.prototype, {
-    oGame: null,
-    oEffectProcessor: null,
-    nPreviousMode: 0
-});

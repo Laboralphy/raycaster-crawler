@@ -3,6 +3,9 @@ import { UI } from '../UI/UI.js';
 import { KEYS } from '../../libraries/Raycaster/KEYS.js';
 
 export class ConsolePlugin {
+    oGame = null;
+    aLines = null;
+
     setGame(g) {
         this.oGame = g;
         this.oGame.registerPluginSignal('key', this);
@@ -58,7 +61,3 @@ export class ConsolePlugin {
         }
     }
 }
-Object.assign(ConsolePlugin.prototype, {
-    oGame: null,
-    aLines: null
-});
