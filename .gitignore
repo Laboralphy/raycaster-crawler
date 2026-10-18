@@ -21,3 +21,6 @@ Thumbs.db
 __pycache__/
 tools/music/**/*.wav
 tools/music/**/*.ogg
+
+# Built
+crawler.js

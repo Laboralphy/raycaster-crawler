@@ -1,18 +1,16 @@
 export class Item {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct(sResRef) {
-        this.resref = sResRef
+    constructor(sResRef) {
+        this.resref = sResRef;
+        this.stacksize =  1;
+        this.stackcount = 1;
     }
 
     isStackable() {
-        return this.stacksize > 1
+        return this.stacksize > 1;
     }
 
     isStackFull() {
-        return this.stackcount == this.stacksize
+        return this.stackcount === this.stacksize
     }
 
     isStackEmpty() {
@@ -42,8 +40,3 @@ export class Item {
         return nOldCount - this.stackcount
     }
 }
-Object.assign(Item.prototype, {
-    resref: '',
-    stacksize: 1,
-    stackcount: 1
-});

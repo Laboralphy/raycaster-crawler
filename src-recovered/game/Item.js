@@ -4,8 +4,21 @@ import { SPELLS_DATA } from './data/SPELLS_DATA.js';
 import { STRINGS } from './data/STRINGS.js';
 
 export class Item extends GC_Item {
-    __construct(sResRef, nStack) {
-        super.__construct(sResRef);
+    constructor(sResRef, nStack) {
+        super(sResRef);
+        this.name = '';
+        this.uname = '';
+        this.slot = '';
+        this.type = '';
+        this.icon = '';
+        this.speed = 0;
+        this.level = 0;
+        this.properties = null;
+        this.effects = null;
+        this.spells = null;
+        this.identified = true;
+
+
         if (!(sResRef in ITEMS_DATA)) {
             throw new Error('item blueprint not found: ' + sResRef)
         }
@@ -86,16 +99,3 @@ export class Item extends GC_Item {
         return this.slot !== ''
     }
 }
-Object.assign(Item.prototype, {
-    name: '',
-    uname: '',
-    slot: '',
-    type: '',
-    icon: '',
-    speed: 0,
-    level: 0,
-    properties: null,
-    effects: null,
-    spells: null,
-    identified: true
-});
