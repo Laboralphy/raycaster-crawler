@@ -12,6 +12,8 @@ const Y_TONARI = [0, -1, -1, 0, 1, 1, 1, 0, -1];
 export class Horde {
     constructor(r) {
         this.oThinkerManager = null;
+        // seul mobile à penser, s'il est défini (sort d'arrêt du temps)
+        this.oSoloMobile = null;
         this.nTileCount = 0;
         this.xTonari = X_TONARI;
         this.yTonari = Y_TONARI;
@@ -26,6 +28,10 @@ export class Horde {
     }
 
     think() {
+        if (this.oSoloMobile) {
+            this.thinkSolo(this.oSoloMobile);
+            return
+        }
         let oMobile;
         let i = 0;
         while (i < this.aMobiles.length) {
@@ -37,6 +43,14 @@ export class Horde {
                 this.unlinkMobile(oMobile);
                 this.oMobileDispenser.pushMobile(oMobile.oSprite.oBlueprint.sId, oMobile)
             }
+        }
+    }
+
+    thinkSolo(oMobile) {
+        oMobile.think();
+        if (!oMobile.bActive) {
+            this.unlinkMobile(oMobile);
+            this.oMobileDispenser.pushMobile(oMobile.oSprite.oBlueprint.sId, oMobile)
         }
     }
 

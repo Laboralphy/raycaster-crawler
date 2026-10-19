@@ -72,6 +72,8 @@ export class Raycaster {
     nFieldOfView = 90;
     nRayLimit = 100;
     oHorde = null;
+    // murs animés figés (sort d'arrêt du temps)
+    bTexturesFrozen = false;
     aScanSectors = null;
     oMobileSectors = null;
     oThinkerManager = null;
@@ -1007,6 +1009,9 @@ export class Raycaster {
     }
 
     textureAnimation() {
+        if (this.bTexturesFrozen) {
+            return
+        }
         let aCode;
         const w = this.oWall, wc = w.codes, wa = w.animated;
         for (const iAnim in wa) {

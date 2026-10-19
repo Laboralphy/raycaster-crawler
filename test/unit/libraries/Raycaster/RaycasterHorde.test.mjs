@@ -33,7 +33,7 @@ describe('Raycaster Horde', () => {
         const rc = raycaster();
         const h = rc.oHorde;
         assertDefaults(h, {
-            oRaycaster: rc, oThinkerManager: null, aMobiles: [], aStatics: [], aSprites: [],
+            oRaycaster: rc, oThinkerManager: null, oSoloMobile: null, aMobiles: [], aStatics: [], aSprites: [],
             oBlueprints: {}, oTiles: {}, nTileCount: 0, oImageLoader: rc.oImages,
             xTonari: [0, 0, 1, 1, 1, 0, -1, -1, -1],
             yTonari: [0, -1, -1, 0, 1, 1, 1, 0, -1]

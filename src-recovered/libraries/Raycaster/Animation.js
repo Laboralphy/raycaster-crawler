@@ -1,4 +1,7 @@
 export class Animation {
+    // toutes les animations figées (sort d'arrêt du temps)
+    static bFrozen = false;
+
     nStart = 0;
     nIndex = 0;
     nCount = 0;
@@ -22,7 +25,7 @@ export class Animation {
     }
 
     animate(nInc) {
-        if (this.nCount <= 1 || this.nDuration === 0) {
+        if (Animation.bFrozen || this.nCount <= 1 || this.nDuration === 0) {
             return this.nIndex + this.nStart
         }
         this.nTime += nInc;

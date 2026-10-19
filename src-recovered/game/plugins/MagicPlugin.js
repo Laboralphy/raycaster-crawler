@@ -8,7 +8,6 @@ import { CanvasFactory } from '../../libraries/O876/CanvasFactory.js';
 import { Animation } from '../../libraries/Raycaster/Animation.js';
 import { KEYS } from '../../libraries/Raycaster/KEYS.js';
 import { RC } from '../../libraries/Raycaster/RC.js';
-import { Raycaster } from '../../libraries/Raycaster/Raycaster.js';
 import { MathTools, PI } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class MagicPlugin {
@@ -22,7 +21,6 @@ export class MagicPlugin {
     nTimeStopGameTime = 0;
     oTimeStopMobile = null;
     oTimeStopGX = null;
-    __timestopThink = null;
 
     triggerSpell(b, n) {
         const s = b[n];
@@ -482,33 +480,14 @@ export class MagicPlugin {
         return true
     }
 
-    timeStopHordeThinker() {
-        const oMobile = this.__timestopMobile;
-        oMobile.think();
-        if (!oMobile.bActive) {
-            this.unlinkMobile(oMobile);
-            this.oMobileDispenser.pushMobile(oMobile.oSprite.oBlueprint.sId, oMobile)
-        }
-    }
-
-    timeStopAnimator(nInc) {
-        return this.nIndex + this.nStart
-    }
-
-    timeStopTextureAnimation() {}
-
     spellTimeRestart() {
         if (!this.oTimeStopMobile) {
             return false
         }
-        const h = this.oGame.oRaycaster.oHorde;
-        h.think = this.__timestopThink;
-        h.__timestopMobile = null;
-        this.__timestopThink = null;
-        Animation.prototype.animate = Animation.prototype.__timestopAnimate;
-        Animation.prototype.__timestopAnimate = null;
-        Raycaster.prototype.textureAnimation = Raycaster.prototype.__timestopAnimate;
-        Raycaster.prototype.__timestopAnimate = null;
+        const rc = this.oGame.oRaycaster;
+        rc.oHorde.oSoloMobile = null;
+        rc.bTexturesFrozen = false;
+        Animation.bFrozen = false;
         this.oGame.nTime = this.nTimeStopGameTime;
         this.oGame.nTimeMs = this.nTimeStopGameTime * this.oGame.oRaycaster.TIME_FACTOR;
         this.oTimeStopMobile.getData('creature').oExtraData.retrigger = 0;
@@ -523,14 +502,11 @@ export class MagicPlugin {
         if (this.oTimeStopMobile) {
             return false
         }
-        const h = this.oGame.oRaycaster.oHorde;
-        h.__timestopMobile = oMobile;
-        this.__timestopThink = h.think;
-        h.think = this.timeStopHordeThinker;
-        Animation.prototype.__timestopAnimate = Animation.prototype.animate;
-        Animation.prototype.animate = this.timeStopAnimator;
-        Raycaster.prototype.__timestopAnimate = Raycaster.prototype.textureAnimation;
-        Raycaster.prototype.textureAnimation = this.timeStopTextureAnimation;
+        // le monde se fige : seul le lanceur pense, rien ne s'anime
+        const rc = this.oGame.oRaycaster;
+        rc.oHorde.oSoloMobile = oMobile;
+        rc.bTexturesFrozen = true;
+        Animation.bFrozen = true;
         this.oTimeStopMobile = oMobile;
         this.nTimeStop = 9;
         this.nTimeStopGameTime = this.oGame.nTime;

@@ -1,5 +1,9 @@
 # Attempt to remove all prototype modification
 
+**Status: done (2026-10-19).** All three objectives are met: no prototype
+defaults, no `__construct`, no runtime prototype patching. `npm run
+report:prototypes` finds nothing left; 432 unit tests.
+
 ## Objectives
 
 The recovered sources still carry the class style of the original 2010-2013
@@ -72,7 +76,7 @@ npm run report:prototypes   # what is left, by dependency level
 
 ## Progress
 
-Snapshot of 2026-10-19: **107 files done, 15 deleted, 1 to go.**
+Snapshot of 2026-10-19: **108 files done, 15 deleted, 0 to go.**
 
 ### Done
 
@@ -186,9 +190,12 @@ Snapshot of 2026-10-19: **107 files done, 15 deleted, 1 to go.**
 | `libraries/Raycaster/Engine.js` | (this branch) | yes (`Game.construction.test.mjs`) |
 | `game/Game.js` | (this branch) | yes (`Game.construction.test.mjs`) |
 
-`MagicPlugin.js` lost its prototype defaults in 44f511c but still patches
-`Animation` and `Raycaster` at runtime (objective 3), so it stays in the to-do
-list.
+| `game/plugins/MagicPlugin.js` | (this branch) | yes (`MagicPlugin.timestop.test.mjs`) |
+
+`MagicPlugin.js` lost its prototype defaults in 44f511c; its runtime patch
+(objective 3) went last: Time Stop now sets `Animation.bFrozen`,
+`Raycaster.bTexturesFrozen` and `Horde.oSoloMobile` instead of swapping
+methods.
 
 ### Deleted
 
@@ -225,9 +232,7 @@ All done.
 
 #### Level 4
 
-| File | Tags | Tests |
-|---|---|---|
-| [ ] `game/plugins/MagicPlugin.js` | R | no |
+All done.
 
 #### Level 5
 
@@ -362,3 +367,14 @@ All done.
   moved from `Engine`'s constructor to the end of `Game`'s; the naive
   version (loop started in `Engine`) goes red. 425 tests pass. Only
   `MagicPlugin`'s runtime patch remains.
+- **2026-10-19**: last item, `MagicPlugin`'s Time Stop. It swapped
+  `Animation.prototype.animate` and `Raycaster.prototype.textureAnimation`
+  and replaced the horde's `think` while the spell ran; it now sets three
+  flags the classes check themselves (`Animation.bFrozen`,
+  `Raycaster.bTexturesFrozen`, `Horde.oSoloMobile` with `Horde.thinkSolo`).
+  Tests first (`MagicPlugin.timestop.test.mjs`); one of them, "no class is
+  modified", fails on the old plugin. Writing the tests showed the old
+  patch's fragility: an error during Time Stop left every `Animation` in the
+  game frozen. Final scan: no `Object.assign(X.prototype`, no
+  `X.prototype.y =`, no `__construct` left in `game/` or `libraries/`.
+  **The migration is complete.** 432 tests pass.
