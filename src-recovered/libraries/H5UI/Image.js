@@ -1,6 +1,13 @@
 import { WinControl } from './WinControl.js';
 
 export class Image extends WinControl {
+    constructor() {
+        super();
+        this._oTexture = null;
+        this._bAutosize = true;
+        this.onLoad = null
+    }
+
     _loadEvent(oEvent) {
         const i = oEvent.target.__image;
         oEvent.target.__image = null;
@@ -43,8 +50,3 @@ export class Image extends WinControl {
         }
     }
 }
-Object.assign(Image.prototype, {
-    _oTexture: null,
-    _bAutosize: true,
-    onLoad: null
-});

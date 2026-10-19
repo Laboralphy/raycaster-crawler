@@ -7,10 +7,33 @@ import { Box } from '../../libraries/H5UI/Box.js';
 import { Text } from '../../libraries/H5UI/Text.js';
 
 export class InventoryWindow extends Window {
-    __construct(oParams) {
-        super.__construct({
+    // ordre du tri (commande inv_sort) ; lu par sortItems, appelée sans this par Array.sort
+    static ITEM_ORDER = ['wand', 'dagger', 'ring', 'amulet', 'earings', 'potion', 'ccc', 'misc'];
+
+    constructor(oParams) {
+        super({
             caption: STRINGS._('~win_inventory')
         });
+        this._sClass = 'UI.InventoryWindow';
+        this.nWidth = 540;
+        this.nHeight = 320;
+        this.aBoxes = null;
+        this.aBoxesBag = null;
+        this.aBoxesEqu = null;
+        this.oTextItem = null;
+        this.oTextBox = null;
+        this.xSelect = 0;
+        this.ySelect = 0;
+        this.nSelect = 0;
+        this.xBoxSize = 8;
+        this.yBoxSize = 4;
+        this.xBag = 128;
+        this.yBag = 32;
+        this.xEquip = 32;
+        this.yEquip = 32;
+        this.xText = 128;
+        this.yText = 234;
+        this.nIconSize = UI.INV_ICON_SIZE;
         this.oEquipSlotData = [{
             'slot': 'hand',
             'empty': ICONS.inv_hand
@@ -65,7 +88,7 @@ export class InventoryWindow extends Window {
 
     sortItems(a, b) {
         if (a && b) {
-            const io = InventoryWindow.prototype.aItemOrder;
+            const io = InventoryWindow.ITEM_ORDER;
             const sa = io.indexOf(a.type);
             const sb = io.indexOf(b.type);
             if (sa == sb) {
@@ -250,28 +273,3 @@ export class InventoryWindow extends Window {
         return oItem
     }
 }
-Object.assign(InventoryWindow.prototype, {
-    _sClass: 'UI.InventoryWindow',
-    nWidth: 540,
-    nHeight: 320,
-    oInventory: null,
-    aBoxes: null,
-    aBoxesBag: null,
-    aBoxesEqu: null,
-    oTextItem: null,
-    oTextBox: null,
-    xSelect: 0,
-    ySelect: 0,
-    nSelect: 0,
-    xBoxSize: 8,
-    yBoxSize: 4,
-    xBag: 128,
-    yBag: 32,
-    xEquip: 32,
-    yEquip: 32,
-    xText: 128,
-    yText: 234,
-    nIconSize: UI.INV_ICON_SIZE,
-    oEquipSlotData: null,
-    aItemOrder: ['wand', 'dagger', 'ring', 'amulet', 'earings', 'potion', 'ccc', 'misc']
-});

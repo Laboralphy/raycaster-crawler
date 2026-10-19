@@ -2,8 +2,12 @@ import { Box } from './Box.js';
 import { Text } from './Text.js';
 
 export class Button extends Box {
-    __construct() {
-        super.__construct();
+    constructor() {
+        super();
+        this._sColorNormal = '#999';
+        this._sColorOver = '#BBB';
+        this._sColorSelect = '#DDD';
+        this._sColorBorder = '#000';
         this.setSize(64, 24);
         this.setColor(this._sColorNormal, this._sColorOver);
         this.setBorder(1, this._sColorBorder);
@@ -33,10 +37,3 @@ export class Button extends Box {
         }
     }
 }
-Object.assign(Button.prototype, {
-    oText: null,
-    _sColorNormal: '#999',
-    _sColorOver: '#BBB',
-    _sColorSelect: '#DDD',
-    _sColorBorder: '#000'
-});

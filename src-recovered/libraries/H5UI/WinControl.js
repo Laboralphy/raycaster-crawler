@@ -1,11 +1,22 @@
 import { H5UI } from './H5UI.js';
 
 export class WinControl {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
+        this._sClass = 'WinControl';
+        this._sName = '';
+        this._nIndex = 0;
+        this._oParent = null;
+        this._oCanvas = null;
+        this._oContext = null;
+        this._nWidth = 0;
+        this._nHeight = 0;
+        this._x = 0;
+        this._y = 0;
+        this._bInvalid = true;
+        this._bVisible = true;
+        this._oPointedControl = null;
+        this._oDraggedControl = null;
+        this._bDragHandler = false;
         this._nHandle = ++H5UI.handle;
         this._aControls = [];
         this._aInvalidControls = [];
@@ -21,15 +32,11 @@ export class WinControl {
         let i;
         H5UI.recycleCanvas(this._oCanvas);
         this.clear();
-        let aProps = [];
+        // tout à null plutôt que supprimé : un contrôle détruit relu par erreur
+        // (getControlCount, hasControls, _nHandle) répond comme un contrôle vide
         for (i in this) {
-            this[i] = null;
-            aProps.push(i)
+            this[i] = null
         }
-        for (i = 0; i < aProps.length; i++) {
-            delete this[aProps[i]]
-        }
-        aProps = null;
         H5UI.data.destroyedCanvases++
     }
 
@@ -427,25 +434,3 @@ export class WinControl {
         return this._aControls !== null && this._aControls.length > 0
     }
 }
-Object.assign(WinControl.prototype, {
-    _sClass: 'WinControl',
-    _sName: '',
-    _nHandle: 0,
-    _nIndex: 0,
-    _oParent: null,
-    _oCanvas: null,
-    _oContext: null,
-    _nWidth: 0,
-    _nHeight: 0,
-    _x: 0,
-    _y: 0,
-    _bInvalid: true,
-    _bVisible: true,
-    _aControls: null,
-    _aInvalidControls: null,
-    _aAlignedControls: null,
-    _aHideControls: null,
-    _oPointedControl: null,
-    _oDraggedControl: null,
-    _bDragHandler: false
-});

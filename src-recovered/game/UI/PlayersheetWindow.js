@@ -4,10 +4,22 @@ import { Box } from '../../libraries/H5UI/Box.js';
 import { Text } from '../../libraries/H5UI/Text.js';
 
 export class PlayersheetWindow extends Window {
-    __construct(oParams) {
-        super.__construct({
+    constructor(oParams) {
+        super({
             caption: '~win_playersheet'
         });
+        this.nWidth = 480;
+        this.nHeight = 360;
+        this.nFontSize = 14;
+        this.nPadding = 24;
+        this.yText = 64;
+        this.oTextAttr = null;
+        this.oTextValue = null;
+        this.sColorAttr = '#AAAAAA';
+        this.sColorValueNorm = '#FFFFFF';
+        this.sColorValueBuffed = '#00CC00';
+        this.sColorValueDebuffed = '#CC0000';
+        this.sColorBG = '#444444';
         this.oParams = oParams;
         this.buildWindowContent()
     }
@@ -92,18 +104,3 @@ export class PlayersheetWindow extends Window {
         }
     }
 }
-Object.assign(PlayersheetWindow.prototype, {
-    nWidth: 480,
-    nHeight: 360,
-    nFontSize: 14,
-    nPadding: 24,
-    oParams: null,
-    yText: 64,
-    oTextAttr: null,
-    oTextValue: null,
-    sColorAttr: '#AAAAAA',
-    sColorValueNorm: '#FFFFFF',
-    sColorValueBuffed: '#00CC00',
-    sColorValueDebuffed: '#CC0000',
-    sColorBG: '#444444'
-});

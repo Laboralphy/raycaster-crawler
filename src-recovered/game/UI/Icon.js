@@ -3,6 +3,17 @@ import { Text } from '../../libraries/H5UI/Text.js';
 import { WinControl } from '../../libraries/H5UI/WinControl.js';
 
 export class Icon extends WinControl {
+    constructor() {
+        super();
+        this._sClass = 'UI.Icon';
+        this.oImage = null;
+        this.xStart = 0;
+        this.yStart = 0;
+        this.fZoom = 1;
+        this._bSelected = false;
+        this._bRedCross = false
+    }
+
     setImage(oImage) {
         this.oImage = oImage;
         this.invalidate()
@@ -77,12 +88,3 @@ export class Icon extends WinControl {
         }
     }
 }
-Object.assign(Icon.prototype, {
-    _sClass: 'UI.Icon',
-    oImage: null,
-    xStart: 0,
-    yStart: 0,
-    fZoom: 1,
-    _bSelected: false,
-    _bRedCross: false
-});

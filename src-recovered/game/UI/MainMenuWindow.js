@@ -3,10 +3,12 @@ import { STRINGS } from '../data/STRINGS.js';
 import { Button } from '../../libraries/H5UI/Button.js';
 
 export class MainMenuWindow extends Window {
-    __construct(oParams) {
-        super.__construct({
+    constructor(oParams) {
+        super({
             caption: STRINGS._('~win_mainmenu')
         });
+        this.aOptions = null;
+        this.iSelect = -1;
         this.buildWindowContent(oParams.options)
     }
 
@@ -34,7 +36,3 @@ export class MainMenuWindow extends Window {
         }
     }
 }
-Object.assign(MainMenuWindow.prototype, {
-    aOptions: null,
-    iSelect: -1
-});

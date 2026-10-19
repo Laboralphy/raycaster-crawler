@@ -4,10 +4,20 @@ import { Image } from '../../libraries/H5UI/Image.js';
 import { Text } from '../../libraries/H5UI/Text.js';
 
 export class BookWindow extends Window {
-    __construct(oParams) {
-        super.__construct({
+    constructor(oParams) {
+        super({
             caption: STRINGS._('~win_book')
         });
+        this.nWidth = 540;
+        this.nHeight = 320;
+        this.nFontSize = 16;
+        this.nPadding = 32;
+        this.nImageWidth = 128;
+        this.yText = 64;
+        this.yTitle = 32;
+        this.iPage = 0;
+        this.oText = null;
+        this.oImage = null;
         this.oParams = oParams;
         this.oGame = oParams.game;
         this.buildWindowContent()
@@ -128,17 +138,3 @@ export class BookWindow extends Window {
         }
     }
 }
-Object.assign(BookWindow.prototype, {
-    nWidth: 540,
-    nHeight: 320,
-    nFontSize: 16,
-    nPadding: 32,
-    nImageWidth: 128,
-    yText: 64,
-    yTitle: 32,
-    oParams: null,
-    iPage: 0,
-    oText: null,
-    oImage: null,
-    oGame: null
-});

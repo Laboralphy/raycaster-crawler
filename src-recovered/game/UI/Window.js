@@ -5,8 +5,13 @@ import { Button } from '../../libraries/H5UI/Button.js';
 import { Text } from '../../libraries/H5UI/Text.js';
 
 export class Window extends Box {
-    __construct(oParams) {
-        super.__construct();
+    constructor(oParams) {
+        super();
+        this._sClass = 'UI.Window';
+        this._oStatusBar = null;
+        this._nStatusBarHeight = 22;
+        this._nButtonWidth = 80;
+        this._nButtonPadding = 4;
         this.setColor(UI.clWINDOW, UI.clWINDOW);
         this.setBorder(4, UI.clWINDOW_BORDER, UI.clWINDOW_BORDER);
         const oCaption = this.linkControl(new Text());
@@ -91,12 +96,3 @@ export class Window extends Box {
         }
     }
 }
-Object.assign(Window.prototype, {
-    _sClass: 'UI.Window',
-    _oStatusBar: null,
-    _oCaptionBar: null,
-    _nStatusBarHeight: 22,
-    _nButtonWidth: 80,
-    _nButtonPadding: 4,
-    _aCmdButtons: null
-});

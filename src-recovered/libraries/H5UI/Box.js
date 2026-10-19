@@ -1,6 +1,23 @@
 import { WinControl } from './WinControl.js';
 
 export class Box extends WinControl {
+    constructor() {
+        super();
+        this._sClass = 'Box';
+        this._sColor = '#FFFFFF';
+        this._sColorOutside = '#FF6666';
+        this._sColorInside = '#FFBBBB';
+        this._sColorBorder = '#000000';
+        this._sColorBorderOutside = '#000000';
+        this._sColorBorderInside = '#000000';
+        this._nBorderWidth = 8;
+        this._xGradStart = 0;
+        this._yGradStart = 0;
+        this._xGradEnd = 0;
+        this._yGradEnd = 0;
+        this._nGradOrientation = 0
+    }
+
     setColor(sNormal, sHighlight) {
         if (sHighlight === undefined) {
             sHighlight = sNormal
@@ -110,18 +127,3 @@ export class Box extends WinControl {
         }
     }
 }
-Object.assign(Box.prototype, {
-    _sClass: 'Box',
-    _sColor: '#FFFFFF',
-    _sColorOutside: '#FF6666',
-    _sColorInside: '#FFBBBB',
-    _sColorBorder: '#000000',
-    _sColorBorderOutside: '#000000',
-    _sColorBorderInside: '#000000',
-    _nBorderWidth: 8,
-    _xGradStart: 0,
-    _yGradStart: 0,
-    _xGradEnd: 0,
-    _yGradEnd: 0,
-    _nGradOrientation: 0
-});

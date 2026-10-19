@@ -5,12 +5,16 @@ import { MobileDispenser } from './MobileDispenser.js';
 import { Sprite } from './Sprite.js';
 import { Tile } from './Tile.js';
 
-export class Horde {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
+// décalages des 9 secteurs voisins (le secteur lui-même compris), en lecture seule
+const X_TONARI = [0, 0, 1, 1, 1, 0, -1, -1, -1];
+const Y_TONARI = [0, -1, -1, 0, 1, 1, 1, 0, -1];
 
-    __construct(r) {
+export class Horde {
+    constructor(r) {
+        this.oThinkerManager = null;
+        this.nTileCount = 0;
+        this.xTonari = X_TONARI;
+        this.yTonari = Y_TONARI;
         this.oRaycaster = r;
         this.oImageLoader = this.oRaycaster.oImages;
         this.oMobileDispenser = new MobileDispenser();
@@ -169,17 +173,3 @@ export class Horde {
         return nRes
     }
 }
-Object.assign(Horde.prototype, {
-    oRaycaster: null,
-    oThinkerManager: null,
-    aMobiles: null,
-    aStatics: null,
-    aSprites: null,
-    oBlueprints: null,
-    oTiles: null,
-    nTileCount: 0,
-    oImageLoader: null,
-    oMobileDispenser: null,
-    xTonari: [0, 0, 1, 1, 1, 0, -1, -1, -1],
-    yTonari: [0, -1, -1, 0, 1, 1, 1, 0, -1]
-});

@@ -1,6 +1,14 @@
 import { WinControl } from './WinControl.js';
 
 export class ScrollBox extends WinControl {
+    constructor() {
+        super();
+        this._sClass = 'ScrollBox';
+        this._oContainer = null;
+        this._xScroll = 0;
+        this._yScroll = 0
+    }
+
     linkControl(o, bParent) {
         if (bParent === undefined) {
             bParent = false
@@ -51,9 +59,3 @@ export class ScrollBox extends WinControl {
         c.setSize(w, h)
     }
 }
-Object.assign(ScrollBox.prototype, {
-    _sClass: 'ScrollBox',
-    _oContainer: null,
-    _xScroll: 0,
-    _yScroll: 0
-});

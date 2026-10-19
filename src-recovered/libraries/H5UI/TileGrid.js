@@ -1,6 +1,17 @@
 import { WinControl } from './WinControl.js';
 
 export class TileGrid extends WinControl {
+    constructor() {
+        super();
+        this._oTexture = null;
+        this._nCellWidth = 8;
+        this._nCellHeight = 8;
+        this._nCellPadding = 0;
+        this._aCells = null;
+        this._aInvalidCells = null;
+        this._bTransparent = true
+    }
+
     setGridSize(w, h, nPadding) {
         this._nCellPadding = nPadding | 0;
         this._aCells = [];
@@ -71,12 +82,3 @@ export class TileGrid extends WinControl {
         }
     }
 }
-Object.assign(TileGrid.prototype, {
-    _oTexture: null,
-    _nCellWidth: 8,
-    _nCellHeight: 8,
-    _nCellPadding: 0,
-    _aCells: null,
-    _aInvalidCells: null,
-    _bTransparent: true
-});

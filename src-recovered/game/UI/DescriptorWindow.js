@@ -4,10 +4,19 @@ import { Window } from './Window.js';
 import { Text } from '../../libraries/H5UI/Text.js';
 
 export class DescriptorWindow extends Window {
-    __construct(oParams) {
-        super.__construct({
+    constructor(oParams) {
+        super({
             caption: oParams.title
         });
+        this.nWidth = 400;
+        this.nHeight = 360;
+        this.nFontSize = 14;
+        this.nPadding = 24;
+        this.yText = 32;
+        this.oText = null;
+        this.xIcon = 0;
+        this.yIcon = 16;
+        this.nIconSize = 48;
         this.oParams = oParams;
         this.buildWindowContent()
     }
@@ -47,15 +56,3 @@ export class DescriptorWindow extends Window {
         ])
     }
 }
-Object.assign(DescriptorWindow.prototype, {
-    nWidth: 400,
-    nHeight: 360,
-    nFontSize: 14,
-    nPadding: 24,
-    oParams: null,
-    yText: 32,
-    oText: null,
-    xIcon: 0,
-    yIcon: 16,
-    nIconSize: 48
-});

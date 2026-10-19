@@ -9,10 +9,28 @@ import { ScrollBox } from '../../libraries/H5UI/ScrollBox.js';
 import { Text } from '../../libraries/H5UI/Text.js';
 
 export class ShopWindow extends Window {
-    __construct(oParams) {
-        super.__construct({
+    constructor(oParams) {
+        super({
             caption: '~win_shop'
         });
+        this._sClass = 'UI.ShopWindow';
+        this.nWidth = 512;
+        this.nHeight = 356;
+        this.oPopup = null;
+        this.aItems = null;
+        this.aPrices = null;
+        this.nIconSize = 48;
+        this.xTab = 32;
+        this.yTab = 32;
+        this.oSelector = null;
+        this.oGold = null;
+        this.nOptionHeight = 58;
+        this.nOptionVisible = 4;
+        this.ySelected = null;
+        this.clSOLDOUT_TEXTCOLOR = '#800';
+        this.clSOLDOUT_COLOR = '#444444';
+        this.clSOLDOUT_BORDER = '#666666';
+        this.clSOLDOUT_SELECT = '#444455';
         this.oParams = oParams;
         this.nOptionWidth = this.nWidth - this.xTab - this.xTab;
         this.yIcon = (this.nOptionHeight - UI.INV_ICON_SIZE) >> 1;
@@ -212,26 +230,3 @@ export class ShopWindow extends Window {
         }
     }
 }
-Object.assign(ShopWindow.prototype, {
-    _sClass: 'UI.ShopWindow',
-    nWidth: 512,
-    nHeight: 356,
-    oParams: null,
-    oPopup: null,
-    aItems: null,
-    aPrices: null,
-    nIconSize: 48,
-    xTab: 32,
-    yTab: 32,
-    oSelector: null,
-    oGold: null,
-    nOptionWidth: 0,
-    nOptionHeight: 58,
-    nOptionVisible: 4,
-    yIcon: 0,
-    ySelected: null,
-    clSOLDOUT_TEXTCOLOR: '#800',
-    clSOLDOUT_COLOR: '#444444',
-    clSOLDOUT_BORDER: '#666666',
-    clSOLDOUT_SELECT: '#444455'
-});

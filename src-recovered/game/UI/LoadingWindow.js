@@ -3,10 +3,11 @@ import { Window } from './Window.js';
 import { STRINGS } from '../data/STRINGS.js';
 
 export class LoadingWindow extends Window {
-    __construct(oParams) {
-        super.__construct({
+    constructor(oParams) {
+        super({
             caption: STRINGS._('~win_loading')
         });
+        this._sClass = 'UI.LoadingWindow';
         this.setSize(320, 160);
         const pb = this.linkControl(new ProgressBar({}));
         pb.setSize(260, 32);
@@ -20,7 +21,3 @@ export class LoadingWindow extends Window {
         return this.oPB
     }
 }
-Object.assign(LoadingWindow.prototype, {
-    _sClass: 'UI.LoadingWindow',
-    oPB: null
-});

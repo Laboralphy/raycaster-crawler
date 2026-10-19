@@ -1,10 +1,12 @@
 import { Window } from './Window.js';
 
 export class StubWindow extends Window {
-    __construct(oParams) {
-        super.__construct({
+    constructor(oParams) {
+        super({
             caption: 'STUB Window'
         });
+        this.nWidth = 540;
+        this.nHeight = 356;
         this.oParams = oParams;
         this.buildWindowContent();
         this.setCommands([
@@ -28,8 +30,3 @@ export class StubWindow extends Window {
         }
     }
 }
-Object.assign(StubWindow.prototype, {
-    nWidth: 540,
-    nHeight: 356,
-    oParams: null
-});

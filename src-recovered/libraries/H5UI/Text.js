@@ -3,8 +3,15 @@ import { WinControl } from './WinControl.js';
 import { CanvasFactory } from '../O876/CanvasFactory.js';
 
 export class Text extends WinControl {
-    __construct() {
-        super.__construct();
+    constructor() {
+        super();
+        this._sClass = 'Text';
+        this._sCaption = '';
+        this._bAutosize = true;
+        this._bWordWrap = false;
+        this._nTextWidth = 0;
+        this._nLineHeight = 0;
+        this._yLastWritten = 0;
         CanvasFactory.setImageSmoothing(this.getSurface(), true);
         this.font = new Font(this)
     }
@@ -81,13 +88,3 @@ export class Text extends WinControl {
         }
     }
 }
-Object.assign(Text.prototype, {
-    _sClass: 'Text',
-    _sCaption: '',
-    _bAutosize: true,
-    _bWordWrap: false,
-    _nTextWidth: 0,
-    _nLineHeight: 0,
-    _yLastWritten: 0,
-    font: null
-});

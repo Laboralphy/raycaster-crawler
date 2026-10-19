@@ -3,8 +3,12 @@ import { Box } from '../../libraries/H5UI/Box.js';
 import { Text } from '../../libraries/H5UI/Text.js';
 
 export class ProgressBar extends Box {
-    __construct(oParams) {
-        super.__construct();
+    constructor(oParams) {
+        super();
+        this._sClass = 'UI.ProgressBar';
+        this.nMax = 100;
+        this.nProgress = 0;
+        this.sCaption = '';
         this.setColor(UI.clDARK_WINDOW, UI.clDARK_WINDOW);
         this.setBorder(1, UI.clWINDOW_BORDER, UI.clWINDOW_BORDER);
         this.oBar = this.linkControl(new Box());
@@ -35,11 +39,3 @@ export class ProgressBar extends Box {
         this.oCaption.setCaption(sCaption)
     }
 }
-Object.assign(ProgressBar.prototype, {
-    _sClass: 'UI.ProgressBar',
-    nMax: 100,
-    nProgress: 0,
-    oBar: null,
-    sCaption: '',
-    oCaption: null
-});

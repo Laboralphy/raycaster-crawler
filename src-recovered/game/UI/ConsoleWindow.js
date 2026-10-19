@@ -2,10 +2,13 @@ import { Window } from './Window.js';
 import { Text } from '../../libraries/H5UI/Text.js';
 
 export class ConsoleWindow extends Window {
-    __construct(oParams) {
-        super.__construct({
+    constructor(oParams) {
+        super({
             caption: 'Console'
         });
+        this.nWidth = 512;
+        this.nHeight = 256;
+        this.oText = null;
         this.oParams = oParams;
         this.buildWindowContent();
         this.setCommands([
@@ -35,9 +38,3 @@ export class ConsoleWindow extends Window {
         }
     }
 }
-Object.assign(ConsoleWindow.prototype, {
-    nWidth: 512,
-    nHeight: 256,
-    oParams: null,
-    oText: null
-});

@@ -38,7 +38,14 @@ npm run report:prototypes   # what is left, by dependency level
   `Thinker` and `GC/EffectProcessor` even test `'__construct' in this`.
 - **Prototype used as a namespace.** Constants read through the prototype
   from outside (`GXColorVeil.prototype.SNARE` in `Game.js`) become `static`
-  fields, and the callers are updated.
+  fields, and the callers are updated. Watch for reads from inside the class
+  too: `InventoryWindow.sortItems` is passed unbound to `Array.sort`, so it read
+  `InventoryWindow.prototype.aItemOrder` (now `static ITEM_ORDER`). A
+  construction snapshot can't see these; grep for `\.prototype\.` instead.
+- **Properties deleted on destruction.** `WinControl.__destruct` deleted every
+  own property, so a destroyed control fell back to its prototype defaults
+  (`_aControls: null`). Without the prototype it would read `undefined` and
+  `hasControls()` would crash; it now sets them to `null` and keeps them.
 - **Order inside the constructor.** `Transistate` picks its first state in the
   constructor: a default (`pDoomloop`, `_sState`) assigned *after*
   `setDoomloop()` erases it.
@@ -53,7 +60,7 @@ npm run report:prototypes   # what is left, by dependency level
 
 ## Progress
 
-Snapshot of 2026-10-19: **74 files done, 15 deleted, 34 to go.**
+Snapshot of 2026-10-19: **97 files done, 15 deleted, 11 to go.**
 
 ### Done
 
@@ -133,6 +140,29 @@ Snapshot of 2026-10-19: **74 files done, 15 deleted, 34 to go.**
 | `libraries/O876/Astar/Nood.js` | (this branch) | yes |
 | `libraries/Raycaster/GXManager.js` | (this branch) | yes |
 | `libraries/Raycaster/Tile.js` | (this branch) | yes |
+| `libraries/Raycaster/Horde.js` | (this branch) | yes |
+| `libraries/H5UI/WinControl.js` | (this branch) | yes (UI construction snapshot) |
+| `libraries/H5UI/Box.js` | (this branch) | yes (UI construction snapshot) |
+| `libraries/H5UI/Button.js` | (this branch) | yes (UI construction snapshot) |
+| `libraries/H5UI/Image.js` | (this branch) | yes (UI construction snapshot) |
+| `libraries/H5UI/ScrollBox.js` | (this branch) | yes (UI construction snapshot) |
+| `libraries/H5UI/Text.js` | (this branch) | yes (UI construction snapshot) |
+| `libraries/H5UI/TileGrid.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/Icon.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/ProgressBar.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/Screen.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/Window.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/BookWindow.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/ConsoleWindow.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/CraftWindow.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/DescriptorWindow.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/DialogWindow.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/InventoryWindow.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/LoadingWindow.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/MainMenuWindow.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/PlayersheetWindow.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/ShopWindow.js` | (this branch) | yes (UI construction snapshot) |
+| `game/UI/StubWindow.js` | (this branch) | yes (UI construction snapshot) |
 
 `MagicPlugin.js` lost its prototype defaults in 44f511c but still patches
 `Animation` and `Raycaster` at runtime (objective 3), so it stays in the to-do
@@ -167,33 +197,21 @@ All done.
 
 #### Level 2
 
-| File | Tags | Tests |
-|---|---|---|
-| [ ] `libraries/H5UI/WinControl.js` | P C | no |
-| [ ] `libraries/Raycaster/Horde.js` | P C | no |
+All done.
 
 #### Level 3
 
 | File | Tags | Tests |
 |---|---|---|
 | [ ] `game/Dungeon.js` | P C | no |
-| [ ] `game/UI/Screen.js` | P | no |
-| [ ] `libraries/H5UI/Box.js` | P | no |
-| [ ] `libraries/H5UI/Image.js` | P | no |
-| [ ] `libraries/H5UI/ScrollBox.js` | P | no |
-| [ ] `libraries/H5UI/Text.js` | P C | no |
-| [ ] `libraries/H5UI/TileGrid.js` | P | no |
 
 #### Level 4
 
 | File | Tags | Tests |
 |---|---|---|
 | [ ] `game/UI/HUD.js` | P C | no |
-| [ ] `game/UI/Icon.js` | P | no |
-| [ ] `game/UI/ProgressBar.js` | P C | no |
 | [ ] `game/cutscenes/Cutscene.js` | P C | no |
 | [ ] `game/plugins/MagicPlugin.js` | R | no |
-| [ ] `libraries/H5UI/Button.js` | P C | no |
 | [ ] `libraries/Raycaster/Engine.js` | P C | no |
 
 #### Level 5
@@ -201,25 +219,12 @@ All done.
 | File | Tags | Tests |
 |---|---|---|
 | [ ] `game/MenuSystem.js` | P C | no |
-| [ ] `game/UI/Window.js` | P C | no |
 | [ ] `game/cutscenes/CutsceneEnd.js` | P C | no |
 | [ ] `game/cutscenes/CutsceneIntro.js` | P C | no |
 
 #### Level 6
 
-| File | Tags | Tests |
-|---|---|---|
-| [ ] `game/UI/BookWindow.js` | P C | no |
-| [ ] `game/UI/ConsoleWindow.js` | P C | no |
-| [ ] `game/UI/CraftWindow.js` | P C | no |
-| [ ] `game/UI/DescriptorWindow.js` | P C | no |
-| [ ] `game/UI/DialogWindow.js` | P C | no |
-| [ ] `game/UI/InventoryWindow.js` | P C | no |
-| [ ] `game/UI/LoadingWindow.js` | P C | no |
-| [ ] `game/UI/MainMenuWindow.js` | P C | no |
-| [ ] `game/UI/PlayersheetWindow.js` | P C | no |
-| [ ] `game/UI/ShopWindow.js` | P C | no |
-| [ ] `game/UI/StubWindow.js` | P C | no |
+All done.
 
 #### Level 7
 
@@ -297,3 +302,13 @@ All done.
   migrated; a mutation check (Tile defaults set after reading the data) goes
   red. Deleted the unused `Mediator`, `Plugin`, `Microsyte` and
   `ReikasterMicrosyte`. 335 tests pass.
+- **2026-10-19**: `Raycaster/Horde` tested and migrated (its neighbour
+  tables are now shared read-only module constants). Then the whole
+  `WinControl` family at once, 22 classes (`H5UI` controls, `Icon`,
+  `ProgressBar`, `Screen`, `Window` and the 12 game windows): construction
+  snapshot first (`test/unit/game/UI/construction.test.mjs`: every class
+  built on fake canvases, windows opened with game-like parameters, fields and
+  drawing calls of 215 controls), then a scripted migration. Mutation checks
+  (`Box` without its `_sClass`, `Button` colours set after use) go red. Found
+  by grep, not by the snapshot: `InventoryWindow.prototype.aItemOrder`, now
+  `static ITEM_ORDER`, with a sort test. 368 tests pass.

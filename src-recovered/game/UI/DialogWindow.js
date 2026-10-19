@@ -3,10 +3,16 @@ import { STRINGS } from '../data/STRINGS.js';
 import { Text } from '../../libraries/H5UI/Text.js';
 
 export class DialogWindow extends Window {
-    __construct(oParams) {
-        super.__construct({
+    constructor(oParams) {
+        super({
             caption: STRINGS._('~win_dialog')
         });
+        this.nWidth = 512;
+        this.nHeight = 192;
+        this.nFontSize = 16;
+        this.nPadding = 32;
+        this.yText = 64;
+        this.oText = null;
         this.oParams = oParams;
         this.buildWindowContent()
     }
@@ -43,12 +49,3 @@ export class DialogWindow extends Window {
         }
     }
 }
-Object.assign(DialogWindow.prototype, {
-    nWidth: 512,
-    nHeight: 192,
-    nFontSize: 16,
-    nPadding: 32,
-    oParams: null,
-    yText: 64,
-    oText: null
-});

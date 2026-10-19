@@ -8,10 +8,27 @@ import { ScrollBox } from '../../libraries/H5UI/ScrollBox.js';
 import { Text } from '../../libraries/H5UI/Text.js';
 
 export class CraftWindow extends Window {
-    __construct(oParams) {
-        super.__construct({
+    constructor(oParams) {
+        super({
             caption: STRINGS._('~win_craft')
         });
+        this.nWidth = 540;
+        this.nHeight = 356;
+        this.nOptionWidth = 512;
+        this.nOptionHeight = 58;
+        this.nOptionVisible = 5;
+        this.nOptionY = 32;
+        this.oPopup = null;
+        this.oProgressBar = null;
+        this.oProgressCaption = null;
+        this.oPopupMessage = null;
+        this.nProgress = 0;
+        this.oSelector = null;
+        this.ySelected = null;
+        this.oCraftItem = null;
+        this.clNOCRAFT_COLOR = '#444444';
+        this.clNOCRAFT_BORDER = '#666666';
+        this.clNOCRAFT_SELECT = '#444455';
         this.oParams = oParams;
         this.buildWindowContent();
         this.setCommands([
@@ -240,23 +257,3 @@ export class CraftWindow extends Window {
         }
     }
 }
-Object.assign(CraftWindow.prototype, {
-    nWidth: 540,
-    nHeight: 356,
-    nOptionWidth: 512,
-    nOptionHeight: 58,
-    nOptionVisible: 5,
-    nOptionY: 32,
-    oParams: null,
-    oPopup: null,
-    oProgressBar: null,
-    oProgressCaption: null,
-    oPopupMessage: null,
-    nProgress: 0,
-    oSelector: null,
-    ySelected: null,
-    oCraftItem: null,
-    clNOCRAFT_COLOR: '#444444',
-    clNOCRAFT_BORDER: '#666666',
-    clNOCRAFT_SELECT: '#444455'
-});
