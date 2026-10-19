@@ -267,3 +267,8 @@ Tick a box once the file is migrated and its tests pass.
   18 remaining thinkers and adding behaviour tests (`Linear`, `NonLinear`,
   `MouseKeyboard`, `Missile`). `MobThinker.EFFECT_HAZES` is now a module
   constant, still shared by all mobs. 203 tests green, game boots.
+- **2026-10-19**: in-game check of the `Thinker` family. OK: cutscenes,
+  player, hazes on monsters, shooters, melee monsters. The raven never stole:
+  an old bug (empty re-aim block in `StealerThinker._follow`, since the
+  initial commit), fixed outside the migration along with smarter stealing.
+  Not checked yet: casters, healers, sentries, monster spells.
