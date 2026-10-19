@@ -81,6 +81,8 @@ export class EffectProcessor {
         if (sMeth in this) {
             this[sMeth](oCreature, oEffect.sEffect)
         }
+        // marqué fini : qui le garde encore (icône d'état, objet équipé) le sait
+        oEffect.expire();
         oCreature.oEffects.splice(oCreature.oEffects.indexOf(oEffect), 1)
     }
 

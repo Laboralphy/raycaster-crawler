@@ -99,7 +99,8 @@ export class GXIconPad extends GXEffect {
         for (const iIc in this.oIcons) {
             oIcon = this.oIcons[iIc];
             if (oIcon.effect) {
-                if (oIcon.effect.hasExpired()) {
+                // fini, ou retiré de la créature (remplacé par le même effet)
+                if (oIcon.effect.hasExpired() || this.oEffects.indexOf(oIcon.effect) < 0) {
                     oIcon.effect = null;
                     oIcon.visible = false
                 } else {

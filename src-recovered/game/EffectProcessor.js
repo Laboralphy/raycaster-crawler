@@ -158,7 +158,7 @@ export class EffectProcessor extends GC_EffectProcessor {
                 }
             }
         }
-        super.bestowEffect(oCreature, sEffect, nDuration)
+        return super.bestowEffect(oCreature, sEffect, nDuration)
     }
 
     selectEffects_poison(oEffect) {
@@ -554,7 +554,7 @@ export class EffectProcessor extends GC_EffectProcessor {
         while (nLevel > 0 && aEffects.length > 0) {
             iEffect = MathTools.rnd(0, aEffects.length - 1);
             oEffToDisp = aEffects[iEffect];
-            ArrayTools.removeItem(aEffects, i);
+            ArrayTools.removeItem(aEffects, iEffect);
             oEffToDisp.expire();
             nLevel--
         }

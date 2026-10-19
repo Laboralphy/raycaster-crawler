@@ -173,11 +173,10 @@ describe('Dungeon : équipement', () => {
         expect(d.getCreatureInventory(c).getItemBagSlot(a)).toBe(-1);
     });
 
-    // BOGUE connu (depuis le premier commit) : EffectProcessor.bestowEffect
-    // ne renvoie pas l'effet, l'objet ne garde donc pas trace de ses effets et
-    // les retirer est impossible : changer d'anneau cumule les bonus (+4, +8...).
-    // it.fails passe tant que le bogue est là ; le corriger fera échouer ce test.
-    it.fails('remplacer un anneau retire son bonus', () => {
+    // BOGUE corrigé (depuis le premier commit) : EffectProcessor.bestowEffect
+    // ne renvoyait pas l'effet, l'objet ne gardait pas trace de ses effets et
+    // changer d'anneau cumulait les bonus (+4, +8, +12...)
+    it('remplacer un anneau retire son bonus', () => {
         const d = new Dungeon();
         const c = d.getPlayerCreature();
         const a = new Item('ring_power_2');

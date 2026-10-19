@@ -324,3 +324,15 @@ All done.
   and swapping rings stacks their bonuses (+4, +8, +12...), recorded as an
   `it.fails` test in `Dungeon.test.mjs`; `Dungeon.isDropStack` calls a
   `Marker.isMarked` that does not exist (the method is never called).
+- **2026-10-19**: bug fixes, outside the migration:
+  - rings and amulets: `bestowEffect` now returns the effect, so swapping
+    them no longer stacks their bonuses; `DataSerializer.saveItem` skips an
+    item effect the creature no longer has instead of throwing (possible now
+    that items record their effects, e.g. a raven dying with a stolen ring);
+  - status icons: `killEffect` marks the effect expired, and `GXIconPad`
+    hides an icon whose effect left the creature; a re-applied confusion
+    (non-stackable effect, same code) used to leave its icon on forever;
+  - Dispel potion: crashed (`i is not defined`) whenever a timed effect was
+    active;
+  - deleted the unused, broken `Dungeon.isDropStack`.
+  407 tests pass.

@@ -9,6 +9,8 @@ import { GXIconPad } from '../../../../src-recovered/game/gx/GXIconPad.js';
 import { GXTimeStop } from '../../../../src-recovered/game/gx/GXTimeStop.js';
 import { GXUnderwater } from '../../../../src-recovered/game/gx/GXUnderwater.js';
 import { Effect } from '../../../../src-recovered/game/GC/Effect.js';
+import { EffectProcessor } from '../../../../src-recovered/game/EffectProcessor.js';
+import { Creature } from '../../../../src-recovered/game/GC/Creature.js';
 import { ICONS } from '../../../../src-recovered/game/data/ICONS.js';
 import { assertDefaults } from '../../helpers.mjs';
 import { fakeCanvas, fakeRaycaster, stubDocument } from '../../canvas.mjs';
@@ -192,6 +194,32 @@ describe('GXTimeStop', () => {
 describe('GXIconPad', () => {
     const oImage = {};
     const raycaster = () => fakeRaycaster({ oHorde: { oTiles: { i_icons: { oImage } } } });
+
+    // BOGUE corrigé : confus une seconde fois avant la fin de la première
+    // confusion (effet non cumulable : l'ancien est remplacé, le code est le
+    // même), l'icône restait affichée pour toujours une fois l'effet fini
+    it('l\'icône disparaît quand un effet réappliqué prend fin', () => {
+        const ep = new EffectProcessor();
+        ep.setTime(100);
+        const c = new Creature();
+        c.setEffectProcessor(ep);
+        const g = new GXIconPad(raycaster());
+        g.setCreature(c);
+        const visible = () => Object.keys(g.oIcons || {}).filter((s) => g.oIcons[s].visible);
+        ep.applyEffect(c, 'macnfBK');
+        g.process();
+        expect(visible()).toEqual(['acnf']);
+        ep.setTime(105);
+        ep.applyEffect(c, 'macnfBK');
+        c.processEffects();
+        g.process();
+        expect(visible()).toEqual(['acnf']);
+        ep.setTime(115);
+        c.processEffects();
+        expect(c.oEffects).toEqual([]);
+        g.process();
+        expect(visible()).toEqual([]);
+    });
 
     function effect(sEffect, nTimeOut = 100) {
         const e = new Effect();

@@ -172,6 +172,22 @@ describe('game EffectProcessor', () => {
             });
     });
 
+    // BOGUE corrigé : ArrayTools.removeItem(aEffects, i), i non déclaré,
+    // la potion de dissipation plantait dès qu'un effet temporaire était actif
+    it('dissipation : retire des effets temporaires, jamais les permanents', () => {
+        const ep = new EffectProcessor();
+        ep.setTime(100);
+        const c = creature(ep);
+        ep.applyEffect(c, 'mabldBZ');
+        ep.applyEffect(c, 'nacnfBZ');
+        ep.applyEffect(c, 'ibpowB/');
+        ep.applyEffect(c, 'bdispCA');
+        ep.setTime(101);
+        c.processEffects();
+        expect(c.oEffects.map((e) => e.sEffect)).toEqual(['ibpowB/']);
+        expect([c.getAttribute('blind'), c.getAttribute('confused'), c.getAttribute('power')]).toEqual([0, 0, 1]);
+    });
+
     // filet de sécurité : chaque sous-type, appliqué 5 s (niveau 3) à une
     // créature, puis une seconde plus tard, puis à échéance
     describe.each(subtypes())('sous-type %s', (sSub) => {

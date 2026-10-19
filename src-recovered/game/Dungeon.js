@@ -252,18 +252,6 @@ export class Dungeon {
         this.oData.drops[sArea][nFloor] = oData
     }
 
-    isDropStack(x, y) {
-        const sArea = this.getPlayerLocationArea();
-        const nFloor = this.getPlayerLocationFloor();
-        if (!(sArea in this.oData.drops)) {
-            return false
-        }
-        if (this.oData.drops[sArea][nFloor] === undefined) {
-            return false
-        }
-        return Marker.isMarked(this.oData.drops[sArea][nFloor], x, y)
-    }
-
     addDrop(x, y, oItem) {
         if (typeof oItem == 'string') {
             oItem = new Item(oItem)

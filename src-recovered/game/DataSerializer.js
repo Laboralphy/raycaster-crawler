@@ -230,10 +230,11 @@ export class DataSerializer {
         let nEffectRank;
         for (let i = 0; i < oItem.effects.length; i++) {
             nEffectRank = aEffects.indexOf(oItem.effects[i]);
-            if (nEffectRank < 0) {
-                throw new Error('serializer::saveItem: error in item effect loop')
+            // effet déjà retiré de la créature (monstre mort, effets dissipés) :
+            // il n'y a plus rien à relier au chargement
+            if (nEffectRank >= 0) {
+                aDataEffects.push(nEffectRank)
             }
-            aDataEffects.push(nEffectRank)
         }
         return [oItem.resref, oItem.identified, oItem.stackcount, aDataEffects]
     }
