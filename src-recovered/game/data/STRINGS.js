@@ -441,7 +441,40 @@ export const STRINGS = {
         cs0_advangry2: '... I\'ll take the Grimoire back, you old buzzard.',
         cs0_advangry3: 'THIS IS WAR !!!             ',
         ...BOOKS.en,
-        cs1_credits: '----------------------\n' + 'GIVE BACK MY GRIMOIRE!\n' + '----------------------\n\n\n' + '////// STAFF CREDITS //////\n' + '\n' + 'Programming & Graphics\n' + '- Raphaël Marandet (raphael.marandet@gmail.com)\n\n' + '////// OTHER CREDITS //////\n' + '\n' + 'Music\n' + '- Introduction theme: Raphaël Marandet\n' + '- Other musics: generated with Claude Code (Anthropic), FM synthesis XM modules (sources in tools/music)\n\n' + 'Wall portraits\n' + '- Dungeon Crawl Stone Soup tiles, by the Crawl artists (CC0) https://opengameart.org/content/dungeon-crawl-32x32-tiles\n\n' + '////// SOFTWARES //////\n' + '\n' + 'Audio & music\n' + '- Audacity (optimizing sound files)\n' + '- Timidity++ (Converting midi files to audio files).\n' + '- Python & NumPy (music synthesis)\n' + '- OpenMPT / libopenmpt (XM module rendering)\n' + '- FFmpeg (OGG encoding)\n' + '\n' + 'Artwork\n' + '- Openoffice Draw (Texture creation)\n' + '- Gimp (Texture arrangement)\n' + '- Povray (Rendering sprites)\n' + '- ImageMagick (Spritesheet)\n' + '\n' + '\n' + '\n' + '\n' + '\n' + 'Thank you for playing.',
+        cs1_credits: '////// GIVE BACK MY GRIMOIRE //////\n' +
+            '\n' +
+            'This project is the result of hard work since 2012.\n' +
+            '- 2012 : Project initialization\n' +
+            '- 2018 : Raycaster main library\n' +
+            '         modernized to ECMAScript 6\n' +
+            '- 2026 : Using AI assistance to debug,\n' +
+            '         modernize, and ensure code\n' +
+            '         quality.\n' +
+            '\n' +
+            '////// CREDITS //////\n' +
+            '\n' +
+            'Programming :\n' +
+            '- Raphaël Marandet : Main programmer\n' +
+            '- Anthropic Claude : Code modernizer\n' +
+            '                     & assistant\n' +
+            '\n' +
+            '////// SOFTWARE //////\n' +
+            '\n' +
+            'Audio & music :\n' +
+            '- Audacity (optimizing sound files)\n' +
+            '- Python & NumPy (music synthesis)\n' +
+            '- FluidSynth (MIDI module rendering)\n' +
+            '- FFmpeg (OGG encoding)\n' +
+            '\n' +
+            'Artwork :\n' +
+            '- OpenOffice Draw (Texture creation)\n' +
+            '- GIMP (Texture arrangement)\n' +
+            '- POV-Ray (Rendering sprites)\n' +
+            '- ImageMagick (Spritesheet composition)\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            'Thanks for playing...',
         mspage_icon: 'Send a comment',
         mspage_button_close: 'Close',
         mspage_p1_title: 'Help me improve the game !',
@@ -814,7 +847,40 @@ export const STRINGS = {
         cs0_advangry2: '... Je reprendrai le Grimoire, foi de magicien !',
         cs0_advangry3: 'C\'EST LA GUERRE !!!             ',
         ...BOOKS.fr,
-        cs1_credits: '------------------------\n' + 'RENDS-MOI MON GRIMOIRE !\n' + '------------------------\n\n\n' + '////// ÉQUIPE //////\n' + '\n' + 'Programmation et graphismes\n' + '- Raphaël Marandet (raphael.marandet@gmail.com)\n\n' + '////// AUTRES CRÉDITS //////\n' + '\n' + 'Musique\n' + '- Thème d\'introduction : Raphaël Marandet\n' + '- Autres musiques : générées avec Claude Code (Anthropic), modules XM en synthèse FM (sources dans tools/music)\n\n' + 'Portraits muraux\n' + '- Tuiles de Dungeon Crawl Stone Soup, par les artistes de Crawl (CC0) https://opengameart.org/content/dungeon-crawl-32x32-tiles\n\n' + '////// LOGICIELS //////\n' + '\n' + 'Son et musique\n' + '- Audacity (optimisation des fichiers son)\n' + '- Timidity++ (conversion des fichiers MIDI en audio)\n' + '- Python et NumPy (synthèse musicale)\n' + '- OpenMPT / libopenmpt (rendu des modules XM)\n' + '- FFmpeg (encodage OGG)\n' + '\n' + 'Graphismes\n' + '- OpenOffice Draw (création des textures)\n' + '- Gimp (assemblage des textures)\n' + '- POV-Ray (rendu des sprites)\n' + '- ImageMagick (planches de sprites)\n' + '\n' + '\n' + '\n' + '\n' + '\n' + 'Merci d\'avoir joué.',
+        cs1_credits: '////// RENDS-MOI MON GRIMOIRE //////\n' +
+            '\n' +
+            'Ce projet est le fruit d\'un long travail commencé en 2012.\n' +
+            '- 2012 : Lancement du projet\n' +
+            '- 2018 : Bibliothèque du raycaster\n' +
+            '         modernisée en ECMAScript 6\n' +
+            '- 2026 : Recours à l\'IA pour déboguer,\n' +
+            '         moderniser et garantir la\n' +
+            '         qualité du code.\n' +
+            '\n' +
+            '////// CRÉDITS //////\n' +
+            '\n' +
+            'Programmation :\n' +
+            '- Raphaël Marandet : programmeur en chef\n' +
+            '- Anthropic Claude : modernisation du\n' +
+            '                     code et assistance\n' +
+            '\n' +
+            '////// LOGICIELS //////\n' +
+            '\n' +
+            'Son et musique :\n' +
+            '- Audacity (optimisation des sons)\n' +
+            '- Python et NumPy (synthèse musicale)\n' +
+            '- FluidSynth (rendu des modules MIDI)\n' +
+            '- FFmpeg (encodage OGG)\n' +
+            '\n' +
+            'Graphismes :\n' +
+            '- OpenOffice Draw (création de textures)\n' +
+            '- GIMP (assemblage des textures)\n' +
+            '- POV-Ray (rendu des sprites)\n' +
+            '- ImageMagick (planches de sprites)\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            'Merci d\'avoir joué...',
         mspage_icon: "Envoyer un commentaire",
         mspage_button_close: "Fermer",
         mspage_p1_title: "Aidez-moi à améliorer le jeu !",

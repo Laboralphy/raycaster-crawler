@@ -2,7 +2,7 @@
 
 Partitions General MIDI générées par script, dans l'esprit de Heretic et
 Hexen, rendues en OGG pour le jeu. Composition écrite avec Claude Code
-(voir `ASSETS.md`, « Assistance par IA »).
+(voir `AI_DISCLOSURE.md`).
 
 ## Morceaux
 
@@ -24,7 +24,7 @@ Hexen, rendues en OGG pour le jeu. Composition écrite avec Claude Code
 | `boss_medusa` | `make_boss_medusa.py` | boss : la reine Méduse | combat sous l'eau, rapide (fa dièse mineur) | 1:27 |
 | `treasure_guardian` | `make_treasure_guardian.py` | salle du trésor | l'or et son gardien : harpe, trombones et tuba (mi phrygien) | 1:29 |
 | `boss_warlock` | `make_boss_warlock.py` | boss final : le sorcier | épique ; thème du Grimoire en furie (ré mineur) | 1:33 |
-| `ending_homeward` | `make_ending_homeward.py` | cinématique de fin | joyeux ; thème du Grimoire en majeur (ré majeur) | 1:23 |
+| `ending_triumph` | `make_ending_triumph.py` | cinématique de fin | hymne épique, chœur sur ostinato de taikos et de cordes graves, thème du Grimoire, dans l'esprit du final d'« Avalon » (do mineur phrygien) | 1:18 |
 | `intro_wander` | `make_intro_wander.py` | cinématique d'intro, 1 : la promenade | insouciant puis perdu ; thème de l'aventurier (ré mixolydien) | 0:38 |
 | `intro_ambush` | `make_intro_ambush.py` | cinématique d'intro, 2 : l'embuscade | thème du Grimoire menaçant, sortilège, poulet qui caquette et s'enfuit (ré mineur) | 0:32 |
 | `intro_revenge` | `make_intro_revenge.py` | cinématique d'intro, 3 : la vengeance | colère qui monte, thème de l'aventurier en mineur, tutti (ré mineur) | 0:20 |
@@ -33,7 +33,8 @@ Hexen, rendues en OGG pour le jeu. Composition écrite avec Claude Code
 collait pas à l'ambiance. `dungeon_sanctum` (trop oriental, l'acte II de
 Diablo II), `mines_burrow` (trop « nains au travail dans la mine »),
 `treasure_hoard` (mignon mais trop paisible), `underwater_flooded` (trop
-paisible pour un niveau de méduses et de barracudas).
+paisible pour un niveau de méduses et de barracudas), `ending_homeward`
+(joyeux, remplacé par l'hymne plus épique `ending_triumph`).
 
 Hors jeu, pour un projet futur (absent de `make_all.sh`) :
 `danmaku_harpsichord` (`make_danmaku_harpsichord.py`), morceau original dans
@@ -88,5 +89,8 @@ est copié en `resources/snd/ogg/mus_<nom>.ogg`.
 - `compose.py` : accords, progressions, mélodies, arpèges, batterie, échos...
 - `motifs.py` : thème du Grimoire (menu), en mineur et en majeur ; thème de
   l'aventurier (intro), en mixolydien et en mineur.
+- `analyse_ref.py` : profil d'un enregistrement de référence (niveau, bandes,
+  tempo, tonalité au fil du temps), pour composer dans son esprit ; les
+  extraits restent dans `../samples/`, hors du dépôt.
 - `render.sh` : rendu FluidSynth, bouclage et niveau (`finish.py`), OGG.
 - `make_all.sh` : tout régénérer, avec le niveau de chaque morceau.

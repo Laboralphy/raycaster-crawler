@@ -10,7 +10,7 @@ dungeon_gate:-20 dungeon_vaults:-21 dungeon_chains:-19
 dungeon_crypt:-20 dungeon_ritual:-19 dungeon_requiem:-21 dungeon_gauntlet:-19
 mines_depths:-22 mines_echoes:-21 mines_pit:-21
 underwater_hunt:-19 boss_medusa:-18 treasure_guardian:-20
-boss_warlock:-18 ending_homeward:-20
+boss_warlock:-18 ending_triumph:-18
 intro_wander:-21 intro_ambush:-20 intro_revenge:-19"
 for entry in $LEVELS; do
     name=${entry%%:*}

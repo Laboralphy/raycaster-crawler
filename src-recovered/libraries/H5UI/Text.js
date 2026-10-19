@@ -47,10 +47,14 @@ export class Text extends WinControl {
             oSurface.textBaseline = 'top';
             const aParas = this._sCaption.split('\n');
             for (let iPara = 0; iPara < aParas.length; iPara++) {
-                aWords = aParas[iPara].split(' ');
+                // les espaces en tête de ligne sont gardés (alignement d'une
+                // suite de ligne sous le texte, en police à chasse fixe)
+                const sIndent = aParas[iPara].match(/^ */)[0];
+                aWords = aParas[iPara].substr(sIndent.length).split(' ');
+                sLine = sIndent;
                 while (aWords.length) {
                     sWord = aWords.shift();
-                    sSpace = sLine ? ' ' : '';
+                    sSpace = sLine.trim() ? ' ' : '';
                     oMetrics = oSurface.measureText(sLine + sSpace + sWord);
                     if (oMetrics.width >= this.getWidth()) {
                         x = 0;

@@ -35,7 +35,7 @@ export const SOUNDS = {
     MUSIC_CUTSCENE: 'mus_intro_wander',
     MUSIC_INTRO_AMBUSH: 'mus_intro_ambush',
     MUSIC_INTRO_REVENGE: 'mus_intro_revenge',
-    MUSIC_END: 'mus_ending_homeward',
+    MUSIC_END: 'mus_ending_triumph',
     AMB_BUBBLES: ['amb_bubbles0', 'amb_bubbles1', 'amb_bubbles2', 'amb_bubbles3'],
     SPELL_0: 'hit_spell0',
     SPELL_1: 'amb_gloom',
