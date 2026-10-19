@@ -259,3 +259,29 @@ describe('InventoryWindow', () => {
     });
 });
 
+describe('InventoryWindow : Jeter ou Retirer', () => {
+    const shown = (w) => ['inv_drop', 'inv_unequip'].filter((s, i) => w.getCommandButton(4 + i)._bVisible);
+
+    it('Jeter pour le sac, Retirer pour un objet porté, rien pour l\'arme', () => {
+        const w = CLASSES.InventoryWindow();
+        const oRing = w.oInventory.aBagSlots.find((o) => o && o.resref === 'ring_power_2');
+        w.oInventory.equipItem(oRing, 'finger');
+        w.refreshContent();
+        const [oDrop, oUnequip] = [w.getCommandButton(4), w.getCommandButton(5)];
+        expect([oUnequip._x, oUnequip._y]).toEqual([oDrop._x, oDrop._y]);
+        expect(oUnequip.getCaption()).toBe('Unequip');
+        w.selectXY(0, 0);
+        expect(shown(w)).toEqual(['inv_drop']);
+        w.selectXY(-1, 2);
+        expect(w.getSelectedItem()).toBe(oRing);
+        expect(shown(w)).toEqual(['inv_unequip']);
+        w.selectXY(-1, 0);
+        expect(w.getSelectedItem().slot).toBe('hand');
+        expect(shown(w)).toEqual([]);
+        w.selectXY(-1, 1);
+        expect(shown(w)).toEqual([]);
+        w.selectXY(3, 1);
+        expect(shown(w)).toEqual(['inv_drop']);
+    });
+});
+

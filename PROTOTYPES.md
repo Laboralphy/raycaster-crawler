@@ -336,3 +336,8 @@ All done.
     active;
   - deleted the unused, broken `Dungeon.isDropStack`.
   407 tests pass.
+- **2026-10-19**: new feature, outside the migration: unequipping. In the
+  inventory, an equipped ring, amulet or earrings shows **Unequip** in place
+  of **Drop** (`Dungeon.unequipItem`, `InventoryPlugin.unequipItem`); the
+  weapon cannot be unequipped (the game always expects one in hand), and a
+  full bag refuses with "Your inventory is full.". 413 tests pass.

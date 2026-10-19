@@ -336,12 +336,7 @@ export class Dungeon {
         let iEff, nEffCount, oEffect;
         const oRemovedItem = this.getCreatureInventory(oCreature).equipItem(oItem, oItem.slot);
         if (oRemovedItem) {
-            nEffCount = oRemovedItem.effects.length;
-            for (iEff = 0; iEff < nEffCount; iEff++) {
-                oRemovedItem.effects[iEff].expire()
-            }
-            oRemovedItem.effects = [];
-            this.oEffectProcessor.removeExpiredEffects(oCreature)
+            this.removeItemEffects(oCreature, oRemovedItem)
         }
         if (oItem) {
             if (oItem.properties) {
@@ -354,6 +349,31 @@ export class Dungeon {
                 }
             }
         }
+    }
+
+    /**
+     * Range dans le sac l'objet porté à cet emplacement et retire ses effets.
+     * Renvoie l'objet, ou null si l'emplacement est vide ou le sac plein.
+     */
+    unequipItem(oCreature, sSlot) {
+        const oInv = this.getCreatureInventory(oCreature);
+        const oItem = oInv.oEquipSlots[sSlot];
+        if (!oItem || oInv.getFreeBagSlot() < 0) {
+            return null
+        }
+        oInv.oEquipSlots[sSlot] = null;
+        oInv.addItem(oItem);
+        this.removeItemEffects(oCreature, oItem);
+        return oItem
+    }
+
+    removeItemEffects(oCreature, oItem) {
+        const nEffCount = oItem.effects.length;
+        for (let iEff = 0; iEff < nEffCount; iEff++) {
+            oItem.effects[iEff].expire()
+        }
+        oItem.effects = [];
+        this.oEffectProcessor.removeExpiredEffects(oCreature)
     }
 
     dropItem(oCreature, oItem) {

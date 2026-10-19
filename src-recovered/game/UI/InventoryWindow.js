@@ -16,6 +16,9 @@ export class InventoryWindow extends Window {
         });
         this._sClass = 'UI.InventoryWindow';
         this.nWidth = 540;
+        // rangs des boutons dans setCommands (les null n'en créent pas)
+        this.BUTTON_DROP = 4;
+        this.BUTTON_UNEQUIP = 5;
         this.nHeight = 320;
         this.aBoxes = null;
         this.aBoxesBag = null;
@@ -116,6 +119,9 @@ export class InventoryWindow extends Window {
             case 'inv_drop':
                 this.getPlugin('Inventory').dropItem();
                 break;
+            case 'inv_unequip':
+                this.getPlugin('Inventory').unequipItem();
+                break;
             case 'inv_sort':
                 this.oInventory.aBagSlots.sort(this.sortItems);
                 this.refreshContent();
@@ -203,8 +209,33 @@ export class InventoryWindow extends Window {
         this.setCommands([
             ['~key_gen_close', 'inv_close', 4], null, ['~key_inv_use', 'inv_use', 1],
             ['~key_inv_look', 'inv_look', 1], null, ['~key_inv_sort', 'inv_sort', 1],
-            ['~key_inv_drop', 'inv_drop', 6]
-        ])
+            ['~key_inv_drop', 'inv_drop', 6], ['~key_inv_unequip', 'inv_unequip', 6]
+        ]);
+        // « Retirer » prend la place de « Jeter » quand un objet porté est choisi
+        this.getCommandButton(this.BUTTON_UNEQUIP).moveTo(this.getCommandButton(this.BUTTON_DROP)._x, this.getCommandButton(this.BUTTON_DROP)._y);
+        this.updateCommands()
+    }
+
+    // Jeter : objet du sac ; Retirer : objet porté, sauf l'arme ; ni l'un ni l'autre sinon
+    updateCommands() {
+        const oDrop = this.getCommandButton(this.BUTTON_DROP);
+        const oUnequip = this.getCommandButton(this.BUTTON_UNEQUIP);
+        if (!oDrop || !oUnequip) {
+            return
+        }
+        const bEquipped = this.getEquipIndex() >= 0;
+        const oItem = this.getSelectedItem();
+        if (bEquipped) {
+            oDrop.hide();
+            if (oItem && this.oEquipSlotData[this.nSelect].slot !== 'hand') {
+                oUnequip.show()
+            } else {
+                oUnequip.hide()
+            }
+        } else {
+            oUnequip.hide();
+            oDrop.show()
+        }
     }
 
     buildBoxes() {
@@ -250,7 +281,8 @@ export class InventoryWindow extends Window {
             this.oTextBox.setBorder(1, UI.clWINDOW_BORDER, UI.clWINDOW_BORDER);
             this.oTextItem.setCaption('-')
         }
-        this.aBoxes.aBoxes[this.nSelect].selected(true)
+        this.aBoxes.aBoxes[this.nSelect].selected(true);
+        this.updateCommands()
     }
 
     getSelectedItem() {

@@ -193,6 +193,39 @@ describe('Dungeon : équipement', () => {
     });
 });
 
+describe('Dungeon : retirer un objet porté', () => {
+    it('range l\'anneau dans le sac et retire son bonus', () => {
+        const d = new Dungeon();
+        const c = d.getPlayerCreature();
+        const inv = d.getCreatureInventory(c);
+        const r = new Item('ring_power_2');
+        d.pickupItem(c, r);
+        d.equipItem(c, r);
+        expect(d.unequipItem(c, 'finger')).toBe(r);
+        expect(inv.oEquipSlots.finger).toBe(null);
+        expect(inv.getItemBagSlot(r)).toBeGreaterThanOrEqual(0);
+        expect(c.getAttribute('power')).toBe(0);
+        expect(r.effects).toEqual([]);
+        expect(c.oEffects).toEqual([]);
+    });
+
+    it('emplacement vide ou sac plein : rien ne bouge', () => {
+        const d = new Dungeon();
+        const c = d.getPlayerCreature();
+        const inv = d.getCreatureInventory(c);
+        expect(d.unequipItem(c, 'neck')).toBe(null);
+        const r = new Item('ring_power_2');
+        d.pickupItem(c, r);
+        d.equipItem(c, r);
+        while (inv.getFreeBagSlot() >= 0) {
+            inv.addItem(new Item('ring_power_2'));
+        }
+        expect(d.unequipItem(c, 'finger')).toBe(null);
+        expect(inv.oEquipSlots.finger).toBe(r);
+        expect(c.getAttribute('power')).toBe(4);
+    });
+});
+
 describe('Dungeon : attaques', () => {
     function attacker(sWeapon, nEnergy) {
         const d = new Dungeon();

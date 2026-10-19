@@ -77,6 +77,30 @@ export class InventoryPlugin {
         }
     }
 
+    /**
+     * Retire l'objet porté sélectionné (pas l'arme : la main n'est jamais vide)
+     * et le range dans le sac.
+     */
+    unequipItem() {
+        const oPlayerCreature = this.oGame.oDungeon.getPlayerCreature();
+        const nIndex = this.oGame.ui_command('get');
+        if (nIndex >= 0) {
+            return
+        }
+        const oInv = this.oGame.oDungeon.getCreatureInventory(oPlayerCreature);
+        const sSlot = Object.keys(oInv.oEquipSlots)[-1 - nIndex];
+        if (sSlot === 'hand' || !oInv.oEquipSlots[sSlot]) {
+            return
+        }
+        const oItem = this.oGame.oDungeon.unequipItem(oPlayerCreature, sSlot);
+        if (oItem) {
+            this.oGame.sys_notify('item_unequip', [oItem.getName()], oItem.icon)
+        } else {
+            this.oGame.sys_notify('inventory_full')
+        }
+        this.oGame.ui_command('update')
+    }
+
     key(nKey) {
         if (this.oGame.nIntfMode != UI.INTFMODE_INVENTORY && nKey != KEYS._INT_INVENTORY) {
             return false
