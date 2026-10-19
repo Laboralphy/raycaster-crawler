@@ -5,11 +5,19 @@ import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
 import { buildUpperMap } from '../storey.js';
 
 export class Cutscene {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    // taille du raycaster : celle des cinématiques ; le menu en prend une plus petite
+    constructor(nWidth = 800, nHeight = 500) {
+        this.RAYCASTER_WIDTH = nWidth;
+        this.RAYCASTER_HEIGHT = nHeight;
+        this.RAYCASTER_LEVEL = null;
+        this.oFinalCanvas = null;
+        this.oFinalContext = null;
+        this.xRC = 0;
+        this.yRC = 0;
+        this.oRaycaster = null;
+        this.oCameraThinker = null;
+        this.bRender = false;
+        this.nTime = 0;
         this.aPopups = [];
         this.oRenderCanvas = CanvasFactory.getCanvas();
         this.oRenderContext = this.oRenderCanvas.getContext('2d');
@@ -132,24 +140,3 @@ export class Cutscene {
         }
     }
 }
-Object.assign(Cutscene.prototype, {
-    RAYCASTER_WIDTH: 800,
-    RAYCASTER_HEIGHT: 500,
-    RAYCASTER_LEVEL: null,
-    oRenderCanvas: null,
-    oRenderContext: null,
-    oFinalCanvas: null,
-    oFinalContext: null,
-    oRCCanvas: null,
-    oRCContext: null,
-    xRC: 0,
-    yRC: 0,
-    oRaycaster: null,
-    oCameraThinker: null,
-    bRender: false,
-    aPopups: null,
-    nTime: 0,
-    getLabyMap: null,
-    getLevelData: null,
-    onRender: null
-});

@@ -3,8 +3,8 @@ import { GFX_DATA } from './data/GFX_DATA.js';
 import { PI } from '../libraries/Raycaster/Tools/MathTools.js';
 
 export class MenuSystem extends Cutscene {
-    __construct() {
-        super.__construct();
+    constructor() {
+        super(400, 250);
         this.bWallPainted = false;
         const nLabySize = this.oRaycaster.nMapSize;
         const nLabyWidth = nLabySize * this.oRaycaster.nPlaneSpacing;
@@ -196,8 +196,3 @@ export class MenuSystem extends Cutscene {
         }
     }
 }
-Object.assign(MenuSystem.prototype, {
-    RAYCASTER_WIDTH: 400,
-    RAYCASTER_HEIGHT: 250,
-    bWallPainted: false
-});

@@ -6,8 +6,13 @@ import { RC } from '../../libraries/Raycaster/RC.js';
 import { PI } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class CutsceneIntro extends Cutscene {
-    __construct() {
-        super.__construct();
+    constructor() {
+        super();
+        this.fFade = -0.05;
+        this.fAlpha = 1;
+        this.sPhase = 'phaseInit';
+        this.nLabyWidth = 0;
+        this.nShadedTileCount = 0;
         this.nLabySize = this.oRaycaster.nMapSize;
         this.oCameraThinker = this.oRaycaster.oCamera.oThinker;
         this.oCameraThinker.oCutscene = this
@@ -480,11 +485,3 @@ export class CutsceneIntro extends Cutscene {
         }
     }
 }
-Object.assign(CutsceneIntro.prototype, {
-    fFade: -0.05,
-    fAlpha: 1,
-    sPhase: 'phaseInit',
-    nLabyWidth: 0,
-    nLabySize: 0,
-    nShadedTileCount: 0
-});

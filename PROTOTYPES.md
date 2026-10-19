@@ -49,6 +49,12 @@ npm run report:prototypes   # what is left, by dependency level
 - **Order inside the constructor.** `Transistate` picks its first state in the
   constructor: a default (`pDoomloop`, `_sState`) assigned *after*
   `setDoomloop()` erases it.
+- **A parent constructor sized by a subclass.** `Cutscene` builds its canvas
+  from `RAYCASTER_WIDTH/HEIGHT`, which `MenuSystem` overrode on its prototype
+  (400 x 250). After `super()` is too late: the size became a constructor
+  parameter (`super(400, 250)`). Prototype placeholders for methods
+  (`getLabyMap: null`, `onRender: null`) must not be copied into the
+  constructor, or they hide the subclass methods.
 - **Class fields run after `super()`.** A subclass field initialiser
   overwrites whatever the parent constructor (or a virtual `__construct`) set.
 - **Construction snapshot.** For a family with many subclasses, recording
@@ -60,7 +66,7 @@ npm run report:prototypes   # what is left, by dependency level
 
 ## Progress
 
-Snapshot of 2026-10-19: **100 files done, 15 deleted, 8 to go.**
+Snapshot of 2026-10-19: **104 files done, 15 deleted, 4 to go.**
 
 ### Done
 
@@ -166,6 +172,10 @@ Snapshot of 2026-10-19: **100 files done, 15 deleted, 8 to go.**
 | `game/Dungeon.js` | (this branch) | yes |
 | `game/UI/HUD.js` | (this branch) | yes |
 | `game/UI/System.js` | (this branch) | yes |
+| `game/cutscenes/Cutscene.js` | (this branch) | yes (cutscene construction snapshot) |
+| `game/cutscenes/CutsceneIntro.js` | (this branch) | yes (cutscene construction snapshot) |
+| `game/cutscenes/CutsceneEnd.js` | (this branch) | yes (cutscene construction snapshot) |
+| `game/MenuSystem.js` | (this branch) | yes (cutscene construction snapshot) |
 
 `MagicPlugin.js` lost its prototype defaults in 44f511c but still patches
 `Animation` and `Raycaster` at runtime (objective 3), so it stays in the to-do
@@ -210,17 +220,12 @@ All done.
 
 | File | Tags | Tests |
 |---|---|---|
-| [ ] `game/cutscenes/Cutscene.js` | P C | no |
 | [ ] `game/plugins/MagicPlugin.js` | R | no |
 | [ ] `libraries/Raycaster/Engine.js` | P C | no |
 
 #### Level 5
 
-| File | Tags | Tests |
-|---|---|---|
-| [ ] `game/MenuSystem.js` | P C | no |
-| [ ] `game/cutscenes/CutsceneEnd.js` | P C | no |
-| [ ] `game/cutscenes/CutsceneIntro.js` | P C | no |
+All done.
 
 #### Level 6
 
@@ -341,3 +346,8 @@ All done.
   of **Drop** (`Dungeon.unequipItem`, `InventoryPlugin.unequipItem`); the
   weapon cannot be unequipped (the game always expects one in hand), and a
   full bag refuses with "Your inventory is full.". 413 tests pass.
+- **2026-10-19**: the cutscene family (`Cutscene`, `CutsceneIntro`,
+  `CutsceneEnd`, `MenuSystem`): construction snapshot first, with a mocked
+  `Raycaster` recording canvas size, configuration, world and camera
+  (`test/unit/game/cutscenes/construction.test.mjs`), then migrated. Mutation
+  check (menu size set after `super()`) goes red. 422 tests pass.
