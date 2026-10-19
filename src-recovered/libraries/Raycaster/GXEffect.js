@@ -1,9 +1,6 @@
 export class GXEffect {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct(oRaycaster) {
+    constructor(oRaycaster) {
+        this.sClass = 'Effect';
         this.oRaycaster = oRaycaster
     }
 
@@ -19,7 +16,3 @@ export class GXEffect {
 
     terminate() {}
 }
-Object.assign(GXEffect.prototype, {
-    sClass: 'Effect',
-    oRaycaster: null
-});

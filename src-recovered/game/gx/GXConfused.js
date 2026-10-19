@@ -3,8 +3,9 @@ import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
 import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class GXConfused extends GXEffect {
-    __construct(oRaycaster) {
-        super.__construct(oRaycaster);
+    constructor(oRaycaster) {
+        super(oRaycaster);
+        this.sClass = 'Confused';
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
         this.oConfCanvas = CanvasFactory.getCanvas();
@@ -46,12 +47,3 @@ export class GXConfused extends GXEffect {
         this.oConfContext.drawImage(this.oCanvas, nx, ny, this.oCanvas.width - nx - nx, this.oCanvas.height - ny - ny, 0, 0, this.oConfCanvas.width, this.oConfCanvas.height)
     }
 }
-Object.assign(GXConfused.prototype, {
-    sClass: 'Confused',
-    oCanvas: null,
-    oContext: null,
-    nTime: 0,
-    bOver: false,
-    oConfCanvas: null,
-    oConfContext: null
-});

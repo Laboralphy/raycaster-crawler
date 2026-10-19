@@ -2,8 +2,32 @@ import { CanvasFactory } from '../O876/CanvasFactory.js';
 import { GXEffect } from './GXEffect.js';
 
 export class GXMessage extends GXEffect {
-    __construct(oRaycaster) {
-        super.__construct(oRaycaster);
+    constructor(oRaycaster) {
+        super(oRaycaster);
+        this.sClass = 'Message';
+        this.nTime = 0;
+        this.sMessage = '';
+        this.xTo = 0;
+        this.nState = 0;
+        this.fAlpha = 1;
+        this.aPath = null;
+        this.iPath = 0;
+        this.sTextAlign = 'left';
+        this.xTextPos = 0;
+        this.nTextHeight = 13;
+        this.sFontFamily = 'monospace';
+        this.oStyle = {
+            background: 'rgb(255, 255, 255)',
+            border: 'rgb(64, 64, 64)',
+            shadow: 'rgb(220, 220, 220)',
+            text: 'rgb(0, 0, 0)',
+            width: 512,
+            height: 40,
+            font: 'monospace 13',
+            speed: 100,
+            position: 48
+        };
+        this.oIcon = null;
         const s = this.oStyle;
         this.wSize = s.width;
         this.hSize = s.height;
@@ -193,40 +217,3 @@ export class GXMessage extends GXEffect {
         this.nState = 4
     }
 }
-Object.assign(GXMessage.prototype, {
-    sClass: 'Message',
-    oCanvas: null,
-    oContext: null,
-    nTime: 0,
-    sMessage: '',
-    oMessageCanvas: null,
-    xPos: 0,
-    yPos: 0,
-    xTo: 0,
-    yTo: 0,
-    yOfs: 48,
-    nState: 0,
-    fAlpha: 1,
-    aPath: null,
-    iPath: 0,
-    sTextAlign: 'left',
-    xTextPos: 0,
-    yTextPos: 0,
-    nTextHeight: 13,
-    fTimePerChar: 150,
-    wSize: 512,
-    hSize: 40,
-    sFontFamily: 'monospace',
-    oStyle: {
-        background: 'rgb(255, 255, 255)',
-        border: 'rgb(64, 64, 64)',
-        shadow: 'rgb(220, 220, 220)',
-        text: 'rgb(0, 0, 0)',
-        width: 512,
-        height: 40,
-        font: 'monospace 13',
-        speed: 100,
-        position: 48
-    },
-    oIcon: null
-});

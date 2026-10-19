@@ -3,8 +3,18 @@ import { CanvasFactory } from '../../libraries/O876/CanvasFactory.js';
 import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
 
 export class GXIconPad extends GXEffect {
-    __construct(oRaycaster) {
-        super.__construct(oRaycaster);
+    constructor(oRaycaster) {
+        super(oRaycaster);
+        this.sClass = 'IconPad';
+        this.oIcons = null;
+        this.oEffects = null;
+        this.oCreature = null;
+        this.sSnapShot = 'xxx';
+        this.PAD_HEIGHT = 48;
+        this.PAD_Y = 8;
+        this.PAD_X = 8;
+        this.PAD_ICON_SPACING = 2;
+        this.PAD_ICON_SIZE = 48;
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
         this.oRenderCanvas = CanvasFactory.getCanvas();
@@ -130,19 +140,3 @@ export class GXIconPad extends GXEffect {
 
     terminate() {}
 }
-Object.assign(GXIconPad.prototype, {
-    sClass: 'IconPad',
-    oCanvas: null,
-    oContext: null,
-    oRenderCanvas: null,
-    oRenderContext: null,
-    oIcons: null,
-    oEffects: null,
-    oCreature: null,
-    sSnapShot: 'xxx',
-    PAD_HEIGHT: 48,
-    PAD_Y: 8,
-    PAD_X: 8,
-    PAD_ICON_SPACING: 2,
-    PAD_ICON_SIZE: 48
-});

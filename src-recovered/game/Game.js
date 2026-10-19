@@ -1721,13 +1721,13 @@ export class Game extends Engine {
                     }
                     break;
                 case 'snared':
-                    this.sys_veil(GXColorVeil.prototype.SNARE, nNewValue > 0);
+                    this.sys_veil(GXColorVeil.SNARE, nNewValue > 0);
                     break;
                 case 'rooted':
-                    this.sys_veil(GXColorVeil.prototype.ROOT, nNewValue > 0);
+                    this.sys_veil(GXColorVeil.ROOT, nNewValue > 0);
                     break;
                 case 'held':
-                    this.sys_veil(GXColorVeil.prototype.HOLD, nNewValue > 0);
+                    this.sys_veil(GXColorVeil.HOLD, nNewValue > 0);
                     break;
                 case 'invisible':
                     if (nNewValue > 0) {

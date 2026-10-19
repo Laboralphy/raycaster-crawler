@@ -2,8 +2,13 @@ import { GfxTools } from '../O876/GfxTools.js';
 import { GXEffect } from './GXEffect.js';
 
 export class GXFlash extends GXEffect {
-    __construct(oRaycaster) {
-        super.__construct(oRaycaster);
+    constructor(oRaycaster) {
+        super(oRaycaster);
+        this.sClass = 'Flash';
+        this.nTime = 0;
+        this.fAlpha = 0;
+        this.fAlphaFade = 0;
+        this.oColor = null;
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d')
     }
@@ -32,12 +37,3 @@ export class GXFlash extends GXEffect {
         this.fAlpha = 0
     }
 }
-Object.assign(GXFlash.prototype, {
-    sClass: 'Flash',
-    oCanvas: null,
-    oContext: null,
-    nTime: 0,
-    fAlpha: 0,
-    fAlphaFade: 0,
-    oColor: null
-});

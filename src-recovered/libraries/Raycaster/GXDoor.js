@@ -2,8 +2,18 @@ import { Marker } from '../O876/Marker.js';
 import { GXEffect } from './GXEffect.js';
 
 export class GXDoor extends GXEffect {
-    __construct(r) {
-        super.__construct(r);
+    constructor(r) {
+        super(r);
+        this.sClass = 'Door';
+        this.nPhase = 0;
+        this.x = 0;
+        this.y = 0;
+        this.fOffset = 0;
+        this.nMaxTime = 3000;
+        this.nTime = 3000;
+        this.fSpeed = 0;
+        this.nLimit = 0;
+        this.nCode = 0;
         this.setAutoClose(true)
     }
 
@@ -86,17 +96,3 @@ export class GXDoor extends GXEffect {
         this.oRaycaster.setMapXYPhysical(this.x, this.y, this.nCode)
     }
 }
-Object.assign(GXDoor.prototype, {
-    sClass: 'Door',
-    nPhase: 0,
-    oRaycaster: null,
-    x: 0,
-    y: 0,
-    fOffset: 0,
-    nMaxTime: 3000,
-    nTime: 3000,
-    nAutoClose: 0,
-    fSpeed: 0,
-    nLimit: 0,
-    nCode: 0
-});

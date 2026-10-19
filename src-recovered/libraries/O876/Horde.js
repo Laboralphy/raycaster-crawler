@@ -1,9 +1,5 @@
 export class Horde {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
         this.aItems = []
     }
 
@@ -54,6 +50,3 @@ export class Horde {
         this.aItems = []
     }
 }
-Object.assign(Horde.prototype, {
-    aItems: null
-});

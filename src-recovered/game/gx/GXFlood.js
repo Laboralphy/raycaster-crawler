@@ -4,8 +4,11 @@ import { GXFlash } from '../../libraries/Raycaster/GXFlash.js';
 import { MathTools, PI } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class GXFlood extends GXEffect {
-    __construct(oRaycaster) {
-        super.__construct(oRaycaster);
+    constructor(oRaycaster) {
+        super(oRaycaster);
+        this.sClass = 'Flood';
+        this.BUBBLES = 40;
+        this.TIME_AMP = 16;
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
         this.nTime = 0;
@@ -83,13 +86,3 @@ export class GXFlood extends GXEffect {
         this.nTime = this.oCanvas.height + 128
     }
 }
-Object.assign(GXFlood.prototype, {
-    sClass: 'Flood',
-    oCanvas: null,
-    oContext: null,
-    nTime: 0,
-    aAmp: null,
-    aPls: null,
-    BUBBLES: 40,
-    TIME_AMP: 16
-});

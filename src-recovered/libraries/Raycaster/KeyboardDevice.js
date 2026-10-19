@@ -1,9 +1,7 @@
 export class KeyboardDevice {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
+        this.nKeyBufferSize = 16;
+        this.bUseBuffer = true;
         this.aKeys = [];
         this.aAliases = {};
         for (let i = 0; i < 256; i++) {
@@ -70,10 +68,3 @@ export class KeyboardDevice {
         document.onkeydown = undefined
     }
 }
-Object.assign(KeyboardDevice.prototype, {
-    aKeys: null,
-    aKeyBuffer: null,
-    nKeyBufferSize: 16,
-    bUseBuffer: true,
-    aAliases: null
-});

@@ -3,8 +3,9 @@ import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
 import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class GXBlind extends GXEffect {
-    __construct(oRaycaster) {
-        super.__construct(oRaycaster);
+    constructor(oRaycaster) {
+        super(oRaycaster);
+        this.sClass = 'Blind';
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
         this.oFlashCanvas = CanvasFactory.getCanvas();
@@ -54,12 +55,3 @@ export class GXBlind extends GXEffect {
         this.oFlashContext.globalCompositeOperation = xGA
     }
 }
-Object.assign(GXBlind.prototype, {
-    sClass: 'Blind',
-    oCanvas: null,
-    oContext: null,
-    nTime: 0,
-    bOver: false,
-    oFlashCanvas: null,
-    oFlashContext: null
-});

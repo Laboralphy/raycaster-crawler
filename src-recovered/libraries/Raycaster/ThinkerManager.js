@@ -3,11 +3,9 @@
 const THINKERS = {};
 
 export class ThinkerManager {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
+    constructor() {
+        this.oGameInstance = null
     }
-
-    __construct() {}
 
     static registerThinkers(oThinkers) {
         Object.assign(THINKERS, oThinkers)
@@ -26,6 +24,3 @@ export class ThinkerManager {
         }
     }
 }
-Object.assign(ThinkerManager.prototype, {
-    oGameInstance: null
-});

@@ -1,11 +1,9 @@
 export class ImageLoader {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
         this.oImages = {};
         this.aLoading = [];
+        this.bComplete = false;
+        this.nLoaded = 0;
         this.oStats = {
             images: {},
             totalsize: 0
@@ -68,10 +66,3 @@ export class ImageLoader {
         return this.nLoaded
     }
 }
-Object.assign(ImageLoader.prototype, {
-    oImages: null,
-    aLoading: null,
-    bComplete: false,
-    nLoaded: 0,
-    oStats: null
-});

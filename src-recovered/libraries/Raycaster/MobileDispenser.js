@@ -1,9 +1,5 @@
 export class MobileDispenser {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
         this.aBlueprints = {}
     }
 
@@ -33,6 +29,3 @@ export class MobileDispenser {
         return sRender
     }
 }
-Object.assign(MobileDispenser.prototype, {
-    aBlueprints: null
-});

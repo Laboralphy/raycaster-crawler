@@ -1,11 +1,9 @@
 export class Inventory {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
         this.oEquipSlots = {};
-        this.aBagSlots = []
+        this.aBagSlots = [];
+        this.nFindIndex = 0;
+        this.sFindResRef = ''
     }
 
     getAllObjects() {
@@ -214,9 +212,3 @@ export class Inventory {
         return null
     }
 }
-Object.assign(Inventory.prototype, {
-    aBagSlots: null,
-    oEquipSlots: null,
-    nFindIndex: 0,
-    sFindResRef: ''
-});

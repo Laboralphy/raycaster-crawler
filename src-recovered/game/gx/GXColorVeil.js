@@ -2,8 +2,17 @@ import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
 import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class GXColorVeil extends GXEffect {
-    __construct(oRaycaster) {
-        super.__construct(oRaycaster);
+    static SNARE = 1;
+    static ROOT = 2;
+    static HOLD = 4;
+
+    constructor(oRaycaster) {
+        super(oRaycaster);
+        this.sClass = 'ColorVeil';
+        this.xStyle = null;
+        this.yFrom = 0;
+        this.yTo = 0;
+        this.nEffectMask = 0;
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
         this.nTime = 0
@@ -86,16 +95,3 @@ export class GXColorVeil extends GXEffect {
         this.bOver = true
     }
 }
-Object.assign(GXColorVeil.prototype, {
-    sClass: 'ColorVeil',
-    oCanvas: null,
-    oContext: null,
-    nTime: 0,
-    xStyle: null,
-    yFrom: 0,
-    yTo: 0,
-    nEffectMask: 0,
-    SNARE: 1,
-    ROOT: 2,
-    HOLD: 4
-});

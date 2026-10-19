@@ -3,8 +3,9 @@ import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
 import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class GXUnderwater extends GXEffect {
-    __construct(oRaycaster) {
-        super.__construct(oRaycaster);
+    constructor(oRaycaster) {
+        super(oRaycaster);
+        this.sClass = 'Underwater';
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
         this.oDistCanvas = CanvasFactory.getCanvas();
@@ -67,14 +68,3 @@ export class GXUnderwater extends GXEffect {
         this.oDistContext2.drawImage(this.oDistCanvas, h2 + h4, 0, h4, h, y[2], 0, w - y[2], h)
     }
 }
-Object.assign(GXUnderwater.prototype, {
-    sClass: 'Underwater',
-    oCanvas: null,
-    oContext: null,
-    nTime: 0,
-    bOver: false,
-    oDistCanvas: null,
-    oDistContext: null,
-    oDistCanvas2: null,
-    oDistContext2: null
-});

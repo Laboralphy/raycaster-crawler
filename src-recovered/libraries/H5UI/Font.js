@@ -1,9 +1,12 @@
 export class Font {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct(oControl) {
+    constructor(oControl) {
+        this._sStyle = '';
+        this._sFont = 'monospace';
+        this._nFontSize = 10;
+        this._sColor = 'rgb(255, 255, 255)';
+        this._oControl = null;
+        this._sOutlineColor = 'rgb(0, 0, 0)';
+        this._bOutline = false;
         if (oControl === undefined) {
             throw new Error('h5ui.font: no specified control')
         }
@@ -72,12 +75,3 @@ export class Font {
         }
     }
 }
-Object.assign(Font.prototype, {
-    _sStyle: '',
-    _sFont: 'monospace',
-    _nFontSize: 10,
-    _sColor: 'rgb(255, 255, 255)',
-    _oControl: null,
-    _sOutlineColor: 'rgb(0, 0, 0)',
-    _bOutline: false
-});

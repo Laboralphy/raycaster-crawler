@@ -1,9 +1,5 @@
 export class MobileRegister {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct(n) {
+    constructor(n) {
         let x, y;
         this.nSize = n;
         this.aSectors = {};
@@ -48,7 +44,3 @@ export class MobileRegister {
         oMobile.nSectorRank = n
     }
 }
-Object.assign(MobileRegister.prototype, {
-    aSectors: null,
-    nSize: 0
-});

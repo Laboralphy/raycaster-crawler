@@ -1,9 +1,13 @@
 export class Blueprint {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct(oData) {
+    constructor(oData) {
+        this.sId = '';
+        this.nType = 0;
+        this.oTile = null;
+        this.nPhysWidth = 0;
+        this.nPhysHeight = 0;
+        this.sThinker = '';
+        this.nFx = 0;
+        this.oXData = null;
         if (oData !== undefined) {
             this.nPhysWidth = oData.width;
             this.nPhysHeight = oData.height;
@@ -26,13 +30,3 @@ export class Blueprint {
         }
     }
 }
-Object.assign(Blueprint.prototype, {
-    sId: '',
-    nType: 0,
-    oTile: null,
-    nPhysWidth: 0,
-    nPhysHeight: 0,
-    sThinker: '',
-    nFx: 0,
-    oXData: null
-});

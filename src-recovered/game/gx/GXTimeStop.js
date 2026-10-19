@@ -1,8 +1,12 @@
 import { GXEffect } from '../../libraries/Raycaster/GXEffect.js';
 
 export class GXTimeStop extends GXEffect {
-    __construct(oRaycaster) {
-        super.__construct(oRaycaster);
+    constructor(oRaycaster) {
+        super(oRaycaster);
+        this.sClass = 'TimeStop';
+        this.nTime = 0;
+        this.wBuff = 0;
+        this.hBuff = 0;
         this.oCanvas = this.oRaycaster.oCanvas;
         this.oContext = this.oCanvas.getContext('2d');
         this.bOver = false;
@@ -49,16 +53,3 @@ export class GXTimeStop extends GXEffect {
         this.oContext.putImageData(oImageData, 0, 0)
     }
 }
-Object.assign(GXTimeStop.prototype, {
-    sClass: 'TimeStop',
-    oCanvas: null,
-    oContext: null,
-    bOver: false,
-    nTime: 0,
-    oPixBuff: null,
-    oPixBuff8: null,
-    oPixBuff32: null,
-    wBuff: 0,
-    hBuff: 0,
-    nPixelCount: 0
-});

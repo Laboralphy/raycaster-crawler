@@ -1,9 +1,5 @@
 export class NoodList {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
         this.aList = {}
     }
 
@@ -56,6 +52,3 @@ export class NoodList {
         return true
     }
 }
-Object.assign(NoodList.prototype, {
-    aList: null
-});

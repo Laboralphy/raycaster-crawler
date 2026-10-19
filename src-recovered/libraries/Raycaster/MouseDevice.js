@@ -1,10 +1,11 @@
 export class MouseDevice {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
-        this.aEvents = []
+    constructor() {
+        this.nButtons = 0;
+        this.aEvents = [];
+        this.nKeyBufferSize = 16;
+        this.bUseBuffer = true;
+        this.nSecurityDelay = 0;
+        this.oElement = null
     }
 
     clearBuffer() {
@@ -101,11 +102,3 @@ export class MouseDevice {
         this.aEvents = []
     }
 }
-Object.assign(MouseDevice.prototype, {
-    nButtons: 0,
-    aEvents: null,
-    nKeyBufferSize: 16,
-    bUseBuffer: true,
-    nSecurityDelay: 0,
-    oElement: null
-});

@@ -2,6 +2,7 @@ import { CONFIG } from './config.js';
 import { Item } from './Item.js';
 import { BOOKS } from './data/BOOKS.js';
 import { ITEMS_DATA } from './data/ITEMS_DATA.js';
+import { MAGIC_DATA } from './data/MAGIC_DATA.js';
 import { WORLD_DATA } from './data/WORLD_DATA.js';
 import { RC } from '../libraries/Raycaster/RC.js';
 
@@ -340,6 +341,63 @@ export class Cheats {
                 }
                 return aLines.length ? aLines : 'no item matches "' + sFilter + '"';
             }
+        },
+        learn: {
+            ingame: true,
+            help: 'learn <spell|all>: learn a spell (learn alone: list)',
+            run(sSpell) {
+                const oMagic = this.oGame.oDungeon.getPlayerCreature().oExtraData.magic;
+                const aSpells = Object.keys(MAGIC_DATA);
+                if (sSpell === undefined) {
+                    return aSpells.map((s) => s + ' (level ' + MAGIC_DATA[s].level + ')' +
+                        (oMagic.book.includes(s) ? ' known' : ''));
+                }
+                // insensible à la casse : « learn timestop »
+                const aLearn = sSpell.toLowerCase() === 'all'
+                    ? aSpells
+                    : aSpells.filter((s) => s.toLowerCase() === sSpell.toLowerCase());
+                if (!aLearn.length) {
+                    return 'unknown spell "' + sSpell + '" (learn)';
+                }
+                const aNew = aLearn.filter((s) => !oMagic.book.includes(s));
+                // même effet qu'une étagère : le sort prend la touche F suivante
+                oMagic.book.push(...aNew);
+                this.oGame.oMagicSystem.invalidateDisplay();
+                return aNew.length ? 'learned: ' + aNew.join(', ') : 'already known';
+            }
+        },
+        affect: {
+            ingame: true,
+            help: 'affect <effect> [seconds] [level]: affect the player (affect alone: list)',
+            run(sEffect, sSeconds, sLevel) {
+                if (sEffect === undefined) {
+                    return Object.keys(Cheats.AFFECT_ALIASES).map((s) => s + ': ' + Cheats.AFFECT_ALIASES[s]);
+                }
+                // un alias (blind) ou un code d'effet à 4 lettres (abld)
+                const sSubType = Cheats.AFFECT_ALIASES[sEffect.toLowerCase()] || sEffect;
+                const ep = this.oGame.oDungeon.oEffectProcessor;
+                if (!/^[a-z]{4}$/.test(sSubType) || !(('applyEffect_' + sSubType) in ep)) {
+                    return 'unknown effect "' + sEffect + '" (affect)';
+                }
+                // durée en secondes de jeu ; 61 à 63 ont un sens spécial (2 min, 3 min, permanent)
+                const nSeconds = Math.max(1, Math.min(60, sSeconds === undefined ? 5 : sSeconds | 0));
+                const nLevel = Math.max(1, Math.min(63, sLevel === undefined ? 1 : sLevel | 0));
+                const sCode = ep.makeEffectStr('m', sSubType, nLevel, nSeconds);
+                ep.applyEffect(this.oGame.oDungeon.getPlayerCreature(), sCode);
+                return sCode + ': ' + sSubType + ' level ' + nLevel + ' for ' + nSeconds + ' s';
+            }
         }
+    };
+
+    // noms lisibles pour le code affect
+    static AFFECT_ALIASES = {
+        blind: 'abld',
+        confused: 'acnf',
+        snared: 'asnr',
+        rooted: 'aroo',
+        held: 'ahld',
+        weak: 'awea',
+        vulnerable: 'avul',
+        ill: 'aill'
     };
 }

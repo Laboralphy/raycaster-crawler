@@ -26,16 +26,19 @@ npm run report:prototypes   # what is left, by dependency level
 
 ## Traps to watch
 
-- **Subclass overrides hidden by the parent constructor.** The `GX*` effects
-  set `sClass` on their own prototype (`'Door'`, `'Secret'`...). If
-  `GXEffect`'s constructor sets `this.sClass = 'Effect'`, the instance property
-  hides the subclass value, and `DataSerializer.saveOpenDoors` / `Game` no
-  longer recognise doors. Same risk for any default a subclass redefines.
+- **Subclass overrides hidden by the parent constructor.** A default the
+  parent constructor assigns hides the value a subclass puts on its prototype.
+  Seen with `sClass` in the `GX*` effects (`DataSerializer.saveOpenDoors` and
+  `Game` recognise doors by `sClass === 'Door'`); solved by having each
+  subclass assign its own value right after `super()`.
 - **`__construct` is virtual.** The base constructor calls `this.__construct()`,
   so it runs the *subclass* version. Converting a parent to a real constructor
   while its subclasses still use `__construct` silently skips their setup
   (22 subclasses of `GXEffect`/`Thinker`/`Transistate` rely on this).
   `Thinker` and `GC/EffectProcessor` even test `'__construct' in this`.
+- **Prototype used as a namespace.** Constants read through the prototype
+  from outside (`GXColorVeil.prototype.SNARE` in `Game.js`) become `static`
+  fields, and the callers are updated.
 - **Order inside the constructor.** `Transistate` picks its first state in the
   constructor: a default (`pDoomloop`, `_sState`) assigned *after*
   `setDoomloop()` erases it.
@@ -46,7 +49,7 @@ npm run report:prototypes   # what is left, by dependency level
 
 ## Progress
 
-Snapshot of 2026-10-19: **26 files done, 95 to go.**
+Snapshot of 2026-10-19: **52 files done, 4 deleted, 65 to go.**
 
 ### Done
 
@@ -78,10 +81,42 @@ Snapshot of 2026-10-19: **26 files done, 95 to go.**
 | `libraries/Raycaster/Mobile.js` | 44f511c | no |
 | `libraries/Raycaster/Raycaster.js` | 44f511c | no |
 | `libraries/Raycaster/Sprite.js` | 44f511c | no |
+| `game/GC/Creature.js` | (this branch) | yes |
+| `game/GC/Inventory.js` | (this branch) | yes |
+| `libraries/H5UI/Font.js` | (this branch) | yes |
+| `libraries/O876/Astar/NoodList.js` | (this branch) | yes |
+| `libraries/O876/Astar/Point.js` | (this branch) | yes |
+| `libraries/O876/Horde.js` | (this branch) | yes |
+| `libraries/Raycaster/Blueprint.js` | (this branch) | yes |
+| `libraries/Raycaster/ImageLoader.js` | (this branch) | yes |
+| `libraries/Raycaster/KeyboardDevice.js` | (this branch) | yes |
+| `libraries/Raycaster/MobileDispenser.js` | (this branch) | yes |
+| `libraries/Raycaster/MobileRegister.js` | (this branch) | yes |
+| `libraries/Raycaster/MouseDevice.js` | (this branch) | yes |
+| `libraries/Raycaster/ThinkerManager.js` | (this branch) | yes |
+| `libraries/Raycaster/GXEffect.js` | (this branch) | yes |
+| `game/gx/GXBlind.js` | (this branch) | yes |
+| `game/gx/GXColorVeil.js` | (this branch) | yes |
+| `game/gx/GXConfused.js` | (this branch) | yes |
+| `game/gx/GXIconPad.js` | (this branch) | yes |
+| `game/gx/GXTimeStop.js` | (this branch) | yes |
+| `game/gx/GXUnderwater.js` | (this branch) | yes |
+| `libraries/Raycaster/GXDoor.js` | (this branch) | yes |
+| `libraries/Raycaster/GXMessage.js` | (this branch) | yes |
+| `libraries/Raycaster/GXSecret.js` | (this branch) | yes |
+| `libraries/Raycaster/GXFade.js` | (this branch) | yes |
+| `libraries/Raycaster/GXFlash.js` | (this branch) | yes |
+| `game/gx/GXFlood.js` | (this branch) | yes |
 
 `MagicPlugin.js` lost its prototype defaults in 44f511c but still patches
 `Animation` and `Raycaster` at runtime (objective 3), so it stays in the to-do
 list.
+
+### Deleted
+
+Unused anywhere in the game, removed instead of migrated:
+`libraries/O876/CPUMonitor.js`, `libraries/O876/Easing.js`,
+`libraries/O876/Legion.js`, `libraries/Raycaster/Scheduler.js`.
 
 ### To do
 
@@ -89,31 +124,13 @@ Paths are relative to `src-recovered/`. Tags: **P** prototype defaults,
 **C** `__construct`, **R** runtime patch. A level only depends on lower levels.
 Tick a box once the file is migrated and its tests pass.
 
-#### Level 0: no dependency (safety net written)
+#### Level 0: no dependency
 
 | File | Tags | Tests | Notes |
 |---|---|---|---|
-| [ ] `game/GC/Creature.js` | P C | yes | |
-| [ ] `game/GC/Inventory.js` | P C | yes | `findAllItems` sort typo (`stakcount`), sort does nothing |
-| [ ] `libraries/H5UI/Font.js` | P C | yes | |
-| [ ] `libraries/O876/Astar/NoodList.js` | P C | yes | |
-| [ ] `libraries/O876/Astar/Point.js` | P C | yes | |
 | [ ] `libraries/O876/Browser.js` | C | **no** | |
-| [ ] `libraries/O876/CPUMonitor.js` | P C | yes | unused, could be deleted |
-| [ ] `libraries/O876/Easing.js` | P C | yes | unused, could be deleted |
-| [ ] `libraries/O876/Horde.js` | P C | yes | |
-| [ ] `libraries/O876/Legion.js` | P C | yes | unused; `indexOf` bug (`it.fails`) |
 | [ ] `libraries/O876/SoundSystem.js` | P C | **no** | depends on the `howler` package only |
-| [ ] `libraries/Raycaster/Blueprint.js` | P C | yes | |
-| [ ] `libraries/Raycaster/GXEffect.js` | P C | yes | `sClass` trap, see above |
-| [ ] `libraries/Raycaster/ImageLoader.js` | P C | yes | |
-| [ ] `libraries/Raycaster/KeyboardDevice.js` | P C | yes | |
-| [ ] `libraries/Raycaster/MobileDispenser.js` | P C | yes | |
-| [ ] `libraries/Raycaster/MobileRegister.js` | P C | yes | |
-| [ ] `libraries/Raycaster/MouseDevice.js` | P C | yes | |
-| [ ] `libraries/Raycaster/Scheduler.js` | P C | yes | unused; `schedule` bug (`it.fails`) |
 | [ ] `libraries/Raycaster/Thinker.js` | P C | yes | tests `'__construct' in this` |
-| [ ] `libraries/Raycaster/ThinkerManager.js` | P C | yes | |
 | [ ] `libraries/Raycaster/Transistate.js` | P C | yes | constructor order trap, see above |
 
 #### Level 1
@@ -124,22 +141,13 @@ Tick a box once the file is migrated and its tests pass.
 | [ ] `game/GC/EffectProcessor.js` | P C | no |
 | [ ] `game/LootSystem.js` | P C | no |
 | [ ] `game/WeaponAnimator.js` | P C | no |
-| [ ] `game/gx/GXBlind.js` | P C | no |
-| [ ] `game/gx/GXColorVeil.js` | P C | no |
-| [ ] `game/gx/GXConfused.js` | P C | no |
-| [ ] `game/gx/GXIconPad.js` | P C | no |
-| [ ] `game/gx/GXTimeStop.js` | P C | no |
-| [ ] `game/gx/GXUnderwater.js` | P C | no |
 | [ ] `game/thinkers/MobThinker.js` | P C | no |
 | [ ] `game/thinkers/TimedThinker.js` | P | partly (via `Thinker` tests) |
 | [ ] `libraries/O876/Astar/Nood.js` | P C | no |
 | [ ] `libraries/O876/Mediator/Mediator.js` | P C | no |
 | [ ] `libraries/O876/Microsyte.js` | P C | no |
 | [ ] `libraries/Raycaster/CommandThinker.js` | P | no |
-| [ ] `libraries/Raycaster/GXDoor.js` | P C | partly (via `GXEffect` tests) |
 | [ ] `libraries/Raycaster/GXManager.js` | P C | no |
-| [ ] `libraries/Raycaster/GXMessage.js` | P C | no |
-| [ ] `libraries/Raycaster/GXSecret.js` | P C | partly (via `GXEffect` tests) |
 | [ ] `libraries/Raycaster/KeyboardThinker.js` | P | no |
 | [ ] `libraries/Raycaster/LinearThinker.js` | P C | partly (via `Thinker` tests) |
 | [ ] `libraries/Raycaster/MissileThinker.js` | P C | no |
@@ -161,8 +169,6 @@ Tick a box once the file is migrated and its tests pass.
 | [ ] `libraries/H5UI/WinControl.js` | P C | no |
 | [ ] `libraries/Raycaster/CameraKeyboardThinker.js` | P C | no |
 | [ ] `libraries/Raycaster/CameraMouseKeyboardThinker.js` | P C | no |
-| [ ] `libraries/Raycaster/GXFade.js` | P C | no |
-| [ ] `libraries/Raycaster/GXFlash.js` | P C | no |
 | [ ] `libraries/Raycaster/Horde.js` | P C | no |
 | [ ] `libraries/Raycaster/KbdArrowThinker.js` | C | no |
 
@@ -172,7 +178,6 @@ Tick a box once the file is migrated and its tests pass.
 |---|---|---|
 | [ ] `game/Dungeon.js` | P C | no |
 | [ ] `game/UI/Screen.js` | P | no |
-| [ ] `game/gx/GXFlood.js` | P C | no |
 | [ ] `game/thinkers/PlayerKeyboardThinker.js` | P C | no |
 | [ ] `libraries/H5UI/Box.js` | P | no |
 | [ ] `libraries/H5UI/Image.js` | P | no |
@@ -240,3 +245,19 @@ Tick a box once the file is migrated and its tests pass.
   level 0 files (`Browser` and `SoundSystem` still untested). Checked that a
   naive migration of `GXEffect` or `Transistate` turns 7 tests red.
   `npm run report:prototypes` lists what is left.
+- **2026-10-19**: deleted the unused `CPUMonitor`, `Easing`, `Legion` and
+  `Scheduler` (and their tests).
+- **2026-10-19**: migrated the 13 level 0 classes nothing extends (`Creature`,
+  `Inventory`, `Font`, `NoodList`, `Point`, O876 `Horde`, `Blueprint`,
+  `ImageLoader`, `KeyboardDevice`, `MobileDispenser`, `MobileRegister`,
+  `MouseDevice`, `ThinkerManager`). Tests green, game boots to the main menu.
+- **2026-10-19**: migrated the `GXEffect` family (`GXEffect` and its 12
+  subclasses), after adding tests for every subclass with a fake canvas
+  (`test/unit/canvas.mjs`). `GXColorVeil.SNARE/ROOT/HOLD` are now static, read
+  by `Game.js`; the unused `GXDoor.nAutoClose` (typo of `nAutoclose`) is gone.
+  159 tests green, game boots to the main menu.
+- **2026-10-19**: in-game check of the `GXEffect` family. OK: door left open
+  then save/reload, red flash when hit, confusion, secret wall, time stop
+  (`learn` debug cheat added for it), status icons, popup messages, medusa
+  flood then underwater, blindness and the snare/root/hold veils (`affect`
+  debug cheat). The whole family is checked.

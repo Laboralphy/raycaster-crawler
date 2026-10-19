@@ -2,8 +2,14 @@ import { Marker } from '../O876/Marker.js';
 import { GXEffect } from './GXEffect.js';
 
 export class GXSecret extends GXEffect {
-    __construct(r) {
-        super.__construct(r);
+    constructor(r) {
+        super(r);
+        this.sClass = 'Secret';
+        this.nPhase = 0;
+        this.x = 0;
+        this.y = 0;
+        this.fOffset = 0;
+        this.fSpeed = 0;
         this.nLimit = r.nPlaneSpacing
     }
 
@@ -82,13 +88,3 @@ export class GXSecret extends GXEffect {
         }
     }
 }
-Object.assign(GXSecret.prototype, {
-    sClass: 'Secret',
-    nPhase: 0,
-    oRaycaster: null,
-    x: 0,
-    y: 0,
-    fOffset: 0,
-    fSpeed: 0,
-    nLimit: 0
-});

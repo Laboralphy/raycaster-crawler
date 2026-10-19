@@ -1,13 +1,11 @@
 export class Creature {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
         this.oExtraData = {};
         this.oBaseAttributes = {};
         this.oAttributes = {};
-        this.oEffects = []
+        this.oEffects = [];
+        this.oEffectProcessor = null;
+        this.onAttributeChanged = null
     }
 
     setEffectProcessor(ep) {
@@ -123,11 +121,3 @@ export class Creature {
         }
     }
 }
-Object.assign(Creature.prototype, {
-    oBaseAttributes: null,
-    oAttributes: null,
-    oEffects: null,
-    oEffectProcessor: null,
-    onAttributeChanged: null,
-    oExtraData: null
-});
