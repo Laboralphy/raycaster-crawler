@@ -385,3 +385,8 @@ All done.
   fixed: a monster killed while held stayed frozen in its white haze until
   the hold ended (`MobThinker.processEffects` let the hold override death).
   444 tests pass.
+- **2026-10-19**: new music, outside the migration: the intro cutscene gets
+  its own score in three movements (`tools/music/midi/make_intro_*.py`), which
+  `CutsceneIntro` switches at the ambush and when the adventurer turns back
+  into a human (`onMusicEvent`). `check:data` now checks that every file of
+  `SOUNDS` exists. 449 tests pass.

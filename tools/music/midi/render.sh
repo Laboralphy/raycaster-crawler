@@ -12,7 +12,10 @@
 # Pièce sans boucle : NOLOOP=1 (la queue est gardée, pas repliée).
 set -e
 src="$1"
-sf2="${2:-${SF2:-$HOME/Musique/soundfonts/GeneralUser GS v1.471.sf2}}"
+# GeneralUser GS, sous son nom d'origine (espaces) ou celui du paquet (tirets bas)
+gu="$HOME/Musique/soundfonts/GeneralUser GS v1.471.sf2"
+[ -f "$gu" ] || gu="$HOME/Musique/soundfonts/GeneralUser_GS_v1.471.sf2"
+sf2="${2:-${SF2:-$gu}}"
 q="${OGG_Q:-1}"
 rate="${OGG_RATE:-32000}"
 level="${OGG_RMS:--20}"

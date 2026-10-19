@@ -50,3 +50,21 @@ ANSWER_MAJOR = [
     [('D5', 1), ('C#5', 1), ('B4', 1), ('G4', 1)],
     [('A4', 4)],
 ]
+
+# Thème de l'aventurier (cinématique d'introduction) : insouciant en ré
+# mixolydien (do naturel) pendant la promenade, puis en ré mineur, héroïque,
+# quand il jure de se venger. Même contour dans les deux modes.
+HERO_CHORDS = ['D', 'G|D', 'Em|D', 'A|D']
+HERO = [
+    [('D4', 1), ('F#4', .5), ('A4', .5), ('D5', 1.5), ('C5', .5)],
+    [('B4', 1), ('A4', .5), ('G4', .5), ('A4', 2)],
+    [('G4', .5), ('F#4', .5), ('E4', 1), ('F#4', .5), ('G4', .5), ('A4', 1)],
+    [('E4', 1.5), ('F#4', .5), ('D4', 2)],
+]
+HERO_MINOR_CHORDS = ['Dm', 'Bb|F', 'Gm|Dm', 'A|Dm']
+HERO_MINOR = [
+    [('D4', 1), ('F4', .5), ('A4', .5), ('D5', 1.5), ('C5', .5)],
+    [('Bb4', 1), ('A4', .5), ('G4', .5), ('A4', 2)],
+    [('G4', .5), ('F4', .5), ('E4', 1), ('F4', .5), ('G4', .5), ('A4', 1)],
+    [('E4', 1.5), ('F4', .5), ('D4', 2)],
+]

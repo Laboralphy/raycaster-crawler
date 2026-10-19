@@ -2079,6 +2079,9 @@ export class Game extends Engine {
             case 'intro':
                 this.oCutscene = new CutsceneIntro();
                 this.sys_playMusic(SOUNDS.MUSIC_CUTSCENE);
+                // les parties suivantes, chargées d'avance : elles partent
+                // à l'instant voulu (howler garde le son décodé en cache)
+                this.oSoundSystem.preload([SOUNDS.MUSIC_INTRO_AMBUSH, SOUNDS.MUSIC_INTRO_REVENGE].map((s) => this.sys_getSoundPath(s)));
                 break;
             case 'end':
                 this.oCutscene = new CutsceneEnd();
@@ -2090,6 +2093,9 @@ export class Game extends Engine {
         if (this.oCutscene) {
             this.oCutscene.onSoundEvent = function(sSound) {
                 oGame.sys_playSound(sSound)
+            };
+            this.oCutscene.onMusicEvent = function(sMusic) {
+                oGame.sys_playMusic(SOUNDS[sMusic])
             };
             this.oCutscene.setFinalCanvas(this.oCanvas);
             this.sCutsceneNextState = sState;

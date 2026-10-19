@@ -20,6 +20,9 @@ export class CutsceneIntro extends Cutscene {
 
     onSoundEvent(sSound) {}
 
+    // changement de musique (nom de SOUNDS), branché par Game.sys_cutscene
+    onMusicEvent(sMusic) {}
+
     getLevelData() {
         return {
             map: [],
@@ -316,6 +319,7 @@ export class CutsceneIntro extends Cutscene {
     }
 
     eventEmbush() {
+        this.oCutscene.onMusicEvent('MUSIC_INTRO_AMBUSH');
         this.oCutscene.setActorMove(3, 5.3, 7.8, 0, 8, 0, 8, 1, this.oCutscene.doStandAnimation);
         this.oCutscene.setActorMove(4, 5, 8.3, -0.5, 8, 0, 18, 1, this.oCutscene.doStandAnimation);
         this.oCutscene.setActorMove(5, 10, 7.8, PI * (0.9), -8, 0, 5, 1, this.oCutscene.doStandAnimation);
@@ -404,6 +408,7 @@ export class CutsceneIntro extends Cutscene {
     }
 
     eventAdvBack() {
+        this.oCutscene.onMusicEvent('MUSIC_INTRO_REVENGE');
         this.oCutscene.onSoundEvent('hit_spell0');
         this.oCutscene.setActorMove(8, 7, 8.1, 0, 0, 0, 100, 0);
         this.oCutscene.setActorMove(7, null, 3);

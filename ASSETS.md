@@ -35,7 +35,8 @@ Toutes sont des créations personnelles : partitions MIDI générées par script
 | Fichier | Clé | Utilisé pour | État |
 |---|---|---|---|
 | `mus_main_menu` | `MUSIC_MENU` | menu principal | ✅ |
-| `mus_forest_night` | `MUSIC_FOREST`, `MUSIC_CUTSCENE` | les deux forêts, cinématique d'intro | ✅ |
+| `mus_forest_night` | `MUSIC_FOREST` | les deux forêts | ✅ |
+| `mus_intro_wander`, `_ambush`, `_revenge` | `MUSIC_CUTSCENE`, `MUSIC_INTRO_AMBUSH`, `MUSIC_INTRO_REVENGE` | cinématique d'intro, en trois parties | ✅ |
 | `mus_dungeon_gate`, `_vaults`, `_chains`, `_crypt`, `_ritual`, `_requiem`, `_gauntlet` | `MUSIC_DUNGEON` | donjons (tirage au hasard) | ✅ |
 | `mus_mines_depths`, `_echoes`, `_pit` | `MUSIC_MINES` | mines (tirage au hasard) | ✅ |
 | `mus_underwater_hunt` | `MUSIC_UNDERWATER` | niveau sous l'eau, salles inondées | ✅ |

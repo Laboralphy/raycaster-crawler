@@ -170,3 +170,45 @@ describe('Cutscene', () => {
         expect(new MenuSystem().aPopups).not.toBe(c.aPopups);
     });
 });
+
+describe('CutsceneIntro : musique en trois parties', () => {
+    // les évènements de la cinématique tournent avec this = la caméra
+    function scene() {
+        const c = new CutsceneIntro();
+        c.onMusicEvent = vi.fn();
+        c.onSoundEvent = vi.fn();
+        // les déplacements d'acteurs ne nous intéressent pas ici
+        Object.getOwnPropertyNames(CutsceneIntro.prototype)
+            .filter((s) => /^setActor|^setCamera|^wait$/.test(s))
+            .forEach((s) => {
+                c[s] = vi.fn();
+            });
+        return { c, camera: { oCutscene: c } };
+    }
+
+    it('rien par défaut : le jeu branche onMusicEvent', () => {
+        expect(() => new CutsceneIntro().onMusicEvent('MUSIC_INTRO_AMBUSH')).not.toThrow();
+    });
+
+    it('l\'embuscade lance la 2e partie', () => {
+        const { c, camera } = scene();
+        c.eventEmbush.call(camera);
+        expect(c.onMusicEvent).toHaveBeenCalledWith('MUSIC_INTRO_AMBUSH');
+    });
+
+    it('redevenu humain : la 3e partie', () => {
+        const { c, camera } = scene();
+        c.eventAdvBack.call(camera);
+        expect(c.onMusicEvent).toHaveBeenCalledWith('MUSIC_INTRO_REVENGE');
+        expect(c.onSoundEvent).toHaveBeenCalledWith('hit_spell0');
+    });
+
+    it('aucun autre évènement ne change la musique', () => {
+        const { c, camera } = scene();
+        Object.getOwnPropertyNames(CutsceneIntro.prototype)
+            .filter((s) => /^event/.test(s) && s !== 'eventEmbush' && s !== 'eventAdvBack')
+            .forEach((s) => c[s].call(camera));
+        expect(c.onMusicEvent).not.toHaveBeenCalled();
+    });
+});
+

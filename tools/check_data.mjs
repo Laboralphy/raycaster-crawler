@@ -177,6 +177,15 @@ for (const sSpell in SPELLS_DATA) {
     }
 }
 
+// sons et musiques : chaque fichier de SOUNDS existe dans resources/snd/ogg
+for (const sKey in SOUNDS) {
+    [].concat(SOUNDS[sKey]).filter((s) => s !== '').forEach((sFile) => {
+        if (!existsSync(join(ROOT, 'resources', 'snd', 'ogg', sFile + '.ogg'))) {
+            err('son ' + sKey + ' : fichier absent "resources/snd/ogg/' + sFile + '.ogg"');
+        }
+    });
+}
+
 // sorts (data/magic/*.json) : durée de recharge, icône et son par leur nom
 for (const sSpell in MAGIC) {
     const m = MAGIC[sSpell];

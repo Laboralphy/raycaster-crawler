@@ -25,6 +25,9 @@ Hexen, rendues en OGG pour le jeu. Composition écrite avec Claude Code
 | `treasure_guardian` | `make_treasure_guardian.py` | salle du trésor | l'or et son gardien : harpe, trombones et tuba (mi phrygien) | 1:29 |
 | `boss_warlock` | `make_boss_warlock.py` | boss final : le sorcier | épique ; thème du Grimoire en furie (ré mineur) | 1:33 |
 | `ending_homeward` | `make_ending_homeward.py` | cinématique de fin | joyeux ; thème du Grimoire en majeur (ré majeur) | 1:23 |
+| `intro_wander` | `make_intro_wander.py` | cinématique d'intro, 1 : la promenade | insouciant puis perdu ; thème de l'aventurier (ré mixolydien) | 0:38 |
+| `intro_ambush` | `make_intro_ambush.py` | cinématique d'intro, 2 : l'embuscade | thème du Grimoire menaçant, sortilège, poulet qui caquette et s'enfuit (ré mineur) | 0:32 |
+| `intro_revenge` | `make_intro_revenge.py` | cinématique d'intro, 3 : la vengeance | colère qui monte, thème de l'aventurier en mineur, tutti (ré mineur) | 0:20 |
 
 Écartés du jeu (absents de `make_all.sh`, scripts gardés) : le style ne
 collait pas à l'ambiance. `dungeon_sanctum` (trop oriental, l'acte II de
@@ -44,6 +47,10 @@ Rendu : `NOLOOP=1 ./render.sh prelude_dminor.mid`.
 basse obstinée de lamento et sept variations (sol mineur, 3/4, 76 bpm, 2:32,
 sans boucle ; partition `chaconne_gminor.ly`). Rendu :
 `NOLOOP=1 ./render.sh chaconne_gminor.mid`.
+
+Les trois parties de l'intro suivent la cinématique : elle passe de l'une à
+l'autre à l'embuscade (`eventEmbush`) et quand l'aventurier redevient humain
+(`eventAdvBack`) ; leurs repères (en secondes) sont dans l'en-tête des scripts.
 
 Tous bouclent : la fin enchaîne sur le début, et le rendu replie la queue de
 réverbération sur le début du fichier.
@@ -79,6 +86,7 @@ est copié en `resources/snd/ogg/mus_<nom>.ogg`.
 
 - `midi_kit.py` : écriture de fichiers MIDI, sans dépendance.
 - `compose.py` : accords, progressions, mélodies, arpèges, batterie, échos...
-- `motifs.py` : thème du Grimoire (menu), en mineur et en majeur.
+- `motifs.py` : thème du Grimoire (menu), en mineur et en majeur ; thème de
+  l'aventurier (intro), en mixolydien et en mineur.
 - `render.sh` : rendu FluidSynth, bouclage et niveau (`finish.py`), OGG.
 - `make_all.sh` : tout régénérer, avec le niveau de chaque morceau.

@@ -145,4 +145,18 @@ describe('new Game()', () => {
             expect(a[k], k).not.toBe(b[k]);
         });
     });
+
+    it('cinématique d\'intro : la promenade, les deux parties suivantes chargées d\'avance, puis branchées', () => {
+        const g = new Game();
+        const play = vi.spyOn(g.oSoundSystem, 'playMusic');
+        const preload = vi.spyOn(g.oSoundSystem, 'preload');
+        g.sys_cutscene('intro', 'stateStartAdventure');
+        expect(play).toHaveBeenCalledWith('resources/snd/ogg/mus_intro_wander.ogg');
+        expect(preload).toHaveBeenCalledWith(['resources/snd/ogg/mus_intro_ambush.ogg', 'resources/snd/ogg/mus_intro_revenge.ogg']);
+        g.oCutscene.onMusicEvent('MUSIC_INTRO_AMBUSH');
+        expect(play).toHaveBeenLastCalledWith('resources/snd/ogg/mus_intro_ambush.ogg');
+        g.oCutscene.onMusicEvent('MUSIC_INTRO_REVENGE');
+        expect(play).toHaveBeenLastCalledWith('resources/snd/ogg/mus_intro_revenge.ogg');
+    });
 });
+

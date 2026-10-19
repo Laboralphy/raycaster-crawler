@@ -30,7 +30,11 @@ export const SOUNDS = {
     MUSIC_BOSS_MEDUSA: ['mus_boss_medusa'],
     MUSIC_TREASURE: ['mus_treasure_guardian'],
     MUSIC_UNDERWATER: ['mus_underwater_hunt'],
-    MUSIC_CUTSCENE: 'mus_forest_night',
+    // cinématique d'intro en trois parties : la promenade, puis l'embuscade et
+    // la vengeance, lancées par la cinématique (CutsceneIntro.onMusicEvent)
+    MUSIC_CUTSCENE: 'mus_intro_wander',
+    MUSIC_INTRO_AMBUSH: 'mus_intro_ambush',
+    MUSIC_INTRO_REVENGE: 'mus_intro_revenge',
     MUSIC_END: 'mus_ending_homeward',
     AMB_BUBBLES: ['amb_bubbles0', 'amb_bubbles1', 'amb_bubbles2', 'amb_bubbles3'],
     SPELL_0: 'hit_spell0',
