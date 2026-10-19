@@ -175,4 +175,5 @@ export const ICONS = {
     spl_stf: 173,
     spl_tele: 174,
     sys_info: 175,
+    spl_prisma: 176,
 };

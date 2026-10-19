@@ -19,6 +19,7 @@ import { ICONS } from '../src-recovered/game/data/ICONS.js';
 import { MAGIC } from '../src-recovered/game/data/MAGIC_DATA.js';
 import { MAGIC_DATA_PARAMS } from '../src-recovered/game/data/MAGIC_DATA_PARAMS.js';
 import { SPELLS_DATA } from '../src-recovered/game/data/SPELLS_DATA.js';
+import { BLUEPRINTS_DATA } from '../src-recovered/game/data/BLUEPRINTS_DATA.js';
 import { SOUNDS } from '../src-recovered/game/data/SOUNDS.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -151,11 +152,28 @@ for (const sItem in ITEMS) {
         }
     });
 }
-// projectiles (data/spells/*.json) : une chance par effet
+// projectiles (data/spells/*.json) : une chance par effet ; un projectile à
+// plusieurs éclairs (missiles) le vérifie pour chacun, avec son plan et son
+// apparence, et ses effets tirés au hasard (random)
+function checkMissile(p, sWhere) {
+    if ((p.effects || []).length !== (p.chances || []).length) {
+        err(sWhere + ' : ' + (p.effects || []).length + ' effet(s) mais ' + (p.chances || []).length + ' chance(s)');
+    }
+    if (p.blueprint && !(p.blueprint in BLUEPRINTS_DATA)) {
+        err(sWhere + ' : plan inconnu "' + p.blueprint + '" (BLUEPRINTS_DATA)');
+    } else if (p.blueprint && !(BLUEPRINTS_DATA[p.blueprint].tile in GFX_DATA.tiles)) {
+        err(sWhere + ' : apparence inconnue "' + BLUEPRINTS_DATA[p.blueprint].tile + '" (GFX_DATA.tiles)');
+    }
+    if (p.random && !(p.random.count <= (p.random.effects || []).length)) {
+        err(sWhere + ' : ' + p.random.count + ' effet(s) au hasard parmi ' + (p.random.effects || []).length);
+    }
+}
 for (const sSpell in SPELLS_DATA) {
     const p = SPELLS_DATA[sSpell];
-    if ((p.effects || []).length !== (p.chances || []).length) {
-        err('projectile ' + sSpell + ' : ' + p.effects.length + ' effet(s) mais ' + p.chances.length + ' chance(s)');
+    if (p.missiles) {
+        p.missiles.forEach((m, i) => checkMissile(m, 'projectile ' + sSpell + ', éclair ' + i));
+    } else {
+        checkMissile(p, 'projectile ' + sSpell);
     }
 }
 

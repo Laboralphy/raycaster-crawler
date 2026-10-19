@@ -170,10 +170,23 @@ export class DataSerializer {
         oCreature.oExtraData.craft = oData.craft;
         oCreature.oExtraData.level = oData.level;
         oCreature.oExtraData.retrigger = oData.retrigger;
-        oCreature.oExtraData.magic = oData.magic;
+        oCreature.oExtraData.magic = this.restoreMagic(oData.magic);
         oCreature.oExtraData.shelves = oData.shelves || {};
         oCreature.oExtraData.inventory = this.restoreInventory(oData.inventory, oCreature.oEffects);
         return oCreature
+    }
+
+    // anciennes sauvegardes : le sort de mort (DeathSpell), retiré du jeu, a
+    // été remplacé par le rayon prismatique, à la même place dans le grimoire
+    restoreMagic(oMagic) {
+        if (oMagic && oMagic.book) {
+            oMagic.book = oMagic.book.map((s) => s === 'DeathSpell' ? 'PrismaticRay' : s)
+        }
+        if (oMagic && oMagic.cooldown && 'DeathSpell' in oMagic.cooldown) {
+            oMagic.cooldown.PrismaticRay = oMagic.cooldown.DeathSpell;
+            delete oMagic.cooldown.DeathSpell
+        }
+        return oMagic
     }
 
     saveEffect(oEffect) {

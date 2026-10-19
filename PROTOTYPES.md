@@ -378,3 +378,10 @@ All done.
   game frozen. Final scan: no `Object.assign(X.prototype`, no
   `X.prototype.y =`, no `__construct` left in `game/` or `libraries/`.
   **The migration is complete.** 432 tests pass.
+- **2026-10-19**: new spell, outside the migration: the Prismatic Ray
+  replaces the Death Spell (seven bolts in a -30°/+30° fan, data in
+  `data/spells/mis_prismaticray_1.json`, art by `tools/gfx/make_prisma.py`,
+  old saves migrated in `DataSerializer.restoreMagic`). Bug found with it and
+  fixed: a monster killed while held stayed frozen in its white haze until
+  the hold ended (`MobThinker.processEffects` let the hold override death).
+  444 tests pass.

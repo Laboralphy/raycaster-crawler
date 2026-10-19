@@ -2,7 +2,7 @@ import { MAGIC_DATA_PARAMS } from './MAGIC_DATA_PARAMS.js';
 import DrainLife from './magic/DrainLife.json' with { type: 'json' };
 import Teleport from './magic/Teleport.json' with { type: 'json' };
 import Knock from './magic/Knock.json' with { type: 'json' };
-import DeathSpell from './magic/DeathSpell.json' with { type: 'json' };
+import PrismaticRay from './magic/PrismaticRay.json' with { type: 'json' };
 import MagicMapping from './magic/MagicMapping.json' with { type: 'json' };
 import SummonFood from './magic/SummonFood.json' with { type: 'json' };
 import Reflect from './magic/Reflect.json' with { type: 'json' };
@@ -19,7 +19,7 @@ export const MAGIC = {
     DrainLife,
     Teleport,
     Knock,
-    DeathSpell,
+    PrismaticRay,
     MagicMapping,
     SummonFood,
     Reflect,

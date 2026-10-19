@@ -275,9 +275,37 @@ export class MagicPlugin {
         return false
     }
 
-    spellDeathSpell(oMobile) {
+    // rayon prismatique : sept éclairs en éventail (data/spells/mis_prismaticray_1)
+    spellPrismaticRay(oMobile) {
+        const aMissiles = SPELLS_DATA.mis_prismaticray_1.missiles.map((oDef) => this.rollMissileEffects(oDef));
+        this.fireMissiles(oMobile, aMissiles);
+        return true
+    }
+
+    /**
+     * Un éclair avec « random: { count, effects } » reçoit, à chaque lancer,
+     * count effets tirés au hasard (sans doublon) dans effects, en plus des
+     * siens. Les données ne sont pas modifiées.
+     */
+    rollMissileEffects(oDef) {
+        if (!oDef.random) {
+            return oDef
+        }
+        const aPool = oDef.random.effects.slice();
+        const aEffects = oDef.effects.slice();
+        const aChances = oDef.chances.slice();
+        for (let i = 0; i < oDef.random.count && aPool.length; i++) {
+            aEffects.push(aPool.splice(MathTools.rnd(0, aPool.length - 1), 1)[0]);
+            aChances.push(1)
+        }
+        return Object.assign({}, oDef, {
+            effects: aEffects,
+            chances: aChances
+        })
+    }
+
+    fireMissiles(oMobile, aMissiles) {
         const oCreature = oMobile.getData('creature');
-        const aMissiles = this.oGame.oDungeon.getWeaponMissileDefinition(SPELLS_DATA.mis_deathspell_1);
         const nMissiles = aMissiles.length;
         let oMissileDef, oMissile = null,
             sOptions;
@@ -297,8 +325,7 @@ export class MagicPlugin {
             oMissile.oThinker.fire(oMobile)
         }
         const aSnd = oMissile.getData('sounds');
-        this.oGame.sys_playSound(aSnd[0], oMobile.x, oMobile.y);
-        return true
+        this.oGame.sys_playSound(aSnd[0], oMobile.x, oMobile.y)
     }
 
     spellMagicMapping(oMobile) {

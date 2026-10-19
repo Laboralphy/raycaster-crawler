@@ -1,9 +1,9 @@
 {
     "cooldown": "LONG",
     "mp": 10,
-    "visual": ["0x000000", 66, 12, "0xCCFFFF", 66, 8],
+    "visual": ["0xFFFFFF", 66, 6, "0xFF00FF", 66, 6],
     "sound": "SPELL_1",
-    "icon": "eff_xdth",
+    "icon": "spl_prisma",
     "target": true,
     "level": 5
 }

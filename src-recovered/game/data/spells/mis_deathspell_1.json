@@ -1,7 +1,0 @@
-{
-    "blueprint": "p_deathspell",
-    "cost": 0,
-    "options": "l1",
-    "effects": ["hxdthBA"],
-    "chances": [1]
-}

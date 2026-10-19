@@ -108,10 +108,11 @@ export class MobThinker extends Thinker {
     }
 
     processEffects() {
+        // la mort l'emporte sur la paralysie : sinon un monstre tué pendant
+        // qu'il est paralysé reste figé jusqu'à la fin de l'effet
         if (this.isDead()) {
             this.think = this.thinkDie
-        }
-        if (this.isHeld()) {
+        } else if (this.isHeld()) {
             this.oMobile.oSprite.playAnimationType(this.ANIM_IDLE);
             this.think = this.thinkHeld
         }

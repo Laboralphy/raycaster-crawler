@@ -303,6 +303,104 @@ export const GFX_DATA = {
                 ]
             ]
         },
+        p_prisma_red: {
+            src: 'resources/gfx/sprites/p_prisma_red.png',
+            width: 48,
+            height: 64,
+            frames: 14,
+            animations: [
+                [
+                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                ],
+                [
+                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                ]
+            ]
+        },
+        p_prisma_orange: {
+            src: 'resources/gfx/sprites/p_prisma_orange.png',
+            width: 48,
+            height: 64,
+            frames: 14,
+            animations: [
+                [
+                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                ],
+                [
+                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                ]
+            ]
+        },
+        p_prisma_yellow: {
+            src: 'resources/gfx/sprites/p_prisma_yellow.png',
+            width: 48,
+            height: 64,
+            frames: 14,
+            animations: [
+                [
+                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                ],
+                [
+                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                ]
+            ]
+        },
+        p_prisma_green: {
+            src: 'resources/gfx/sprites/p_prisma_green.png',
+            width: 48,
+            height: 64,
+            frames: 14,
+            animations: [
+                [
+                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                ],
+                [
+                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                ]
+            ]
+        },
+        p_prisma_blue: {
+            src: 'resources/gfx/sprites/p_prisma_blue.png',
+            width: 48,
+            height: 64,
+            frames: 14,
+            animations: [
+                [
+                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                ],
+                [
+                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                ]
+            ]
+        },
+        p_prisma_purple: {
+            src: 'resources/gfx/sprites/p_prisma_purple.png',
+            width: 48,
+            height: 64,
+            frames: 14,
+            animations: [
+                [
+                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                ],
+                [
+                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                ]
+            ]
+        },
+        p_prisma_magenta: {
+            src: 'resources/gfx/sprites/p_prisma_magenta.png',
+            width: 48,
+            height: 64,
+            frames: 14,
+            animations: [
+                [
+                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                ],
+                [
+                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                ]
+            ]
+        },
         p_shadbolt: {
             src: 'resources/gfx/sprites/p_shadbolt.png',
             width: 48,
@@ -426,20 +524,6 @@ export const GFX_DATA = {
                 ],
                 [
                     [8, 8, 8, 8, 8, 8, 8, 8], 1, 0, 0
-                ]
-            ]
-        },
-        p_deathspell: {
-            src: 'resources/gfx/sprites/p_deathspell.png',
-            width: 64,
-            height: 96,
-            frames: 10,
-            animations: [
-                [
-                    [0, 0, 0, 0, 0, 0, 0, 0], 9, 100, 0
-                ],
-                [
-                    [9, 9, 9, 9, 9, 9, 9, 9], 1, 1, 0
                 ]
             ]
         },

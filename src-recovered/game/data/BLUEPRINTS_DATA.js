@@ -210,6 +210,111 @@ export const BLUEPRINTS_DATA = {
             range: 30
         }
     },
+    p_prisma_red: {
+        type: RC.OBJECT_TYPE_MISSILE,
+        tile: 'p_prisma_red',
+        sounds: ['atk_magic', 'hit_magic'],
+        width: 1,
+        height: 1,
+        thinker: 'MagicMissile',
+        fx: 2,
+        data: {
+            sounds: ['atk_magic', 'hit_magic'],
+            speed: 180,
+            steps: 4,
+            range: 30
+        }
+    },
+    p_prisma_orange: {
+        type: RC.OBJECT_TYPE_MISSILE,
+        tile: 'p_prisma_orange',
+        sounds: ['atk_magic', 'hit_magic'],
+        width: 1,
+        height: 1,
+        thinker: 'MagicMissile',
+        fx: 2,
+        data: {
+            sounds: ['atk_magic', 'hit_magic'],
+            speed: 180,
+            steps: 4,
+            range: 30
+        }
+    },
+    p_prisma_yellow: {
+        type: RC.OBJECT_TYPE_MISSILE,
+        tile: 'p_prisma_yellow',
+        sounds: ['atk_magic', 'hit_magic'],
+        width: 1,
+        height: 1,
+        thinker: 'MagicMissile',
+        fx: 2,
+        data: {
+            sounds: ['atk_magic', 'hit_magic'],
+            speed: 180,
+            steps: 4,
+            range: 30
+        }
+    },
+    p_prisma_green: {
+        type: RC.OBJECT_TYPE_MISSILE,
+        tile: 'p_prisma_green',
+        sounds: ['atk_magic', 'hit_magic'],
+        width: 1,
+        height: 1,
+        thinker: 'MagicMissile',
+        fx: 2,
+        data: {
+            sounds: ['atk_magic', 'hit_magic'],
+            speed: 180,
+            steps: 4,
+            range: 30
+        }
+    },
+    p_prisma_blue: {
+        type: RC.OBJECT_TYPE_MISSILE,
+        tile: 'p_prisma_blue',
+        sounds: ['atk_magic', 'hit_magic'],
+        width: 1,
+        height: 1,
+        thinker: 'MagicMissile',
+        fx: 2,
+        data: {
+            sounds: ['atk_magic', 'hit_magic'],
+            speed: 180,
+            steps: 4,
+            range: 30
+        }
+    },
+    p_prisma_purple: {
+        type: RC.OBJECT_TYPE_MISSILE,
+        tile: 'p_prisma_purple',
+        sounds: ['atk_magic', 'hit_magic'],
+        width: 1,
+        height: 1,
+        thinker: 'MagicMissile',
+        fx: 2,
+        data: {
+            sounds: ['atk_magic', 'hit_magic'],
+            speed: 180,
+            steps: 4,
+            range: 30
+        }
+    },
+    p_prisma_magenta: {
+        type: RC.OBJECT_TYPE_MISSILE,
+        tile: 'p_prisma_magenta',
+        sounds: ['atk_magic', 'hit_magic'],
+        width: 1,
+        height: 1,
+        thinker: 'MagicMissile',
+        fx: 2,
+        data: {
+            sounds: ['atk_magic', 'hit_magic'],
+            speed: 180,
+            steps: 4,
+            range: 30
+        }
+    },
     p_shadbolt: {
         type: RC.OBJECT_TYPE_MISSILE,
         tile: 'p_shadbolt',
@@ -334,20 +439,6 @@ export const BLUEPRINTS_DATA = {
             speed: 180,
             steps: 4,
             range: 1
-        }
-    },
-    p_deathspell: {
-        type: RC.OBJECT_TYPE_MISSILE,
-        tile: 'p_deathspell',
-        width: 1,
-        height: 1,
-        thinker: 'MagicMissile',
-        fx: 0,
-        data: {
-            sounds: ['atk_magic', 'hit_magic'],
-            speed: 360,
-            steps: 4,
-            range: 90
         }
     }
 };

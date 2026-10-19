@@ -22,7 +22,7 @@ import mis_shadbolt_1 from './spells/mis_shadbolt_1.json' with { type: 'json' };
 import mis_iceball_1 from './spells/mis_iceball_1.json' with { type: 'json' };
 import mis_lightbolt_1 from './spells/mis_lightbolt_1.json' with { type: 'json' };
 import mis_thunbolt_3 from './spells/mis_thunbolt_3.json' with { type: 'json' };
-import mis_deathspell_1 from './spells/mis_deathspell_1.json' with { type: 'json' };
+import mis_prismaticray_1 from './spells/mis_prismaticray_1.json' with { type: 'json' };
 import punch_golem from './spells/punch_golem.json' with { type: 'json' };
 import slash_poison_1 from './spells/slash_poison_1.json' with { type: 'json' };
 import slash_ravenbeak_1 from './spells/slash_ravenbeak_1.json' with { type: 'json' };
@@ -63,7 +63,7 @@ export const SPELLS_DATA = {
     mis_iceball_1,
     mis_lightbolt_1,
     mis_thunbolt_3,
-    mis_deathspell_1,
+    mis_prismaticray_1,
     punch_golem,
     slash_poison_1,
     slash_ravenbeak_1,

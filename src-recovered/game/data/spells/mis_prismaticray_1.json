@@ -1,0 +1,57 @@
+{
+    "missiles": [
+        {
+            "blueprint": "p_prisma_red",
+            "angle": -0.5236,
+            "options": "",
+            "effects": ["mxmagEA", "macnfB8"],
+            "chances": [1, 1]
+        },
+        {
+            "blueprint": "p_prisma_orange",
+            "angle": -0.3491,
+            "options": "",
+            "effects": ["mxfirEA", "mabldB8"],
+            "chances": [1, 1]
+        },
+        {
+            "blueprint": "p_prisma_yellow",
+            "angle": -0.1745,
+            "options": "",
+            "effects": ["mxmagEA"],
+            "chances": [1],
+            "random": {
+                "count": 2,
+                "effects": ["mabldB8", "macnfB8", "masnrH8", "mahldB8"]
+            }
+        },
+        {
+            "blueprint": "p_prisma_green",
+            "angle": 0,
+            "options": "",
+            "effects": ["mxcldEA", "masnrH8"],
+            "chances": [1, 1]
+        },
+        {
+            "blueprint": "p_prisma_blue",
+            "angle": 0.1745,
+            "options": "",
+            "effects": ["mxeleEA", "mahldB8"],
+            "chances": [1, 1]
+        },
+        {
+            "blueprint": "p_prisma_purple",
+            "angle": 0.3491,
+            "options": "",
+            "effects": ["pxtoxCe"],
+            "chances": [1]
+        },
+        {
+            "blueprint": "p_prisma_magenta",
+            "angle": 0.5236,
+            "options": "",
+            "effects": ["mxmagKA"],
+            "chances": [1]
+        }
+    ]
+}
