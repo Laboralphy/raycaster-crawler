@@ -74,6 +74,73 @@ const PLUGINS = {
 };
 
 export class Game extends Engine {
+    constructor() {
+        super();
+        this.sGeneratorUrl = '../../dynamics/laby/laby.php';
+        this.nTime = 0;
+        this.nTimeMs = 0;
+        this.nSecond = 0;
+        this.bNewSecond = false;
+        this.oCanvas = null;
+        this.oContext = null;
+        this.oSoundSystem = null;
+        this.sAudioType = 'ogg';
+        this.oStrings = null;
+        this.aPopupMessages = null;
+        this.oWeaponAnimator = null;
+        this.oWeaponInUse = '';
+        this.oUI = null;
+        this.oHUD = null;
+        this.oPathFinder = null;
+        this.oSerializer = null;
+        this.oLootSystem = null;
+        this.oLootData = null;
+        this.oMenuSystem = null;
+        this.oMainmenuSystem = null;
+        this.oCraftSystem = null;
+        this.oBookSystem = null;
+        this.oInventorySystem = null;
+        this.oBackupSystem = null;
+        this.oAdventure = null;
+        this.oDialogSystem = null;
+        this.oDescriptorSystem = null;
+        this.oPlayerSheetSystem = null;
+        this.oShopSystem = null;
+        this.oCheats = null;
+        this.oMagicSystem = null;
+        this.oConsole = null;
+        this.oUnderwater = null;
+        this.oScore = null;
+        this.oCutscene = null;
+        this.sCutsceneNextState = '';
+        this.aPlugins = null;
+        this.sSaveFile = 'reikaster';
+        this.aMenuActions = null;
+        this.aMobRoster = null;
+        this.aSobRoster = null;
+        this.sTorchBlueprint = 'o_torch_1';
+        this.nTorchWallDistance = 6;
+        this.oLootBags = null;
+        this.oTouchedLootBag = null;
+        this.nDoCommand = 0;
+        this.COMMAND_NONE = 0;
+        this.COMMAND_GAME_RESTORE = 1;
+        this.COMMAND_GAME_RESTART = 2;
+        this.sAmbience = null;
+        this.oTimedTransition = null;
+        this.nIntfMode = 0;
+        this.oPluginSignalRegister = null;
+        this.oMPL = null;
+        this.bMPL = false;
+        this.oControls = null;
+        this.oEventLog = null;
+        this.oConfusedEffect = null;
+        this.oBlindEffect = null;
+        this.oVeilEffect = null;
+        // tous les champs sont posés : la boucle peut démarrer (stateInitialize)
+        this.resume()
+    }
+
     addPlugin(sPlugin) {
         if (this.aPlugins === null) {
             this.aPlugins = []
@@ -2032,66 +2099,3 @@ export class Game extends Engine {
 
     sys_sendScore() {}
 }
-Object.assign(Game.prototype, {
-    sGeneratorUrl: '../../dynamics/laby/laby.php',
-    nTime: 0,
-    nTimeMs: 0,
-    nSecond: 0,
-    bNewSecond: false,
-    oCanvas: null,
-    oContext: null,
-    oSoundSystem: null,
-    sAudioType: 'ogg',
-    oStrings: null,
-    aPopupMessages: null,
-    oWeaponAnimator: null,
-    oWeaponInUse: '',
-    oUI: null,
-    oHUD: null,
-    oPathFinder: null,
-    oSerializer: null,
-    oLootSystem: null,
-    oLootData: null,
-    oMenuSystem: null,
-    oMainmenuSystem: null,
-    oCraftSystem: null,
-    oBookSystem: null,
-    oInventorySystem: null,
-    oBackupSystem: null,
-    oAdventure: null,
-    oDialogSystem: null,
-    oDescriptorSystem: null,
-    oPlayerSheetSystem: null,
-    oShopSystem: null,
-    oCheats: null,
-    oMagicSystem: null,
-    oConsole: null,
-    oUnderwater: null,
-    oScore: null,
-    oCutscene: null,
-    sCutsceneNextState: '',
-    aPlugins: null,
-    sSaveFile: 'reikaster',
-    aMenuActions: null,
-    aMobRoster: null,
-    aSobRoster: null,
-    sTorchBlueprint: 'o_torch_1',
-    nTorchWallDistance: 6,
-    oLootBags: null,
-    oTouchedLootBag: null,
-    nDoCommand: 0,
-    COMMAND_NONE: 0,
-    COMMAND_GAME_RESTORE: 1,
-    COMMAND_GAME_RESTART: 2,
-    sAmbience: null,
-    oTimedTransition: null,
-    nIntfMode: 0,
-    oPluginSignalRegister: null,
-    oMPL: null,
-    bMPL: false,
-    oControls: null,
-    oEventLog: null,
-    oConfusedEffect: null,
-    oBlindEffect: null,
-    oVeilEffect: null
-});

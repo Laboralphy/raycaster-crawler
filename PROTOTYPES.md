@@ -55,6 +55,12 @@ npm run report:prototypes   # what is left, by dependency level
   parameter (`super(400, 250)`). Prototype placeholders for methods
   (`getLabyMap: null`, `onRender: null`) must not be copied into the
   constructor, or they hide the subclass methods.
+- **A parent constructor that starts the subclass running.** `Engine`
+  called `resume()` in its constructor, which runs the first state at once:
+  `stateInitialize` calls `Game.onInitialize`, which reads `Game`'s fields
+  (`aPlugins === null`...). With real constructors those fields only exist
+  after `super()` returns; the loop now starts at the end of `Game`'s
+  constructor.
 - **Class fields run after `super()`.** A subclass field initialiser
   overwrites whatever the parent constructor (or a virtual `__construct`) set.
 - **Construction snapshot.** For a family with many subclasses, recording
@@ -66,7 +72,7 @@ npm run report:prototypes   # what is left, by dependency level
 
 ## Progress
 
-Snapshot of 2026-10-19: **104 files done, 15 deleted, 4 to go.**
+Snapshot of 2026-10-19: **107 files done, 15 deleted, 1 to go.**
 
 ### Done
 
@@ -176,6 +182,9 @@ Snapshot of 2026-10-19: **104 files done, 15 deleted, 4 to go.**
 | `game/cutscenes/CutsceneIntro.js` | (this branch) | yes (cutscene construction snapshot) |
 | `game/cutscenes/CutsceneEnd.js` | (this branch) | yes (cutscene construction snapshot) |
 | `game/MenuSystem.js` | (this branch) | yes (cutscene construction snapshot) |
+| `libraries/Raycaster/Transistate.js` | (this branch) | yes (`Game.construction.test.mjs`) |
+| `libraries/Raycaster/Engine.js` | (this branch) | yes (`Game.construction.test.mjs`) |
+| `game/Game.js` | (this branch) | yes (`Game.construction.test.mjs`) |
 
 `MagicPlugin.js` lost its prototype defaults in 44f511c but still patches
 `Animation` and `Raycaster` at runtime (objective 3), so it stays in the to-do
@@ -200,9 +209,7 @@ Tick a box once the file is migrated and its tests pass.
 
 #### Level 0: no dependency
 
-| File | Tags | Tests | Notes |
-|---|---|---|---|
-| [ ] `libraries/Raycaster/Transistate.js` | P C | yes | constructor order trap, see above |
+All done.
 
 #### Level 1
 
@@ -221,7 +228,6 @@ All done.
 | File | Tags | Tests |
 |---|---|---|
 | [ ] `game/plugins/MagicPlugin.js` | R | no |
-| [ ] `libraries/Raycaster/Engine.js` | P C | no |
 
 #### Level 5
 
@@ -237,9 +243,7 @@ All done.
 
 #### Level 8
 
-| File | Tags | Tests |
-|---|---|---|
-| [ ] `game/Game.js` | P | no |
+All done.
 
 ## Log
 
@@ -351,3 +355,10 @@ All done.
   `Raycaster` recording canvas size, configuration, world and camera
   (`test/unit/game/cutscenes/construction.test.mjs`), then migrated. Mutation
   check (menu size set after `super()`) goes red. 422 tests pass.
+- **2026-10-19**: `Transistate`, `Engine` and `Game` migrated. Safety net: a
+  real `new Game()` as in `main.js` (fake browser, howler and `Raycaster`,
+  fake timers), snapshot of its 87 fields and loop state right after
+  construction (`test/unit/game/Game.construction.test.mjs`). `resume()`
+  moved from `Engine`'s constructor to the end of `Game`'s; the naive
+  version (loop started in `Engine`) goes red. 425 tests pass. Only
+  `MagicPlugin`'s runtime patch remains.

@@ -9,9 +9,21 @@ import { Raycaster } from './Raycaster.js';
 import { Transistate } from './Transistate.js';
 
 export class Engine extends Transistate {
-    __construct() {
-        super.__construct('stateInitialize');
-        this.resume()
+    constructor() {
+        // la boucle ne démarre pas ici mais à la fin du constructeur de la
+        // sous-classe (Game) : son premier état lit les champs de celle-ci
+        super('stateInitialize');
+        this.TIME_FACTOR = 50;
+        this.oRaycaster = null;
+        this.oKbdDevice = null;
+        this.oMouseDevice = null;
+        this.oThinkerManager = null;
+        this.oObjectIndex = null;
+        this.oFrameCounter = null;
+        this.nLastTimeStamp = 0;
+        this.nShadedTiles = 0;
+        this.nShadedTileCount = 0;
+        this.stateRunning = null
     }
 
     initRequestAnimationFrame() {
@@ -288,16 +300,3 @@ export class Engine extends Transistate {
         this.pause()
     }
 }
-Object.assign(Engine.prototype, {
-    TIME_FACTOR: 50,
-    oRaycaster: null,
-    oKbdDevice: null,
-    oMouseDevice: null,
-    oThinkerManager: null,
-    oObjectIndex: null,
-    oFrameCounter: null,
-    nLastTimeStamp: 0,
-    nShadedTiles: 0,
-    nShadedTileCount: 0,
-    stateRunning: null
-});

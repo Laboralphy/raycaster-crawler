@@ -1,9 +1,13 @@
 export class Transistate {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct(sFirst) {
+    constructor(sFirst) {
+        this.nInterval = 160;
+        this.oInterval = null;
+        this.pDoomloop = null;
+        this.sDoomloopType = 'interval';
+        this.bPause = false;
+        this.nTimeModulo = 0;
+        this._sState = '';
+        this.bBound = false;
         this.setDoomloop(sFirst)
     }
 
@@ -40,13 +44,3 @@ export class Transistate {
         this.initDoomloop()
     }
 }
-Object.assign(Transistate.prototype, {
-    nInterval: 160,
-    oInterval: null,
-    pDoomloop: null,
-    sDoomloopType: 'interval',
-    bPause: false,
-    nTimeModulo: 0,
-    _sState: '',
-    bBound: false
-});
