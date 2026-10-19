@@ -8,14 +8,18 @@
     "build": "esbuild src-recovered/game/main.js --bundle --format=iife --minify --target=es2015 --outfile=crawler.js",
     "check:laby": "node laby/tools/check.js",
     "check:data": "node --no-warnings tools/check_data.mjs",
-    "estimate:loot": "node --no-warnings tools/estimate_loot.mjs"
+    "estimate:loot": "node --no-warnings tools/estimate_loot.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "report:prototypes": "node tools/prototype_report.mjs"
   },
   "devDependencies": {
     "acorn": "^8.14.0",
     "acorn-walk": "^8.3.4",
     "esbuild": "0.24.2",
     "eslint-scope": "^8.2.0",
-    "js-beautify": "^1.15.1"
+    "js-beautify": "^1.15.1",
+    "vitest": "^3.2.7"
   },
   "dependencies": {
     "@laboralphy/raycaster386": "^1.1.2",
