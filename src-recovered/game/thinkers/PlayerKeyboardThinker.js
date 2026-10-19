@@ -4,7 +4,21 @@ import { MouseKeyboardThinker } from '../../libraries/Raycaster/MouseKeyboardThi
 import { RC } from '../../libraries/Raycaster/RC.js';
 
 export class PlayerKeyboardThinker extends MouseKeyboardThinker {
-    __construct() {
+    constructor() {
+        super();
+        this.nDeadTime = 0;
+        this.nRotationTime = 0;
+        this.nRotationMask = 0;
+        this.nRotationLeftTime = 0;
+        this.nRotationRightTime = 0;
+        this.ROTATION_MASK_LEFT = 0;
+        this.ROTATION_MASK_RIGHT = 1;
+        this.ROTATION_MASK_FORWARD = 2;
+        this.ROTATION_MASK_BACKWARD = 3;
+        this.oDeathVeil = null;
+        this.oCreature = null;
+        this.nChargeStartTime = 0;
+        this.bActive = true;
         this.oPulse = {
             x: 0,
             y: 0
@@ -323,19 +337,3 @@ export class PlayerKeyboardThinker extends MouseKeyboardThinker {
 
     _hitByMissile(oMissile) {}
 }
-Object.assign(PlayerKeyboardThinker.prototype, {
-    nDeadTime: 0,
-    nRotationTime: 0,
-    nRotationMask: 0,
-    nRotationLeftTime: 0,
-    nRotationRightTime: 0,
-    ROTATION_MASK_LEFT: 0,
-    ROTATION_MASK_RIGHT: 1,
-    ROTATION_MASK_FORWARD: 2,
-    ROTATION_MASK_BACKWARD: 3,
-    oDeathVeil: null,
-    oCreature: null,
-    oPulse: null,
-    nChargeStartTime: 0,
-    bActive: true
-});

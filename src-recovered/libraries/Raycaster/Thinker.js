@@ -1,13 +1,8 @@
 export class Thinker {
-    constructor(...aArgs) {
-        if ('__construct' in this) {
-            this.__construct(...aArgs);
-        }
+    constructor() {
+        this.oMobile = null;
+        this.oGame = null
     }
 
     think() {}
 }
-Object.assign(Thinker.prototype, {
-    oMobile: null,
-    oGame: null
-});

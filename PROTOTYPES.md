@@ -44,12 +44,16 @@ npm run report:prototypes   # what is left, by dependency level
   `setDoomloop()` erases it.
 - **Class fields run after `super()`.** A subclass field initialiser
   overwrites whatever the parent constructor (or a virtual `__construct`) set.
+- **Construction snapshot.** For a family with many subclasses, recording
+  every field a new instance exposes (`for…in` sees own and prototype
+  fields alike) before migrating, then comparing after, catches all of the
+  above at once (see `test/unit/game/thinkers/construction.test.mjs`).
 - **Shared mutable defaults.** An array or object left on a prototype is shared
   by every instance. The tests check this (`assertNotShared`).
 
 ## Progress
 
-Snapshot of 2026-10-19: **52 files done, 4 deleted, 65 to go.**
+Snapshot of 2026-10-19: **65 files done, 10 deleted, 46 to go.**
 
 ### Done
 
@@ -107,6 +111,19 @@ Snapshot of 2026-10-19: **52 files done, 4 deleted, 65 to go.**
 | `libraries/Raycaster/GXFade.js` | (this branch) | yes |
 | `libraries/Raycaster/GXFlash.js` | (this branch) | yes |
 | `game/gx/GXFlood.js` | (this branch) | yes |
+| `libraries/Raycaster/Thinker.js` | (this branch) | yes |
+| `libraries/Raycaster/MouseKeyboardThinker.js` | (this branch) | yes |
+| `libraries/Raycaster/LinearThinker.js` | (this branch) | yes |
+| `libraries/Raycaster/NonLinearThinker.js` | (this branch) | yes |
+| `libraries/Raycaster/MissileThinker.js` | (this branch) | yes |
+| `game/thinkers/MagicMissileThinker.js` | (this branch) | yes |
+| `game/thinkers/PlayerKeyboardThinker.js` | (this branch) | yes |
+| `game/thinkers/TimedThinker.js` | (this branch) | yes |
+| `game/thinkers/MobThinker.js` | (this branch) | yes |
+| `game/thinkers/CasterThinker.js` | (this branch) | yes |
+| `game/thinkers/ShooterThinker.js` | (this branch) | yes |
+| `game/thinkers/SentryThinker.js` | (this branch) | yes |
+| `game/thinkers/StealerThinker.js` | (this branch) | yes |
 
 `MagicPlugin.js` lost its prototype defaults in 44f511c but still patches
 `Animation` and `Raycaster` at runtime (objective 3), so it stays in the to-do
@@ -116,7 +133,9 @@ list.
 
 Unused anywhere in the game, removed instead of migrated:
 `libraries/O876/CPUMonitor.js`, `libraries/O876/Easing.js`,
-`libraries/O876/Legion.js`, `libraries/Raycaster/Scheduler.js`.
+`libraries/O876/Legion.js`, `libraries/Raycaster/Scheduler.js`, and the
+library thinkers `CameraKeyboardThinker`, `CameraMouseKeyboardThinker`,
+`KbdArrowThinker`, `CommandThinker`, `WanderThinker`, `KeyboardThinker`.
 
 ### To do
 
@@ -130,7 +149,6 @@ Tick a box once the file is migrated and its tests pass.
 |---|---|---|---|
 | [ ] `libraries/O876/Browser.js` | C | **no** | |
 | [ ] `libraries/O876/SoundSystem.js` | P C | **no** | depends on the `howler` package only |
-| [ ] `libraries/Raycaster/Thinker.js` | P C | yes | tests `'__construct' in this` |
 | [ ] `libraries/Raycaster/Transistate.js` | P C | yes | constructor order trap, see above |
 
 #### Level 1
@@ -141,36 +159,19 @@ Tick a box once the file is migrated and its tests pass.
 | [ ] `game/GC/EffectProcessor.js` | P C | no |
 | [ ] `game/LootSystem.js` | P C | no |
 | [ ] `game/WeaponAnimator.js` | P C | no |
-| [ ] `game/thinkers/MobThinker.js` | P C | no |
-| [ ] `game/thinkers/TimedThinker.js` | P | partly (via `Thinker` tests) |
 | [ ] `libraries/O876/Astar/Nood.js` | P C | no |
 | [ ] `libraries/O876/Mediator/Mediator.js` | P C | no |
 | [ ] `libraries/O876/Microsyte.js` | P C | no |
-| [ ] `libraries/Raycaster/CommandThinker.js` | P | no |
 | [ ] `libraries/Raycaster/GXManager.js` | P C | no |
-| [ ] `libraries/Raycaster/KeyboardThinker.js` | P | no |
-| [ ] `libraries/Raycaster/LinearThinker.js` | P C | partly (via `Thinker` tests) |
-| [ ] `libraries/Raycaster/MissileThinker.js` | P C | no |
-| [ ] `libraries/Raycaster/MouseKeyboardThinker.js` | P | no |
-| [ ] `libraries/Raycaster/NonLinearThinker.js` | P C | no |
 | [ ] `libraries/Raycaster/Tile.js` | P C | no |
-| [ ] `libraries/Raycaster/WanderThinker.js` | P C | no |
 
 #### Level 2
 
 | File | Tags | Tests |
 |---|---|---|
 | [ ] `game/EffectProcessor.js` | P C | no |
-| [ ] `game/thinkers/CasterThinker.js` | P | no |
-| [ ] `game/thinkers/MagicMissileThinker.js` | P | no |
-| [ ] `game/thinkers/SentryThinker.js` | P | no |
-| [ ] `game/thinkers/ShooterThinker.js` | P | no |
-| [ ] `game/thinkers/StealerThinker.js` | P | no |
 | [ ] `libraries/H5UI/WinControl.js` | P C | no |
-| [ ] `libraries/Raycaster/CameraKeyboardThinker.js` | P C | no |
-| [ ] `libraries/Raycaster/CameraMouseKeyboardThinker.js` | P C | no |
 | [ ] `libraries/Raycaster/Horde.js` | P C | no |
-| [ ] `libraries/Raycaster/KbdArrowThinker.js` | C | no |
 
 #### Level 3
 
@@ -178,7 +179,6 @@ Tick a box once the file is migrated and its tests pass.
 |---|---|---|
 | [ ] `game/Dungeon.js` | P C | no |
 | [ ] `game/UI/Screen.js` | P | no |
-| [ ] `game/thinkers/PlayerKeyboardThinker.js` | P C | no |
 | [ ] `libraries/H5UI/Box.js` | P | no |
 | [ ] `libraries/H5UI/Image.js` | P | no |
 | [ ] `libraries/H5UI/ScrollBox.js` | P | no |
@@ -261,3 +261,9 @@ Tick a box once the file is migrated and its tests pass.
   (`learn` debug cheat added for it), status icons, popup messages, medusa
   flood then underwater, blindness and the snare/root/hold veils (`affect`
   debug cheat). The whole family is checked.
+- **2026-10-19**: deleted the 6 unused library thinkers; migrated the
+  `Thinker` family (`Thinker` and its 12 subclasses that had prototype
+  defaults or `__construct`), after recording a construction snapshot of the
+  18 remaining thinkers and adding behaviour tests (`Linear`, `NonLinear`,
+  `MouseKeyboard`, `Missile`). `MobThinker.EFFECT_HAZES` is now a module
+  constant, still shared by all mobs. 203 tests green, game boots.

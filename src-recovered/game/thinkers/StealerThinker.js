@@ -2,6 +2,11 @@ import { MobThinker } from './MobThinker.js';
 import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class StealerThinker extends MobThinker {
+    constructor() {
+        super();
+        this.nStealCount = 1
+    }
+
     _follow(nTime) {
         if ((nTime % this.TIME_REACTIVITY) === 0) {}
         for (let i = 0; i < 3; i++) {
@@ -93,6 +98,3 @@ export class StealerThinker extends MobThinker {
         }
     }
 }
-Object.assign(StealerThinker.prototype, {
-    nStealCount: 1
-});

@@ -2,6 +2,14 @@ import { MobThinker } from './MobThinker.js';
 import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class ShooterThinker extends MobThinker {
+    constructor() {
+        super();
+        this.nDodging = 3;
+        this.nDodgingTime = 0;
+        this.nProbAttackStraf = 40;
+        this.nProbAttackDodge = 33
+    }
+
     _follow(nTime) {
         let nCT = null;
         if (this.nDodging < 4) {
@@ -46,9 +54,3 @@ export class ShooterThinker extends MobThinker {
         this.oGame.gc_attack(this.oMobile, 0)
     }
 }
-Object.assign(ShooterThinker.prototype, {
-    nDodging: 3,
-    nDodgingTime: 0,
-    nProbAttackStraf: 40,
-    nProbAttackDodge: 33
-});

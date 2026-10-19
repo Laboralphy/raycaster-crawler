@@ -1,7 +1,14 @@
 import { Thinker } from './Thinker.js';
 
 export class LinearThinker extends Thinker {
-    __construct() {
+    constructor() {
+        super();
+        this.nCurrentTime = 0;
+        this.xStart = 0;
+        this.yStart = 0;
+        this.aStart = 0;
+        this.xDelta = 0;
+        this.yDelta = 0;
         this.nTime = 0
     }
 
@@ -55,12 +62,3 @@ export class LinearThinker extends Thinker {
 
     thinkIdle() {}
 }
-Object.assign(LinearThinker.prototype, {
-    nTime: 0,
-    nCurrentTime: 0,
-    xStart: 0,
-    yStart: 0,
-    aStart: 0,
-    xDelta: 0,
-    yDelta: 0
-});

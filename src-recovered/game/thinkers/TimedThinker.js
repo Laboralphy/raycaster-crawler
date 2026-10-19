@@ -1,6 +1,11 @@
 import { Thinker } from '../../libraries/Raycaster/Thinker.js';
 
 export class TimedThinker extends Thinker {
+    constructor() {
+        super();
+        this.nTimeOut = 0
+    }
+
     start(t) {
         this.nTimeOut = this.oGame.nTimeMs + t;
         this.think = this.thinkAlive
@@ -16,6 +21,3 @@ export class TimedThinker extends Thinker {
         this.oMobile.bActive = false
     }
 }
-Object.assign(TimedThinker.prototype, {
-    nTimeOut: 0
-});

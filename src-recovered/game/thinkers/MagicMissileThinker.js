@@ -2,6 +2,26 @@ import { MissileThinker } from '../../libraries/Raycaster/MissileThinker.js';
 import { PI } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class MagicMissileThinker extends MissileThinker {
+    constructor() {
+        super();
+        this.nRndTime = 0;
+        this.fSineTime = 0;
+        this.fSineInc = 0;
+        this.fSine = 0;
+        this.bHeavy = false;
+        this.bRandom = false;
+        this.bBump = false;
+        this.bSine = false;
+        this.bCosine = false;
+        this.bAoE = false;
+        this.nAoE = 0;
+        this.bSpareBoss = false;
+        this.aEffects = null;
+        this.aChances = null;
+        this.nPower = 0;
+        this.oOwner = null
+    }
+
     setOptions(sOptions) {
         this.fSineInc = this.oGame.TIME_FACTOR / 320;
         this.bRandom = false;
@@ -191,21 +211,3 @@ export class MagicMissileThinker extends MissileThinker {
 
     _hitByMissile(oMissile) {}
 }
-Object.assign(MagicMissileThinker.prototype, {
-    nRndTime: 0,
-    fSineTime: 0,
-    fSineInc: 0,
-    fSine: 0,
-    bHeavy: false,
-    bRandom: false,
-    bBump: false,
-    bSine: false,
-    bCosine: false,
-    bAoE: false,
-    nAoE: 0,
-    bSpareBoss: false,
-    aEffects: null,
-    aChances: null,
-    nPower: 0,
-    oOwner: null
-});

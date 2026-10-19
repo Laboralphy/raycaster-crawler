@@ -1,6 +1,14 @@
 import { Thinker } from './Thinker.js';
 
 export class MouseKeyboardThinker extends Thinker {
+    constructor() {
+        super();
+        this.oKeyboard = null;
+        this.oMouse = null;
+        this.aKeys = null;
+        this.aCommands = null
+    }
+
     defineKeys(a) {
         this.aKeys = {};
         this.aCommands = {};
@@ -82,9 +90,3 @@ export class MouseKeyboardThinker extends Thinker {
         }
     }
 }
-Object.assign(MouseKeyboardThinker.prototype, {
-    oKeyboard: null,
-    oMouse: null,
-    aKeys: null,
-    aCommands: null
-});

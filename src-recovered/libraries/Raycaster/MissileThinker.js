@@ -2,7 +2,17 @@ import { RC } from './RC.js';
 import { Thinker } from './Thinker.js';
 
 export class MissileThinker extends Thinker {
-    __construct() {
+    constructor() {
+        super();
+        this.oOwner = null;
+        this.nExplosionTime = 0;
+        this.nExplosionMaxTime = 4;
+        this.bExiting = true;
+        this.oLastHitMobile = null;
+        this.nStepSpeed = 4;
+        this.ANIMATION_EXPLOSION = 0;
+        this.ANIMATION_MOVING = 1;
+        this.nLifeOut = 0;
         this.think = this.thinkIdle
     }
 
@@ -86,14 +96,3 @@ export class MissileThinker extends Thinker {
         this.oMobile.bActive = false
     }
 }
-Object.assign(MissileThinker.prototype, {
-    oOwner: null,
-    nExplosionTime: 0,
-    nExplosionMaxTime: 4,
-    bExiting: true,
-    oLastHitMobile: null,
-    nStepSpeed: 4,
-    ANIMATION_EXPLOSION: 0,
-    ANIMATION_MOVING: 1,
-    nLifeOut: 0
-});

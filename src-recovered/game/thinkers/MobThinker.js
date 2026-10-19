@@ -5,8 +5,93 @@ import { RC } from '../../libraries/Raycaster/RC.js';
 import { Thinker } from '../../libraries/Raycaster/Thinker.js';
 import { MathTools, PI } from '../../libraries/Raycaster/Tools/MathTools.js';
 
+// surcouche (e_hazes, 64 x 96) des effets en cours ; le premier effet
+// actif de la liste l'emporte. Images : 0 vert, 1 cyan, 2 bleu clair,
+// 3 bleu, 4 violet, 5 magenta, 6 rouge, 7 orange, 8 jaune, 9 blanc,
+// 10 gris, 11 noir, 12 bouclier bleu, 13 bouclier jaune, 14 bouclier de
+// feu, 15 bouclier sacré
+const EFFECT_HAZES = {
+    reflect: {
+        property: 'bReflect',
+        haze: 13
+    },
+    blind: {
+        property: 'bBlind',
+        haze: 11
+    },
+    confused: {
+        property: 'bConfused',
+        haze: 6
+    },
+    held: {
+        property: 'bHeld',
+        haze: 9
+    },
+    rooted: {
+        property: 'bRooted',
+        haze: 1
+    },
+    snared: {
+        property: 'bSnared',
+        haze: 0
+    },
+    vulnerable: {
+        property: 'bVulnerable',
+        haze: 4
+    },
+    disease: {
+        property: 'bDisease',
+        haze: 7
+    },
+    weak: {
+        property: 'bWeak',
+        haze: 7
+    }
+};
+
 export class MobThinker extends Thinker {
-    __construct() {
+    constructor() {
+        super();
+        this.oMobileSectors = null;
+        this.oInventory = null;
+        this.oWeapon = null;
+        this.oCreature = null;
+        this.oTarget = null;
+        this.oLastAggressor = null;
+        this.nNewActionTime = 0;
+        this.nLastFireTime = 0;
+        this.nDeadTime = 0;
+        this.nSearchingTime = 2500;
+        this.nWalkingTime = 750;
+        this.nCastingTime = 250;
+        this.nWanderingTime = 250;
+        this.nWeaponSpeed = 10;
+        this.bAttacking = false;
+        this.nHazedEffects = 0;
+        this.nBoredTime = 0;
+        this.bSnared = false;
+        this.bRooted = false;
+        this.bHeld = false;
+        this.bConfused = false;
+        this.bBlind = false;
+        this.bVulnerable = false;
+        this.bDisease = false;
+        this.bWeak = false;
+        this.bReflect = false;
+        this.nCastAttack = 0;
+        this.aCastTimes = null;
+        this.TIME_REACTIVITY = 1;
+        this.ANIM_IDLE = 0;
+        this.ANIM_WALK = 1;
+        this.ANIM_ATTACK = 2;
+        this.ANIM_DIE = 3;
+        this.COLLISION_NONE = 0;
+        this.COLLISION_MOBILE = 1;
+        this.COLLISION_TARGET = 2;
+        this.COLLISION_WALL_X = 3;
+        this.COLLISION_WALL_Y = 4;
+        this.MAX_BORING_TIME = 10000;
+        this.EFFECT_HAZES = EFFECT_HAZES;
         this.fViewAngle = PI;
         this.aAngles = [0, 0.25 * PI, 0.5 * PI, 0.75 * PI, PI, -0.75 * PI, -0.5 * PI, -0.25 * PI];
         this.oDummyData = {
@@ -500,91 +585,3 @@ export class MobThinker extends Thinker {
         this._dead()
     }
 }
-Object.assign(MobThinker.prototype, {
-    oMobileSectors: null,
-    oPulse: null,
-    oInventory: null,
-    oWeapon: null,
-    aAngles: null,
-    fViewAngle: 0,
-    oDummyData: null,
-    oCreature: null,
-    oTarget: null,
-    oLastAggressor: null,
-    nNewActionTime: 0,
-    nLastFireTime: 0,
-    nDeadTime: 0,
-    nSearchingTime: 2500,
-    nWalkingTime: 750,
-    nCastingTime: 250,
-    nWanderingTime: 250,
-    nWeaponSpeed: 10,
-    bAttacking: false,
-    nHazedEffects: 0,
-    nBoredTime: 0,
-    bSnared: false,
-    bRooted: false,
-    bHeld: false,
-    bConfused: false,
-    bBlind: false,
-    bVulnerable: false,
-    bDisease: false,
-    bWeak: false,
-    bReflect: false,
-    nCastAttack: 0,
-    aCastTimes: null,
-    TIME_REACTIVITY: 1,
-    ANIM_IDLE: 0,
-    ANIM_WALK: 1,
-    ANIM_ATTACK: 2,
-    ANIM_DIE: 3,
-    COLLISION_NONE: 0,
-    COLLISION_MOBILE: 1,
-    COLLISION_TARGET: 2,
-    COLLISION_WALL_X: 3,
-    COLLISION_WALL_Y: 4,
-    MAX_BORING_TIME: 10000,
-    // surcouche (e_hazes, 64 x 96) des effets en cours ; le premier effet
-    // actif de la liste l'emporte. Images : 0 vert, 1 cyan, 2 bleu clair,
-    // 3 bleu, 4 violet, 5 magenta, 6 rouge, 7 orange, 8 jaune, 9 blanc,
-    // 10 gris, 11 noir, 12 bouclier bleu, 13 bouclier jaune, 14 bouclier de
-    // feu, 15 bouclier sacré
-    EFFECT_HAZES: {
-        reflect: {
-            property: 'bReflect',
-            haze: 13
-        },
-        blind: {
-            property: 'bBlind',
-            haze: 11
-        },
-        confused: {
-            property: 'bConfused',
-            haze: 6
-        },
-        held: {
-            property: 'bHeld',
-            haze: 9
-        },
-        rooted: {
-            property: 'bRooted',
-            haze: 1
-        },
-        snared: {
-            property: 'bSnared',
-            haze: 0
-        },
-        vulnerable: {
-            property: 'bVulnerable',
-            haze: 4
-        },
-        disease: {
-            property: 'bDisease',
-            haze: 7
-        },
-        weak: {
-            property: 'bWeak',
-            haze: 7
-        }
-    }
-});

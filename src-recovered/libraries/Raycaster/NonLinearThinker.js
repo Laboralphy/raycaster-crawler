@@ -1,7 +1,16 @@
 import { Thinker } from './Thinker.js';
 
 export class NonLinearThinker extends Thinker {
-    __construct() {
+    constructor() {
+        super();
+        this.nCurrentTime = 0;
+        this.xStart = 0;
+        this.yStart = 0;
+        this.aStart = 0;
+        this.xEnd = 0;
+        this.yEnd = 0;
+        this.fWeight = 1;
+        this.sFunction = 'smoothstepX2';
         this.nTime = 0
     }
 
@@ -110,14 +119,3 @@ export class NonLinearThinker extends Thinker {
 
     thinkIdle() {}
 }
-Object.assign(NonLinearThinker.prototype, {
-    nTime: 0,
-    nCurrentTime: 0,
-    xStart: 0,
-    yStart: 0,
-    aStart: 0,
-    xEnd: 0,
-    yEnd: 0,
-    fWeight: 1,
-    sFunction: 'smoothstepX2'
-});

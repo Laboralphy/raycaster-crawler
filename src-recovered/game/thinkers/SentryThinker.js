@@ -1,6 +1,14 @@
 import { MobThinker } from './MobThinker.js';
 
 export class SentryThinker extends MobThinker {
+    constructor() {
+        super();
+        this.TIME_REACTIVITY = 4;
+        this.nSearchingTime = 2500;
+        this.nWalkingTime = 0;
+        this.nWanderingTime = 0
+    }
+
     _follow(nTime) {
         if ((nTime % this.TIME_REACTIVITY) === 0) {
             this.chaseTarget(this.getTarget());
@@ -12,9 +20,3 @@ export class SentryThinker extends MobThinker {
         this.oGame.gc_attack(this.oMobile, 0)
     }
 }
-Object.assign(SentryThinker.prototype, {
-    TIME_REACTIVITY: 4,
-    nSearchingTime: 2500,
-    nWalkingTime: 0,
-    nWanderingTime: 0
-});

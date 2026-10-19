@@ -2,6 +2,11 @@ import { MobThinker } from './MobThinker.js';
 import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
 
 export class CasterThinker extends MobThinker {
+    constructor() {
+        super();
+        this.nDodging = 3
+    }
+
     castSpell() {
         const n = MathTools.rnd(0, 9);
         switch (n) {
@@ -76,6 +81,3 @@ export class CasterThinker extends MobThinker {
         this.oGame.gc_attack(this.oMobile, 0)
     }
 }
-Object.assign(CasterThinker.prototype, {
-    nDodging: 3
-});
