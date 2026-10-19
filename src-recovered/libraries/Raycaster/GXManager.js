@@ -1,11 +1,7 @@
 import { ArrayTools } from '../O876/ArrayTools.js';
 
 export class GXManager {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
         this.aEffects = []
     }
 
@@ -45,6 +41,3 @@ export class GXManager {
         }
     }
 }
-Object.assign(GXManager.prototype, {
-    aEffects: null
-});

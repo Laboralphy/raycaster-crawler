@@ -3,11 +3,7 @@ import { ArrayTools } from '../libraries/O876/ArrayTools.js';
 import { MathTools } from '../libraries/Raycaster/Tools/MathTools.js';
 
 export class LootSystem {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
         this._oTable = {}
     }
 
@@ -115,6 +111,3 @@ export class LootSystem {
         return oItems
     }
 }
-Object.assign(LootSystem.prototype, {
-    _oTable: null
-});

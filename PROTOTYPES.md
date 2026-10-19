@@ -53,7 +53,7 @@ npm run report:prototypes   # what is left, by dependency level
 
 ## Progress
 
-Snapshot of 2026-10-19: **68 files done, 11 deleted, 42 to go.**
+Snapshot of 2026-10-19: **74 files done, 15 deleted, 34 to go.**
 
 ### Done
 
@@ -127,6 +127,12 @@ Snapshot of 2026-10-19: **68 files done, 11 deleted, 42 to go.**
 | `libraries/O876/SoundSystem.js` | (this branch) | yes (fake `howler`) |
 | `game/GC/EffectProcessor.js` | (this branch) | yes |
 | `game/EffectProcessor.js` | (this branch) | yes (behaviour snapshot of every effect) |
+| `game/BackupSystem.js` | (this branch) | yes |
+| `game/LootSystem.js` | (this branch) | yes |
+| `game/WeaponAnimator.js` | (this branch) | yes |
+| `libraries/O876/Astar/Nood.js` | (this branch) | yes |
+| `libraries/Raycaster/GXManager.js` | (this branch) | yes |
+| `libraries/Raycaster/Tile.js` | (this branch) | yes |
 
 `MagicPlugin.js` lost its prototype defaults in 44f511c but still patches
 `Animation` and `Raycaster` at runtime (objective 3), so it stays in the to-do
@@ -139,7 +145,9 @@ Unused anywhere in the game, removed instead of migrated:
 `libraries/O876/Legion.js`, `libraries/Raycaster/Scheduler.js`, and the
 library thinkers `CameraKeyboardThinker`, `CameraMouseKeyboardThinker`,
 `KbdArrowThinker`, `CommandThinker`, `WanderThinker`, `KeyboardThinker`,
-and `libraries/O876/Browser.js`.
+`libraries/O876/Browser.js`, `libraries/O876/Mediator/Mediator.js` and
+`Plugin.js`, `libraries/O876/Microsyte.js` and `game/ReikasterMicrosyte.js`
+(the old online hi-score pages, imported nowhere).
 
 ### To do
 
@@ -155,16 +163,7 @@ Tick a box once the file is migrated and its tests pass.
 
 #### Level 1
 
-| File | Tags | Tests |
-|---|---|---|
-| [ ] `game/BackupSystem.js` | P C | no |
-| [ ] `game/LootSystem.js` | P C | no |
-| [ ] `game/WeaponAnimator.js` | P C | no |
-| [ ] `libraries/O876/Astar/Nood.js` | P C | no |
-| [ ] `libraries/O876/Mediator/Mediator.js` | P C | no |
-| [ ] `libraries/O876/Microsyte.js` | P C | no |
-| [ ] `libraries/Raycaster/GXManager.js` | P C | no |
-| [ ] `libraries/Raycaster/Tile.js` | P C | no |
+All done.
 
 #### Level 2
 
@@ -293,3 +292,8 @@ Tick a box once the file is migrated and its tests pass.
   death ward now wear off), and the ailment selectors, so a remedy only cures
   its own ailments instead of dispelling every effect (permanent item bonuses
   included), and freedom cures snare, root and hold. 308 tests pass.
+- **2026-10-19**: level 1 done. `BackupSystem` (fake `localStorage`),
+  `LootSystem`, `WeaponAnimator`, `Nood`, `GXManager` and `Tile` tested, then
+  migrated; a mutation check (Tile defaults set after reading the data) goes
+  red. Deleted the unused `Mediator`, `Plugin`, `Microsyte` and
+  `ReikasterMicrosyte`. 335 tests pass.

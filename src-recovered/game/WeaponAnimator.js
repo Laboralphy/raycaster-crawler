@@ -3,11 +3,24 @@ import { Animation } from '../libraries/Raycaster/Animation.js';
 import { MathTools } from '../libraries/Raycaster/Tools/MathTools.js';
 
 export class WeaponAnimator {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
+        this.oWeaponLayer = null;
+        this.oRaycaster = null;
+        this.bInvalid = true;
+        this.wScreen = 0;
+        this.hScreen = 0;
+        this.xWeapon = 0;
+        this.yWeapon = 0;
+        this.xCalibration = 0;
+        this.yCalibration = 0;
+        this.xShift = 0;
+        this.yShift = 0;
+        this.nDraw = 0;
+        this.nDrawSpeed = 20;
+        this.fOscilloSpeed = 0;
+        this.oAnimationLibrary = null;
+        this.sTile = '';
+        this.sAnim = '';
         this.oAnimation = new Animation()
     }
 
@@ -78,23 +91,3 @@ export class WeaponAnimator {
         this.yWeapon = this.yCalibration + this.yShift | 0
     }
 }
-Object.assign(WeaponAnimator.prototype, {
-    oWeaponLayer: null,
-    oRaycaster: null,
-    bInvalid: true,
-    wScreen: 0,
-    hScreen: 0,
-    xWeapon: 0,
-    yWeapon: 0,
-    xCalibration: 0,
-    yCalibration: 0,
-    xShift: 0,
-    yShift: 0,
-    nDraw: 0,
-    nDrawSpeed: 20,
-    fOscilloSpeed: 0,
-    oAnimation: null,
-    oAnimationLibrary: null,
-    sTile: '',
-    sAnim: ''
-});

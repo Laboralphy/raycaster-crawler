@@ -1,11 +1,15 @@
 import { Animation } from './Animation.js';
 
 export class Tile {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct(oData) {
+    constructor(oData) {
+        this.oImage = null;
+        this.nWidth = 0;
+        this.nHeight = 0;
+        this.sSource = null;
+        this.nFrames = 0;
+        this.aAnimations = null;
+        this.bShading = true;
+        this.nScale = 1;
         if (oData !== undefined) {
             this.sSource = oData.src;
             this.nFrames = oData.frames;
@@ -39,13 +43,3 @@ export class Tile {
         }
     }
 }
-Object.assign(Tile.prototype, {
-    oImage: null,
-    nWidth: 0,
-    nHeight: 0,
-    sSource: null,
-    nFrames: 0,
-    aAnimations: null,
-    bShading: true,
-    nScale: 1
-});

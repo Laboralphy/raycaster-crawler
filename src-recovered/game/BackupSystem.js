@@ -2,11 +2,12 @@ import { ArrayTools } from '../libraries/O876/ArrayTools.js';
 import { LZW } from '../libraries/O876/LZW.js';
 
 export class BackupSystem {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
+        this.nBackupFormat = 1;
+        this.sNameSpace = '';
+        this.SEPARATOR = '__';
+        this.DATA_KEY = 'data';
+        this.aFiles = null;
         this.aRatio = {};
         if (!this.hasLocalStorage()) {
             throw new Error('no localstorage available')
@@ -110,11 +111,3 @@ export class BackupSystem {
         return oExport
     }
 }
-Object.assign(BackupSystem.prototype, {
-    nBackupFormat: 1,
-    sNameSpace: '',
-    SEPARATOR: '__',
-    DATA_KEY: 'data',
-    aFiles: null,
-    aRatio: null
-});
