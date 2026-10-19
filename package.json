@@ -11,7 +11,8 @@
     "estimate:loot": "node --no-warnings tools/estimate_loot.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
-    "report:prototypes": "node tools/prototype_report.mjs"
+    "report:prototypes": "node tools/prototype_report.mjs",
+    "doc:monsters": "vite-node tools/doc_monsters.mjs"
   },
   "devDependencies": {
     "acorn": "^8.14.0",

@@ -288,3 +288,8 @@ Tick a box once the file is migrated and its tests pass.
   `_rbod`, `_rmin`, `_rmov` are misspelled, so those resistances never wear
   off; `selectEffects_moveAilment` returns nothing, and `_bodyAilment` and
   `_mindAilment` return an `indexOf` instead of a boolean. 301 tests pass.
+- **2026-10-19**: fixed the three effect bugs found above (outside the
+  migration): the four `exprireEffect_` typos (remedy, clarity, freedom and
+  death ward now wear off), and the ailment selectors, so a remedy only cures
+  its own ailments instead of dispelling every effect (permanent item bonuses
+  included), and freedom cures snare, root and hold. 308 tests pass.

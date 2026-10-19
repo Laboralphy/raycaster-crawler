@@ -174,7 +174,7 @@ export class EffectProcessor extends GC_EffectProcessor {
     }
 
     selectEffects_moveAilment(oEffect) {
-        ('-ahld-aroo-asnr').indexOf(this.getEffectSubType(oEffect.sEffect))
+        return ('-ahld-aroo-asnr').indexOf(this.getEffectSubType(oEffect.sEffect)) >= 0
     }
 
     selectEffects_ahld(oEffect) {
@@ -190,7 +190,7 @@ export class EffectProcessor extends GC_EffectProcessor {
     }
 
     selectEffects_bodyAilment(oEffect) {
-        return ('-avul-awea-aill').indexOf(this.getEffectSubType(oEffect.sEffect))
+        return ('-avul-awea-aill').indexOf(this.getEffectSubType(oEffect.sEffect)) >= 0
     }
 
     selectEffects_avul(oEffect) {
@@ -206,7 +206,7 @@ export class EffectProcessor extends GC_EffectProcessor {
     }
 
     selectEffects_mindAilment(oEffect) {
-        return ('-abld-acnf').indexOf(this.getEffectSubType(oEffect.sEffect))
+        return ('-abld-acnf').indexOf(this.getEffectSubType(oEffect.sEffect)) >= 0
     }
 
     selectEffects_abld(oEffect) {
@@ -694,7 +694,7 @@ export class EffectProcessor extends GC_EffectProcessor {
         oCreature.modifyAttribute('drtoxic', -nLevel)
     }
 
-    exprireEffect_rdth(oCreature, sEffect) {
+    expireEffect_rdth(oCreature, sEffect) {
         const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('drdeath', -nLevel)
     }
@@ -760,17 +760,17 @@ export class EffectProcessor extends GC_EffectProcessor {
         oCreature.modifyAttribute('antidote', -nLevel)
     }
 
-    exprireEffect_rbod(oCreature, sEffect) {
+    expireEffect_rbod(oCreature, sEffect) {
         const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('health', -nLevel)
     }
 
-    exprireEffect_rmin(oCreature, sEffect) {
+    expireEffect_rmin(oCreature, sEffect) {
         const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('clearmind', -nLevel)
     }
 
-    exprireEffect_rmov(oCreature, sEffect) {
+    expireEffect_rmov(oCreature, sEffect) {
         const nLevel = this.getEffectLevel(sEffect);
         oCreature.modifyAttribute('freedom', -nLevel)
     }

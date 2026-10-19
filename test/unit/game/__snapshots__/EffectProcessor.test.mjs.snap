@@ -1360,7 +1360,6 @@ exports[`game EffectProcessor > sous-type rbod > application, tour, expiration 1
         "energy": 50,
         "foodmax": 1000,
         "foodp": 500,
-        "health": 3,
         "hp": 40,
         "mp": 20,
         "vitality": 100,
@@ -1464,7 +1463,6 @@ exports[`game EffectProcessor > sous-type rdth > application, tour, expiration 1
     "105",
     {
       "attributes": {
-        "drdeath": 3,
         "energy": 50,
         "foodmax": 1000,
         "foodp": 500,
@@ -1827,7 +1825,6 @@ exports[`game EffectProcessor > sous-type rmin > application, tour, expiration 1
     "105",
     {
       "attributes": {
-        "clearmind": 3,
         "energy": 50,
         "foodmax": 1000,
         "foodp": 500,
@@ -1884,7 +1881,6 @@ exports[`game EffectProcessor > sous-type rmov > application, tour, expiration 1
         "energy": 50,
         "foodmax": 1000,
         "foodp": 500,
-        "freedom": 3,
         "hp": 40,
         "mp": 20,
         "vitality": 100,

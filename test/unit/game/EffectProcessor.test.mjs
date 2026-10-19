@@ -118,6 +118,60 @@ describe('game EffectProcessor', () => {
         expect(c.getAttribute('hp')).toBe(40);
     });
 
+    describe('remèdes', () => {
+        // créature aveugle, confuse, ralentie, enracinée, paralysée,
+        // affaiblie, vulnérable, malade, avec un bonus d'objet permanent
+        function afflicted() {
+            const ep = new EffectProcessor();
+            ep.setTime(100);
+            const c = creature(ep);
+            ['mabldBZ', 'macnfBZ', 'masnrBZ', 'marooBZ', 'mahldBZ', 'maweaBZ', 'mavulBZ', 'maillBZ', 'ibpowB/']
+                .forEach((s) => ep.applyEffect(c, s));
+            return { ep, c };
+        }
+
+        // sous-types encore actifs une seconde après le remède
+        function remaining(ep, c, sRemedy) {
+            ep.applyEffect(c, sRemedy);
+            ep.setTime(101);
+            c.processEffects();
+            return c.oEffects.map((e) => ep.getEffectSubType(e.sEffect)).filter((s) => s !== ep.getEffectSubType(sRemedy));
+        }
+
+        it('remède du corps : faiblesse, vulnérabilité et maladie seulement', () => {
+            const { ep, c } = afflicted();
+            expect(remaining(ep, c, 'brbodBP')).toEqual(['abld', 'acnf', 'asnr', 'aroo', 'ahld', 'bpow']);
+            expect(c.getAttribute('weak')).toBe(0);
+            expect(c.getAttribute('power')).toBe(1);
+        });
+
+        it('remède de l\'esprit : aveuglement et confusion seulement', () => {
+            const { ep, c } = afflicted();
+            expect(remaining(ep, c, 'brminBP')).toEqual(['asnr', 'aroo', 'ahld', 'awea', 'avul', 'aill', 'bpow']);
+            expect(c.getAttribute('blind')).toBe(0);
+        });
+
+        it('liberté : ralentissement, enracinement et paralysie', () => {
+            const { ep, c } = afflicted();
+            expect(remaining(ep, c, 'brmovBP')).toEqual(['abld', 'acnf', 'awea', 'avul', 'aill', 'bpow']);
+            expect(c.getAttribute('snared')).toBe(0);
+            expect(c.getAttribute('rooted')).toBe(0);
+            expect(c.getAttribute('held')).toBe(0);
+        });
+
+        it.each([['rbod', 'health'], ['rmin', 'clearmind'], ['rmov', 'freedom'], ['rdth', 'drdeath']])(
+            'la résistance %s (%s) prend fin', (sSub, sAttr) => {
+                const ep = new EffectProcessor();
+                ep.setTime(100);
+                const c = creature(ep);
+                ep.applyEffect(c, 'b' + sSub + 'BP');
+                expect(c.getAttribute(sAttr)).toBe(1);
+                ep.setTime(115);
+                c.processEffects();
+                expect(c.getAttribute(sAttr)).toBe(0);
+            });
+    });
+
     // filet de sécurité : chaque sous-type, appliqué 5 s (niveau 3) à une
     // créature, puis une seconde plus tard, puis à échéance
     describe.each(subtypes())('sous-type %s', (sSub) => {
