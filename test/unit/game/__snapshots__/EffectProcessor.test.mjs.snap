@@ -1,0 +1,2833 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`game EffectProcessor > sous-type abld > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "blind": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nabldDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "blind": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nabldDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type acnf > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "confused": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nacnfDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "confused": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nacnfDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type adhp > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 70,
+      },
+      "effects": [
+        "nadhpDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 70,
+      },
+      "effects": [
+        "nadhpDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 73,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type admp > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 20,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nadmpDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 20,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nadmpDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 23,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type ahld > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "held": 3,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nahldDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "held": 3,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nahldDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type ahun > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodc": 30,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nahunDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodc": 30,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nahunDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodc": 27,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type aill > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "disease": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "naillDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "disease": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "naillDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type ajnx > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "luck": -3,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "najnxDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "luck": -3,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "najnxDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "luck": -3,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type aroo > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "rooted": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "narooDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "rooted": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "narooDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type asnr > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "snared": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "nasnrDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "snared": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "nasnrDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type avul > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+        "vulnerable": 3,
+      },
+      "effects": [
+        "navulDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+        "vulnerable": 3,
+      },
+      "effects": [
+        "navulDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type awea > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "power": -3,
+        "vitality": 100,
+      },
+      "effects": [
+        "naweaDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "power": -3,
+        "vitality": 100,
+      },
+      "effects": [
+        "naweaDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type bclk > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "invisible": 3,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbclkDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "invisible": 3,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbclkDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type besp > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "esp": 3,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbespDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "esp": 3,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbespDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type bhst > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hasted": 3,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbhstDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hasted": 3,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbhstDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type binv > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "invulnerable": 3,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbinvDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "invulnerable": 3,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbinvDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type blck > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "luck": 3,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nblckDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "luck": 3,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nblckDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type bpha > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "pharma": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbphaDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "pharma": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbphaDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type bpow > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "power": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbpowDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "power": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbpowDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type bref > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "reflect": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbrefDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "reflect": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbrefDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type bsfc > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodc": -3,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbsfcDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodc": -3,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbsfcDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type bxhp > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 130,
+      },
+      "effects": [
+        "nbxhpDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 130,
+      },
+      "effects": [
+        "nbxhpDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type bxmp > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 80,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbxmpDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 80,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nbxmpDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type disp > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "ndispDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "ndispDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rant > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "antidote": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrantDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "antidote": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrantDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rbod > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "health": 3,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrbodDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "health": 3,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrbodDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "health": 3,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rcld > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drcold": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrcldDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drcold": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrcldDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rdth > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drdeath": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrdthDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drdeath": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrdthDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "drdeath": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rele > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drelectricity": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nreleDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drelectricity": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nreleDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rene > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "vitality": 100,
+      },
+      "effects": [
+        "nreneDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "vitality": 100,
+      },
+      "effects": [
+        "nreneDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rfdp > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 800,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrfdpDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 803,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrfdpDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 806,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rfir > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drfire": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrfirDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drfire": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrfirDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rhea > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 22,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrheaDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 19,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrheaDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 16,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rmag > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drmagical": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrmagDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drmagical": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrmagDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rmin > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "clearmind": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrminDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "clearmind": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrminDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "clearmind": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rmov > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "freedom": 3,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrmovDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "freedom": 3,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrmovDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "freedom": 3,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rphy > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drphysical": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrphyDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drphysical": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrphyDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type rtox > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drtoxic": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrtoxDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drtoxic": 3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nrtoxDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type sdrn > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vampyre": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "nsdrnDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vampyre": 3,
+        "vitality": 100,
+      },
+      "effects": [
+        "nsdrnDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type vcld > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drcold": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nvcldDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drcold": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nvcldDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type vele > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drelectricity": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nveleDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drelectricity": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nveleDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type vfir > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drfire": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nvfirDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drfire": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nvfirDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type vmag > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drmagical": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nvmagDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drmagical": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nvmagDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type vphy > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drphysical": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nvphyDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drphysical": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nvphyDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type vtox > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "drtoxic": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nvtoxDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "drtoxic": -3,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nvtoxDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type xcld > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 52,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxcldDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 55,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxcldDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 58,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type xdth > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxdthDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxdthDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "dead": 1,
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 140,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type xele > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 52,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxeleDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 55,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxeleDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 58,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type xene > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 32,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxeneDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 35,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxeneDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 40,
+        "mp": 38,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type xfdp > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 200,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxfdpDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 197,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxfdpDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 194,
+        "hp": 40,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type xfir > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 52,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxfirDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 55,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxfirDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 58,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type xmag > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 52,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxmagDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 55,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxmagDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 58,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type xphy > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 52,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxphyDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 55,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxphyDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 58,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;
+
+exports[`game EffectProcessor > sous-type xtox > application, tour, expiration 1`] = `
+[
+  [
+    "apply",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 52,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxtoxDF 105",
+      ],
+    },
+  ],
+  [
+    "101",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 55,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [
+        "nxtoxDF 105",
+      ],
+    },
+  ],
+  [
+    "105",
+    {
+      "attributes": {
+        "energy": 50,
+        "foodmax": 1000,
+        "foodp": 500,
+        "hp": 58,
+        "mp": 20,
+        "vitality": 100,
+      },
+      "effects": [],
+    },
+  ],
+]
+`;

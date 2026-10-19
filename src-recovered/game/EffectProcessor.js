@@ -3,7 +3,29 @@ import { ArrayTools } from '../libraries/O876/ArrayTools.js';
 import { MathTools } from '../libraries/Raycaster/Tools/MathTools.js';
 
 export class EffectProcessor extends GC_EffectProcessor {
-    __construct() {
+    constructor() {
+        super();
+        this.DAMAGE_FACTOR_PHYSICAL = 6;
+        this.DAMAGE_FACTOR_MAGICAL = 6;
+        this.DAMAGE_FACTOR_COLD = 6;
+        this.DAMAGE_FACTOR_FIRE = 6;
+        this.DAMAGE_FACTOR_ELECTRICITY = 6;
+        this.DAMAGE_FACTOR_TOXIC = 6;
+        this.HEAL_FACTOR = 6;
+        this.ENERGY_FACTOR = 10;
+        this.VITALITY_FACTOR = 10;
+        this.FOOD_FACTOR = 100;
+        this.MAX_LEVEL = 63;
+        this.EFFECT_NULL = 'snullAA';
+        this.EFFECT_TYPE_POTION = 'b';
+        this.EFFECT_TYPE_CHARM = 'h';
+        this.EFFECT_TYPE_MISSILE = 'm';
+        this.EFFECT_TYPE_ATTACK = 'x';
+        this.EFFECT_TYPE_POISON = 'p';
+        this.EFFECT_TYPE_CURSE = 'c';
+        this.EFFECT_TYPE_ITEM = 'i';
+        this.EFFECT_TYPE_NATURAL = 'n';
+        this.EFFECT_NON_STACKABLE = 'bhmx';
         this.buildTables()
     }
 
@@ -792,30 +814,3 @@ export class EffectProcessor extends GC_EffectProcessor {
         oCreature.modifyAttribute('vampyre', -nLevel)
     }
 }
-Object.assign(EffectProcessor.prototype, {
-    DAMAGE_FACTOR_PHYSICAL: 6,
-    DAMAGE_FACTOR_MAGICAL: 6,
-    DAMAGE_FACTOR_COLD: 6,
-    DAMAGE_FACTOR_FIRE: 6,
-    DAMAGE_FACTOR_ELECTRICITY: 6,
-    DAMAGE_FACTOR_TOXIC: 6,
-    HEAL_FACTOR: 6,
-    ENERGY_FACTOR: 10,
-    VITALITY_FACTOR: 10,
-    FOOD_FACTOR: 100,
-    MAX_LEVEL: 63,
-    BUFF_FACTOR: null,
-    VULNER_FACTOR: null,
-    DEBUFF_FACTOR: null,
-    RESIST_FACTOR: null,
-    EFFECT_NULL: 'snullAA',
-    EFFECT_TYPE_POTION: 'b',
-    EFFECT_TYPE_CHARM: 'h',
-    EFFECT_TYPE_MISSILE: 'm',
-    EFFECT_TYPE_ATTACK: 'x',
-    EFFECT_TYPE_POISON: 'p',
-    EFFECT_TYPE_CURSE: 'c',
-    EFFECT_TYPE_ITEM: 'i',
-    EFFECT_TYPE_NATURAL: 'n',
-    EFFECT_NON_STACKABLE: 'bhmx'
-});

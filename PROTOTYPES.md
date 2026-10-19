@@ -53,7 +53,7 @@ npm run report:prototypes   # what is left, by dependency level
 
 ## Progress
 
-Snapshot of 2026-10-19: **65 files done, 10 deleted, 46 to go.**
+Snapshot of 2026-10-19: **68 files done, 11 deleted, 42 to go.**
 
 ### Done
 
@@ -124,6 +124,9 @@ Snapshot of 2026-10-19: **65 files done, 10 deleted, 46 to go.**
 | `game/thinkers/ShooterThinker.js` | (this branch) | yes |
 | `game/thinkers/SentryThinker.js` | (this branch) | yes |
 | `game/thinkers/StealerThinker.js` | (this branch) | yes |
+| `libraries/O876/SoundSystem.js` | (this branch) | yes (fake `howler`) |
+| `game/GC/EffectProcessor.js` | (this branch) | yes |
+| `game/EffectProcessor.js` | (this branch) | yes (behaviour snapshot of every effect) |
 
 `MagicPlugin.js` lost its prototype defaults in 44f511c but still patches
 `Animation` and `Raycaster` at runtime (objective 3), so it stays in the to-do
@@ -135,7 +138,8 @@ Unused anywhere in the game, removed instead of migrated:
 `libraries/O876/CPUMonitor.js`, `libraries/O876/Easing.js`,
 `libraries/O876/Legion.js`, `libraries/Raycaster/Scheduler.js`, and the
 library thinkers `CameraKeyboardThinker`, `CameraMouseKeyboardThinker`,
-`KbdArrowThinker`, `CommandThinker`, `WanderThinker`, `KeyboardThinker`.
+`KbdArrowThinker`, `CommandThinker`, `WanderThinker`, `KeyboardThinker`,
+and `libraries/O876/Browser.js`.
 
 ### To do
 
@@ -147,8 +151,6 @@ Tick a box once the file is migrated and its tests pass.
 
 | File | Tags | Tests | Notes |
 |---|---|---|---|
-| [ ] `libraries/O876/Browser.js` | C | **no** | |
-| [ ] `libraries/O876/SoundSystem.js` | P C | **no** | depends on the `howler` package only |
 | [ ] `libraries/Raycaster/Transistate.js` | P C | yes | constructor order trap, see above |
 
 #### Level 1
@@ -156,7 +158,6 @@ Tick a box once the file is migrated and its tests pass.
 | File | Tags | Tests |
 |---|---|---|
 | [ ] `game/BackupSystem.js` | P C | no |
-| [ ] `game/GC/EffectProcessor.js` | P C | no |
 | [ ] `game/LootSystem.js` | P C | no |
 | [ ] `game/WeaponAnimator.js` | P C | no |
 | [ ] `libraries/O876/Astar/Nood.js` | P C | no |
@@ -169,7 +170,6 @@ Tick a box once the file is migrated and its tests pass.
 
 | File | Tags | Tests |
 |---|---|---|
-| [ ] `game/EffectProcessor.js` | P C | no |
 | [ ] `libraries/H5UI/WinControl.js` | P C | no |
 | [ ] `libraries/Raycaster/Horde.js` | P C | no |
 
@@ -278,3 +278,13 @@ Tick a box once the file is migrated and its tests pass.
   sentries (turret stays put), monster spells (witch queen triple confusion
   shot, acid blob explosion, medusa poison bolt). Casters: no monster uses
   `CasterThinker`, nothing to test.
+- **2026-10-19**: deleted the unused `Browser` (its `isChrome` read an
+  undefined `isOpera`). `SoundSystem` tested with a mocked `howler`
+  (`vi.mock`), then migrated: 234 tests pass.
+- **2026-10-19**: both `EffectProcessor` classes tested, then migrated. The
+  game one is covered by a behaviour snapshot: each of its 54 effect subtypes
+  is applied to a creature, then ticked, then expired. Pre-existing bugs
+  found and left as they are (recorded in the snapshot): `exprireEffect_rdth`,
+  `_rbod`, `_rmin`, `_rmov` are misspelled, so those resistances never wear
+  off; `selectEffects_moveAilment` returns nothing, and `_bodyAilment` and
+  `_mindAilment` return an `indexOf` instead of a boolean. 301 tests pass.

@@ -12,13 +12,11 @@ import { Howl } from 'howler';
  * faisait chuter la cadence d'images à chaque tour.
  */
 export class SoundSystem {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
         this.oSounds = new Map();
-        this.oMusic = null
+        this.oMusic = null;
+        this.sMusicFile = '';
+        this.bMute = false
     }
 
     getSound(sFile) {
@@ -96,9 +94,3 @@ export class SoundSystem {
         }
     }
 }
-Object.assign(SoundSystem.prototype, {
-    oSounds: null,
-    oMusic: null,
-    sMusicFile: '',
-    bMute: false
-});

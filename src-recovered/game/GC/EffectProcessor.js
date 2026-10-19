@@ -1,10 +1,9 @@
 import { Effect } from './Effect.js';
 
 export class EffectProcessor {
-    constructor(...aArgs) {
-        if ('__construct' in this) {
-            this.__construct(...aArgs);
-        }
+    constructor() {
+        this.nTime = 0;
+        this.BASE64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
     }
 
     getEffectType(sEffect) {
@@ -161,7 +160,3 @@ export class EffectProcessor {
         return oEffect.isExpired(this.nTime)
     }
 }
-Object.assign(EffectProcessor.prototype, {
-    nTime: 0,
-    BASE64: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-});
