@@ -4,11 +4,14 @@ import { Screen } from './Screen.js';
 import { UI } from './UI.js';
 
 export class System {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
+        this.oRenderContext = null;
+        this.oRenderCanvas = null;
+        this.oWidgets = null;
+        this.oWidget = null;
+        this.sScreen = 0;
+        this.bEventsDefined = false;
+        this.commandProc = null;
         this.oScreen = new Screen();
         this.oPlugins = UI.oPlugins
     }
@@ -193,9 +196,13 @@ export class System {
 
     setScreen(sScreen) {
         this.sScreen = sScreen;
+        // écran intégré (cmdLoading...) ou greffon déclaré par UI.addUIPlugin ;
+        // le contrôleur du greffon tourne avec this = System (this.commandProc)
         const sCmdProc = 'cmd' + sScreen;
         if (sCmdProc in this) {
             this.commandProc = this[sCmdProc]
+        } else if (sScreen in UI.oPlugins) {
+            this.commandProc = UI.oPlugins[sScreen].uiController
         } else {
             throw new Error('Unknown UI Command')
         }
@@ -252,14 +259,3 @@ export class System {
         }
     }
 }
-Object.assign(System.prototype, {
-    oScreen: null,
-    oRenderContext: null,
-    oRenderCanvas: null,
-    oWidgets: null,
-    oWidget: null,
-    sScreen: 0,
-    oPlugins: null,
-    bEventsDefined: false,
-    commandProc: null
-});

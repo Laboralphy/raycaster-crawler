@@ -1,5 +1,3 @@
-import { System } from './System.js';
-
 export const UI = {
     clWINDOW: '#999',
     clWINDOW_BORDER: '#000',
@@ -16,7 +14,6 @@ export const UI = {
     oPlugins: {},
     addUIPlugin: function(sController, oPlugin) {
         UI['INTFMODE_' + sController.toUpperCase()] = ++UI.INTFMODE_LAST;
-        System.prototype['cmd' + sController] = oPlugin.uiController;
         UI.oPlugins[sController] = oPlugin
     }
 };

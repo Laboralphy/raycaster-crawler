@@ -1,11 +1,60 @@
 import { TileGrid } from '../../libraries/H5UI/TileGrid.js';
 
-export class HUD {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
+// emplacements des compteurs dans la grille, en lecture seule
+const POSITIONS = {
+    life: {
+        x: 0,
+        y: 0,
+        max: 999,
+        pad: 3
+    },
+    energy: {
+        x: 0,
+        y: 1,
+        max: 999,
+        pad: 3
+    },
+    food: {
+        x: 5,
+        y: 0,
+        max: 999,
+        pad: 3
+    },
+    keys: {
+        x: 11,
+        y: 1,
+        max: 0,
+        pad: 0
+    },
+    genkeys: {
+        x: 6,
+        y: 1,
+        max: 99,
+        pad: 2
     }
+};
 
-    __construct() {
+export class HUD {
+    constructor() {
+        this.POSITIONS = POSITIONS;
+        this.oCanvas = null;
+        this.oContext = null;
+        this.TILE_VOID = 0;
+        this.TILE_ZERO = 1;
+        this.TILE_KEY_COPPER = 11;
+        this.TILE_KEY_IRON = 12;
+        this.TILE_KEY_YELLOW = 13;
+        this.TILE_KEY_BLUE = 15;
+        this.TILE_KEY_RED = 14;
+        this.TILE_KEY_GREEN = 16;
+        this.TILE_KEY_NONE = 17;
+        this.TILE_HEART = 18;
+        this.TILE_CRYSTAL = 19;
+        this.TILE_PORKCHOP = 20;
+        this.TILE_ZERO_WHITE = 1;
+        this.TILE_ZERO_GREEN = 21;
+        this.TILE_ZERO_RED = 31;
+        this.TILE_ZERO_YELLOW = 41;
         this.oHUD = new TileGrid();
         this.oHUD.setGridSize(20, 2);
         this.printTile(this.POSITIONS.life.x + this.POSITIONS.life.pad, this.POSITIONS.life.y, this.TILE_HEART);
@@ -99,56 +148,3 @@ export class HUD {
         }
     }
 }
-Object.assign(HUD.prototype, {
-    oCanvas: null,
-    oContext: null,
-    oHUD: null,
-    POSITIONS: {
-        life: {
-            x: 0,
-            y: 0,
-            max: 999,
-            pad: 3
-        },
-        energy: {
-            x: 0,
-            y: 1,
-            max: 999,
-            pad: 3
-        },
-        food: {
-            x: 5,
-            y: 0,
-            max: 999,
-            pad: 3
-        },
-        keys: {
-            x: 11,
-            y: 1,
-            max: 0,
-            pad: 0
-        },
-        genkeys: {
-            x: 6,
-            y: 1,
-            max: 99,
-            pad: 2
-        }
-    },
-    TILE_VOID: 0,
-    TILE_ZERO: 1,
-    TILE_KEY_COPPER: 11,
-    TILE_KEY_IRON: 12,
-    TILE_KEY_YELLOW: 13,
-    TILE_KEY_BLUE: 15,
-    TILE_KEY_RED: 14,
-    TILE_KEY_GREEN: 16,
-    TILE_KEY_NONE: 17,
-    TILE_HEART: 18,
-    TILE_CRYSTAL: 19,
-    TILE_PORKCHOP: 20,
-    TILE_ZERO_WHITE: 1,
-    TILE_ZERO_GREEN: 21,
-    TILE_ZERO_RED: 31,
-    TILE_ZERO_YELLOW: 41
-});

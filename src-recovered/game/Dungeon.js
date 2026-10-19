@@ -6,11 +6,13 @@ import { SPELLS_DATA } from './data/SPELLS_DATA.js';
 import { Marker } from '../libraries/O876/Marker.js';
 
 export class Dungeon {
-    constructor(...aArgs) {
-        this.__construct(...aArgs);
-    }
-
-    __construct() {
+    constructor() {
+        this.INVENTORY_SIZE_PLAYER = 32;
+        this.INVENTORY_SIZE_CREATURE = 4;
+        this.oData = null;
+        this.oArea = null;
+        this.oEffectProcessor = null;
+        this.aStartingStuff = null;
         this.oWeapons = {};
         this.resetData();
         this.oData.player.creature = this.setupPlayerCreature(this.newCreature(1));
@@ -609,13 +611,3 @@ export class Dungeon {
         return this.getWeaponMissileDefinition(oSpell)
     }
 }
-Object.assign(Dungeon.prototype, {
-    INVENTORY_SIZE_PLAYER: 32,
-    INVENTORY_SIZE_CREATURE: 4,
-    oData: null,
-    oArea: null,
-    oWeapons: null,
-    oEffectProcessor: null,
-    oSpawnPoint: null,
-    aStartingStuff: null
-});

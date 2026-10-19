@@ -60,7 +60,7 @@ npm run report:prototypes   # what is left, by dependency level
 
 ## Progress
 
-Snapshot of 2026-10-19: **97 files done, 15 deleted, 11 to go.**
+Snapshot of 2026-10-19: **100 files done, 15 deleted, 8 to go.**
 
 ### Done
 
@@ -163,6 +163,9 @@ Snapshot of 2026-10-19: **97 files done, 15 deleted, 11 to go.**
 | `game/UI/PlayersheetWindow.js` | (this branch) | yes (UI construction snapshot) |
 | `game/UI/ShopWindow.js` | (this branch) | yes (UI construction snapshot) |
 | `game/UI/StubWindow.js` | (this branch) | yes (UI construction snapshot) |
+| `game/Dungeon.js` | (this branch) | yes |
+| `game/UI/HUD.js` | (this branch) | yes |
+| `game/UI/System.js` | (this branch) | yes |
 
 `MagicPlugin.js` lost its prototype defaults in 44f511c but still patches
 `Animation` and `Raycaster` at runtime (objective 3), so it stays in the to-do
@@ -201,15 +204,12 @@ All done.
 
 #### Level 3
 
-| File | Tags | Tests |
-|---|---|---|
-| [ ] `game/Dungeon.js` | P C | no |
+All done.
 
 #### Level 4
 
 | File | Tags | Tests |
 |---|---|---|
-| [ ] `game/UI/HUD.js` | P C | no |
 | [ ] `game/cutscenes/Cutscene.js` | P C | no |
 | [ ] `game/plugins/MagicPlugin.js` | R | no |
 | [ ] `libraries/Raycaster/Engine.js` | P C | no |
@@ -228,9 +228,7 @@ All done.
 
 #### Level 7
 
-| File | Tags | Tests | Notes |
-|---|---|---|---|
-| [ ] `game/UI/System.js` | P C | no | import cycle: `UI.js` imports `System.js`, which imports windows that import `UI.js` |
+All done.
 
 #### Level 8
 
@@ -312,3 +310,17 @@ All done.
   (`Box` without its `_sClass`, `Button` colours set after use) go red. Found
   by grep, not by the snapshot: `InventoryWindow.prototype.aItemOrder`, now
   `static ITEM_ORDER`, with a sort test. 368 tests pass.
+- **2026-10-19**: UI family checked in game: main menu, loading screen,
+  inventory (sort, drop, use, equip), player sheet, item descriptions, books
+  with pictures and pages, shop and buying, brewing with its progress bar,
+  cutscene dialogs, popup messages.
+- **2026-10-19**: `Dungeon`, `HUD` and `System` tested, then migrated
+  (`HUD.POSITIONS` is a shared read-only module constant). `UI.addUIPlugin`
+  no longer patches `System.prototype`: `System.setScreen` looks the
+  controller up in `UI.oPlugins`, which also removes the only import cycle
+  (`UI.js` no longer imports `System.js`). 403 tests pass.
+  Pre-existing bugs found, left as they are: `EffectProcessor.bestowEffect`
+  does not return the effect, so equipped items never record their effects
+  and swapping rings stacks their bonuses (+4, +8, +12...), recorded as an
+  `it.fails` test in `Dungeon.test.mjs`; `Dungeon.isDropStack` calls a
+  `Marker.isMarked` that does not exist (the method is never called).
