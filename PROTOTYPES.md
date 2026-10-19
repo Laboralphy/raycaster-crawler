@@ -272,3 +272,9 @@ Tick a box once the file is migrated and its tests pass.
   an old bug (empty re-aim block in `StealerThinker._follow`, since the
   initial commit), fixed outside the migration along with smarter stealing.
   Not checked yet: casters, healers, sentries, monster spells.
+- **2026-10-19**: ravens steal in game, with the new "A raven stole Gold x 20
+  from you." message.
+- **2026-10-19**: Thinker family fully checked in game: healers (heal beam),
+  sentries (turret stays put), monster spells (witch queen triple confusion
+  shot, acid blob explosion, medusa poison bolt). Casters: no monster uses
+  `CasterThinker`, nothing to test.

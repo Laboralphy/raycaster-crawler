@@ -374,7 +374,7 @@ export const MONSTERS_BLUEPRINTS = {
         "tile": "m_witch_queen",
         "width": 40,
         "height": 64,
-        "thinker": "Shooter",
+        "thinker": "Caster",
         "fx": 0,
         "data": {
             "vitality": 60,
@@ -388,7 +388,15 @@ export const MONSTERS_BLUEPRINTS = {
             "onWound": {
                 "spell": "Reflect",
                 "cooldown": "MEDIUM"
-            }
+            },
+            // se téléporte à travers le joueur jusqu'au mur derrière lui,
+            // puis se retourne (CasterThinker)
+            "casts": [{
+                "spell": "Teleport",
+                "chance": 25,
+                "cooldown": 8000,
+                "time": 400
+            }]
         }
     },
     "m_succubus": {

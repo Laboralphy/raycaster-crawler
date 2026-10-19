@@ -187,6 +187,8 @@ exports[`construction des thinkers > Caster 1`] = `
   "nHazedEffects": 0,
   "nLastFireTime": 0,
   "nNewActionTime": 0,
+  "nProbAttackDodge": 33,
+  "nProbAttackStraf": 40,
   "nSearchingTime": 2500,
   "nWalkingTime": 750,
   "nWanderingTime": 250,
@@ -201,6 +203,7 @@ exports[`construction des thinkers > Caster 1`] = `
   "oGame": null,
   "oInventory": null,
   "oLastAggressor": null,
+  "oMagicCastTimes": {},
   "oMobile": null,
   "oMobileSectors": null,
   "oPulse": {
@@ -209,6 +212,7 @@ exports[`construction des thinkers > Caster 1`] = `
   },
   "oTarget": null,
   "oWeapon": null,
+  "sMagicCast": null,
   "think": "[Function thinkInit]",
 }
 `;

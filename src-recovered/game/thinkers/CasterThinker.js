@@ -1,34 +1,82 @@
 import { MobThinker } from './MobThinker.js';
+import { MAGIC_DATA } from '../data/MAGIC_DATA.js';
+import { MAGIC_DATA_PARAMS } from '../data/MAGIC_DATA_PARAMS.js';
+import { SOUNDS } from '../data/SOUNDS.js';
 import { MathTools } from '../../libraries/Raycaster/Tools/MathTools.js';
 
+/**
+ * Lanceur de sorts : garde ses distances (recule, tourne autour de la cible)
+ * et lance ses sorts.
+ *
+ * Sorts de baguette : 40 % emplacement 0 (attaque immédiate), 30 % emplacement
+ * 1, 20 % emplacement 2, 10 % emplacement 3 ; un emplacement absent de la
+ * baguette se rabat sur l'attaque.
+ *
+ * Sorts de magie (MagicPlugin.spell<Nom>(oMobile), qui agissent sur celui qui
+ * les lance) : dans MONSTERS_BLUEPRINTS, data.casts = [{ spell: 'Teleport',
+ * chance: 25, cooldown: 'MEDIUM', time: 500 }]. À chaque sort, chacun est
+ * tenté avant la baguette : chance en %, cooldown un nom de
+ * MAGIC_DATA_PARAMS.COOLDOWN ou des millisecondes (par défaut la recharge du
+ * sort), time l'incantation en millisecondes (par défaut 0).
+ */
 export class CasterThinker extends MobThinker {
     constructor() {
         super();
-        this.nDodging = 3
+        this.nDodging = 3;
+        this.nProbAttackStraf = 40;
+        this.nProbAttackDodge = 33;
+        this.sMagicCast = null;
+        this.oMagicCastTimes = {}
     }
 
     castSpell() {
-        const n = MathTools.rnd(0, 9);
-        switch (n) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-                this.setAttackMode();
-                break;
-            case 4:
-            case 5:
-            case 6:
-                this.setCastMode(1);
-                break;
-            case 7:
-            case 8:
-                this.setCastMode(2);
-                break;
-            case 9:
-                this.setCastMode(3);
-                break
+        this.sMagicCast = null;
+        if (this.castMagic()) {
+            return
         }
+        const n = MathTools.rnd(0, 9);
+        let iSlot = n < 4 ? 0 : n < 7 ? 1 : n < 9 ? 2 : 3;
+        if (iSlot >= this.aCastTimes.length) {
+            iSlot = 0
+        }
+        if (iSlot === 0) {
+            this.setAttackMode()
+        } else {
+            this.setCastMode(iSlot)
+        }
+    }
+
+    castMagic() {
+        const aCasts = this.oMobile.getData('casts');
+        if (!aCasts) {
+            return false
+        }
+        const nTime = this.oGame.nTimeMs;
+        for (const oCast of aCasts) {
+            const nLast = this.oMagicCastTimes[oCast.spell];
+            if (nLast !== undefined && nTime < nLast + this.getMagicCooldown(oCast)) {
+                continue
+            }
+            if (MathTools.rnd(0, 99) >= oCast.chance) {
+                continue
+            }
+            this.oMagicCastTimes[oCast.spell] = nTime;
+            this.sMagicCast = oCast.spell;
+            this.bAttacking = false;
+            this.nCastingTime = (oCast.time | 0) + 1;
+            this.setNextActionTime(this.nCastingTime);
+            this.think = this.thinkCast;
+            return true
+        }
+        return false
+    }
+
+    getMagicCooldown(oCast) {
+        const x = oCast.cooldown;
+        if (typeof x === 'string') {
+            return MAGIC_DATA_PARAMS.COOLDOWN[x]
+        }
+        return typeof x === 'number' ? x : MAGIC_DATA[oCast.spell].cooldown
     }
 
     _follow(nTime) {
@@ -73,6 +121,16 @@ export class CasterThinker extends MobThinker {
 
     _cast(nTime) {
         this.chaseTarget(this.getTarget());
+        if (this.sMagicCast !== null) {
+            const sSpell = this.sMagicCast;
+            this.sMagicCast = null;
+            const m = this.oMobile;
+            if (this.oGame.oMagicSystem['spell' + sSpell](m)) {
+                this.oGame.sys_playSound(SOUNDS[MAGIC_DATA[sSpell].sound], m.x, m.y)
+            }
+            this.setPursuitMode();
+            return
+        }
         this.oGame.gc_attack(this.oMobile, this.nCastingTime);
         this.setSearchMode()
     }
