@@ -1359,7 +1359,7 @@ export class Game extends Engine {
             case LABY.BLOCK_LABO_CLOSET_Y:
                 rc.setMapXY(x, y, rc.getMapXY(x, y) + 2);
                 c.setAreaBlockProperty(x, y, nBlockCode == LABY.BLOCK_LABO_CLOSET_X ? LABY.BLOCK_LABO_CLOSET_X_OPEN : LABY.BLOCK_LABO_CLOSET_Y_OPEN);
-                this.sys_playSound(SOUNDS.BLOCK_OPENCHEST, xBlock, yBlock);
+                this.sys_playSound(SOUNDS.BLOCK_OPENCLOSET, xBlock, yBlock);
                 if (this.gc_dropLoot(this.oLootData.closet, x, y)) {
                     this.gc_pickup(oMobile)
                 } else {

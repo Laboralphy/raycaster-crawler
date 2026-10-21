@@ -59,7 +59,7 @@ cités dans sa licence) ; jamais « Yamaha Tyros 4 » ni « Timbres of Heaven »
 
 | Ressource | Problème | À faire |
 |---|---|---|
-| Bruitages `resources/snd/ogg/` : `a_*` (portes, coffres, clés…), `atk_*`, `hit_*`, `hit_spell0`, `fx_teleport`, `amb_gloom`, `amb_bubbles*`, `m_*`, `x_death` | origine inconnue | retrouver l'origine, sinon remplacer (sons CC0 : freesound.org filtré CC0, Kenney.nl, OpenGameArt ; ou sons générés) |
+| Bruitages `resources/snd/ogg/` (35 fichiers) : `a_*` (portes, coffres, clés…), `atk_*`, `hit_*`, `hit_spell0`, `fx_teleport`, `amb_gloom`, `amb_bubbles*`, `m_chicken*`, `m_raven`, `x_death` | origine inconnue | retrouver l'origine, sinon remplacer (sons CC0 : freesound.org filtré CC0, Kenney.nl, OpenGameArt ; ou sons générés) |
 | Livre de l'histoire `resources/gfx/books/book_of_story0.png`, `book_of_story1.png`, `book_of_story3.png` | images trouvées il y a plus de 8 ans, origine introuvable | remplacer |
 | Livre de l'histoire `book_of_story2.png` (monstres dans une salle) | ressemble aux monstres POV-Ray du jeu | confirmer que c'est une création de l'auteur |
 | Autres pages de livres `resources/gfx/books/book_*` (sorts, alchimie, clés…) | même style que les icônes | confirmer que ce sont des créations de l'auteur |
