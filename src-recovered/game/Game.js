@@ -21,7 +21,7 @@ import { ICONS } from './data/ICONS.js';
 import { LABY } from './data/LABY.js';
 import { MONSTERS_BLUEPRINTS } from './data/MONSTERS_BLUEPRINTS.js';
 import { MONSTERS_TILES } from './data/MONSTERS_TILES.js';
-import { SOUNDS } from './data/SOUNDS.js';
+import { SOUNDS, soundNames } from './data/SOUNDS.js';
 import { SPELLS_DATA } from './data/SPELLS_DATA.js';
 import { STRINGS } from './data/STRINGS.js';
 import { VERSION_DATA } from './data/VERSION_DATA.js';
@@ -2010,7 +2010,7 @@ export class Game extends Engine {
         const aFiles = [];
         for (const sKey in SOUNDS) {
             if (!sKey.startsWith('MUSIC_')) {
-                [].concat(SOUNDS[sKey]).filter((sFile) => sFile !== '').forEach((sFile) => aFiles.push(this.sys_getSoundPath(sFile)))
+                soundNames(SOUNDS[sKey]).forEach((sFile) => aFiles.push(this.sys_getSoundPath(sFile)))
             }
         }
         return aFiles

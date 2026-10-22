@@ -20,7 +20,7 @@ import { MAGIC } from '../src-recovered/game/data/MAGIC_DATA.js';
 import { MAGIC_DATA_PARAMS } from '../src-recovered/game/data/MAGIC_DATA_PARAMS.js';
 import { SPELLS_DATA } from '../src-recovered/game/data/SPELLS_DATA.js';
 import { BLUEPRINTS_DATA } from '../src-recovered/game/data/BLUEPRINTS_DATA.js';
-import { SOUNDS } from '../src-recovered/game/data/SOUNDS.js';
+import { SOUNDS, soundNames } from '../src-recovered/game/data/SOUNDS.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const { generateLaby, GENERATORS } = createRequire(import.meta.url)('../laby');
@@ -141,6 +141,34 @@ for (const sTile in MONSTERS_TILES) {
     }
 }
 
+// planches de GFX_DATA : l'image contient toutes les images annoncées, et
+// chaque animation reste dans la planche (sinon le sprite clignote ou disparaît)
+function pngSize(sFile) {
+    const b = readFileSync(sFile);
+    return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+}
+for (const sTile in GFX_DATA.tiles) {
+    const t = GFX_DATA.tiles[sTile];
+    const sFile = join(ROOT, t.src);
+    if (!existsSync(sFile)) {
+        err('planche ' + sTile + ' : image absente "' + t.src + '"');
+        continue;
+    }
+    if (!t.src.endsWith('.png') || !t.frames) {
+        continue;
+    }
+    const { w, h } = pngSize(sFile);
+    const nRoom = Math.floor(w / t.width) * Math.floor(h / t.height);
+    if (t.frames > nRoom) {
+        err('planche ' + sTile + ' : ' + t.frames + ' images annoncées, ' + nRoom + ' dans "' + t.src + '" (' + w + '×' + h + ')');
+    }
+    (t.animations || []).forEach((a, i) => {
+        if (a && a[0].some((nStart) => nStart + a[1] > t.frames)) {
+            err('planche ' + sTile + ' : animation ' + i + ' hors de la planche (' + t.frames + ' images)');
+        }
+    });
+}
+
 // objets (data/items/*.json) : l'icône est un nom de ICONS
 for (const sItem in ITEMS) {
     if (typeof ITEMS[sItem].icon === 'string' && !(ITEMS[sItem].icon in ICONS)) {
@@ -178,12 +206,25 @@ for (const sSpell in SPELLS_DATA) {
 }
 
 // sons et musiques : chaque fichier de SOUNDS existe dans resources/snd/ogg
+const checkSound = (sFile, sWhere) => {
+    if (!existsSync(join(ROOT, 'resources', 'snd', 'ogg', sFile + '.ogg'))) {
+        err(sWhere + ' : fichier absent "resources/snd/ogg/' + sFile + '.ogg"');
+    }
+};
 for (const sKey in SOUNDS) {
-    [].concat(SOUNDS[sKey]).filter((s) => s !== '').forEach((sFile) => {
-        if (!existsSync(join(ROOT, 'resources', 'snd', 'ogg', sFile + '.ogg'))) {
-            err('son ' + sKey + ' : fichier absent "resources/snd/ogg/' + sFile + '.ogg"');
-        }
-    });
+    soundNames(SOUNDS[sKey]).forEach((sFile) => checkSound(sFile, 'son ' + sKey));
+}
+// sons des projectiles (BLUEPRINTS_DATA, data.sounds : départ, impact)
+for (const sBP in BLUEPRINTS_DATA) {
+    const d = BLUEPRINTS_DATA[sBP].data;
+    soundNames((d && d.sounds) || []).forEach((sFile) => checkSound(sFile, 'projectile ' + sBP));
+}
+// cri de mort de chaque monstre : une espèce de SOUNDS.DEATH
+for (const sMob in MONSTERS_BLUEPRINTS) {
+    const sDeath = MONSTERS_BLUEPRINTS[sMob].data.death;
+    if (!(sDeath in SOUNDS.DEATH)) {
+        err('monstre ' + sMob + ' : cri de mort inconnu "' + sDeath + '" (SOUNDS.DEATH)');
+    }
 }
 
 // sorts (data/magic/*.json) : durée de recharge, icône et son par leur nom

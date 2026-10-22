@@ -9,6 +9,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rusher",
         "fx": 0,
         "data": {
+            "death": "horror",
             "vitality": 4,
             "speed": 30,
             "weapon": "dag_brass",
@@ -25,6 +26,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rushooter",
         "fx": 0,
         "data": {
+            "death": "horror",
             "vitality": 6,
             "speed": 30,
             "weapon": "wand_myco_1",
@@ -41,6 +43,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rushooter",
         "fx": 0,
         "data": {
+            "death": "horror",
             "vitality": 15,
             "speed": 40,
             "weapon": "wand_myco_1",
@@ -57,6 +60,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rusher",
         "fx": 0,
         "data": {
+            "death": "zombie",
             "vitality": 6,
             "speed": 80,
             "weapon": "dag_brass",
@@ -73,6 +77,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rusher",
         "fx": 0,
         "data": {
+            "death": "goblin",
             "vitality": 5,
             "speed": 100,
             "weapon": "dag_brass",
@@ -89,6 +94,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rusher",
         "fx": 0,
         "data": {
+            "death": "goblin",
             "vitality": 12,
             "speed": 100,
             "weapon": "dag_brass",
@@ -105,6 +111,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rusher",
         "fx": 0,
         "data": {
+            "death": "bones",
             "vitality": 15,
             "speed": 100,
             "weapon": "dag_brass",
@@ -121,6 +128,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rusher",
         "fx": 0,
         "data": {
+            "death": "knight",
             "vitality": 25,
             "speed": 70,
             "weapon": "dag_steel",
@@ -137,6 +145,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rusher",
         "fx": 1,
         "data": {
+            "death": "zombie",
             "vitality": 30,
             "speed": 60,
             "weapon": "dag_steel",
@@ -153,6 +162,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Boomer",
         "fx": 0,
         "data": {
+            "death": "slime",
             "vitality": 10,
             "speed": 80,
             "weapon": "wand_booma_1",
@@ -169,6 +179,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Boomer",
         "fx": 2,
         "data": {
+            "death": "slime",
             "vitality": 10,
             "speed": 80,
             "weapon": "wand_boomf_1",
@@ -185,6 +196,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Dasher",
         "fx": 0,
         "data": {
+            "death": "bug",
             "vitality": 3,
             "speed": 80,
             "weapon": "dag_poisonsting_1",
@@ -201,6 +213,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Stealer",
         "fx": 0,
         "data": {
+            "death": "raven",
             "vitality": 4,
             "speed": 100,
             "weapon": "dag_ravenbeak_1",
@@ -217,6 +230,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Wavedasher",
         "fx": 0,
         "data": {
+            "death": "raven",
             "vitality": 4,
             "speed": 90,
             "weapon": "dag_brass",
@@ -233,6 +247,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rusher",
         "fx": 0,
         "data": {
+            "death": "bug",
             "vitality": 6,
             "speed": 140,
             "weapon": "dag_poisonsting_1",
@@ -249,6 +264,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Shooter",
         "fx": 0,
         "data": {
+            "death": "goblin",
             "vitality": 13,
             "speed": 100,
             "weapon": "wand_imp_1",
@@ -265,6 +281,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Healer",
         "fx": 0,
         "data": {
+            "death": "goblin",
             "vitality": 11,
             "speed": 120,
             "weapon": "wand_imp_1",
@@ -281,6 +298,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Sentry",
         "fx": 0,
         "data": {
+            "death": "machine",
             "vitality": 30,
             "speed": 0,
             "weapon": "wand_turret_1",
@@ -297,6 +315,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rushooter",
         "fx": 0,
         "data": {
+            "death": "machine",
             "vitality": 10,
             "speed": 70,
             "weapon": "wand_cube_1",
@@ -313,6 +332,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Shooter",
         "fx": 0,
         "data": {
+            "death": "shade",
             "vitality": 30,
             "speed": 200,
             "weapon": "wand_imp_1",
@@ -329,6 +349,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Healer",
         "fx": 0,
         "data": {
+            "death": "horror",
             "vitality": 25,
             "speed": 40,
             "weapon": "wand_imp_1",
@@ -345,6 +366,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Shooter",
         "fx": 0,
         "data": {
+            "death": "girl",
             "vitality": 15,
             "speed": 90,
             "weapon": "wand_witch_1",
@@ -361,6 +383,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Shooter",
         "fx": 0,
         "data": {
+            "death": "girl",
             "vitality": 15,
             "speed": 90,
             "weapon": "wand_witch_dark_1",
@@ -377,6 +400,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Caster",
         "fx": 0,
         "data": {
+            "death": "girl",
             "vitality": 60,
             "speed": 90,
             "weapon": "wand_witch_queen_1",
@@ -407,6 +431,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Shooter",
         "fx": 0,
         "data": {
+            "death": "girl",
             "vitality": 25,
             "speed": 110,
             "weapon": "wand_succubus_1",
@@ -423,6 +448,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Shooter",
         "fx": 0,
         "data": {
+            "death": "knight",
             "vitality": 25,
             "speed": 80,
             "weapon": "wand_warlock_1",
@@ -439,6 +465,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Shooter",
         "fx": 0,
         "data": {
+            "death": "knight",
             "vitality": 25,
             "speed": 80,
             "weapon": "wand_warlock_1",
@@ -455,6 +482,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Wavedasher",
         "fx": 0,
         "data": {
+            "death": "fish",
             "vitality": 15,
             "speed": 90,
             "weapon": "dag_brass",
@@ -471,6 +499,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rushooter",
         "fx": 0,
         "data": {
+            "death": "girl",
             "vitality": 15,
             "speed": 40,
             "weapon": "wand_medusa_1",
@@ -487,6 +516,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rusher",
         "fx": 2,
         "data": {
+            "death": "machine",
             "vitality": 300,
             "speed": 160,
             "weapon": "dag_golem",
@@ -503,6 +533,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rusher",
         "fx": 2,
         "data": {
+            "death": "zombie",
             "vitality": 200,
             "speed": 100,
             "weapon": "dag_steel",
@@ -519,6 +550,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rusher",
         "fx": 2,
         "data": {
+            "death": "knight",
             "vitality": 220,
             "speed": 100,
             "weapon": "dag_steel",
@@ -535,6 +567,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Shooter",
         "fx": 2,
         "data": {
+            "death": "knight",
             "vitality": 200,
             "speed": 100,
             "weapon": "wand_warlock_1",
@@ -551,6 +584,7 @@ export const MONSTERS_BLUEPRINTS = {
         "thinker": "Rushooter",
         "fx": 2,
         "data": {
+            "death": "girl",
             "vitality": 200,
             "speed": 50,
             "weapon": "wand_medusa_1",

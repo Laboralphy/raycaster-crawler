@@ -81,13 +81,22 @@ export class MagicMissileThinker extends MissileThinker {
         super.fire(oMobile)
     }
 
+    // rebond sur la direction de vol : un projectile ne glisse pas le long des
+    // murs, le choc a donc annulé xSpeed et ySpeed ; et oWallCollision ne dit
+    // pas toujours de quel côté est le mur (il ne retient que le point de
+    // contrôle touché, dont le décalage sur cet axe peut être nul). On regarde
+    // donc juste après le bord du projectile, axe par axe, vers où il va.
     bump() {
-        let dx = this.oMobile.xSpeed;
-        let dy = this.oMobile.ySpeed;
-        if (this.oMobile.oWallCollision.x) {
+        const m = this.oMobile;
+        let dx = Math.cos(m.fTheta);
+        let dy = Math.sin(m.fTheta);
+        const nReach = m.nSize + 1;
+        const bWallX = Math.sign(dx) !== 0 && !!m.oRaycaster.clip(m.x + Math.sign(dx) * nReach, m.y, 1);
+        const bWallY = Math.sign(dy) !== 0 && !!m.oRaycaster.clip(m.x, m.y + Math.sign(dy) * nReach, 1);
+        if (bWallX || !bWallY) {
             dx = -dx
         }
-        if (this.oMobile.oWallCollision.y) {
+        if (bWallY || !bWallX) {
             dy = -dy
         }
         this.oMobile.fTheta = Math.atan2(dy, dx);
@@ -133,6 +142,11 @@ export class MagicMissileThinker extends MissileThinker {
     extinct() {
         if (this.bAoE) {
             this.boom();
+            this.explode()
+        } else if (this.bBump) {
+            // un projectile qui rebondit ne touche jamais de mur : il explose
+            // au bout de sa portée au lieu de disparaître
+            this.oMobile.oMobileCollision = null;
             this.explode()
         } else {
             super.extinct()

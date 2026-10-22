@@ -364,7 +364,7 @@ export class CutsceneIntro extends Cutscene {
     }
 
     eventWarlockAttacks() {
-        this.oCutscene.onSoundEvent('hit_spell0');
+        this.oCutscene.onSoundEvent('spells/hit_spell0');
         this.oCutscene.setActorMove(2, null, null, null, null, null, 5, 1, this.oCutscene.doStandAnimation);
         this.oCutscene.setActorMove(8, 8, 8.1, 0, 0, 0, 0, 0);
         this.oCutscene.setActorMove(7, 8, 8, 0, 0, 0, 0, 0);
@@ -373,7 +373,7 @@ export class CutsceneIntro extends Cutscene {
     }
 
     eventBookToWarlock() {
-        this.oCutscene.onSoundEvent('m_chicken0');
+        this.oCutscene.onSoundEvent('creatures/m_chicken0');
         this.oCutscene.setActorNonLinearMove(9, 8, 8, 0, 10, 8, 64, 0, this.oCutscene.doVanish);
         this.oCutscene.setCameraMove(null, null, null, 0, 0, 25, this.oCutscene.eventWarlockLaughter)
     }
@@ -396,7 +396,7 @@ export class CutsceneIntro extends Cutscene {
     }
 
     eventChickenRuns() {
-        this.oCutscene.onSoundEvent('m_chicken1');
+        this.oCutscene.onSoundEvent('creatures/m_chicken1');
         this.oCutscene.setActorMove(7, null, null, null, -1, 0, 64, 3);
         this.oCutscene.setActorMove(5, null, null, null, -1.5, 1, 15, 1, this.oCutscene.doStandAnimation);
         this.oCutscene.wait(15, this.oCutscene.eventChickenRuns2)
@@ -409,7 +409,7 @@ export class CutsceneIntro extends Cutscene {
 
     eventAdvBack() {
         this.oCutscene.onMusicEvent('MUSIC_INTRO_REVENGE');
-        this.oCutscene.onSoundEvent('hit_spell0');
+        this.oCutscene.onSoundEvent('spells/hit_spell0');
         this.oCutscene.setActorMove(8, 7, 8.1, 0, 0, 0, 100, 0);
         this.oCutscene.setActorMove(7, null, 3);
         this.oCutscene.setActorMove(1, 7, 8, 0.8 * PI, 0, 0, 0, 0);

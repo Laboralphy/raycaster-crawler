@@ -221,57 +221,57 @@ export const GFX_DATA = {
         },
         p_firebolt: {
             src: 'resources/gfx/sprites/p_firebolt.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 11,
+            frames: 40,
             animations: [
                 [
-                    [8, 8, 8, 8, 8, 8, 8, 8], 3, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 8, 70, 0
                 ],
                 [
-                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 1, 0
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 80, 1
                 ]
             ]
         },
         p_fireball: {
             src: 'resources/gfx/sprites/p_fireball.png',
-            width: 50,
+            width: 64,
             height: 64,
-            frames: 20,
+            frames: 40,
             animations: [
                 [
-                    [16, 16, 16, 16, 16, 16, 16, 16], 4, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 8, 70, 0
                 ],
                 [
-                    [8, 10, 12, 14, 0, 2, 4, 6], 2, 100, 1
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 80, 1
                 ]
             ]
         },
         p_toxicbolt: {
             src: 'resources/gfx/sprites/p_toxicbolt.png',
-            width: 50,
+            width: 64,
             height: 64,
-            frames: 20,
+            frames: 40,
             animations: [
                 [
-                    [16, 16, 16, 16, 16, 16, 16, 16], 4, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 8, 70, 0
                 ],
                 [
-                    [8, 10, 12, 14, 0, 2, 4, 6], 2, 100, 1
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 90, 1
                 ]
             ]
         },
         p_toxicspit: {
             src: 'resources/gfx/sprites/p_toxicspit.png',
             width: 64,
-            height: 56,
-            frames: 7,
+            height: 64,
+            frames: 40,
             animations: [
                 [
-                    [2, 2, 2, 2, 2, 2, 2, 2], 3, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 8, 70, 0
                 ],
                 [
-                    [0, 0, 0, 0, 0, 0, 0, 0], 2, 200, 1
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 90, 1
                 ]
             ]
         },
@@ -279,209 +279,209 @@ export const GFX_DATA = {
             src: 'resources/gfx/sprites/p_thunbolt.png',
             width: 64,
             height: 96,
-            frames: 15,
+            frames: 31,
             animations: [
                 [
-                    [10, 10, 10, 10, 10, 10, 10, 10], 5, 100, 0
+                    [24, 24, 24, 24, 24, 24, 24, 24], 7, 50, 0
                 ],
                 [
-                    [0, 0, 0, 0, 0, 0, 0, 0], 8, 50, 1
+                    [0, 0, 0, 0, 0, 0, 0, 0], 24, 50, 1
                 ]
             ]
         },
         p_magbolt: {
             src: 'resources/gfx/sprites/p_magbolt.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 14,
+            frames: 39,
             animations: [
                 [
-                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 7, 60, 0
                 ],
                 [
-                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 60, 1
                 ]
             ]
         },
         p_prisma_red: {
             src: 'resources/gfx/sprites/p_prisma_red.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 14,
+            frames: 39,
             animations: [
                 [
-                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 7, 60, 0
                 ],
                 [
-                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 60, 1
                 ]
             ]
         },
         p_prisma_orange: {
             src: 'resources/gfx/sprites/p_prisma_orange.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 14,
+            frames: 39,
             animations: [
                 [
-                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 7, 60, 0
                 ],
                 [
-                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 60, 1
                 ]
             ]
         },
         p_prisma_yellow: {
             src: 'resources/gfx/sprites/p_prisma_yellow.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 14,
+            frames: 39,
             animations: [
                 [
-                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 7, 60, 0
                 ],
                 [
-                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 60, 1
                 ]
             ]
         },
         p_prisma_green: {
             src: 'resources/gfx/sprites/p_prisma_green.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 14,
+            frames: 39,
             animations: [
                 [
-                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 7, 60, 0
                 ],
                 [
-                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 60, 1
                 ]
             ]
         },
         p_prisma_blue: {
             src: 'resources/gfx/sprites/p_prisma_blue.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 14,
+            frames: 39,
             animations: [
                 [
-                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 7, 60, 0
                 ],
                 [
-                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 60, 1
                 ]
             ]
         },
         p_prisma_purple: {
             src: 'resources/gfx/sprites/p_prisma_purple.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 14,
+            frames: 39,
             animations: [
                 [
-                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 7, 60, 0
                 ],
                 [
-                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 60, 1
                 ]
             ]
         },
         p_prisma_magenta: {
             src: 'resources/gfx/sprites/p_prisma_magenta.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 14,
+            frames: 39,
             animations: [
                 [
-                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 7, 60, 0
                 ],
                 [
-                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 60, 1
                 ]
             ]
         },
         p_shadbolt: {
             src: 'resources/gfx/sprites/p_shadbolt.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 14,
+            frames: 40,
             animations: [
                 [
-                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 8, 70, 0
                 ],
                 [
-                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 0, 0
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 70, 1
                 ]
             ]
         },
         p_healbolt: {
             src: 'resources/gfx/sprites/p_healbolt.png',
-            width: 48,
-            height: 64,
-            frames: 14,
+            width: 64,
+            height: 96,
+            frames: 10,
             animations: [
                 [
-                    [8, 8, 8, 8, 8, 8, 8, 8], 6, 100, 0
+                    [6, 6, 6, 6, 6, 6, 6, 6], 4, 40, 0
                 ],
                 [
-                    [4, 5, 6, 7, 0, 1, 2, 3], 1, 50, 0
+                    [0, 0, 0, 0, 0, 0, 0, 0], 6, 70, 1
                 ]
             ]
         },
         p_icebolt: {
             src: 'resources/gfx/sprites/p_icebolt.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 30,
+            frames: 40,
             animations: [
                 [
-                    [24, 24, 24, 24, 24, 24, 24, 24], 6, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 8, 60, 0
                 ],
                 [
-                    [12, 15, 18, 21, 0, 3, 6, 9], 3, 150, 1
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 50, 1
                 ]
             ]
         },
         p_medbolt: {
             src: 'resources/gfx/sprites/p_medbolt.png',
-            width: 48,
+            width: 64,
             height: 64,
-            frames: 30,
+            frames: 40,
             animations: [
                 [
-                    [24, 24, 24, 24, 24, 24, 24, 24], 6, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 8, 60, 0
                 ],
                 [
-                    [12, 15, 18, 21, 0, 3, 6, 9], 3, 150, 1
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 50, 1
                 ]
             ]
         },
         p_lightbolt: {
             src: 'resources/gfx/sprites/p_lightbolt.png',
             width: 64,
-            height: 96,
-            frames: 6,
+            height: 64,
+            frames: 56,
             animations: [
                 [
-                    [4, 4, 4, 4, 4, 4, 4, 4], 3, 100, 0
+                    [48, 48, 48, 48, 48, 48, 48, 48], 8, 60, 0
                 ],
                 [
-                    [0, 0, 0, 0, 0, 0, 0, 0], 3, 50, 1
+                    [0, 6, 12, 18, 24, 30, 36, 42], 6, 40, 1
                 ]
             ]
         },
         p_iceball: {
             src: 'resources/gfx/sprites/p_iceball.png',
             width: 64,
-            height: 80,
-            frames: 5,
+            height: 64,
+            frames: 39,
             animations: [
                 [
-                    [1, 1, 1, 1, 1, 1, 1, 1], 4, 100, 0
+                    [32, 32, 32, 32, 32, 32, 32, 32], 7, 60, 0
                 ],
                 [
-                    [0, 0, 0, 0, 0, 0, 0, 0], 1, 1, 0
+                    [0, 4, 8, 12, 16, 20, 24, 28], 4, 60, 1
                 ]
             ]
         },

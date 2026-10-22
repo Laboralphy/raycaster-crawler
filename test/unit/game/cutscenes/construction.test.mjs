@@ -200,7 +200,7 @@ describe('CutsceneIntro : musique en trois parties', () => {
         const { c, camera } = scene();
         c.eventAdvBack.call(camera);
         expect(c.onMusicEvent).toHaveBeenCalledWith('MUSIC_INTRO_REVENGE');
-        expect(c.onSoundEvent).toHaveBeenCalledWith('hit_spell0');
+        expect(c.onSoundEvent).toHaveBeenCalledWith('spells/hit_spell0');
     });
 
     it('aucun autre évènement ne change la musique', () => {

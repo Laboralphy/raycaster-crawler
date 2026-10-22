@@ -1,14 +1,30 @@
 export const SOUNDS = {
-    DOOR_OPEN: ['a_drawstrt', 'a_drawchain', 'a_pushston'],
-    DOOR_CLOSE: ['a_doorstop', '', ''],
-    DOOR_LOCKED: 'a_locked',
-    DOOR_UNLOCKED: 'a_unlock',
-    BLOCK_GETKEY: 'a_key',
-    BLOCK_OPENCHEST: 'a_chest',
-    BLOCK_OPENCLOSET: 'a_closet',
-    ITEM_TAKE: 'a_take',
-    WATER_SPLASH: 'a_splash',
+    DOOR_OPEN: ['open-close-doors-containers/a_drawstrt', 'open-close-doors-containers/a_drawchain', 'open-close-doors-containers/a_pushston'],
+    DOOR_CLOSE: ['open-close-doors-containers/a_doorstop', '', ''],
+    DOOR_LOCKED: 'open-close-doors-containers/a_locked',
+    DOOR_UNLOCKED: 'open-close-doors-containers/a_unlock',
+    BLOCK_GETKEY: 'pick-items/a_key',
+    BLOCK_OPENCHEST: 'open-close-doors-containers/a_chest',
+    BLOCK_OPENCLOSET: 'open-close-doors-containers/a_closet',
+    ITEM_TAKE: 'pick-items/a_take',
+    WATER_SPLASH: 'nature/water/a_splash',
     FOE_SLAIN: 'x_death',
+    // cris de mort par espèce (data.death des monstres), un au hasard ;
+    // FOE_SLAIN sert aux monstres sans espèce
+    DEATH: {
+        bones: ['creatures/x_death_bones0'],
+        bug: ['creatures/x_death_bug0', 'creatures/x_death_bug1', 'creatures/x_death_bug2'],
+        fish: ['creatures/x_death_fish0', 'creatures/x_death_fish1'],
+        girl: ['creatures/x_death_girl0', 'creatures/x_death_girl1', 'creatures/x_death_girl2'],
+        goblin: ['creatures/x_death_goblin0', 'creatures/x_death_goblin1', 'creatures/x_death_goblin2'],
+        horror: ['creatures/x_death_horror0', 'creatures/x_death_horror1', 'creatures/x_death_horror2'],
+        knight: ['creatures/x_death_knight0', 'creatures/x_death_knight1', 'creatures/x_death_knight2'],
+        machine: ['creatures/x_death_machine0'],
+        raven: ['creatures/x_death_raven1', 'creatures/x_death_raven2'],
+        shade: ['creatures/x_death_shade0', 'creatures/x_death_shade1', 'creatures/x_death_shade2'],
+        slime: ['creatures/x_death_slime0'],
+        zombie: ['creatures/x_death_zombie0', 'creatures/x_death_zombie1', 'creatures/x_death_zombie2']
+    },
     // musiques MIDI de tools/music/midi, rendues avec GeneralUser GS (render.sh)
     MUSIC_MENU: ['mus_main_menu'],
     MUSIC_FOREST: ['mus_forest_night'],
@@ -25,8 +41,17 @@ export const SOUNDS = {
     MUSIC_INTRO_AMBUSH: 'mus_intro_ambush',
     MUSIC_INTRO_REVENGE: 'mus_intro_revenge',
     MUSIC_END: 'mus_ending_triumph',
-    AMB_BUBBLES: ['amb_bubbles0', 'amb_bubbles1', 'amb_bubbles2', 'amb_bubbles3'],
-    SPELL_0: 'hit_spell0',
-    SPELL_1: 'amb_gloom',
-    FX_TELEPORT: 'fx_teleport'
+    AMB_BUBBLES: ['nature/water/amb_bubbles0', 'nature/water/amb_bubbles1', 'nature/water/amb_bubbles2', 'nature/water/amb_bubbles3'],
+    SPELL_0: 'spells/hit_spell0',
+    SPELL_1: 'spells/hit_spell0',
+    FX_TELEPORT: 'spells/fx_teleport'
 };
+
+/**
+ * Les fichiers d'une entrée de SOUNDS : un nom, une liste de variantes ou une
+ * table de listes (DEATH) ; les noms vides (pas de son) sont écartés.
+ */
+export function soundNames(xSound) {
+    const aNames = typeof xSound === 'object' && !Array.isArray(xSound) ? Object.values(xSound).flat() : [].concat(xSound);
+    return aNames.filter((s) => s !== '');
+}

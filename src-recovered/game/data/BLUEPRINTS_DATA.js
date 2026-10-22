@@ -132,8 +132,9 @@ export const BLUEPRINTS_DATA = {
         height: 1,
         thinker: 'MagicMissile',
         fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_fire', 'hit_fire'],
+            sounds: ['spells/atk_fire', 'spells/hit_fire'],
             speed: 180,
             steps: 4,
             range: 30
@@ -146,8 +147,9 @@ export const BLUEPRINTS_DATA = {
         height: 1,
         thinker: 'MagicMissile',
         fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_fire', 'hit_fire'],
+            sounds: ['spells/atk_fire', 'spells/hit_fire'],
             speed: 180,
             steps: 4,
             range: 30
@@ -159,9 +161,10 @@ export const BLUEPRINTS_DATA = {
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
-        fx: 0,
+        fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_toxic', 'hit_toxic'],
+            sounds: ['spells/atk_toxic', 'spells/hit_acid'],
             speed: 180,
             steps: 4,
             range: 30
@@ -173,9 +176,10 @@ export const BLUEPRINTS_DATA = {
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
-        fx: 0,
+        fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_toxic', 'hit_toxic'],
+            sounds: ['spells/atk_toxic', 'spells/hit_acid'],
             speed: 80,
             steps: 4,
             range: 16
@@ -189,7 +193,7 @@ export const BLUEPRINTS_DATA = {
         thinker: 'MagicMissile',
         fx: 2,
         data: {
-            sounds: ['atk_elec', 'hit_elec'],
+            sounds: ['spells/atk_elec', 'spells/hit_elec'],
             speed: 180,
             steps: 4,
             range: 30
@@ -198,13 +202,14 @@ export const BLUEPRINTS_DATA = {
     p_magbolt: {
         type: RC.OBJECT_TYPE_MISSILE,
         tile: 'p_magbolt',
-        sounds: ['atk_magic', 'hit_magic'],
+        sounds: ['spells/atk_magic', 'spells/hit_magic'],
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
         fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_magic', 'hit_magic'],
+            sounds: ['spells/atk_magic', 'spells/hit_magic'],
             speed: 180,
             steps: 4,
             range: 30
@@ -213,13 +218,14 @@ export const BLUEPRINTS_DATA = {
     p_prisma_red: {
         type: RC.OBJECT_TYPE_MISSILE,
         tile: 'p_prisma_red',
-        sounds: ['atk_magic', 'hit_magic'],
+        sounds: ['spells/atk_magic', 'spells/hit_magic'],
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
         fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_magic', 'hit_magic'],
+            sounds: ['spells/atk_magic', 'spells/hit_magic'],
             speed: 180,
             steps: 4,
             range: 30
@@ -228,13 +234,14 @@ export const BLUEPRINTS_DATA = {
     p_prisma_orange: {
         type: RC.OBJECT_TYPE_MISSILE,
         tile: 'p_prisma_orange',
-        sounds: ['atk_magic', 'hit_magic'],
+        sounds: ['spells/atk_magic', 'spells/hit_magic'],
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
         fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_magic', 'hit_magic'],
+            sounds: ['spells/atk_magic', 'spells/hit_magic'],
             speed: 180,
             steps: 4,
             range: 30
@@ -243,13 +250,14 @@ export const BLUEPRINTS_DATA = {
     p_prisma_yellow: {
         type: RC.OBJECT_TYPE_MISSILE,
         tile: 'p_prisma_yellow',
-        sounds: ['atk_magic', 'hit_magic'],
+        sounds: ['spells/atk_magic', 'spells/hit_magic'],
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
         fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_magic', 'hit_magic'],
+            sounds: ['spells/atk_magic', 'spells/hit_magic'],
             speed: 180,
             steps: 4,
             range: 30
@@ -258,13 +266,14 @@ export const BLUEPRINTS_DATA = {
     p_prisma_green: {
         type: RC.OBJECT_TYPE_MISSILE,
         tile: 'p_prisma_green',
-        sounds: ['atk_magic', 'hit_magic'],
+        sounds: ['spells/atk_magic', 'spells/hit_magic'],
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
         fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_magic', 'hit_magic'],
+            sounds: ['spells/atk_magic', 'spells/hit_magic'],
             speed: 180,
             steps: 4,
             range: 30
@@ -273,13 +282,14 @@ export const BLUEPRINTS_DATA = {
     p_prisma_blue: {
         type: RC.OBJECT_TYPE_MISSILE,
         tile: 'p_prisma_blue',
-        sounds: ['atk_magic', 'hit_magic'],
+        sounds: ['spells/atk_magic', 'spells/hit_magic'],
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
         fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_magic', 'hit_magic'],
+            sounds: ['spells/atk_magic', 'spells/hit_magic'],
             speed: 180,
             steps: 4,
             range: 30
@@ -288,13 +298,14 @@ export const BLUEPRINTS_DATA = {
     p_prisma_purple: {
         type: RC.OBJECT_TYPE_MISSILE,
         tile: 'p_prisma_purple',
-        sounds: ['atk_magic', 'hit_magic'],
+        sounds: ['spells/atk_magic', 'spells/hit_magic'],
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
         fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_magic', 'hit_magic'],
+            sounds: ['spells/atk_magic', 'spells/hit_magic'],
             speed: 180,
             steps: 4,
             range: 30
@@ -303,13 +314,14 @@ export const BLUEPRINTS_DATA = {
     p_prisma_magenta: {
         type: RC.OBJECT_TYPE_MISSILE,
         tile: 'p_prisma_magenta',
-        sounds: ['atk_magic', 'hit_magic'],
+        sounds: ['spells/atk_magic', 'spells/hit_magic'],
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
         fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_magic', 'hit_magic'],
+            sounds: ['spells/atk_magic', 'spells/hit_magic'],
             speed: 180,
             steps: 4,
             range: 30
@@ -321,9 +333,10 @@ export const BLUEPRINTS_DATA = {
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
-        fx: 0,
+        fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_magic', 'hit_magic'],
+            sounds: ['spells/atk_magic', 'spells/hit_magic'],
             speed: 180,
             steps: 4,
             range: 30
@@ -335,9 +348,9 @@ export const BLUEPRINTS_DATA = {
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
-        fx: 0,
+        fx: 2,
         data: {
-            sounds: ['atk_magic', 'hit_magic'],
+            sounds: ['spells/atk_magic', 'spells/hit_magic'],
             speed: 180,
             steps: 4,
             range: 30
@@ -351,7 +364,7 @@ export const BLUEPRINTS_DATA = {
         thinker: 'MagicMissile',
         fx: 0,
         data: {
-            sounds: ['atk_exp', 'hit_toxic'],
+            sounds: ['spells/atk_exp', 'spells/hit_acid'],
             speed: 20,
             steps: 1,
             range: 0
@@ -365,7 +378,7 @@ export const BLUEPRINTS_DATA = {
         thinker: 'MagicMissile',
         fx: 0,
         data: {
-            sounds: ['atk_exp', 'hit_fire'],
+            sounds: ['spells/atk_exp', 'spells/hit_fire'],
             speed: 20,
             steps: 1,
             range: 0
@@ -377,9 +390,10 @@ export const BLUEPRINTS_DATA = {
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
-        fx: 0,
+        fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_ice', 'hit_ice'],
+            sounds: ['spells/atk_ice', 'spells/hit_ice'],
             speed: 180,
             steps: 4,
             range: 30
@@ -392,10 +406,11 @@ export const BLUEPRINTS_DATA = {
         height: 1,
         thinker: 'MagicMissile',
         fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_ice', 'hit_ice'],
-            speed: 100,
-            steps: 3,
+            sounds: ['spells/atk_ice', 'spells/hit_ice'],
+            speed: 180,
+            steps: 4,
             range: 30
         }
     },
@@ -406,8 +421,9 @@ export const BLUEPRINTS_DATA = {
         height: 1,
         thinker: 'MagicMissile',
         fx: 1,
+        elevation: 38,
         data: {
-            sounds: ['atk_magic', 'hit_magic'],
+            sounds: ['spells/atk_magic', 'spells/hit_magic'],
             speed: 180,
             steps: 4,
             range: 30
@@ -419,9 +435,10 @@ export const BLUEPRINTS_DATA = {
         width: 1,
         height: 1,
         thinker: 'MagicMissile',
-        fx: 0,
+        fx: 2,
+        elevation: 38,
         data: {
-            sounds: ['atk_ice', 'hit_ice'],
+            sounds: ['spells/atk_ice', 'spells/hit_ice'],
             speed: 150,
             steps: 4,
             range: 30
@@ -435,7 +452,7 @@ export const BLUEPRINTS_DATA = {
         thinker: 'MagicMissile',
         fx: 0,
         data: {
-            sounds: ['atk_dag', 'hit_dag'],
+            sounds: ['weapons/atk_dag', 'weapons/hit_dag'],
             speed: 180,
             steps: 4,
             range: 1

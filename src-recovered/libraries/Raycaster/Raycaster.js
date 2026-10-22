@@ -896,7 +896,11 @@ export class Raycaster {
     }
 
     /** Place un sprite 386 (pris dans la réserve) pour cette image. */
-    pushSprite(oTile, x, y, nFrame, nFx) {
+    /**
+     * nElevation : hauteur du centre du sprite au-dessus du sol, en texels ;
+     * null le laisse au centre de l'image, à mi-mur (hauteur des yeux)
+     */
+    pushSprite(oTile, x, y, nFrame, nFx, nElevation = null) {
         const ts = this.getTileSet(oTile);
         if (ts === null) {
             return
@@ -916,6 +920,7 @@ export class Raycaster {
         s.setTileSet(ts);
         s.x = x;
         s.y = y;
+        s.h = nElevation === null ? 0 : nElevation - (this.yTexture >> 1);
         s.flags = nFx;
         s.scale = SPRITE_SCALE / oTile.nScale;
         s.visible = true;
@@ -938,7 +943,7 @@ export class Raycaster {
         oSprite.setDirection(((8 * fAngle1 / (2 * PI)) | 0) & 7);
         oSprite.animate(this.TIME_FACTOR);
         const nSFx = oSprite.oBlueprint.nFx | (oSprite.bTranslucent ? (oSprite.nAlpha << 2) : 0);
-        this.pushSprite(oTile, oMobile.x, oMobile.y, oSprite.nFrame, nSFx);
+        this.pushSprite(oTile, oMobile.x, oMobile.y, oSprite.nFrame, nSFx, oSprite.oBlueprint.nElevation);
         const oOL = oSprite.oOverlay;
         if (oOL) {
             // l'ancien moteur dessinait la surcouche juste devant le sprite :

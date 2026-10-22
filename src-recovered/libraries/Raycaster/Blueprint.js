@@ -7,6 +7,8 @@ export class Blueprint {
         this.nPhysHeight = 0;
         this.sThinker = '';
         this.nFx = 0;
+        // hauteur du centre du sprite au-dessus du sol (texels), null = à hauteur des yeux
+        this.nElevation = null;
         this.oXData = null;
         if (oData !== undefined) {
             this.nPhysWidth = oData.width;
@@ -14,6 +16,7 @@ export class Blueprint {
             this.sThinker = oData.thinker;
             this.nFx = oData.fx;
             this.nType = oData.type;
+            this.nElevation = oData.elevation ?? null;
             if ('data' in oData) {
                 this.oXData = oData.data
             } else {

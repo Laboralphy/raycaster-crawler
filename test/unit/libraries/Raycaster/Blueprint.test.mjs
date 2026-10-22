@@ -6,7 +6,7 @@ describe('Blueprint', () => {
     it('a des valeurs par défaut sans données', () => {
         assertDefaults(new Blueprint(), {
             sId: '', nType: 0, oTile: null, nPhysWidth: 0, nPhysHeight: 0,
-            sThinker: '', nFx: 0, oXData: null
+            sThinker: '', nFx: 0, nElevation: null, oXData: null
         });
     });
 
@@ -27,5 +27,10 @@ describe('Blueprint', () => {
         const b = new Blueprint({ width: 1, height: 1, thinker: null, fx: 0, type: 1 });
         expect(b.oXData).toEqual({});
         expect(b.oXData).not.toBe(new Blueprint({ type: 1 }).oXData);
+    });
+
+    it('lit la hauteur du centre du sprite au-dessus du sol', () => {
+        expect(new Blueprint({ width: 1, height: 1, fx: 0, type: 4, elevation: 24 }).nElevation).toBe(24);
+        expect(new Blueprint({ width: 1, height: 1, fx: 0, type: 4 }).nElevation).toBe(null);
     });
 });
