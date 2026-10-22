@@ -454,7 +454,8 @@ export const LOOT_DATA = {
         },
         items: {
             ccc_h2o: 5,
-            ccc_herb1: 9,
+            ccc_herb0: 9,
+            ccc_herb1: 5,
             ccc_herb2: 3,
             pot_luck_1: 1,
             pot_antidote: 2,

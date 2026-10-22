@@ -1,97 +1,97 @@
-# Ressources du jeu — origines et licences
+# Game assets — origins and licenses
 
-Ce que le jeu livre (images, sons, musiques, polices), d'où ça vient et sous
-quelle licence. Tout ce qui est livré doit pouvoir être **redistribué dans un
-jeu publié** (itch.io, Steam, jeu gratuit) : une ressource d'origine ou de
-licence inconnue est interdite tant qu'elle n'est pas vérifiée.
+What the game ships (images, sounds, music, fonts), where it comes from and
+under which license. Everything shipped must be **redistributable in a
+published game** (itch.io, Steam, free game): an asset of unknown origin or
+license is forbidden until it has been checked.
 
-Ce qui a été fait avec l'IA, et les cases à cocher sur les plateformes, est
-dans `AI_DISCLOSURE.md`.
+What was made with AI, and the boxes to tick on the platforms, is in
+`AI_DISCLOSURE.md`.
 
-État au 22 octobre 2026.
+Status as of October 22, 2026.
 
-## Ressources de tiers
+## Third-party assets
 
-Les seules ressources du jeu qui ne sont pas de l'auteur.
+The only assets in the game that are not the author's.
 
-| Ressource | Où dans le jeu | Auteur, source | Licence | Obligation |
+| Asset | Where in the game | Author, source | License | Obligation |
 |---|---|---|---|---|
-| Banque de sons **GeneralUser GS v1.471** | ses échantillons sont dans toutes les musiques `resources/snd/ogg/mus_*.ogg` (rendu des partitions) | S. Christian Collins, https://schristiancollins.com/generaluser.php | libre, y compris pour un usage commercial de la musique produite | aucune ; licence à relire (voir plus bas) |
-| Portraits muraux `resources/gfx/textures/d_pictures.png` | tableaux sur les murs | artistes de Dungeon Crawl Stone Soup, [OpenGameArt](https://opengameart.org/content/dungeon-crawl-32x32-tiles) ; mis en cadre par nous | CC0 (vérifié sur la page et dans le README du paquet) | aucune (crédit facultatif, présent dans `credits.html`) |
-| Cris de mort des monstres `resources/snd/ogg/creatures/x_death_*.ogg` (28 fichiers) | mort des monstres | [OpenGameArt](https://opengameart.org) | CC0 | aucune (crédit facultatif) |
-| Police **UnifrakturMaguntia** | dessinée dans le logo `title_128.png` (pas livrée en fichier) | projet Unifraktur, https://fonts.google.com/specimen/UnifrakturMaguntia | SIL OFL 1.1 | aucune pour une image tirée de la police |
+| Sound bank **GeneralUser GS v1.471** | its samples are in all the music tracks `resources/snd/ogg/mus_*.ogg` (score rendering) | S. Christian Collins, https://schristiancollins.com/generaluser.php | free, including commercial use of the music produced | none; license to be re-read (see below) |
+| Wall portraits `resources/gfx/textures/d_pictures.png` | paintings on the walls | Dungeon Crawl Stone Soup artists, [OpenGameArt](https://opengameart.org/content/dungeon-crawl-32x32-tiles); framed by us | CC0 (checked on the page and in the package README) | none (credit optional, present in `credits.html`) |
+| Monster death cries `resources/snd/ogg/creatures/x_death_*.ogg` (28 files) | monster deaths | [OpenGameArt](https://opengameart.org) | CC0 | none (credit optional) |
+| Sound effect `resources/snd/ogg/pick-items/a_take.ogg` | picking up an item | [OpenGameArt](https://opengameart.org) | CC0 | none (credit optional) |
+| Font **UnifrakturMaguntia** | drawn into the logo `title_128.png` (not shipped as a file) | Unifraktur project, https://fonts.google.com/specimen/UnifrakturMaguntia | SIL OFL 1.1 | none for an image made from the font |
 
-## Créations de l'auteur
+## The author's creations
 
-Tout le reste, sauf ce qui est listé dans « À régler » :
+Everything else, except what is listed in "To settle":
 
-- sprites des monstres et des objets (`resources/gfx/sprites/`), modélisés et
-  rendus avec POV-Ray (les projectiles `p_*` avec le générateur de sprites
-  de l'auteur, projet `raytracing-sprite-generator`) ; torche
-  `o_torch_1.png` reprise du projet « mansion » ;
-- textures des murs et des sols (`resources/gfx/textures/t_*`, `f_*`),
-  dessinées avec OpenOffice Draw et assemblées avec GIMP, sauf les thèmes
-  crypte et gothique (voir plus bas) ;
-- icônes du jeu (`resources/gfx/icons/icons.png` : objets de l'inventaire,
-  armes, sorts, effets), sauf celle du rayon prismatique, et chiffres du HUD
-  (`digits.png`), dessinés par l'auteur avec OpenOffice Draw ;
-- images des livres (`resources/gfx/books/`) : dessins OpenOffice Draw de
-  l'auteur, et pour le bestiaire (`book_m_*`, `zombie_attack_front-left.png`)
-  des compositions d'images des sprites POV-Ray des monstres du jeu ; sauf
-  `book_spells_prisma.png` (script, voir plus bas) et les images de
-  l'histoire listées dans « À régler » ;
-- bruitages des portes, coffres, armoires et clés
+- monster and item sprites (`resources/gfx/sprites/`), modeled and
+  rendered with POV-Ray (the `p_*` projectiles with the author's sprite
+  generator, project `raytracing-sprite-generator`); torch
+  `o_torch_1.png` taken from the "mansion" project;
+- wall and floor textures (`resources/gfx/textures/t_*`, `f_*`),
+  drawn with OpenOffice Draw and assembled with GIMP, except the crypt and
+  gothic themes (see below);
+- game icons (`resources/gfx/icons/icons.png`: inventory items, weapons,
+  spells, effects), except the prismatic ray icon, and HUD digits
+  (`digits.png`), drawn by the author with OpenOffice Draw;
+- book images (`resources/gfx/books/`): the author's OpenOffice Draw
+  drawings, and for the bestiary (`book_m_*`, `zombie_attack_front-left.png`)
+  compositions of the game's POV-Ray monster sprites; except
+  `book_spells_prisma.png` (script, see below) and the story images listed
+  in "To settle";
+- sound effects for doors, chests, closets and keys
   (`resources/snd/ogg/open-close-doors-containers/`, `pick-items/a_key.ogg`),
-  enregistrés par l'auteur chez lui avec un Zoom Essential ;
-- bruitages des sorts (`resources/snd/ogg/spells/`, dont `hit_spell0.ogg`) et cris de la poule de
-  la cinématique d'intro (`creatures/m_chicken0.ogg`, `m_chicken1.ogg`), créés par l'auteur avec
-  jsfxr (https://sfxr.me, générateur de sons ; le son produit appartient à
-  celui qui le règle) ;
-- bruitages de l'eau (`resources/snd/ogg/nature/water/`), des armes
-  (`resources/snd/ogg/weapons/`) et du ramassage d'un objet
-  (`pick-items/a_take.ogg`), créés par l'auteur avec Bfxr
-  (https://www.bfxr.net, générateur de sons, même principe) ;
-- musiques (`resources/snd/ogg/mus_*.ogg`), logo, ciel de nuit, ciel
-  infernal (`sky_hell.png`), textures des thèmes crypte (`t_crypt*.png`,
-  `f_crypt*.png`) et gothique (`t_gothic.png`, `f_gothic.png`), tirées des
-  tuiles `t_gray` de l'auteur, maçonnerie et décors redessinés, panneau de magasin, icône et image du rayon
-  prismatique : produits par des scripts du
-  dépôt (`tools/music/`, `tools/gfx/`), écrits avec l'IA (voir
+  recorded by the author at home with a Zoom Essential;
+- spell sound effects (`resources/snd/ogg/spells/`, including `hit_spell0.ogg`) and the chicken
+  cries in the intro cutscene (`creatures/m_chicken0.ogg`, `m_chicken1.ogg`), made by the author with
+  jsfxr (https://sfxr.me, sound generator; the sound produced belongs to
+  whoever sets it up);
+- water (`resources/snd/ogg/nature/water/`) and weapon
+  (`resources/snd/ogg/weapons/`) sound effects, made by the author with Bfxr
+  (https://www.bfxr.net, sound generator, same principle);
+- music (`resources/snd/ogg/mus_*.ogg`), logo, night sky, hell sky
+  (`sky_hell.png`), crypt theme textures (`t_crypt*.png`,
+  `f_crypt*.png`) and gothic theme textures (`t_gothic.png`, `f_gothic.png`), derived from the
+  author's `t_gray` tiles, with redrawn masonry and decorations, shop sign, prismatic ray icon and
+  image: produced by scripts in the
+  repository (`tools/music/`, `tools/gfx/`), written with AI (see
   `AI_DISCLOSURE.md`).
 
-## Règles pour une nouvelle ressource
+## Rules for a new asset
 
-| Acceptable | Interdit |
+| Acceptable | Forbidden |
 |---|---|
-| Création personnelle, y compris par nos scripts | Ressource extraite d'un autre jeu |
-| CC0 / domaine public | Licence « non commerciale » (CC BY-NC…) : Steam peut être vu comme commercial, même pour un jeu gratuit |
-| CC BY 3.0 / 4.0 : **créditer** l'auteur | Origine ou licence inconnue |
-| SIL Open Font License (polices) | CC BY-SA : à éviter (œuvres dérivées sous la même licence) |
+| Personal creation, including by our scripts | Asset extracted from another game |
+| CC0 / public domain | "Non-commercial" license (CC BY-NC…): Steam may be considered commercial, even for a free game |
+| CC BY 3.0 / 4.0: **credit** the author | Unknown origin or license |
+| SIL Open Font License (fonts) | CC BY-SA: avoid (derivative works under the same license) |
 
-Noter l'auteur, la licence, l'URL et la date de vérification dans le
-tableau « Ressources de tiers », et créditer si la licence l'exige : dans le
-jeu (`src/game/data/STRINGS.js`, clé `cs1_credits`, en anglais et
-en français) et dans `resources/doc/menu/credits.html` et `credits.fr.html`.
+Record the author, license, URL and date checked in the "Third-party
+assets" table, and credit them if the license requires it: in the game
+(`src/game/data/STRINGS.js`, key `cs1_credits`, in English and French) and
+in `resources/doc/menu/credits.html` and `credits.fr.html`.
 
-Banques de sons pour le rendu des musiques : seule une banque libre convient,
-car ses échantillons finissent dans l'OGG. MuseScore General 0.2 (MIT) est
-une autre banque possible (créditer alors FluidR3 de Frank Wen et les auteurs
-cités dans sa licence) ; jamais « Yamaha Tyros 4 » ni « Timbres of Heaven »
-(échantillons d'origine commerciale ou inconnue).
+Sound banks for rendering the music: only a free bank will do, since its
+samples end up in the OGG. MuseScore General 0.2 (MIT) is another possible
+bank (then credit FluidR3 by Frank Wen and the authors listed in its
+license); never "Yamaha Tyros 4" or "Timbres of Heaven" (samples of
+commercial or unknown origin).
 
-## À régler avant la publication
+## To settle before publishing
 
-| Ressource | Problème | À faire |
+| Asset | Problem | To do |
 |---|---|---|
-| Anciens bruitages encore utilisés : `x_death.ogg` (cri commun, sert aux monstres sans espèce) | origine inconnue | remplacer (enregistrement, jsfxr, CC0 : freesound.org filtré CC0, Kenney.nl) |
-| Sons sources `resources/snd/flac/` | dans `resources/`, donc livrés avec le jeu s'ils y restent | les sortir du paquet livré (ou du dépôt) |
-| Livre de l'histoire `resources/gfx/books/book_of_story0.png`, `book_of_story1.png`, `book_of_story3.png` | images trouvées il y a plus de 8 ans, origine introuvable | remplacer |
-| Panneau de magasin (panneau 79 des textures `t_*`) | sac d'or provisoire, dessiné par script | remplacer par le dessin définitif |
-| GeneralUser GS v1.471 | licence pas encore relue | relire le fichier de licence fourni avec la banque |
+| Old sound effects still in use: `x_death.ogg` (generic sound, played at every monster death) | unknown origin | replace (recording, jsfxr, CC0: freesound.org filtered on CC0, Kenney.nl) |
+| Source sounds `resources/snd/flac/` | in `resources/`, so shipped with the game if they stay there | move them out of the shipped package (or out of the repository) |
+| Story book `resources/gfx/books/book_of_story0.png`, `book_of_story1.png`, `book_of_story3.png` | images found more than 8 years ago, origin untraceable | replace |
+| Shop sign (tile 79 of the `t_*` textures) | temporary gold bag, drawn by a script | replace with the final drawing |
+| GeneralUser GS v1.471 | license not yet re-read | re-read the license file shipped with the bank |
 
-Avant chaque publication :
+Before each release:
 
-- [ ] Plus rien dans le tableau ci-dessus.
-- [ ] Crédits à jour dans le jeu (`cs1_credits`) et dans `credits.html`.
-- [ ] `AI_DISCLOSURE.md` à jour, cases cochées sur la plateforme.
-- [ ] Les fichiers remplacés sont supprimés du dépôt et du paquet livré.
+- [ ] Nothing left in the table above.
+- [ ] Credits up to date in the game (`cs1_credits`) and in `credits.html`.
+- [ ] `AI_DISCLOSURE.md` up to date, boxes ticked on the platform.
+- [ ] Replaced files are deleted from the repository and the shipped package.

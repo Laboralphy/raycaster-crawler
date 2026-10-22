@@ -65,8 +65,39 @@ describe('MobThinker.getDeathSound', () => {
         vi.restoreAllMocks();
     });
 
-    it('sans espèce connue : le cri commun', () => {
-        expect(dying(null).getDeathSound()).toBe(SOUNDS.FOE_SLAIN);
-        expect(dying('dragon').getDeathSound()).toBe(SOUNDS.FOE_SLAIN);
+    it('sans espèce connue : pas de cri', () => {
+        expect(dying(null).getDeathSound()).toBe(null);
+        expect(dying('dragon').getDeathSound()).toBe(null);
+    });
+});
+
+describe('MobThinker.thinkDie : sons', () => {
+    function die(sDeath) {
+        const t = new MobThinker();
+        t.oMobile = {
+            x: 10,
+            y: 20,
+            oSprite: {
+                oBlueprint: { sId: 'm_test', getData: (s) => (s === 'death' ? sDeath : null) },
+                oAnimation: { nDuration: 1, nCount: 1 },
+                playAnimationType: () => {}
+            }
+        };
+        t.oGame = { sys_playSound: vi.fn(), gc_dropLoot: () => {} };
+        t.pulse = () => {};
+        t.stripEffects = () => {};
+        t.thinkDie();
+        return t.oGame.sys_playSound.mock.calls;
+    }
+
+    it('le son commun, puis le cri de l\'espèce', () => {
+        const aCalls = die('zombie');
+        expect(aCalls.length).toBe(2);
+        expect(aCalls[0]).toEqual([SOUNDS.FOE_SLAIN, 10, 20]);
+        expect(SOUNDS.DEATH.zombie).toContain(aCalls[1][0]);
+    });
+
+    it('sans espèce : le son commun seul', () => {
+        expect(die(null)).toEqual([[SOUNDS.FOE_SLAIN, 10, 20]]);
     });
 });

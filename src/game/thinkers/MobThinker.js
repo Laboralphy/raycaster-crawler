@@ -569,13 +569,18 @@ export class MobThinker extends Thinker {
         this.oGame.gc_dropLoot(this.oMobile.oSprite.oBlueprint.sId, this.oMobile);
         this.stripEffects();
         this.think = this.thinkDying;
-        this.oGame.sys_playSound(this.getDeathSound(), this.oMobile.x, this.oMobile.y)
+        // le son commun de chaque mort, plus le cri de l'espèce s'il y en a un
+        this.oGame.sys_playSound(SOUNDS.FOE_SLAIN, this.oMobile.x, this.oMobile.y);
+        const sDeathSound = this.getDeathSound();
+        if (sDeathSound) {
+            this.oGame.sys_playSound(sDeathSound, this.oMobile.x, this.oMobile.y)
+        }
     }
 
-    /** Un des cris de mort de l'espèce du monstre (data.death), sinon le cri commun */
+    /** Un des cris de mort de l'espèce du monstre (data.death), sinon null */
     getDeathSound() {
         const aSounds = SOUNDS.DEATH[this.oMobile.oSprite.oBlueprint.getData('death')];
-        return aSounds ? aSounds[Math.random() * aSounds.length | 0] : SOUNDS.FOE_SLAIN
+        return aSounds ? aSounds[Math.random() * aSounds.length | 0] : null
     }
 
     thinkDying() {

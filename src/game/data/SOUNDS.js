@@ -9,8 +9,8 @@ export const SOUNDS = {
     ITEM_TAKE: 'pick-items/a_take',
     WATER_SPLASH: 'nature/water/a_splash',
     FOE_SLAIN: 'x_death',
-    // cris de mort par espèce (data.death des monstres), un au hasard ;
-    // FOE_SLAIN sert aux monstres sans espèce
+    // FOE_SLAIN à chaque mort de monstre, avec un cri de son espèce
+    // (data.death des monstres) tiré au hasard, s'il en a une
     DEATH: {
         bones: ['creatures/x_death_bones0'],
         bug: ['creatures/x_death_bug0', 'creatures/x_death_bug1', 'creatures/x_death_bug2'],
