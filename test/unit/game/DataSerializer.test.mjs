@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { DataSerializer } from '../../../src-recovered/game/DataSerializer.js';
-import { Dungeon } from '../../../src-recovered/game/Dungeon.js';
-import { Item } from '../../../src-recovered/game/Item.js';
-import { STRINGS } from '../../../src-recovered/game/data/STRINGS.js';
+import { DataSerializer } from '../../../src/game/DataSerializer.js';
+import { Dungeon } from '../../../src/game/Dungeon.js';
+import { Item } from '../../../src/game/Item.js';
+import { STRINGS } from '../../../src/game/data/STRINGS.js';
 
 beforeAll(() => STRINGS.setLanguage('en'));
 

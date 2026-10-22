@@ -39,6 +39,12 @@ export const CONFIG = {
             r0: 32,
             r1: 160,
             v: 0.8
+        },
+        // de même, pour les murs à torche de la forêt (levels/ForestTorchLights.js)
+        wallTorchLight: {
+            r0: 32,
+            r1: 160,
+            v: 0.8
         }
     }
 };

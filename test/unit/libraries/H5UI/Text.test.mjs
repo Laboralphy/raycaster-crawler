@@ -7,8 +7,8 @@ function stubBrowser() {
 stubBrowser();
 beforeEach(stubBrowser);
 
-const { Text } = await import('../../../../src-recovered/libraries/H5UI/Text.js');
-const { STRINGS } = await import('../../../../src-recovered/game/data/STRINGS.js');
+const { Text } = await import('../../../../src/libraries/H5UI/Text.js');
+const { STRINGS } = await import('../../../../src/game/data/STRINGS.js');
 
 // texte à la ligne, largeur en caractères (le faux canvas compte 7 px par caractère)
 function wrapped(sCaption, nChars) {

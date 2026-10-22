@@ -5,7 +5,7 @@
   "description": "Give Back My Grimoire! - dungeon crawler",
   "scripts": {
     "start": "node server.js",
-    "build": "esbuild src-recovered/game/main.js --bundle --format=iife --minify --target=es2015 --outfile=crawler.js",
+    "build": "esbuild src/game/main.js --bundle --format=iife --minify --target=es2015 --outfile=crawler.js",
     "check:laby": "node laby/tools/check.js",
     "check:data": "node --no-warnings tools/check_data.mjs",
     "estimate:loot": "node --no-warnings tools/estimate_loot.mjs",

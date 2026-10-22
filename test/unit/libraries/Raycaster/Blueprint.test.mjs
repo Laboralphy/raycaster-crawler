@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Blueprint } from '../../../../src-recovered/libraries/Raycaster/Blueprint.js';
+import { Blueprint } from '../../../../src/libraries/Raycaster/Blueprint.js';
 import { assertDefaults } from '../../helpers.mjs';
 
 describe('Blueprint', () => {

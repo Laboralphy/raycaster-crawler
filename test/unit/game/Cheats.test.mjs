@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 // config.js (importé par Cheats) interroge le navigateur au chargement
 vi.stubGlobal('location', { search: '' });
 vi.stubGlobal('document', {});
-const { Cheats } = await import('../../../src-recovered/game/Cheats.js');
+const { Cheats } = await import('../../../src/game/Cheats.js');
 
 describe('cheat learn', () => {
     function context(aBook) {
@@ -49,8 +49,8 @@ describe('cheat learn', () => {
 });
 
 describe('cheat affect', async () => {
-    const { EffectProcessor } = await import('../../../src-recovered/game/EffectProcessor.js');
-    const { Creature } = await import('../../../src-recovered/game/GC/Creature.js');
+    const { EffectProcessor } = await import('../../../src/game/EffectProcessor.js');
+    const { Creature } = await import('../../../src/game/GC/Creature.js');
 
     function context() {
         const ep = new EffectProcessor();

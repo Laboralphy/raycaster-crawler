@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { Tile } from '../../../../src-recovered/libraries/Raycaster/Tile.js';
-import { Animation } from '../../../../src-recovered/libraries/Raycaster/Animation.js';
+import { Tile } from '../../../../src/libraries/Raycaster/Tile.js';
+import { Animation } from '../../../../src/libraries/Raycaster/Animation.js';
 import { assertDefaults } from '../../helpers.mjs';
 
 describe('Tile', () => {

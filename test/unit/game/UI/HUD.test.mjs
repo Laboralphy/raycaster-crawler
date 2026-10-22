@@ -7,8 +7,8 @@ function stubBrowser() {
 stubBrowser();
 beforeEach(stubBrowser);
 
-const { HUD } = await import('../../../../src-recovered/game/UI/HUD.js');
-const { TileGrid } = await import('../../../../src-recovered/libraries/H5UI/TileGrid.js');
+const { HUD } = await import('../../../../src/game/UI/HUD.js');
+const { TileGrid } = await import('../../../../src/libraries/H5UI/TileGrid.js');
 
 const row = (h, y) => h.oHUD._aCells[y].join(' ');
 

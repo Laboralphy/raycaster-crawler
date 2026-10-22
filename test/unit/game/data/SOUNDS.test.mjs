@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { existsSync } from 'node:fs';
-import { SOUNDS, soundNames } from '../../../../src-recovered/game/data/SOUNDS.js';
-import { MONSTERS_BLUEPRINTS } from '../../../../src-recovered/game/data/MONSTERS_BLUEPRINTS.js';
+import { SOUNDS, soundNames } from '../../../../src/game/data/SOUNDS.js';
+import { MONSTERS_BLUEPRINTS } from '../../../../src/game/data/MONSTERS_BLUEPRINTS.js';
 
 describe('SOUNDS', () => {
     it('soundNames : un nom, une liste ou une table de listes, sans les vides', () => {

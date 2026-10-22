@@ -8,11 +8,11 @@ function stubBrowser() {
 stubBrowser();
 beforeEach(stubBrowser);
 
-const { System } = await import('../../../../src-recovered/game/UI/System.js');
-const { UI } = await import('../../../../src-recovered/game/UI/UI.js');
-const { Screen } = await import('../../../../src-recovered/game/UI/Screen.js');
-const { Box } = await import('../../../../src-recovered/libraries/H5UI/Box.js');
-const { STRINGS } = await import('../../../../src-recovered/game/data/STRINGS.js');
+const { System } = await import('../../../../src/game/UI/System.js');
+const { UI } = await import('../../../../src/game/UI/UI.js');
+const { Screen } = await import('../../../../src/game/UI/Screen.js');
+const { Box } = await import('../../../../src/libraries/H5UI/Box.js');
+const { STRINGS } = await import('../../../../src/game/data/STRINGS.js');
 STRINGS.setLanguage('en');
 
 // greffon d'interface : son contrôleur tourne avec this = System

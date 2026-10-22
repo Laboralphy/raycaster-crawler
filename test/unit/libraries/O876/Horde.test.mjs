@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Horde } from '../../../../src-recovered/libraries/O876/Horde.js';
+import { Horde } from '../../../../src/libraries/O876/Horde.js';
 import { assertDefaults, assertNotShared } from '../../helpers.mjs';
 
 function horde(...aItems) {

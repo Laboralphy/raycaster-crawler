@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { WeaponAnimator } from '../../../src-recovered/game/WeaponAnimator.js';
-import { Animation } from '../../../src-recovered/libraries/Raycaster/Animation.js';
+import { WeaponAnimator } from '../../../src/game/WeaponAnimator.js';
+import { Animation } from '../../../src/libraries/Raycaster/Animation.js';
 import { assertDefaults, assertNotShared } from '../helpers.mjs';
 
 describe('WeaponAnimator', () => {

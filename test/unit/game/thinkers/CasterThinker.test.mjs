@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { CasterThinker } from '../../../../src-recovered/game/thinkers/CasterThinker.js';
-import { MathTools } from '../../../../src-recovered/libraries/Raycaster/Tools/MathTools.js';
+import { CasterThinker } from '../../../../src/game/thinkers/CasterThinker.js';
+import { MathTools } from '../../../../src/libraries/Raycaster/Tools/MathTools.js';
 
 // lanceur au contact de sa cible, baguette de nSlots sorts, data.casts = aCasts
 function caster(nSlots, aCasts) {

@@ -1,5 +1,5 @@
 import { describe, it, beforeEach, afterEach, expect, vi } from 'vitest';
-import { Transistate } from '../../../../src-recovered/libraries/Raycaster/Transistate.js';
+import { Transistate } from '../../../../src/libraries/Raycaster/Transistate.js';
 import { assertDefaults } from '../../helpers.mjs';
 
 // Comme Engine (puis Game) : les états sont des méthodes de la sous-classe,

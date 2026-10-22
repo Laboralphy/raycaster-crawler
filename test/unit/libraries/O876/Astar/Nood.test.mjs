@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { Nood } from '../../../../../src-recovered/libraries/O876/Astar/Nood.js';
-import { Point } from '../../../../../src-recovered/libraries/O876/Astar/Point.js';
+import { Nood } from '../../../../../src/libraries/O876/Astar/Nood.js';
+import { Point } from '../../../../../src/libraries/O876/Astar/Point.js';
 import { assertDefaults, assertNotShared } from '../../../helpers.mjs';
 
 describe('Nood', () => {

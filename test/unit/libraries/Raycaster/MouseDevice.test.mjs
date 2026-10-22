@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { MouseDevice } from '../../../../src-recovered/libraries/Raycaster/MouseDevice.js';
+import { MouseDevice } from '../../../../src/libraries/Raycaster/MouseDevice.js';
 import { assertDefaults, assertNotShared } from '../../helpers.mjs';
 
 // élément DOM minimal qui garde ses écouteurs

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { GXManager } from '../../../../src-recovered/libraries/Raycaster/GXManager.js';
+import { GXManager } from '../../../../src/libraries/Raycaster/GXManager.js';
 import { assertNotShared } from '../../helpers.mjs';
 
 function fx(nLife) {

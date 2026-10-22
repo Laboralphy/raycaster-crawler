@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Item } from '../../../../src-recovered/game/GC/Item.js';
+import { Item } from '../../../../src/game/GC/Item.js';
 import { assertDefaults } from '../../helpers.mjs';
 
 describe('GC Item', () => {

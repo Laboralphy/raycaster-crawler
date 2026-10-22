@@ -5,7 +5,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { fakeCanvas } from '../../canvas.mjs';
 
-vi.mock('../../../../src-recovered/libraries/Raycaster/Raycaster.js', async () => {
+vi.mock('../../../../src/libraries/Raycaster/Raycaster.js', async () => {
     const { fakeCanvas: canvas } = await import('../../canvas.mjs');
     class Raycaster {
         constructor() {
@@ -53,11 +53,11 @@ function stubBrowser() {
 }
 stubBrowser();
 
-const { Cutscene } = await import('../../../../src-recovered/game/cutscenes/Cutscene.js');
-const { CutsceneIntro } = await import('../../../../src-recovered/game/cutscenes/CutsceneIntro.js');
-const { CutsceneEnd } = await import('../../../../src-recovered/game/cutscenes/CutsceneEnd.js');
-const { MenuSystem } = await import('../../../../src-recovered/game/MenuSystem.js');
-const { STRINGS } = await import('../../../../src-recovered/game/data/STRINGS.js');
+const { Cutscene } = await import('../../../../src/game/cutscenes/Cutscene.js');
+const { CutsceneIntro } = await import('../../../../src/game/cutscenes/CutsceneIntro.js');
+const { CutsceneEnd } = await import('../../../../src/game/cutscenes/CutsceneEnd.js');
+const { MenuSystem } = await import('../../../../src/game/MenuSystem.js');
+const { STRINGS } = await import('../../../../src/game/data/STRINGS.js');
 STRINGS.setLanguage('en');
 
 beforeEach(() => {

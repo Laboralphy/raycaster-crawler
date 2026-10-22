@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { BackupSystem } from '../../../src-recovered/game/BackupSystem.js';
+import { BackupSystem } from '../../../src/game/BackupSystem.js';
 import { assertDefaults, assertNotShared } from '../helpers.mjs';
 
 // faux localStorage : clés énumérables, removeItem caché

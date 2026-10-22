@@ -3,11 +3,11 @@
 // for…in) et le même état initial (think) qu'avant. Le snapshot a été
 // enregistré sur le code d'avant la migration.
 import { describe, it, expect } from 'vitest';
-import { THINKERS } from '../../../../src-recovered/game/thinkers/THINKERS.js';
-import { Thinker } from '../../../../src-recovered/libraries/Raycaster/Thinker.js';
-import { MissileThinker } from '../../../../src-recovered/libraries/Raycaster/MissileThinker.js';
-import { MouseKeyboardThinker } from '../../../../src-recovered/libraries/Raycaster/MouseKeyboardThinker.js';
-import { ThinkerManager } from '../../../../src-recovered/libraries/Raycaster/ThinkerManager.js';
+import { THINKERS } from '../../../../src/game/thinkers/THINKERS.js';
+import { Thinker } from '../../../../src/libraries/Raycaster/Thinker.js';
+import { MissileThinker } from '../../../../src/libraries/Raycaster/MissileThinker.js';
+import { MouseKeyboardThinker } from '../../../../src/libraries/Raycaster/MouseKeyboardThinker.js';
+import { ThinkerManager } from '../../../../src/libraries/Raycaster/ThinkerManager.js';
 import { assertNotShared } from '../../helpers.mjs';
 
 const ALL = {

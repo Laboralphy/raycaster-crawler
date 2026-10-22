@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { KeyboardDevice } from '../../../../src-recovered/libraries/Raycaster/KeyboardDevice.js';
+import { KeyboardDevice } from '../../../../src/libraries/Raycaster/KeyboardDevice.js';
 import { assertDefaults, assertNotShared } from '../../helpers.mjs';
 
 describe('KeyboardDevice', () => {

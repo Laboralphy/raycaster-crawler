@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { ThinkerManager } from '../../../../src-recovered/libraries/Raycaster/ThinkerManager.js';
-import { Thinker } from '../../../../src-recovered/libraries/Raycaster/Thinker.js';
+import { ThinkerManager } from '../../../../src/libraries/Raycaster/ThinkerManager.js';
+import { Thinker } from '../../../../src/libraries/Raycaster/Thinker.js';
 import { assertDefaults } from '../../helpers.mjs';
 
 class TestThinker extends Thinker {}

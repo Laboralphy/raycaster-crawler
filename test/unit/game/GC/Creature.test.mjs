@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Creature } from '../../../../src-recovered/game/GC/Creature.js';
+import { Creature } from '../../../../src/game/GC/Creature.js';
 import { assertDefaults, assertNotShared } from '../../helpers.mjs';
 
 describe('Creature', () => {

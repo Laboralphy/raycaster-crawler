@@ -49,6 +49,7 @@ import { DescriptorPlugin } from './plugins/DescriptorPlugin.js';
 import { DialogPlugin } from './plugins/DialogPlugin.js';
 import { InventoryPlugin } from './plugins/InventoryPlugin.js';
 import { MagicPlugin } from './plugins/MagicPlugin.js';
+import { PanicPlugin } from './plugins/PanicPlugin.js';
 import { PlayersheetPlugin } from './plugins/PlayersheetPlugin.js';
 import { ScorePlugin } from './plugins/ScorePlugin.js';
 import { ShopPlugin } from './plugins/ShopPlugin.js';
@@ -65,6 +66,7 @@ const PLUGINS = {
     Dialog: DialogPlugin,
     Inventory: InventoryPlugin,
     Magic: MagicPlugin,
+    Panic: PanicPlugin,
     Playersheet: PlayersheetPlugin,
     Score: ScorePlugin,
     Shop: ShopPlugin,
@@ -250,6 +252,7 @@ export class Game extends Engine {
         KEYS._INT_SAVE = KEYS.F12;
         KEYS._INT_INVENTORY = KEYS.ALPHANUM.E;
         KEYS._INT_SHEET = KEYS.ALPHANUM.P;
+        KEYS._INT_PANIC = KEYS.ALPHANUM.H;
         KEYS._INT_PAUSE = KEYS.PAUSE;
         KEYS._INT_RIGHT = KEYS.RIGHT;
         KEYS._INT_LEFT = KEYS.LEFT;
@@ -326,6 +329,7 @@ export class Game extends Engine {
         this.oUnderwater = this.addPlugin('Underwater');
         this.oScore = this.addPlugin('Score');
         this.addPlugin('Wound');
+        this.addPlugin('Panic');
         this.oBackupSystem = new BackupSystem();
         this.oBackupSystem.init(this.sSaveFile);
         this.sWorldBackup = JSON.stringify(WORLD_DATA);
@@ -437,6 +441,7 @@ export class Game extends Engine {
             }
         }
         this.rld_addFireplaceLights();
+        this.rld_addLevelLights();
         this.oPathFinder.init(this.oRaycaster.aMap);
         this.oMPL.setHook(null);
         const oPlayerThinker = this.oThinkerManager.createThinker('PlayerKeyboard');
@@ -987,6 +992,20 @@ export class Game extends Engine {
                 }
             }
         }
+    }
+
+    /**
+     * Les sources de lumière posées par le LevelProcessor de l'étage
+     * (LevelProcessor.addLight), au centre de leur case.
+     */
+    rld_addLevelLights() {
+        const rc = this.oRaycaster;
+        const nSpacing = rc.nPlaneSpacing;
+        (this.rld_getLevelData().lights || []).forEach((o) => rc.oRenderer.addLightSource(
+            o.x * nSpacing + (nSpacing >> 1),
+            o.y * nSpacing + (nSpacing >> 1),
+            o.r0, o.r1, o.v
+        ))
     }
 
     rld_chooseSob(oData, nLevel) {
@@ -2051,13 +2070,8 @@ export class Game extends Engine {
         this.oSoundSystem.playMusic(this.sys_getSoundPath(sFile))
     }
 
-    sys_getVersion(nFormat) {
-        switch (nFormat) {
-            case 1:
-                return 'v' + VERSION_DATA.major + '.' + VERSION_DATA.minor + '.' + VERSION_DATA.patch + ' ' + VERSION_DATA.date;
-            default:
-                return 'v' + VERSION_DATA.major + '.' + VERSION_DATA.minor + '.' + VERSION_DATA.patch
-        }
+    sys_getVersion() {
+        return 'v' + VERSION_DATA.version
     }
 
     sys_timeTrans(sNextState) {

@@ -3,6 +3,7 @@ import { SOUNDS } from './data/SOUNDS.js';
 import { STRINGS } from './data/STRINGS.js';
 import { GXUnderwater } from './gx/GXUnderwater.js';
 import { CovenThrone } from './levels/CovenThrone.js';
+import { ForestTorchLights } from './levels/ForestTorchLights.js';
 import { HellgateBridge } from './levels/HellgateBridge.js';
 import { RC } from '../libraries/Raycaster/RC.js';
 import { MathTools } from '../libraries/Raycaster/Tools/MathTools.js';
@@ -175,6 +176,8 @@ export class Adventure {
         link(d.treasure[0], { portal: 'hellgate' });
         link(d.hellgate[0], { entrance: ['treasure', 0, 3], exit: ['hellkeep', 0, 1] });
         this.defineLevelProcessor('hellgate', 0, HellgateBridge);
+        this.defineLevelProcessor('forest', 0, ForestTorchLights);
+        this.defineLevelProcessor('forest', 1, ForestTorchLights);
         // zones annexes, par portail (point d'arrivée 3 : ascenseur du portail)
         const nPortalToMines = this.oVariables.portalToMines;
         d1[nPortalToMines].options += '-p1';

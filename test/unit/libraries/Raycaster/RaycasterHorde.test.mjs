@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Horde } from '../../../../src-recovered/libraries/Raycaster/Horde.js';
-import { MobileRegister } from '../../../../src-recovered/libraries/Raycaster/MobileRegister.js';
-import { MobileDispenser } from '../../../../src-recovered/libraries/Raycaster/MobileDispenser.js';
-import { Tile } from '../../../../src-recovered/libraries/Raycaster/Tile.js';
-import { Blueprint } from '../../../../src-recovered/libraries/Raycaster/Blueprint.js';
-import { Mobile } from '../../../../src-recovered/libraries/Raycaster/Mobile.js';
+import { Horde } from '../../../../src/libraries/Raycaster/Horde.js';
+import { MobileRegister } from '../../../../src/libraries/Raycaster/MobileRegister.js';
+import { MobileDispenser } from '../../../../src/libraries/Raycaster/MobileDispenser.js';
+import { Tile } from '../../../../src/libraries/Raycaster/Tile.js';
+import { Blueprint } from '../../../../src/libraries/Raycaster/Blueprint.js';
+import { Mobile } from '../../../../src/libraries/Raycaster/Mobile.js';
 import { assertDefaults, assertNotShared } from '../../helpers.mjs';
 
 // raycaster minimal : chargeur d'images, grille de secteurs 4 × 4 de 64

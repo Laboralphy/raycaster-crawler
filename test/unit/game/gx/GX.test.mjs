@@ -1,17 +1,17 @@
 // Effets graphiques du jeu dérivés de GXEffect.
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { GXEffect } from '../../../../src-recovered/libraries/Raycaster/GXEffect.js';
-import { GXBlind } from '../../../../src-recovered/game/gx/GXBlind.js';
-import { GXColorVeil } from '../../../../src-recovered/game/gx/GXColorVeil.js';
-import { GXConfused } from '../../../../src-recovered/game/gx/GXConfused.js';
-import { GXFlood } from '../../../../src-recovered/game/gx/GXFlood.js';
-import { GXIconPad } from '../../../../src-recovered/game/gx/GXIconPad.js';
-import { GXTimeStop } from '../../../../src-recovered/game/gx/GXTimeStop.js';
-import { GXUnderwater } from '../../../../src-recovered/game/gx/GXUnderwater.js';
-import { Effect } from '../../../../src-recovered/game/GC/Effect.js';
-import { EffectProcessor } from '../../../../src-recovered/game/EffectProcessor.js';
-import { Creature } from '../../../../src-recovered/game/GC/Creature.js';
-import { ICONS } from '../../../../src-recovered/game/data/ICONS.js';
+import { GXEffect } from '../../../../src/libraries/Raycaster/GXEffect.js';
+import { GXBlind } from '../../../../src/game/gx/GXBlind.js';
+import { GXColorVeil } from '../../../../src/game/gx/GXColorVeil.js';
+import { GXConfused } from '../../../../src/game/gx/GXConfused.js';
+import { GXFlood } from '../../../../src/game/gx/GXFlood.js';
+import { GXIconPad } from '../../../../src/game/gx/GXIconPad.js';
+import { GXTimeStop } from '../../../../src/game/gx/GXTimeStop.js';
+import { GXUnderwater } from '../../../../src/game/gx/GXUnderwater.js';
+import { Effect } from '../../../../src/game/GC/Effect.js';
+import { EffectProcessor } from '../../../../src/game/EffectProcessor.js';
+import { Creature } from '../../../../src/game/GC/Creature.js';
+import { ICONS } from '../../../../src/game/data/ICONS.js';
 import { assertDefaults } from '../../helpers.mjs';
 import { fakeCanvas, fakeRaycaster, stubDocument } from '../../canvas.mjs';
 

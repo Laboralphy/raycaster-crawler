@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { MagicMissileThinker } from '../../../../src-recovered/game/thinkers/MagicMissileThinker.js';
+import { MagicMissileThinker } from '../../../../src/game/thinkers/MagicMissileThinker.js';
 
 // carte de 64 : murs en x < 64, x >= 192, y < 64, y >= 192 (une pièce de 2 × 2 cases)
 const ps = 64;

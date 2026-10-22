@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeAll, vi } from 'vitest';
-import { StealerThinker } from '../../../../src-recovered/game/thinkers/StealerThinker.js';
-import { Item } from '../../../../src-recovered/game/Item.js';
-import { Inventory } from '../../../../src-recovered/game/GC/Inventory.js';
-import { STRINGS } from '../../../../src-recovered/game/data/STRINGS.js';
+import { StealerThinker } from '../../../../src/game/thinkers/StealerThinker.js';
+import { Item } from '../../../../src/game/Item.js';
+import { Inventory } from '../../../../src/game/GC/Inventory.js';
+import { STRINGS } from '../../../../src/game/data/STRINGS.js';
 
 beforeAll(() => STRINGS.setLanguage('en'));
 

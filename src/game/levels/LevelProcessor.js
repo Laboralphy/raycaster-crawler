@@ -158,6 +158,19 @@ export class LevelProcessor {
     }
 
     /**
+     * Source de lumière au centre de la case (x, y), posée à la création du
+     * rendu (Game.rld_addLevelLights).
+     * @param oLight {object} r0, r1 (en pixels), v : pleine intensité v
+     * jusqu'à r0, nulle à r1
+     */
+    addLight(x, y, oLight) {
+        if (!this.data.lights) {
+            this.data.lights = []
+        }
+        this.data.lights.push({ x, y, r0: oLight.r0, r1: oLight.r1, v: oLight.v })
+    }
+
+    /**
      * Parcourt toutes les cases : f(x, y, nCell, nBlock).
      */
     forEachCell(f) {

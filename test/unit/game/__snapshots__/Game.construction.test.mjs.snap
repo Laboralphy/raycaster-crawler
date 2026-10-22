@@ -10,7 +10,7 @@ exports[`new Game() > construit le jeu, l'initialise et entre dans le menu 1`] =
     "_sState": "stateMenuLoop",
     "aMenuActions": "[Array 3]",
     "aMobRoster": null,
-    "aPlugins": "[Array 12]",
+    "aPlugins": "[Array 13]",
     "aPopupMessages": "[Array 0]",
     "aSobRoster": null,
     "bBound": true,
@@ -99,6 +99,7 @@ exports[`new Game() > construit le jeu, l'initialise et entre dans le menu 1`] =
     "UnderwaterPlugin",
     "ScorePlugin",
     "WoundPlugin",
+    "PanicPlugin",
   ],
   "signals": [
     "block",

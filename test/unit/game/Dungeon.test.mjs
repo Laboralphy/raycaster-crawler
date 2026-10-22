@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { Dungeon } from '../../../src-recovered/game/Dungeon.js';
-import { EffectProcessor } from '../../../src-recovered/game/EffectProcessor.js';
-import { Item } from '../../../src-recovered/game/Item.js';
-import { MONSTERS_BLUEPRINTS } from '../../../src-recovered/game/data/MONSTERS_BLUEPRINTS.js';
-import { SPELLS_DATA } from '../../../src-recovered/game/data/SPELLS_DATA.js';
-import { STRINGS } from '../../../src-recovered/game/data/STRINGS.js';
+import { Dungeon } from '../../../src/game/Dungeon.js';
+import { EffectProcessor } from '../../../src/game/EffectProcessor.js';
+import { Item } from '../../../src/game/Item.js';
+import { MONSTERS_BLUEPRINTS } from '../../../src/game/data/MONSTERS_BLUEPRINTS.js';
+import { SPELLS_DATA } from '../../../src/game/data/SPELLS_DATA.js';
+import { STRINGS } from '../../../src/game/data/STRINGS.js';
 import { assertDefaults, assertNotShared } from '../helpers.mjs';
 
 beforeAll(() => STRINGS.setLanguage('en'));

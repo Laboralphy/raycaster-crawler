@@ -14,7 +14,7 @@ vi.mock('howler', () => ({
     })
 }));
 
-const { SoundSystem } = await import('../../../../src-recovered/libraries/O876/SoundSystem.js');
+const { SoundSystem } = await import('../../../../src/libraries/O876/SoundSystem.js');
 
 beforeEach(() => {
     aHowls.length = 0;

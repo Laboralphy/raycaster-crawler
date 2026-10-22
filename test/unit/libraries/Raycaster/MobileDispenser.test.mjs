@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { MobileDispenser } from '../../../../src-recovered/libraries/Raycaster/MobileDispenser.js';
+import { MobileDispenser } from '../../../../src/libraries/Raycaster/MobileDispenser.js';
 import { assertDefaults, assertNotShared } from '../../helpers.mjs';
 
 describe('MobileDispenser', () => {

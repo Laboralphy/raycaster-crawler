@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { ImageLoader } from '../../../../src-recovered/libraries/Raycaster/ImageLoader.js';
+import { ImageLoader } from '../../../../src/libraries/Raycaster/ImageLoader.js';
 import { assertDefaults, assertNotShared } from '../../helpers.mjs';
 
 class FakeImage {

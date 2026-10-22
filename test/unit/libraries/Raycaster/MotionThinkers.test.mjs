@@ -1,10 +1,10 @@
 // Thinkers de déplacement scripté (cinématiques) et de projectile.
 import { describe, it, expect, vi } from 'vitest';
-import { LinearThinker } from '../../../../src-recovered/libraries/Raycaster/LinearThinker.js';
-import { NonLinearThinker } from '../../../../src-recovered/libraries/Raycaster/NonLinearThinker.js';
-import { MissileThinker } from '../../../../src-recovered/libraries/Raycaster/MissileThinker.js';
-import { MouseKeyboardThinker } from '../../../../src-recovered/libraries/Raycaster/MouseKeyboardThinker.js';
-import { RC } from '../../../../src-recovered/libraries/Raycaster/RC.js';
+import { LinearThinker } from '../../../../src/libraries/Raycaster/LinearThinker.js';
+import { NonLinearThinker } from '../../../../src/libraries/Raycaster/NonLinearThinker.js';
+import { MissileThinker } from '../../../../src/libraries/Raycaster/MissileThinker.js';
+import { MouseKeyboardThinker } from '../../../../src/libraries/Raycaster/MouseKeyboardThinker.js';
+import { RC } from '../../../../src/libraries/Raycaster/RC.js';
 
 function mobile() {
     return {

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { Thinker } from '../../../../src-recovered/libraries/Raycaster/Thinker.js';
-import { LinearThinker } from '../../../../src-recovered/libraries/Raycaster/LinearThinker.js';
-import { TimedThinker } from '../../../../src-recovered/game/thinkers/TimedThinker.js';
+import { Thinker } from '../../../../src/libraries/Raycaster/Thinker.js';
+import { LinearThinker } from '../../../../src/libraries/Raycaster/LinearThinker.js';
+import { TimedThinker } from '../../../../src/game/thinkers/TimedThinker.js';
 import { assertDefaults } from '../../helpers.mjs';
 
 describe('Thinker', () => {

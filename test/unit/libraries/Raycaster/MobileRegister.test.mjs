@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { MobileRegister } from '../../../../src-recovered/libraries/Raycaster/MobileRegister.js';
+import { MobileRegister } from '../../../../src/libraries/Raycaster/MobileRegister.js';
 import { assertDefaults } from '../../helpers.mjs';
 
 const mobile = (x, y) => ({ xSector: x, ySector: y, nSectorRank: -1 });

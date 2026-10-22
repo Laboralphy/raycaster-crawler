@@ -70,5 +70,5 @@ L'ancien `crawler.js` packé est conservé dans
 `original/crawler.packed.js` ; pour y revenir :
 
 ```bash
-cp src-recovered/original/crawler.packed.js crawler.js
+cp src/original/crawler.packed.js crawler.js
 ```

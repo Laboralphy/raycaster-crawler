@@ -4,17 +4,17 @@ import { stubDocument } from '../../canvas.mjs';
 
 stubDocument();
 
-const { MagicPlugin } = await import('../../../../src-recovered/game/plugins/MagicPlugin.js');
-const { SPELLS_DATA } = await import('../../../../src-recovered/game/data/SPELLS_DATA.js');
-const { MAGIC_DATA } = await import('../../../../src-recovered/game/data/MAGIC_DATA.js');
-const { BLUEPRINTS_DATA } = await import('../../../../src-recovered/game/data/BLUEPRINTS_DATA.js');
-const { GFX_DATA } = await import('../../../../src-recovered/game/data/GFX_DATA.js');
-const { ICONS } = await import('../../../../src-recovered/game/data/ICONS.js');
-const { STRINGS } = await import('../../../../src-recovered/game/data/STRINGS.js');
-const { EffectProcessor } = await import('../../../../src-recovered/game/EffectProcessor.js');
-const { DataSerializer } = await import('../../../../src-recovered/game/DataSerializer.js');
-const { Dungeon } = await import('../../../../src-recovered/game/Dungeon.js');
-const { MathTools } = await import('../../../../src-recovered/libraries/Raycaster/Tools/MathTools.js');
+const { MagicPlugin } = await import('../../../../src/game/plugins/MagicPlugin.js');
+const { SPELLS_DATA } = await import('../../../../src/game/data/SPELLS_DATA.js');
+const { MAGIC_DATA } = await import('../../../../src/game/data/MAGIC_DATA.js');
+const { BLUEPRINTS_DATA } = await import('../../../../src/game/data/BLUEPRINTS_DATA.js');
+const { GFX_DATA } = await import('../../../../src/game/data/GFX_DATA.js');
+const { ICONS } = await import('../../../../src/game/data/ICONS.js');
+const { STRINGS } = await import('../../../../src/game/data/STRINGS.js');
+const { EffectProcessor } = await import('../../../../src/game/EffectProcessor.js');
+const { DataSerializer } = await import('../../../../src/game/DataSerializer.js');
+const { Dungeon } = await import('../../../../src/game/Dungeon.js');
+const { MathTools } = await import('../../../../src/libraries/Raycaster/Tools/MathTools.js');
 
 beforeAll(() => STRINGS.setLanguage('en'));
 

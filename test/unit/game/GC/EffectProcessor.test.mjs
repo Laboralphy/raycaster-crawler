@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { EffectProcessor } from '../../../../src-recovered/game/GC/EffectProcessor.js';
-import { Effect } from '../../../../src-recovered/game/GC/Effect.js';
+import { EffectProcessor } from '../../../../src/game/GC/EffectProcessor.js';
+import { Effect } from '../../../../src/game/GC/Effect.js';
 import { assertDefaults } from '../../helpers.mjs';
 
 const BASE64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';

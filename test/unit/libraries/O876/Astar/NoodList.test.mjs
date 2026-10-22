@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { NoodList } from '../../../../../src-recovered/libraries/O876/Astar/NoodList.js';
+import { NoodList } from '../../../../../src/libraries/O876/Astar/NoodList.js';
 import { assertDefaults, assertNotShared } from '../../../helpers.mjs';
 
 const nood = (x, y) => ({ oPos: { x, y } });

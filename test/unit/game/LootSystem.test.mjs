@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { LootSystem } from '../../../src-recovered/game/LootSystem.js';
-import { LOOT_DATA } from '../../../src-recovered/game/data/LOOT_DATA.js';
+import { LootSystem } from '../../../src/game/LootSystem.js';
+import { LOOT_DATA } from '../../../src/game/data/LOOT_DATA.js';
 import { assertNotShared } from '../helpers.mjs';
 
 describe('LootSystem', () => {

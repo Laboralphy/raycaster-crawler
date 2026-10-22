@@ -5,11 +5,11 @@ import { fakeCanvas, stubDocument } from '../../canvas.mjs';
 
 stubDocument();
 
-const { MagicPlugin } = await import('../../../../src-recovered/game/plugins/MagicPlugin.js');
-const { Animation } = await import('../../../../src-recovered/libraries/Raycaster/Animation.js');
-const { Raycaster } = await import('../../../../src-recovered/libraries/Raycaster/Raycaster.js');
-const { Horde } = await import('../../../../src-recovered/libraries/Raycaster/Horde.js');
-const { MobileRegister } = await import('../../../../src-recovered/libraries/Raycaster/MobileRegister.js');
+const { MagicPlugin } = await import('../../../../src/game/plugins/MagicPlugin.js');
+const { Animation } = await import('../../../../src/libraries/Raycaster/Animation.js');
+const { Raycaster } = await import('../../../../src/libraries/Raycaster/Raycaster.js');
+const { Horde } = await import('../../../../src/libraries/Raycaster/Horde.js');
+const { MobileRegister } = await import('../../../../src/libraries/Raycaster/MobileRegister.js');
 
 beforeEach(stubDocument);
 

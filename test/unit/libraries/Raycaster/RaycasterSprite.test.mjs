@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Raycaster } from '../../../../src-recovered/libraries/Raycaster/Raycaster.js';
+import { Raycaster } from '../../../../src/libraries/Raycaster/Raycaster.js';
 
 // le strict nécessaire de Raycaster pour pushSprite et drawSprite
 function raycaster() {

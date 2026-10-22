@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Font } from '../../../../src-recovered/libraries/H5UI/Font.js';
+import { Font } from '../../../../src/libraries/H5UI/Font.js';
 import { assertDefaults } from '../../helpers.mjs';
 
 // contrôle H5UI minimal : une surface 2D et un compteur d'invalidations

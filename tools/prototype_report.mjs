@@ -3,7 +3,7 @@
 // Usage : npm run report:prototypes
 import fs from 'fs'; import path from 'path';
 const files = [];
-(function walk(d){ for (const f of fs.readdirSync(d)) { const p = path.join(d,f); if (fs.statSync(p).isDirectory()) { if (f!=='original' && f!=='data') walk(p) } else if (f.endsWith('.js')) files.push(p) } })('src-recovered');
+(function walk(d){ for (const f of fs.readdirSync(d)) { const p = path.join(d,f); if (fs.statSync(p).isDirectory()) { if (f!=='original' && f!=='data') walk(p) } else if (f.endsWith('.js')) files.push(p) } })('src');
 const info = {};
 for (const f of files) {
   const src = fs.readFileSync(f,'utf8');
@@ -24,7 +24,7 @@ for (const k of Object.keys(by).sort((a,b)=>a-b)) {
   for (const f of by[k].sort()) {
     const tags = [info[f].proto && 'prototype defaults', info[f].ctor && '__construct', info[f].patch && 'runtime patch'].filter(Boolean).join(', ');
     const deps = info[f].imps.map(d => path.basename(d, '.js')).join(', ');
-    console.log(`- [ ] \`${f.replace('src-recovered/','')}\` (${tags})${deps ? ', depends on: ' + deps : ''}`);
+    console.log(`- [ ] \`${f.replace('src/','')}\` (${tags})${deps ? ', depends on: ' + deps : ''}`);
   }
 }
 console.log(`\n${todo.length} fichiers restants`);

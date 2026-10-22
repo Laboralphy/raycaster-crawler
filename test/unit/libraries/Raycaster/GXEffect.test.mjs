@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { GXEffect } from '../../../../src-recovered/libraries/Raycaster/GXEffect.js';
-import { GXDoor } from '../../../../src-recovered/libraries/Raycaster/GXDoor.js';
-import { GXSecret } from '../../../../src-recovered/libraries/Raycaster/GXSecret.js';
+import { GXEffect } from '../../../../src/libraries/Raycaster/GXEffect.js';
+import { GXDoor } from '../../../../src/libraries/Raycaster/GXDoor.js';
+import { GXSecret } from '../../../../src/libraries/Raycaster/GXSecret.js';
 import { assertDefaults } from '../../helpers.mjs';
 
 describe('GXEffect', () => {

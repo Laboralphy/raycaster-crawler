@@ -70,7 +70,7 @@ Tout le reste, sauf ce qui est listé dans « À régler » :
 
 Noter l'auteur, la licence, l'URL et la date de vérification dans le
 tableau « Ressources de tiers », et créditer si la licence l'exige : dans le
-jeu (`src-recovered/game/data/STRINGS.js`, clé `cs1_credits`, en anglais et
+jeu (`src/game/data/STRINGS.js`, clé `cs1_credits`, en anglais et
 en français) et dans `resources/doc/menu/credits.html` et `credits.fr.html`.
 
 Banques de sons pour le rendu des musiques : seule une banque libre convient,

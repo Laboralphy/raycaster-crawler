@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { Inventory } from '../../../../src-recovered/game/GC/Inventory.js';
-import { Item } from '../../../../src-recovered/game/GC/Item.js';
+import { Inventory } from '../../../../src/game/GC/Inventory.js';
+import { Item } from '../../../../src/game/GC/Item.js';
 import { assertDefaults, assertNotShared } from '../../helpers.mjs';
 
 function item(sResRef, nSize = 1, nCount = 1) {

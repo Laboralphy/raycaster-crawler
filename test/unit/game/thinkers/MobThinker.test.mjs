@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
-import { MobThinker } from '../../../../src-recovered/game/thinkers/MobThinker.js';
-import { Creature } from '../../../../src-recovered/game/GC/Creature.js';
-import { SOUNDS } from '../../../../src-recovered/game/data/SOUNDS.js';
+import { MobThinker } from '../../../../src/game/thinkers/MobThinker.js';
+import { Creature } from '../../../../src/game/GC/Creature.js';
+import { SOUNDS } from '../../../../src/game/data/SOUNDS.js';
 
 // monstre réduit à ce que lit processEffects
 function mob(oAttr) {

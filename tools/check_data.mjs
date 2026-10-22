@@ -8,19 +8,19 @@ import { existsSync, readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { GFX_DATA } from '../src-recovered/game/data/GFX_DATA.js';
-import { LABY } from '../src-recovered/game/data/LABY.js';
-import { WORLD_DATA } from '../src-recovered/game/data/WORLD_DATA.js';
-import { MONSTERS_BLUEPRINTS } from '../src-recovered/game/data/MONSTERS_BLUEPRINTS.js';
-import { MONSTERS_TILES } from '../src-recovered/game/data/MONSTERS_TILES.js';
-import { LOOT_DATA } from '../src-recovered/game/data/LOOT_DATA.js';
-import { ITEMS_DATA, ITEMS } from '../src-recovered/game/data/ITEMS_DATA.js';
-import { ICONS } from '../src-recovered/game/data/ICONS.js';
-import { MAGIC } from '../src-recovered/game/data/MAGIC_DATA.js';
-import { MAGIC_DATA_PARAMS } from '../src-recovered/game/data/MAGIC_DATA_PARAMS.js';
-import { SPELLS_DATA } from '../src-recovered/game/data/SPELLS_DATA.js';
-import { BLUEPRINTS_DATA } from '../src-recovered/game/data/BLUEPRINTS_DATA.js';
-import { SOUNDS, soundNames } from '../src-recovered/game/data/SOUNDS.js';
+import { GFX_DATA } from '../src/game/data/GFX_DATA.js';
+import { LABY } from '../src/game/data/LABY.js';
+import { WORLD_DATA } from '../src/game/data/WORLD_DATA.js';
+import { MONSTERS_BLUEPRINTS } from '../src/game/data/MONSTERS_BLUEPRINTS.js';
+import { MONSTERS_TILES } from '../src/game/data/MONSTERS_TILES.js';
+import { LOOT_DATA } from '../src/game/data/LOOT_DATA.js';
+import { ITEMS_DATA, ITEMS } from '../src/game/data/ITEMS_DATA.js';
+import { ICONS } from '../src/game/data/ICONS.js';
+import { MAGIC } from '../src/game/data/MAGIC_DATA.js';
+import { MAGIC_DATA_PARAMS } from '../src/game/data/MAGIC_DATA_PARAMS.js';
+import { SPELLS_DATA } from '../src/game/data/SPELLS_DATA.js';
+import { BLUEPRINTS_DATA } from '../src/game/data/BLUEPRINTS_DATA.js';
+import { SOUNDS, soundNames } from '../src/game/data/SOUNDS.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const { generateLaby, GENERATORS } = createRequire(import.meta.url)('../laby');
@@ -56,7 +56,7 @@ function checkGenerator(f, sFloor) {
 
 // une zone hors du parcours doit être reliée dans Adventure.config()
 // (sans les lignes defineEvent, qui nomment la zone sans y mener)
-const sAdventure = readFileSync(join(ROOT, 'src-recovered/game/Adventure.js'), 'utf8')
+const sAdventure = readFileSync(join(ROOT, 'src/game/Adventure.js'), 'utf8')
     .split('\n').filter((s) => !s.includes('defineEvent(') && !s.includes('defineLevelProcessor(')).join('\n');
 // ou par une sortie écrite dans les données d'un autre étage (transit)
 const oTransitTargets = {};

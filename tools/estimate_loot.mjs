@@ -12,9 +12,9 @@
 //   --area nom   un seul donjon (d1, crypts...)
 //   --items      détail des objets attendus par étage
 import { createRequire } from 'node:module';
-import { LABY } from '../src-recovered/game/data/LABY.js';
-import { WORLD_DATA } from '../src-recovered/game/data/WORLD_DATA.js';
-import { LOOT_DATA } from '../src-recovered/game/data/LOOT_DATA.js';
+import { LABY } from '../src/game/data/LABY.js';
+import { WORLD_DATA } from '../src/game/data/WORLD_DATA.js';
+import { LOOT_DATA } from '../src/game/data/LOOT_DATA.js';
 
 const { generateLaby } = createRequire(import.meta.url)('../laby');
 

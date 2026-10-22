@@ -15,7 +15,7 @@ vi.mock('howler', () => ({
     })
 }));
 
-vi.mock('../../../src-recovered/libraries/Raycaster/Raycaster.js', async () => {
+vi.mock('../../../src/libraries/Raycaster/Raycaster.js', async () => {
     const { fakeCanvas: canvas } = await import('../canvas.mjs');
     class Raycaster {
         constructor() {
@@ -72,9 +72,9 @@ function stubBrowser() {
 }
 stubBrowser();
 
-const { Game } = await import('../../../src-recovered/game/Game.js');
-const { Transistate } = await import('../../../src-recovered/libraries/Raycaster/Transistate.js');
-const { Engine } = await import('../../../src-recovered/libraries/Raycaster/Engine.js');
+const { Game } = await import('../../../src/game/Game.js');
+const { Transistate } = await import('../../../src/libraries/Raycaster/Transistate.js');
+const { Engine } = await import('../../../src/libraries/Raycaster/Engine.js');
 
 beforeEach(() => {
     stubBrowser();

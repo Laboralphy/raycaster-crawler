@@ -1,12 +1,12 @@
 // Effets du moteur dérivés de GXEffect : GXDoor, GXSecret, GXFade, GXFlash, GXMessage.
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { GXEffect } from '../../../../src-recovered/libraries/Raycaster/GXEffect.js';
-import { GXDoor } from '../../../../src-recovered/libraries/Raycaster/GXDoor.js';
-import { GXSecret } from '../../../../src-recovered/libraries/Raycaster/GXSecret.js';
-import { GXFade } from '../../../../src-recovered/libraries/Raycaster/GXFade.js';
-import { GXFlash } from '../../../../src-recovered/libraries/Raycaster/GXFlash.js';
-import { GXMessage } from '../../../../src-recovered/libraries/Raycaster/GXMessage.js';
-import { Marker } from '../../../../src-recovered/libraries/O876/Marker.js';
+import { GXEffect } from '../../../../src/libraries/Raycaster/GXEffect.js';
+import { GXDoor } from '../../../../src/libraries/Raycaster/GXDoor.js';
+import { GXSecret } from '../../../../src/libraries/Raycaster/GXSecret.js';
+import { GXFade } from '../../../../src/libraries/Raycaster/GXFade.js';
+import { GXFlash } from '../../../../src/libraries/Raycaster/GXFlash.js';
+import { GXMessage } from '../../../../src/libraries/Raycaster/GXMessage.js';
+import { Marker } from '../../../../src/libraries/O876/Marker.js';
 import { assertDefaults } from '../../helpers.mjs';
 import { fakeRaycaster, stubDocument } from '../../canvas.mjs';
 

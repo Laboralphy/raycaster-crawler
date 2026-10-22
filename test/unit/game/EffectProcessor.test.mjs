@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { EffectProcessor } from '../../../src-recovered/game/EffectProcessor.js';
-import { Creature } from '../../../src-recovered/game/GC/Creature.js';
+import { EffectProcessor } from '../../../src/game/EffectProcessor.js';
+import { Creature } from '../../../src/game/GC/Creature.js';
 import { assertDefaults, assertNotShared } from '../helpers.mjs';
 
 beforeEach(() => {

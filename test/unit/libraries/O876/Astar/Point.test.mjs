@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Point } from '../../../../../src-recovered/libraries/O876/Astar/Point.js';
+import { Point } from '../../../../../src/libraries/O876/Astar/Point.js';
 import { assertDefaults } from '../../../helpers.mjs';
 
 describe('Point', () => {
