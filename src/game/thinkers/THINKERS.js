@@ -1,5 +1,6 @@
 import { BoomerThinker } from './BoomerThinker.js';
 import { CasterThinker } from './CasterThinker.js';
+import { ChargerThinker } from './ChargerThinker.js';
 import { DasherThinker } from './DasherThinker.js';
 import { HealerThinker } from './HealerThinker.js';
 import { MagicMissileThinker } from './MagicMissileThinker.js';
@@ -20,6 +21,7 @@ import { NonLinearThinker } from '../../libraries/Raycaster/NonLinearThinker.js'
 export const THINKERS = {
     Boomer: BoomerThinker,
     Caster: CasterThinker,
+    Charger: ChargerThinker,
     Dasher: DasherThinker,
     Healer: HealerThinker,
     MagicMissile: MagicMissileThinker,

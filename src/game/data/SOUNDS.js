@@ -44,7 +44,9 @@ export const SOUNDS = {
     AMB_BUBBLES: ['nature/water/amb_bubbles0', 'nature/water/amb_bubbles1', 'nature/water/amb_bubbles2', 'nature/water/amb_bubbles3'],
     SPELL_0: 'spells/hit_spell0',
     SPELL_1: 'spells/hit_spell0',
-    FX_TELEPORT: 'spells/fx_teleport'
+    FX_TELEPORT: 'spells/fx_teleport',
+    // charge du chevalier noir (ChargerThinker)
+    BOSS_RUSH: 'atk_rush_rumble'
 };
 
 /**

@@ -547,7 +547,7 @@ export const MONSTERS_BLUEPRINTS = {
         "tile": "m_bigarmorboss",
         "width": 50,
         "height": 64,
-        "thinker": "Rusher",
+        "thinker": "Charger",
         "fx": 2,
         "data": {
             "death": "knight",

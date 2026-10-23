@@ -81,6 +81,8 @@ export class MobThinker extends Thinker {
         this.nCastAttack = 0;
         this.aCastTimes = null;
         this.TIME_REACTIVITY = 1;
+        // multiplie la vitesse de marche (charge du ChargerThinker)
+        this.fSpeedFactor = 1;
         this.ANIM_IDLE = 0;
         this.ANIM_WALK = 1;
         this.ANIM_ATTACK = 2;
@@ -256,7 +258,7 @@ export class MobThinker extends Thinker {
             nType = 0
         }
         const g = this.oGame;
-        this.oMobile.fSpeed = g.TIME_FACTOR * g.oDungeon.getCreatureMoveSpeed(this.oCreature) / 1000;
+        this.oMobile.fSpeed = g.TIME_FACTOR * g.oDungeon.getCreatureMoveSpeed(this.oCreature) * this.fSpeedFactor / 1000;
         switch (nType) {
             case 0:
                 this.oMobile.moveForward();

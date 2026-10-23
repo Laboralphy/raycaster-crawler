@@ -4,6 +4,9 @@ import { LevelProcessor } from './LevelProcessor.js';
  * coven[1] : la salle du trône de la reine des sorcières.
  */
 export class CovenThrone extends LevelProcessor {
+    // texture du mur transparent posé à l'étage, autour du ciel ouvert
+    static UPPER_TEXTURE = 61;
+
     run() {
         // second étage, vide pour l'instant
         this.createStorey();
@@ -15,9 +18,9 @@ export class CovenThrone extends LevelProcessor {
         this.BLOCK_OPEN_SKY = this.addBlock({
             ceil: -1
         });
-        // mur transparent, texture 61
+        // mur transparent, texture UPPER_TEXTURE
         this.BLOCK_GLASS = this.addBlock({
-            walls: [61],
+            walls: [this.constructor.UPPER_TEXTURE],
             phys: LevelProcessor.PHYS_TRANSPARENT_BLOCK
         })
     }

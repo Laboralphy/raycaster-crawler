@@ -5,6 +5,7 @@ import { GXUnderwater } from './gx/GXUnderwater.js';
 import { CovenThrone } from './levels/CovenThrone.js';
 import { ForestTorchLights } from './levels/ForestTorchLights.js';
 import { HellgateBridge } from './levels/HellgateBridge.js';
+import { HellkeepThrone } from './levels/HellkeepThrone.js';
 import { RC } from '../libraries/Raycaster/RC.js';
 import { MathTools } from '../libraries/Raycaster/Tools/MathTools.js';
 
@@ -167,6 +168,7 @@ export class Adventure {
         link(d2[0], { entrance: ['hellkeep', 2, 2] });
         this.defineEvent('crypts', 2, 'activateSealedDoor', 'eventUnsealDoor');
         this.defineEvent('hellkeep', 2, 'activateSealedDoor', 'eventUnsealDoor');
+        this.defineLevelProcessor('hellkeep', 2, HellkeepThrone);
         this.defineEvent('d2', 1, 'activateSealedDoor', 'eventUnsealDoor');
         this.defineEvent('coven', 1, 'activateSealedDoor', 'eventUnsealDoor');
         this.defineLevelProcessor('coven', 1, CovenThrone);

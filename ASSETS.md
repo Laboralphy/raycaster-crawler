@@ -45,7 +45,8 @@ Everything else, except what is listed in "To settle":
   (`resources/snd/ogg/open-close-doors-containers/`, `pick-items/a_key.ogg`),
   recorded by the author at home with a Zoom Essential;
 - spell sound effects (`resources/snd/ogg/spells/`, including `hit_spell0.ogg`) and the chicken
-  cries in the intro cutscene (`creatures/m_chicken0.ogg`, `m_chicken1.ogg`), made by the author with
+  cries in the intro cutscene (`creatures/m_chicken0.ogg`, `m_chicken1.ogg`), and the black
+  knight's rush (`atk_rush_rumble.ogg`, a mix of several jsfxr sounds), made by the author with
   jsfxr (https://sfxr.me, sound generator; the sound produced belongs to
   whoever sets it up);
 - water (`resources/snd/ogg/nature/water/`) and weapon
@@ -83,10 +84,7 @@ commercial or unknown origin).
 
 | Asset | Problem | To do |
 |---|---|---|
-| Old sound effects still in use: `x_death.ogg` (generic sound, played at every monster death) | unknown origin | replace (recording, jsfxr, CC0: freesound.org filtered on CC0, Kenney.nl) |
-| Source sounds `resources/snd/flac/` | in `resources/`, so shipped with the game if they stay there | move them out of the shipped package (or out of the repository) |
 | Story book `resources/gfx/books/book_of_story0.png`, `book_of_story1.png`, `book_of_story3.png` | images found more than 8 years ago, origin untraceable | replace |
-| Shop sign (tile 79 of the `t_*` textures) | temporary gold bag, drawn by a script | replace with the final drawing |
 | GeneralUser GS v1.471 | license not yet re-read | re-read the license file shipped with the bank |
 
 Before each release:
