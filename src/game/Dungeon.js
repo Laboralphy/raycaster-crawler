@@ -79,7 +79,7 @@ export class Dungeon {
         i.defineEquipSlot('neck');
         i.defineEquipSlot('finger');
         i.defineEquipSlot('ears');
-        this.aStartingStuff = ['wand_yce_1', 'dag_steel', 'pot_heal_3', 'pot_heal_3', 'pot_heal_3', 'pot_ether_3', 'pot_ether_3', 'pot_ether_3', 'ccc_herb0', 'ccc_herb1', 'ccc_h2o', 'ccc_vegs', 'ccc_meat'];
+        this.aStartingStuff = ['wand_yce_1', 'dag_steel', 'pot_heal_2', 'pot_heal_2', 'pot_ether_2', 'ccc_h2o', 'ccc_h2o'];
         let oItem = null;
         for (let iStuff = 0; iStuff < this.aStartingStuff.length; iStuff++) {
             oItem = new Item(this.aStartingStuff[iStuff]);
