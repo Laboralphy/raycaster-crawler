@@ -1,7 +1,7 @@
 import { LABY } from '../LABY.js';
 import { shops } from '../WORLD_DATA.shops.js';
 
-// porte de l'enfer : on y arrive par le portail de la salle au trésor.
+// porte de l'enfer : on y arrive depuis le dernier étage des cryptes.
 // Petite salle d'arrivée, pont au-dessus du vide, grande salle avec deux
 // magasins, sortie vers le donjon infernal. Pas de monstres.
 //
@@ -13,7 +13,7 @@ const HELLGATE_LEGEND = {
     '.': LABY.BLOCK_VOID,
     '~': LABY.BLOCK_ABYSS,               // le vide autour du pont
     'S': LABY.BLOCK_SHOP,
-    // ascenseur d'entrée (retour au portail de la salle au trésor)
+    // ascenseur d'entrée (retour aux cryptes)
     'E': LABY.BLOCK_ELEVATOR_ENTRANCE,
     'p': LABY.BLOCK_ELEVATOR_DOOR_PREV,
     '<': LABY.BLOCK_ELEVATOR_SWITCH_PREV,

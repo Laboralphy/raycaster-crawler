@@ -8,7 +8,7 @@ license is forbidden until it has been checked.
 What was made with AI, and the boxes to tick on the platforms, is in
 `AI_DISCLOSURE.md`.
 
-Status as of October 22, 2026.
+Status as of November 5, 2026.
 
 ## Third-party assets
 
@@ -16,7 +16,7 @@ The only assets in the game that are not the author's.
 
 | Asset | Where in the game | Author, source | License | Obligation |
 |---|---|---|---|---|
-| Sound bank **GeneralUser GS v1.471** | its samples are in all the music tracks `resources/snd/ogg/mus_*.ogg` (score rendering) | S. Christian Collins, https://schristiancollins.com/generaluser.php | free, including commercial use of the music produced | none; license to be re-read (see below) |
+| Sound bank **GeneralUser GS v1.471** | its samples are in all the music tracks `resources/snd/ogg/mus_*.ogg` (score rendering) | S. Christian Collins, https://schristiancollins.com/generaluser.php | GeneralUser GS License v2.0 (re-read November 5, 2026, [copy of LICENSE.txt](https://github.com/TheGammaSqueeze/jelos_generaluser-gs/blob/main/LICENSE.txt)): use without restriction for music creation, private or commercial; the samples allow full use in music production, including profit from recordings | none (credit not required). The author cannot guarantee where every sample comes from (none from commercial banks or sample CDs, no complaint since 2000): accepted risk. If the bank is ever mentioned on a website, link to the author's site, not directly to the bank's download files |
 | Wall portraits `resources/gfx/textures/d_pictures.png` | paintings on the walls | Dungeon Crawl Stone Soup artists, [OpenGameArt](https://opengameart.org/content/dungeon-crawl-32x32-tiles); framed by us | CC0 (checked on the page and in the package README) | none (credit optional, present in `credits.html`) |
 | Monster death cries `resources/snd/ogg/creatures/x_death_*.ogg` (28 files) | monster deaths | [OpenGameArt](https://opengameart.org) | CC0 | none (credit optional) |
 | Sound effect `resources/snd/ogg/pick-items/a_take.ogg` | picking up an item | [OpenGameArt](https://opengameart.org) | CC0 | none (credit optional) |
@@ -39,8 +39,8 @@ Everything else, except what is listed in "To settle":
 - book images (`resources/gfx/books/`): the author's OpenOffice Draw
   drawings, and for the bestiary (`book_m_*`, `zombie_attack_front-left.png`)
   compositions of the game's POV-Ray monster sprites; except
-  `book_spells_prisma.png` (script, see below) and the story images listed
-  in "To settle";
+  `book_spells_prisma.png`, `book_of_story0.png` and `book_of_story1.png`
+  (scripts, see below) and the story image listed in "To settle";
 - sound effects for doors, chests, closets and keys
   (`resources/snd/ogg/open-close-doors-containers/`, `pick-items/a_key.ogg`),
   recorded by the author at home with a Zoom Essential;
@@ -56,7 +56,10 @@ Everything else, except what is listed in "To settle":
   (`sky_hell.png`), crypt theme textures (`t_crypt*.png`,
   `f_crypt*.png`) and gothic theme textures (`t_gothic.png`, `f_gothic.png`), derived from the
   author's `t_gray` tiles, with redrawn masonry and decorations, shop sign, prismatic ray icon and
-  image: produced by scripts in the
+  image, story book images `book_of_story0.png` (a grimoire, POV-Ray scene
+  `tools/gfx/story0/grimoire.pov`) and `book_of_story1.png` (a screenshot of the game's forest[1]
+  keep, the boss warlock sprite composited behind its battlements), both in grayscale in the
+  frame of `book_of_story2.png`: produced by scripts in the
   repository (`tools/music/`, `tools/gfx/`), written with AI (see
   `AI_DISCLOSURE.md`).
 
@@ -84,8 +87,7 @@ commercial or unknown origin).
 
 | Asset | Problem | To do |
 |---|---|---|
-| Story book `resources/gfx/books/book_of_story0.png`, `book_of_story1.png`, `book_of_story3.png` | images found more than 8 years ago, origin untraceable | replace |
-| GeneralUser GS v1.471 | license not yet re-read | re-read the license file shipped with the bank |
+| Story book `resources/gfx/books/book_of_story3.png` | image found more than 8 years ago, origin untraceable | replace |
 
 Before each release:
 

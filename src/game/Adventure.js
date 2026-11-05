@@ -142,9 +142,7 @@ export class Adventure {
         this.oEvents = {};
         this.oLevelProcessors = {};
         const d1 = d.d1;
-        const d2 = d.d2;
         const mines = d.mines;
-        const medusa = d.medusa;
         if (this.oVariables === null) {
             this.oVariables = {
                 portalToMines: MathTools.rnd(1, 2)
@@ -158,14 +156,20 @@ export class Adventure {
         this.seedLevels(d);
         this.defineEvent('forest', 0, 'enterLevel', 'eventReadBookOfStory');
         this.defineEvent('forest', 0, 'entranceSwitch', 'eventEscapeGame');
-        // parcours principal : d1 -> cryptes -> donjon infernal -> d2 -> trésor
+        // parcours principal : forêt -> d1 -> méduse -> covent -> cryptes ->
+        // porte de l'enfer -> donjon infernal -> d2 -> trésor
         // (point d'arrivée 1 : ascenseur d'entrée, 2 : ascenseur de sortie)
-        link(d1[3], { exit: ['crypts', 0, 1] });
-        link(d.crypts[0], { entrance: ['d1', 3, 2] });
-        link(d.crypts[2], { exit: ['hellkeep', 0, 1] });
-        link(d.hellkeep[0], { entrance: ['crypts', 2, 2] });
-        link(d.hellkeep[2], { exit: ['d2', 0, 1] });
-        link(d2[0], { entrance: ['hellkeep', 2, 2] });
+        const chain = (sFrom, sTo) => {
+            const nLast = d[sFrom].length - 1;
+            link(d[sFrom][nLast], { exit: [sTo, 0, 1] });
+            link(d[sTo][0], { entrance: [sFrom, nLast, 2] })
+        };
+        chain('d1', 'medusa');
+        chain('medusa', 'coven');
+        chain('coven', 'crypts');
+        chain('crypts', 'hellgate');
+        chain('hellgate', 'hellkeep');
+        chain('hellkeep', 'd2');
         this.defineEvent('crypts', 2, 'activateSealedDoor', 'eventUnsealDoor');
         this.defineEvent('hellkeep', 2, 'activateSealedDoor', 'eventUnsealDoor');
         this.defineLevelProcessor('hellkeep', 2, HellkeepThrone);
@@ -173,10 +177,6 @@ export class Adventure {
         this.defineEvent('coven', 1, 'activateSealedDoor', 'eventUnsealDoor');
         this.defineLevelProcessor('coven', 1, CovenThrone);
         this.defineEvent('treasure', 0, 'openRelicChest', 'eventGotRelic');
-        // portail de la pièce de la relique -> porte de l'enfer -> donjon infernal
-        d.treasure[0].options += '-p1';
-        link(d.treasure[0], { portal: 'hellgate' });
-        link(d.hellgate[0], { entrance: ['treasure', 0, 3], exit: ['hellkeep', 0, 1] });
         this.defineLevelProcessor('hellgate', 0, HellgateBridge);
         this.defineLevelProcessor('forest', 0, ForestTorchLights);
         this.defineLevelProcessor('forest', 1, ForestTorchLights);
@@ -191,15 +191,6 @@ export class Adventure {
             exit: ['d1', nPortalToMines, 3]
         };
         this.defineEvent('mines', 2, 'activateSealedDoor', 'eventUnsealDoor');
-        // la méduse reste sur l'ancien d1[4], devenu d2[0]
-        d2[0].options += '-p1';
-        link(d2[0], { portal: 'medusa' });
-        medusa[0].transit = {
-            entrance: ['d2', 0, 3]
-        };
-        medusa[2].transit = {
-            exit: ['d2', 0, 3]
-        };
         this.defineEvent('medusa', 0, 'enterLevel', 'eventEnterValvedLevel');
         this.defineEvent('medusa', 1, 'enterLevel', 'eventEnterUnderwaterLevel');
         this.defineEvent('medusa', 2, 'enterLevel', 'eventEnterUnderwaterLevel');

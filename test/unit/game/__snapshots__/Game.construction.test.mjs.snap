@@ -78,7 +78,6 @@ exports[`new Game() > construit le jeu, l'initialise et entre dans le menu 1`] =
     "sAudioType": "ogg",
     "sCutsceneNextState": "",
     "sDoomloopType": "interval",
-    "sGeneratorUrl": "../../dynamics/laby/laby.php",
     "sSaveFile": "reikaster",
     "sTorchBlueprint": "o_torch_1",
     "stateRunning": "[Function stateRunningInt]",

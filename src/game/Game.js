@@ -12,6 +12,7 @@ import { System } from './UI/System.js';
 import { UI } from './UI/UI.js';
 import { WeaponAnimator } from './WeaponAnimator.js';
 import { buildUpperMap } from './storey.js';
+import { generateLevelMap } from './labyGenerator.js';
 import { CONFIG } from './config.js';
 import { CutsceneEnd } from './cutscenes/CutsceneEnd.js';
 import { CutsceneIntro } from './cutscenes/CutsceneIntro.js';
@@ -34,7 +35,6 @@ import { ArrayTools } from '../libraries/O876/ArrayTools.js';
 import { Land } from '../libraries/O876/Astar/Land.js';
 import { Marker } from '../libraries/O876/Marker.js';
 import { SoundSystem } from '../libraries/O876/SoundSystem.js';
-import { XHR } from '../libraries/O876/XHR.js';
 import { Engine } from '../libraries/Raycaster/Engine.js';
 import { GXFlash } from '../libraries/Raycaster/GXFlash.js';
 import { GXMessage } from '../libraries/Raycaster/GXMessage.js';
@@ -78,7 +78,6 @@ const PLUGINS = {
 export class Game extends Engine {
     constructor() {
         super();
-        this.sGeneratorUrl = '../../dynamics/laby/laby.php';
         this.nTime = 0;
         this.nTimeMs = 0;
         this.nSecond = 0;
@@ -213,9 +212,7 @@ export class Game extends Engine {
     }
 
     invokeLabyGenerator(sGenerator, nSeed, sOptions) {
-        nSeed = nSeed || 0;
-        sOptions = sOptions || '';
-        return JSON.parse(XHR.getSync(this.sGeneratorUrl + '?g=' + sGenerator + '&s=' + nSeed.toString() + '&o=' + sOptions))
+        return generateLevelMap(sGenerator, nSeed, sOptions)
     }
 
     newGame() {
@@ -1866,28 +1863,13 @@ export class Game extends Engine {
         this.sys_cutscene('end', 'stateMenuLoop')
     }
 
-    sys_storeData(sKey, xData, bRemote) {
-        if (bRemote === undefined) {
-            bRemote = false
-        }
-        if (bRemote) {
-            // ancien stockage distant (crawlerfs) : plus de serveur, rien n'est envoyé
-            return
-        }
-        // sauvegarde locale (localStorage) : le jeu d'origine ne l'écrivait pas,
-        // si bien que « Continuer » n'apparaissait jamais au menu
+    // sauvegardes : localStorage seulement (BackupSystem)
+    sys_storeData(sKey, xData) {
         this.oBackupSystem.storeData(sKey, xData)
     }
 
-    sys_loadData(sKey, bRemote) {
-        if (bRemote === undefined) {
-            bRemote = false
-        }
-        if (bRemote) {
-            return XHR.getSync(CONFIG.crawlerfs.r + '?f=' + sKey)
-        } else {
-            return this.oBackupSystem.loadData(sKey)
-        }
+    sys_loadData(sKey) {
+        return this.oBackupSystem.loadData(sKey)
     }
 
     sys_save() {

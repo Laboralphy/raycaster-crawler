@@ -5,7 +5,6 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { generateLaby, GENERATORS } = require('./laby');
 
 const ROOT = __dirname;
 const PORT = Number(process.argv[2] || process.env.PORT || 8080);
@@ -35,33 +34,6 @@ function send(res, status, body) {
   res.end(body);
 }
 
-// Générateur de labyrinthe. Le jeu l'appelle toujours à l'adresse de
-// l'ancien script PHP : ?g=générateur&s=graine&o=options
-const LABY_URL = '/dynamics/laby/laby.php';
-// Valeur maximale d'une option : au-delà, la génération (synchrone)
-// bloquerait le serveur. Le jeu n'utilise que des valeurs de 0 à 3.
-const LABY_MAX_OPTION = 20;
-
-function serveLaby(req, res) {
-  const q = new URL(req.url, 'http://localhost').searchParams;
-  const g = q.get('g') || '';
-  const s = q.get('s') || '0';
-  const o = q.get('o') || '';
-  if (!GENERATORS.includes(g) || !/^-?\d+$/.test(s) || !/^(-[a-z]+\d+)*$/i.test(o) ||
-      (o.match(/\d+/g) || []).some((n) => Number(n) > LABY_MAX_OPTION)) {
-    return send(res, 400, 'Bad Request');
-  }
-  let sJSON;
-  try {
-    sJSON = generateLaby(g, s, o).renderJSON();
-  } catch (e) {
-    console.error(`[laby g=${g} s=${s} o=${o}]`, e);
-    return send(res, 500, 'Laby generator failed');
-  }
-  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-cache' });
-  res.end(req.method === 'HEAD' ? undefined : sJSON);
-}
-
 function isAllowed(rel) {
   return ROOT_FILES.has(rel) || rel.startsWith('resources' + path.sep);
 }
@@ -78,10 +50,6 @@ const server = http.createServer((req, res) => {
     return send(res, 400, 'Bad Request');
   }
   if (urlPath === '/') urlPath = '/index.html';
-  if (urlPath === LABY_URL) {
-    res.on('finish', () => console.log(`${res.statusCode} ${req.method} ${req.url}`));
-    return serveLaby(req, res);
-  }
 
   const filePath = path.resolve(ROOT, '.' + urlPath);
   const rel = path.relative(ROOT, filePath);

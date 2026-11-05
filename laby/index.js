@@ -1,15 +1,19 @@
 const RandomGenerator = require('./core/RandomGenerator');
 
-/** Générateurs disponibles (nom -> module) */
+/**
+ * Générateurs disponibles (nom -> classe). Des require statiques, pour que
+ * esbuild les embarque dans crawler.js : le jeu génère ses niveaux dans le
+ * navigateur (src/game/labyGenerator.js).
+ */
 const GENERATORS = {
-    boss: './generators/boss/BossLevelGenerator',
-    cave: './generators/cave/CaveLevelGenerator',
-    dungeon: './generators/dungeon/DungeonLevelGenerator',
-    forest: './generators/forest/ForestLevelGenerator',
-    magetower: './generators/magetower/MagetowerLevelGenerator',
-    mines: './generators/mines/MinesLevelGenerator',
-    special: './generators/special/SpecialLevelGenerator',
-    trivial: './generators/trivial/TrivialLevelGenerator',
+    boss: require('./generators/boss/BossLevelGenerator'),
+    cave: require('./generators/cave/CaveLevelGenerator'),
+    dungeon: require('./generators/dungeon/DungeonLevelGenerator'),
+    forest: require('./generators/forest/ForestLevelGenerator'),
+    magetower: require('./generators/magetower/MagetowerLevelGenerator'),
+    mines: require('./generators/mines/MinesLevelGenerator'),
+    special: require('./generators/special/SpecialLevelGenerator'),
+    trivial: require('./generators/trivial/TrivialLevelGenerator'),
 };
 
 /**
@@ -38,8 +42,7 @@ function generateLaby(sGenerator, seed = 0, sOptions = '') {
     if (!Object.prototype.hasOwnProperty.call(GENERATORS, sGenerator)) {
         throw new Error(`unknown generator: ${sGenerator}`);
     }
-    const LevelGeneratorClass = require(GENERATORS[sGenerator]);
-    const oLevel = new LevelGeneratorClass(new RandomGenerator());
+    const oLevel = new GENERATORS[sGenerator](new RandomGenerator());
     oLevel.setOptions(sOptions);
     oLevel.generate(parseSeed(seed));
     return oLevel;

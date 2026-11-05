@@ -26,9 +26,6 @@ export const medusa = [{
     visual: 'valvewater',
     music: 'MUSIC_DUNGEON',
     level: 1,
-    transit: {
-        entrance: false
-    },
     loot: {
         chest: 'basic_chest',
         closet: 'basic_closet',

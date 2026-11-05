@@ -30,7 +30,10 @@ scripts written by the AI, from simple shapes: the title logo (with the free
 UnifrakturMaguntia font), the night sky, the hell sky, the crypt and gothic wall
 and floor textures (built on the author's own grey tiles, with new masonry
 and decorations), a temporary shop panel, and the Prismatic Ray spell icon and
-book picture. All other graphics are the author's.
+book picture. Two story book pictures come from such scripts: a grimoire
+modeled and rendered with POV-Ray (scene written by the AI), and a picture
+assembled from the game's own graphics (a screenshot of the forest keep and
+the warlock sprite), both turned to grayscale. All other graphics are the author's.
 
 ## Music
 
