@@ -2,6 +2,8 @@
 // Contient ce que charge le navigateur : index.html à la racine, crawler.js
 // (à construire avant : npm run dist le fait), styles.css et resources/.
 // Usage : npm run dist
+// Avec --site [dossier] : copie ces fichiers dans un dossier (dist/site par
+// défaut) au lieu de faire l'archive ; npm run site, utilisé par GitHub Pages.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -36,8 +38,31 @@ export function listFiles(sRoot = ROOT) {
     return aFiles.sort();
 }
 
+/**
+ * Copie les mêmes fichiers que l'archive dans un dossier (vidé avant),
+ * prêt à être servi tel quel (GitHub Pages)
+ * @return {string[]} les fichiers copiés
+ */
+export function copySite(sOut, sRoot = ROOT) {
+    const aFiles = listFiles(sRoot);
+    fs.rmSync(sOut, { recursive: true, force: true });
+    for (const f of aFiles) {
+        const sDest = path.join(sOut, f);
+        fs.mkdirSync(path.dirname(sDest), { recursive: true });
+        fs.copyFileSync(path.join(sRoot, f), sDest);
+    }
+    return aFiles;
+}
+
 function main() {
-    const { version } = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
+    const nSite = process.argv.indexOf('--site');
+    if (nSite >= 0) {
+        const sOut = path.resolve(process.argv[nSite + 1] || path.join(ROOT, 'dist', 'site'));
+        const aFiles = copySite(sOut);
+        console.log(`${path.relative(ROOT, sOut)} : ${aFiles.length} fichiers`);
+        return;
+    }
+    const { version }= JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
     const aFiles = listFiles();
     const zip = createZip(aFiles.map((name) => {
         const sPath = path.join(ROOT, name);

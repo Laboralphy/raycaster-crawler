@@ -1,8 +1,11 @@
 // npm run dist : l'archive zip du jeu (tools/zip.mjs, tools/dist.mjs)
 import { describe, it, expect } from 'vitest';
 import zlib from 'node:zlib';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import { createZip } from '../../../tools/zip.mjs';
-import { listFiles } from '../../../tools/dist.mjs';
+import { listFiles, copySite } from '../../../tools/dist.mjs';
 
 // lecteur minimal : le répertoire central, puis chaque fichier par son en-tête local
 function readZip(zip) {
@@ -47,6 +50,34 @@ describe('createZip', () => {
         expect(files['resources/gfx/bruit.png'].data.equals(noise)).toBe(true);
         expect(files['resources/é à.txt'].data.toString()).toBe('accents');
         expect(files['vide.txt'].data.length).toBe(0);
+    });
+});
+
+describe('copySite', () => {
+    it('copie les fichiers du jeu, à l\'identique, dans un dossier vidé au préalable', () => {
+        const sRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'site-src-'));
+        const sOut = fs.mkdtempSync(path.join(os.tmpdir(), 'site-out-'));
+        try {
+            for (const [f, s] of Object.entries({
+                'index.html': '<html>', 'crawler.js': 'js', 'styles.css': 'css',
+                'resources/gfx/a.png': 'png', 'resources/snd/flac/b.flac': 'flac', 'src/main.js': 'src'
+            })) {
+                fs.mkdirSync(path.dirname(path.join(sRoot, f)), { recursive: true });
+                fs.writeFileSync(path.join(sRoot, f), s);
+            }
+            fs.writeFileSync(path.join(sOut, 'ancien.txt'), 'old');
+            const aFiles = copySite(sOut, sRoot);
+            expect(aFiles).toEqual(['crawler.js', 'index.html', 'resources/gfx/a.png', 'styles.css']);
+            const aCopied = fs.readdirSync(sOut, { recursive: true, withFileTypes: true })
+                .filter((d) => d.isFile())
+                .map((d) => path.relative(sOut, path.join(d.parentPath, d.name)).split(path.sep).join('/'))
+                .sort();
+            expect(aCopied).toEqual(aFiles);
+            expect(fs.readFileSync(path.join(sOut, 'resources/gfx/a.png'), 'utf8')).toBe('png');
+        } finally {
+            fs.rmSync(sRoot, { recursive: true, force: true });
+            fs.rmSync(sOut, { recursive: true, force: true });
+        }
     });
 });
 

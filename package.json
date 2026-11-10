@@ -10,6 +10,7 @@
     "check:data": "node --no-warnings tools/check_data.mjs",
     "estimate:loot": "node --no-warnings tools/estimate_loot.mjs",
     "dist": "npm run build && node tools/dist.mjs",
+    "site": "npm run build && node tools/dist.mjs --site dist/site",
     "test": "vitest run",
     "test:watch": "vitest",
     "report:prototypes": "node tools/prototype_report.mjs",
